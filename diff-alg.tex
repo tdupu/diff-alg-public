@@ -1,0 +1,417 @@
+\documentclass[]{article}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{hyperref}
+\usepackage[all]{xy}
+
+\usepackage{color}
+\newcommand{\taylor}[1]{{\color{blue} \sf $\spadesuit\spadesuit\spadesuit$ Taylor: [#1]}}
+\newcommand{\anton}[1]{{\color{red} \sf $\spadesuit\spadesuit\spadesuit$ Anton: [#1]}}
+\newcommand{\todo}[1]{{\color{purple} \sf $\spadesuit\spadesuit\spadesuit$ TODO: [#1]}}
+
+\numberwithin{equation}{section}
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{remarks}[theorem]{Remarks}
+\newtheorem{warning}[theorem]{Warning}
+
+
+\newcommand{\trdeg}{\operatorname{trdeg}}
+
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+
+\renewcommand{\AA}{\mathbb{A}}
+\newcommand{\GG}{\mathbb{G}}
+\newcommand{\PP}{\mathbb{P}}
+
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\Ocal}{\mathcal{O}}
+
+%\newcommand{\sec}{\operatorname{sec}}
+
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\Hom}{\operatorname{Hom}}
+
+\newcommand{\LM}{\operatorname{LM}}
+\newcommand{\LT}{\operatorname{LT}}
+\newcommand{\LC}{\operatorname{LC}}
+\newcommand{\Low}{\operatorname{Low}}
+
+\newcommand{\wt}{\operatorname{wt}}
+
+
+%opening
+\title{Differential Algebra Notes}
+\author{Taylor Dupuy }
+
+\begin{document}
+
+\maketitle
+
+\noindent Needs:
+\begin{enumerate}
+	\item Differential dimensions of points (\S\ref{sec:primitive})
+	\item Kolchin open sets contain points of differentially closed fields (\S\ref{sec:primitive})
+	\item Prediscussion for quantifier elimination (formulas, quantifier free formulas)
+\end{enumerate}
+\noindent 
+Wants:
+\begin{enumerate}
+	\item Primary 
+	\item Ricatti
+	\item Seidenberg
+	\item Matsuda: For finitely generated $L/K$ of $\trdeg(L/K)>1$ if $\Aut(L/K)$ is infinite then one of the following holds..
+	\item Luroth
+	\item Differential Schemes/Transformal Schemes
+\end{enumerate}
+
+\subsection*{Acknowledgements}
+We would like to thank James Freitag for many long conversations about many of these topics. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{}
+%%%%%%%%%%%%%%%%%%%%%%%
+If $(K_0,\partial_0)$ is a differential field with trivial derivation we can consider $K=K_0(t)$ where $t$ is an indeterminate and form $(K,\partial)$ where $\partial(t)=1$. 
+
+\begin{exercise}
+	If $P$ is a prime ideal in $K_0\lbrace y_1,\ldots,y_n\rbrace$ then if $P_1=K_1[y_0,\ldots,y_n,\partial] P$ then $P_1$ is prime in $K_1[y_0,\ldots,y_n]$.
+	\taylor{
+$P_1$ is intended to be the differential ideal in $K\lbrace y_1,\ldots,y_n\rbrace$ genered by $P_0$.	
+} 
+\end{exercise}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Term Orderings}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+It will be conveniant to introduce some notation for monomials in $K[ y ]_{\partial}$ where $y$ is a single indeterminant. 
+For $\alpha \in \ZZ_{\geq 0}[\partial]$ with $\alpha = \alpha_0 + \alpha_1 \partial + \cdots + \alpha_r \partial^r$ we will write 
+$$ y^{\alpha} = y^{\alpha_0} (y')^{\alpha_1} \cdots (y^{(r)})^{\alpha_r}.$$
+We assign two gradings to $K[y]_{\partial}$. 
+A grading by weight and degree. 
+We say that the \emph{degree} of $y^{\alpha}$ (or just $\alpha$) is 
+$$\deg(y^{\alpha}) = \alpha_0 + \alpha_1 + \cdots + \alpha_r.$$
+Similarly, we define the \emph{weight} of $y^{\alpha}$ (or just $\alpha$) is 
+$$ \wt(y^{\alpha}) = \alpha_1 + 2\alpha_2 + \cdots + r \alpha_r.$$
+A basic observation is that terms with no derivatives have weight zero, terms with single derivatives have weight one, terms with only second derivatives have weight two etc. 
+If we view $\alpha$ as a polynomial $\alpha(x) \in \ZZ[x]$ then $\deg(\alpha) = \alpha(0)$ and $wt(\alpha) = \alpha'(0)$. 
+
+\begin{exercise}
+Let $A \in K\lbrace y \rbrace$ be a differential monomial which is homogeneous in both degree and weight. Show that $\partial(A)$ is homogeneous and that 
+ $$ \deg(\partial(A)) = \deg(A), \quad \wt(\partial(A)) = \wt(A)+1.$$
+\end{exercise}
+
+Let $R$ be a differential ring on which a commuting family of differential operators $\Delta$ acts.
+Let $A = R[y_1,\ldots,y_n]_{\Delta}$. 
+Let $\Theta$ be the collection of differential operators. 
+\begin{definition}
+	A \emph{ranking} is a total ordering $\prec$ on the set of differential variables
+	$ \lbrace \theta(y_j) \colon \theta \in \Theta, 1\leq j \leq n \rbrace $
+	satisfying the following two axioms
+	\begin{enumerate}
+		\item $ u \prec \theta u$, 
+		\item $u \prec v \implies \theta u \prec \theta v $
+	\end{enumerate}
+	
+\end{definition}
+
+The \emph{leader} of a differential polynomial $A$ is the highest rank variable $u$ such that $\partial A/\partial u \neq 0$. 
+If we denote the leader of $A$ by $\ell=\ell_A$ then we may write 
+$$A = a_d \ell^d + a_{d-1} \ell^{d-1} + \cdots + a_0$$ 
+where $a_i$ is a polynomial in the variables strictly smaller than $\ell_A$. 
+The top coefficient $a_d = I_A$ is called the \emph{initial} of $A$ with respect to the ranking and $\partial A/\partial \ell = S_A$ is called the \emph{separant} of $A$ with respect to the ranking. 
+
+Recall that a \emph{term order} is total ordering on monomial that respects multiplication. 
+That is, it is a total ordering $\prec$ for that for all monomial $M$,$N$, and $L$ if $M\prec N$ then $LM \prec LN$. 
+Given a ranking there is an induced term order on the collection of monomials given by taking lexicographic order on the differential variables. 
+We will let $\prec$ also denote the term order induced by the ranking $\prec$. 
+
+\begin{example}
+	For a single variable $y$ there is a unique term in $K\lbrace y \rbrace$. 
+	The monomials $y^{\alpha}$ are ordered first by order and then by degree. 
+	Ritt phrases this as saying $y^{\alpha} \prec y^{\beta}$ if and only if the greatest $i$ such that $\alpha_i - \beta_i \neq 0$ we have $\alpha_i -\beta_i <0$.  
+	
+\end{example}
+
+\begin{theorem}
+	Fix a ranking on a ring of differential polynomials.
+	If $A$ is a differential polynomial and $\LM(A) = I \ell^m$ where $I$ is the initial and $\ell^m$ is the leader to some power then $\LM(\partial(A)) = (I m \ell^{m-1}) \partial(\ell)$ with new leader $\partial(\ell)$ and new initial $mI\ell^{m-1}$.
+\end{theorem}
+\begin{proof}
+	We have $\partial(I \ell^m) = \partial(I)\ell^m + m\ell^{m-1}\partial(\ell)I$. 
+	We have $\partial(\ell) \succ \ell \succ I$. 
+	This means that $\partial(\ell)$ will precede any differential variable in any of the monomials of $\partial(I)$ by the second axiom of rankings.
+	Hence $\LT(\partial(A) ) = m\ell^{m-1}I \partial(\ell)$ and $I_{\partial(A)} = m \ell_A^{m-1} I_A$ and $\ell_{\partial(A)} = \partial(\ell_A)$.
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Basics}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{lemma}[Power Lemma]\label{lem:power-lemma}
+	Let $R$ be a differential $\QQ$-algebra. 
+	Let $I$ be a differential ideal. 
+	Suppose that $a\in R$ satisfies $a^n \in I$. 
+	Then $(a')^{n} \in I$. 
+\end{lemma}
+\begin{proof}
+    If $a^n \in I$ then $\partial(a^n) = n a^{n-1} a' \in I$. 
+    By the $\QQ$-algebra hypothesis, $a^{n-1}a' \in I$. 
+    Taking derivatives again we get $(n-1)a^{n-2}(a')^2 + a^{n-1}a'' \in I$ which implies that $a^{n-2} (a')^2 \in I$ since $a^{n-1}a'' \in I$. 
+    Continuing, we have that $(a')^n \in I$. 	
+\end{proof}
+
+We aim to give a much stronger version of the above in what follows culminating in Lemma~\ref{lem:levi}.
+\begin{lemma}\label{lem:monomials-of-derivative}
+A monomial $y^{\alpha}$ for $\alpha \in \ZZ_{\geq 0}[\partial]$ appears in $\partial^r(y^n)$ nontrivially if and only if it has degree $n$ and weight $r$.
+\end{lemma}
+\begin{proof}[Sketch Proof]
+	The proof is by induction on $r$.
+	The case $r=0$ is trivial.
+	In the inductive step one needs to take a derivative of $y^{\alpha_0} (y')^{\alpha_1}\cdots (y^{(s)})^{\alpha_s}$ and observe that every term of $(\alpha_0, \alpha_1,\ldots, \alpha_s,\alpha_{s+1})$ is modified by one of  $(-1,1,0,\ldots, 0,0), (0,-1,1,\ldots, 0,0), \ldots, (0,0,0, \ldots, -1,1)$. 
+\end{proof}
+
+\begin{lemma}\label{lem:lowest-monomial}
+	The lowest monomial of $\partial^m(y^n) \in K\lbrace y \rbrace$ with respect to its unique ranking is $\partial^q(y)^{n-r}\partial^{q+1}(y)^r$
+	where $q, r \in \ZZ_{\geq 0}$ are the unique integers with $0 \leq r \leq n$ in the Euclidean algorithm such that
+	 $m= qn+r$.
+\end{lemma}
+Before giving a proof we give an example. 
+\begin{example}
+	In the case $m=10$ and $n=3$ the proposition is saying that $\partial^{10}(y^3)$ has $\partial^3(y)^2\partial^4(y)$ as the lowest term in the ordering since $10=3(3)+1$.
+\end{example}
+We now give a proof of the claim.
+\begin{proof}[Proof of Lemma~\ref{lem:lowest-monomial}]
+	First observe that 
+	 $$ \deg( \partial^q(y)^{n-r}\partial^{q+1}(y)^r)= n,$$
+	 $$ \wt( \partial^q(y)^{n-r}\partial^{q+1}(y)^r) = q(n-r) + (q+1)r  =qn+r =m,$$
+	so by Lemma~\ref{lem:monomials-of-derivative}, $\partial^q(y)^{n-r}\partial^{q+1}(y)^r$ appears as a monomial of $\partial^m(y^n)$.
+
+	Suppose now that $\beta_0 + \beta_1 \partial + \cdots + \beta_{q+1} \partial^{q+1} \in \ZZ_{\geq 0}[\partial]$ has weight $m$ and degree $n$ and preceeds $\alpha = (n-r)\partial^q + (r+1) \partial^{q+1}$.
+	\taylor{II,\S21}
+\end{proof}
+
+Levi's Criterion will give a recipe on the weight and degree of $y^{\alpha}$ for membership in the differential ideal generated by $y^n$.
+\begin{lemma}[Levi's Lemma]\label{lem:levi}
+	Let $n$ be a non-negative integer. 
+	Suppose that $y^{\alpha}$ for $\alpha \in \ZZ_{\geq 0}[\partial]$ has weight $w$ and degree $d$. We have the following
+	$$ w < f(n,d) \implies y^{\alpha} \in \langle y^n \rangle_{\partial} $$
+	where $f(n,d) = a(a-1)(n-1)+2ab$ where $a$ and $b$ are the unique integers such that $d=a(n-1)+b$.
+\end{lemma}
+\begin{proof}
+	We will say a monomial $y^{\alpha_0 + \alpha_1 \partial + \cdots + \alpha_s \partial^s}$ of $\partial^m(y^n)$ is \emph{weak} if and only if for all $j$, $\alpha_j + \alpha_{j+1} < n$. 
+	If $y^{\alpha}$ is not weak it will be called \emph{strong}.
+	
+	\taylor{
+		There are a series of claims:
+		\begin{enumerate}
+			\item If $y^{\alpha}$ is strong then there exists some $j$ such that $L_j=\Low(\partial^j(y^n))$ divides $y^{\alpha}$.
+			\item  If $A$ is homogeneous of degree $d$ weight $w$ is congruent to a weak on modulo $[y^n]$.
+			\item If $y^{\alpha}$ is degree $d$ and has weight less than $f(n,d)$ then $y^{\alpha}$ is strong. 
+			\item By hypothesis, we have a strong polynomial which is equivalent to a weak one. 
+		\end{enumerate}
+
+	}
+    We can peel off the strong terms, term-by-term and kill them. 
+    Suppose $A$ is not weak. 
+    Then let $A=bB+R$ where $B$ is the lowest strong. 
+    We have $B = L_j H$ for some $H$ and $j$. 
+    We have $\partial^j(y^n) = cL_j + \sum_{i=1}^s c_i P_i$ where $P_i \succ L_j$. 
+    Then 
+    \begin{align*}
+    A &= bB+R \\
+    &= b \left( \frac{1}{c} \left[ \partial^j(y^n) - \sum_{i=1}^s c_i P_i \right] \right)H + R\\
+    &\equiv \frac{-b}{c} \sum_{i=1}^s c_i P_i H + R \mod [y^n],
+    \end{align*}
+	and the terns $P_iH$ are higher that $G$ in the ordering. 
+	We now repeat this process to kill higher and higher terms. 
+	Since there are only finitely many terms we can do this with, the process terminates. 
+\end{proof}
+
+
+\begin{theorem}[Radicals of Differential Ideals are Differential Ideals]
+	Let $A$ be a differential $\QQ$-algebra. 
+	If $I$ is a differential ideal then $\sqrt{I}$ is a differential ideal. 
+\end{theorem}
+\begin{proof}
+	Suppose $a \in \sqrt{I}$. 
+	Then there exists some natural number $n$ such that $a^n \in I$. 
+	By the Power Lemma~\ref{lem:power-lemma} we have that $(a')^n \in I$. 
+	This implies $a' \in \sqrt{I}$. 
+\end{proof}
+
+
+
+
+\begin{example}
+	Consider the chain of ideals 
+	 $$ \langle x^2 \rangle  \subset \langle x^2, (x')^2 \rangle \subset \langle x^2, (x')^2, (x'')^2 \rangle \subset \cdots $$
+	in the ring $F[x]_{\partial}$. 
+	This is a non-terminating ascending chain which shows that differential ideals don't satisfy the ascending chain condition.
+\end{example}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Wronskians}
+%%%%%%%%%%%%%%%%%%%%%%%
+Let $(K,\delta)$ be a differential field. 
+Let $f_1,f_2,\ldots,f_n\in K$.
+The \emph{Wronskian} of $f_1,f_2,\ldots,f_n$ is 
+	 $$ W(f_1,f_2,\ldots,f_n) = \det \begin{pmatrix}
+	 f_1 & f_2 & \cdots & f_n \\
+	 \delta(f_1) & \delta(f_2) & \cdots & \delta(f_n) \\
+	 \vdots & \vdots & \ddots & \vdots \\
+	 \delta^{n-1}(f_1) & \delta^{n-1}(f_2) & \cdots & \delta^{n-1}(f_n)
+	 \end{pmatrix} $$
+This can be used to detect linear independence over the constants $K^{\delta}$. 
+
+\begin{theorem}
+The elements $f_1,f_2,\ldots, f_n \in K$ are linearly dependent over $K^{\delta}$ if and only if $W(f_1,f_2,\ldots,f_n)=0$. 
+\end{theorem}
+\begin{proof}
+	If there exists some $c_1,c_2, \cdots, c_n \in K^{\delta}$ such that $c_1 f_1 +c_2 f_2 + \cdots + c_n f_n=0$ then we get $c_1 \delta^i(f_1) + c_2 \delta^i(f_1) + \cdots + \delta^i(f_n)=0$ for all $i\geq 0$. 
+	This means that the matrix 
+	$$  \begin{pmatrix}
+	f_1 & f_2 & \cdots & f_n \\
+	\delta(f_1) & \delta(f_2) & \cdots & \delta(f_n) \\
+	\vdots & \vdots & \ddots & \vdots \\
+	\delta^{n-1}(f_1) & \delta^{n-1}(f_2) & \cdots & \delta^{n-1}(f_n)
+	\end{pmatrix} $$
+	
+	Conversely, suppose that the determinant is non-zero and proceed by induction. 
+	In the base case we have $f_1\neq 0$ which clearly generates a one dimensional vector space. 
+	In the inductive step we can assume the minor using only $(n-1)$-functions is not zero. \taylor{fd} 
+\end{proof}
+
+If we were allowed to evaluate $W(f_1,f_2,\ldots,f_n)$ at points one could have argued about the rank of the matrix
+  $$\begin{pmatrix}
+ 	f_1(t_0) & f_2(t_0) & \cdots & f_n(t_0) \\
+ 	f_1'(t_0) & f_2'(t_0) & \cdots & f_n'(t_0) \\
+ 	\vdots & \vdots & \ddots & \vdots \\
+ 	f_1^{(n-1)}(t_0) & f_2^{(n-1)}(t_0) & \cdots & f_n^{(n-1)}(t_0)
+ \end{pmatrix} $$
+at a single point $t=t_0$.
+This is what happens in first courses in differential equations.
+In this argument we suppose that $c_1 f_1+c_2f_2+\cdots + c_n f_n=0$ with not all $c_i=0$ and that $W(f_1,f_2,\ldots,f_n)\neq 0$ identically as a function of $t$.
+Then we choose some point $t=t_0$ where it doesn't vanish and conclude a contradiction.
+d
+
+
+\section{Prime Decomposition}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Ritt Problem}
+%%%%%%%%%%%%%%%%%%%%%%%
+Let $F$ be a differentially closed field with $\Delta$ a set of commuting differential operators. 
+Let $\Theta$ be the collection of differential operators. 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Low Power Theorem}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+The following is due to Ritt. 
+Let $f \in F[y_1,\ldots,y_n]_{\partial}$ be algebraically irreducible. 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Absolute and Differential Dimension}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+The absolute dimension of a 
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Kolchin Polynomial}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+Let $(K,\partial_0)$ be a differential field, and let $(L,\partial)$ be a finitely $\partial$-generated field over $K$. 
+Suppose that $L = K(a_1,\ldots,a_n)_{\partial}$. 
+We are doing to consider the function which assigns to each $n$ the transcendence degree of the field over $K$ obtained by adjoining up to the $n$th derivatives of the generators:
+\begin{definition}
+The \emph{Kolchin function} $h$ is defined by 
+ $$ h_{L/K}(n) = \trdeg_K( K(a,\delta(a), \ldots, \delta^n(a) ). $$
+\end{definition}
+It turns out this function is a polynomial and the constants 
+
+\begin{theorem}
+	There exists some natural number $N$ and some constants $a,b\in \ZZ$ such that for all $n\geq N$ we have $h_{L/K}(n) = a+bn$. 
+\end{theorem}
+
+\begin{definition}
+	The \emph{Kolchin polynomial} is the polynomial $h(t) = a+bt$. 
+\end{definition}
+
+It turns out that $b=\trdeg^{\partial}(L/K)$.
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Primitive Element Theorem}\label{sec:primitive}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+Let $\Sigma \subset \AA^2$ be an irreducible differential algebraic variety of finite absolute dimension. 
+We are going to show that there exists some point $p \in \AA^2\setminus \Sigma$ such that the projection $\pi_p$ is well-defined injection into $\Sigma \to \AA^1$. 
+
+Observe that $\sec(\Sigma) \approx \Sigma \times \Sigma \times \AA^1$ and has $\partial$-dimension $1$. 
+The generic point $\eta$ of $\AA^2$ is not contained in $\Sigma$.
+Otherwise $\kappa(\Sigma)_{\partial}$ must have differential dimension at least one since it would be at least two since differential transcendence degree of $\kappa(\eta)_{\partial}$ is two which exceeds the differential dimension of $\sec(\Sigma)$. 
+This shows that we can at least project from the generic point of $\AA^2$.
+Since $\AA^2\setminus \sec(\Sigma)$ is Kolchin open and 
+
+\taylor{In one variable every prime ideal has a singleton characteristic set.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Quantifier Elimination}
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{theorem}
+The theory of differentially closed field of characteristic zero admits quantifier elimination. 
+This means for all formulas in $(K,+,*,0,1)$ there exists an equivalent quantifier free formula.
+\end{theorem}
+
+The following is a classical example of quantifier elimination. 
+\begin{example}
+The most classical example is the statement about linear dependence of functions over the constants. 
+In the case of two functions $f$ and $g$ the formula for linear dependence is the following:
+\begin{equation}\label{eqn:linear-dependence}
+\exists a,b \in K^{\delta}(af+bg=0)
+\end{equation}
+Note that $a\in K^{\delta}$ is also definable as $a \in K^{\delta}$ if and only if $a\in K$ and $\delta(a)=0$. 
+It is a well-known theorem that the Wronskian can detect linear independence of functions. 
+Here, in the two variable case, the Wronskian is given by 
+ $$ W(f,g) = \det \begin{pmatrix} f & g \\
+ \delta(f) & \delta(g) 
+ \end{pmatrix}.$$
+Hence \eqref{eqn:linear-dependence} is equivalent to the quantifier free formula
+ \begin{equation}
+  W(f,g)=0.
+  \end{equation}
+
+\end{example}
+
+
+
+
+
+
+%\bibliographystyle{amsalpha}
+%\bibliography{mydocument.bib}
+
+\end{document}
