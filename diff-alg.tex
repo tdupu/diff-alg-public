@@ -7,6 +7,8 @@
 \newcommand{\anton}[1]{{\color{red} \sf $\spadesuit\spadesuit\spadesuit$ Anton: [#1]}}
 \newcommand{\todo}[1]{{\color{purple} \sf $\spadesuit\spadesuit\spadesuit$ TODO: [#1]}}
 
+\usepackage{graphicx}
+
 \numberwithin{equation}{section}
 \newtheorem{theorem}{Theorem}[subsection]
 \newtheorem{lemma}[theorem]{Lemma}
@@ -52,7 +54,21 @@
 \newcommand{\Low}{\operatorname{Low}}
 
 \newcommand{\wt}{\operatorname{wt}}
+\newcommand{\hol}{\operatorname{Hol}}
+\newcommand{\Mer}{\operatorname{Mer}}
+\newcommand{\adj}{\operatorname{adj}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\llangle}{\langle \langle}
+\newcommand{\rrangle}{\rangle \rangle}
 
+\newcommand{\mult}{\operatorname{mult}}
+\newcommand{\Res}{\operatorname{Res}}
+
+
+\usepackage{tabto}
+\def\quoteattr#1#2{\setbox0=\hbox{#2}#1\tabto{\dimexpr\linewidth-\wd0}\box0}
+\parskip 1em
 
 %opening
 \title{The Algebraic Theory of Differential Equations}
@@ -69,37 +85,36 @@
 
 \chapter{FrontMatter}
 
-\section*{Why do these note exist?}
+\section{Why do these notes exist?}
 These notes are from a course taught in Fall 2022 at UVM entitled \emph{The Algebraic Theory of Differential Equations}. 
-I decided to write these notes because there are a lot different sources for Differential Algebra and I don't like any of them as an introduction to the subject for graduate students. 
-They are either too old, or too specific, or too analytic, or too algebraic or model theoretic or non-rigorous.
+I decided to write these notes because there are a lot different sources for Differential Algebra and I can't pick one since none of them will cover exactly what I want to cover and how I want to cover it. 
 
-For me the starting place is Ritt's book. 
+So what is the Algebraic Theory of Differential Equations? 
+For me the starting place are Ritt's books on Differential Algebra. 
 I love Ritt's books \cite{Ritt1932} and \cite{Ritt1950} but they are old and hard to read. 
-They are also missing a lot of the classical theory from the 1800s which motivated the subject. 
-The successor to Ritt's books are Kolchin's books which, while mathematically very useful, invoke notation that gives me nightmares and has an obsession with removing intuitive analytic methods. 
+They are also missing a lot of the classical theory from the 1800's which motivated the subject. 
+The successor to Ritt's books is Kolchin's books \cite{Kolchin1973} which, while mathematically very useful, invokes notation and terminology that gives me nightmares. 
 Also, the algebraic geometry there largely ignores the development of scheme theory between from 1950 to 1970 by the French school. 
-An alternative to these two is Kaplansky's book which I love but is perhaps too brief. 
-The the classical theory of the hypergeometric functions and the Painlev\'{e} equations there is the classic book by Ince and 
+An alternative to these two is Kaplansky's book \cite{Kaplansky1976} which I love but is perhaps too brief. 
+Following the spirit of these Differential Algebra Books are my advisors book  There are also my advisor's books, \cite{Buium1986} (influenced by Matsuda's book \cite{Matsuda1980}),\cite{Buium1992}, and \cite{Buium1994} which are probably the most influential on my perspective. 
+They are about differential field theory (non-movable singularities), differential algebraic groups, and applications of differential algebra to diophantine geometry.
+Also, in the spirit of these Differential Algebra books are the are the importants books on Picard-Vessiot Theory by Singer and van der Put \cite{Put2003} and Magid \cite{Magid1994}.
+These books are about the Galois theory for linear differential equations and they are great but they don't really explain the classical origins of linear Galois theory.
 
-\begin{itemize}
-	\item There are also my advisor's books, which are probably the most influential on my perspective. 
-	These are about differential fields and moduli problems, differential algebraic groups, and applications of differential algebra to Diophantine Geometry
-	\item There are the seminal texts of Picard-Vessiot Theory (Galois theory for linear differential equations). 
-	\item There is the more algebraic perpective by Deligne and Dwork which have a view towards applications to Arithmetic and Algebraic Geometry.
-	\item There is the work on the Japanese school on both the theory of differential fields, so-called spaces of initial conditions for the Painlev\'{e} equations, and general differential Galois Theory.
-	\item There is the work by the ``integrable systems'' community giving algebraic interpretations of famous solitonic equations (which also is closely tied to the work of the Japanese school and differential algebraic geometry). 
-	\item There is work the Russian school which is largely focused on physical problems but often . 
-	I personally had the pleasure as a student to take courses by  Zarkharov and Lushnikov.
-	\item There is the work by Model Theorists which resolved what differentially closed fields should be?
-\end{itemize}
-There are a myriad of questions that can be address. 
-My collaborator Jim Freitag's favorite: given a differential equation, what are the algebraic solutions one can possibly have?
+To cover this perspective one would like to talk about hypergeometric functions, the Painlev\'{e} equations, and monodromy more generally. 
+There is the classic book by Ince \cite{Ince1944} and a standard text \cite{Iwasaki1991} which is nice but not as algebro-geometric enough for my taste.
+There are great discussion of Hilbert's 21st problem in \cite{Borel1987} and a more modern algebro geometric version in \cite{Deligne1970}.
+Marrying this material with the field theoretic methods of \cite{Buium1986} is something that I want to do. 
 
+Once one gets into the Painlev'{e} equations more algebraic geometry surfaces. The japanese following  Okomoto \cite{Okamoto1987b,Okamoto1987,Okamoto1986, Okamoto1987a} (and many many papers which I'm not going to list following this thread) showed that there exist rational surfaces of ``spaces of initial conditions'' for the Painlev\'{e} which capture a lot of geometry. 
 
+Also, there are so-called Lax Pairs for these Painlev\'{e} equations which leads to a theory of ``algebraic complete integrability''. 
+The notion of algebraic complete integrability is discussed in, say, \cite{Beauville1990}\cite{Adler2004}. 
+From here one can see that equations like the KP equation admit Lax Pairs and this theory again makes connections to algebraic geometry (this time abelian varieties) through so-called Jacobian Flows and Krichever modules \cite{Mulase1994}.
 
+On top of all this there is a general differential Galois Theory beyond linear equations  developed by Umemura \cite{Umemura2011} and a general theorem of Riemann-Hilbert  Problems and D-Modules following Malgrange and Kashiwara \cite{Borel1987}.
 
- 
+I haven't even mentioned differential algebraic geometry (it's associated tussles with dimension theory) and the geometry of foliations. To make things worse, much of this material generalizes beyond differential equations, to difference equations, $p$-derivations, and other operations.
 
 Understandably, I can't cover this all. 
 I'm not even going to pretend to try. 
@@ -115,7 +130,11 @@ I have a number of things I would like to understand better. What is a $\tau$-fu
 What is a Jacobian flow? What proofs work for differential equations but not for difference equations? 
 What do we \emph{really} mean when we say $X$ equation is a limiting case of $Y$ equation?
 What are the most fundamental examples to keep in mind and teach students when talking about this material?
+How are classical asymptotic methods ``enriched by $D$-modules and sheaves''?
 
+The subject is vast and I hope we have a fun time exploring it. 
+It may be that I don't get anywhere on any of this material and we spend 3 months defining what a differential ideal is. 
+We'll see. 
 %At the end of all of this there is going to be many course that could be taught using this book.
 
 
@@ -128,15 +147,666 @@ A link to the .tex can be found here:
 I will be posting a Dropbox link on my webpage (at the time of writing this it is at \url{http://uvm.edu/~tdupuy}) but these always break. 
 If you are taking the course and the link breaks let me know.
 
+\newpage 
+\section{Notation}
+\begin{itemize}
+	\item $R^{\Delta}$ (or $R^{\partial}$) the constants of the derivations (or derivation). 
+	\item $R\lbrace x \rbrace$ the ring of differential polynomials over $R$.
+	\item $K(S)_{\partial} = K(\lbrace S \rbrace)$ the field extension of $K$ $\partial$-generated by $S$.
+	\item $\CC\langle t-t_0 \rangle$ convergent power series at $t_0$
+	\item $\CC\llangle t-t_0\rrangle$ Laurent series of meromorphic functions (so finite poles).
+\end{itemize}
+\newpage
+
 \mainmatter
 
-\chapter{Hypergeometric Differential Equations}
+
+
+\chapter{Differential Algebra Basics}
+I would skip this for now and only come back to this chapter when we need it. 
+
+\section{$\Delta$-Rings and $\partial$-Rings}
+In this book, unless stated otherwise, all rings are going to be commutative with a multiplicative unit. 
+Let $R$ be a commutative ring. 
+By a \emph{derivation} on $R$ we map a map of sets $\partial:R\to R$ that satisfied 
+ $$ \partial(a+b) = \partial(a) + \partial(b), \qquad \forall a,b\in R,$$
+ $$ \partial(ab) = \partial(a) b + a\partial(b), \qquad \forall a, b \in R, $$
+ $$ \partial(1) = \partial(0) = 0.$$
+Derivations are completely formal here. 
+We don't care about limits. 
+
+\begin{exercise}
+	Check that all the usual rules hold. For example if $\partial:R \to R$ is a differential ring then 
+	\begin{enumerate}
+		\item For $n\in \ZZ_{\geq 0}$ and $a \in R$ we have $\partial(a^n) = na^{n-1}\partial(a)$.
+		\item For $a \in R$ and $b\in R^{\times}$ we have $\partial(a/b) = (\partial(a)b - a \partial(b))/b^2$. Here $R^{\times}$ denotes the elements which have a multiplicative inverse.
+		\item For $f \in R[x]$ and $a \in R$ we have $\partial(f(a)) = f^{\partial}(a) + f'(a)\partial(a)$. If $f(x) = \sum_{i=0}^d b_i x^i$ then $f^{\partial}(x) = \sum_{i=0}^d \partial(b_i) x^i$. 
+	\end{enumerate}
+\end{exercise}
+Note that the one exception for derivative rules holding is the chain rule. 
+For an abstract ring $R$ there is not a defined composition of elements $a\circ b$ (although you can compose with polynomials as above).
+
+
+\begin{definition}
+	A \emph{differential ring} or (\emph{$\Delta$-ring}) is a tuple $(R,\Delta)$ where $R$ is a commutative rings with unity and $\Delta = \lbrace \partial_1,\ldots,\partial_m\rbrace$ is a collection of commuting derivations $\partial_i:R \to R$. 
+\end{definition}
+
+When $\Delta = \lbrace \partial \rbrace$ then we call $(R,\Delta)$ a \emph{$\partial$-ring} and will use the notation $(R,\partial)$. 
+We also call such a ring an ordinary differential ring. 
+
+
+\begin{example}
+	\begin{enumerate}
+		\item The ring of polynomials in on variable $(\CC[t],\dfrac{d}{dt})$ 
+		\item The ring of rational functions $(\CC(t), \dfrac{d}{dt})$, this is an example of a differential field. 
+		In general a \emph{differential field} is a differential ring $(K,\Delta)$ where the underlying ring $K$ is a field. 
+		\item The ring of holomorphic functions $\hol(U)$ for some $U\subset \CC^m$ is an example of a $\Delta$-ring, $(\hol(U), \lbrace \dfrac{\partial}{\partial t_1}, \ldots, \dfrac{\partial}{\partial t_m}\rbrace )$. 
+		Here we are using $(t_1,\ldots,t_m)$ for the complex variables $t_j = \sigma_j + i \tau_j$ where $\sigma_j,\tau_j \in \RR$. 
+		\item We can do the same thing with meromorphic functions $\Mer(U)$. These will give a differential field. 
+	\end{enumerate}
+\end{example}
+
+\section{Morphisms of $\Delta$-Rings and $\partial$-Rings}
+Let $(A,\Delta)$ and $(B,\Delta)$ be differential rings where we use $\Delta = \lbrace \partial_1,\ldots,\partial_m\rbrace$ for the derivatives on both $A$ and $B$.
+\begin{definition}
+A \emph{morphism} of differential rings is a ring homomorphism $f:A\to B$ such that for each $\partial_i \in \Delta$ we have $f(\partial_i(a)) = \partial_i(f(a))$ for each $a\in A$. 
+\end{definition}
+
+\chapter{Monodromy and Hilbert's 21st Problem }
+
+\quoteattr{In the theory of linear differential equations with one independent variable $z$, I wish to indicate an important problem one which very likely Riemann himself may have had in mind. 
+	This problem is as follows: To show that there always exists a linear differential equation of the Fuchsian class, with given singular points and monodromic group. 
+	The problem requires the production of $n$ functions of the variable $z$, regular\footnote{Hilbert means holomorphic.} throughout the complex $z$-plane except at the given singular points; at these points the functions may become infinite of only finite order, and when $z$ describes circuits about these points the functions shall undergo the prescribed linear substitutions. 
+	The existence of such differential equations has been shown to be probable by counting the constants, but the rigorous proof has been obtained up to this time only in the particular case where the fundamental equations of the given substitutions have roots all of absolute magnitude unity. L. Schlesinger (1895) has given this proof, based upon Poincaré's theory of the Fuchsian zeta-functions. 
+	The theory of linear differential equations would evidently have a more finished appearance if the problem here sketched could be disposed of by some perfectly general method.}{Hilbert's 21st Problem}
+
+In this chapter we are going to move towards Hilbert's 21st problem and some of the classical theory of monodromy of solutions of differential equations.
+
+
+\section{Wronskians}
+
+Let $(R,\partial)$ be a differential ring. 
+Let $f_1,\ldots,f_n\in R$. 
+The \emph{Wronskian} of $f_1,\ldots,f_n$ is 
+ $$ W(f_1,\ldots,f_n) = \det \begin{pmatrix}
+ f_1 & f_2 & \cdots & f_n \\
+ f_1' & f_2' & \cdots & f_n' \\
+ \vdots & \vdots & \ddots & \vdots \\
+ f_1^{(n-1)} & f_2^{(n-1)} & \cdots & f_n^{(n-1)}
+ \end{pmatrix}.$$
+The Wronskian gives us a test for linear dependence over the constants of a differential field. 
+\begin{theorem}
+	Let $(K,\partial)$ be a differential field. 
+	Let $f_1,\ldots,f_n \in K$. 
+	Let $C = K^{\partial}$ be the constants. 
+	We have that $f_1,\ldots,f_n$ are linearly dependent over $C$ if and only if $W(f_1,\ldots,f_n)=0$. 
+\end{theorem}
+\begin{proof}
+	Suppose that $f_1,\ldots,f_n$ are linearly dependent over $C$.
+	Then there exists $c_1,\ldots,c_n \in C$ not all zero such that 
+	 $$ c_1 f_1 + \cdots + c_n f_n =0.$$
+	 Taking derivatives gives 
+	  \begin{equation} \label{E:element-of-kernel}
+	  	\begin{pmatrix}
+	  f_1 & f_2 & \cdots & f_n \\
+	  f_1' & f_2' & \cdots & f_n' \\
+	  \vdots & \vdots & \ddots & \vdots \\
+	  f_1^{(n-1)} & f_2^{(n-1)} & \cdots & f_n^{(n-1)}
+	  \end{pmatrix} \begin{pmatrix} c_1 \\ c_2 \\  \vdots  \\ c_n \end{pmatrix} =0.
+  \end{equation}
+	 Since the $c_i \in K$, this means the matrix $B$ such that $\det(B)=W$ is singular and hence $W=\det(B)=0$.
+	 
+	 Conversely, suppose that $W=0$. 
+	 Then there exists some $c_1,\ldots,c_n \in K$ not all zero such that \eqref{E:element-of-kernel} holds. 
+	 To prove our result, we need to show that $c_1,\ldots, c_n \in C$. 
+	 If some proper subset of $\lbrace f_1,\ldots, f_n \rbrace$ have a non-trivial dependence relation we can replace our set with that subset and hence we can assume without loss of generality that $\lbrace f_2,f_3,\ldots, f_n \rbrace$ are linearly independent over $K$. 
+	 We can also suppose that $c_1\neq 0$. 
+	 Furthermore we can scale the vector $(c_1,\ldots,c_n)$ by $1/c_1$.
+	 Hence we can further assume that $c_1=1$.  
+	 
+	 Now for $1\leq j \leq n-2$ (note the $n-2$ here) we can take a derivative of 
+	  $$ c_1 f_1^{(j)} + \cdots + c_n f_n^{(j)} =0 $$
+	 To get 
+	 \begin{align*}
+	 		   0 =& c_1 f_1^{(j+1)} + \cdots + c_n f_n^{(j+1)} + c_1'  f _1^{(j)} + \cdots + c_n' f_n^{(j)} \\
+	 		   =&  c_2'  f _2^{(j)} + \cdots + c_n' f_n^{(j)}.
+	\end{align*}
+	But $f_2,\ldots,f_n$ are linearly independent. 
+	This implies that $c_2'=\cdots=c_n'=0$ which implies that $c_1,\ldots,c_n \in C$ which proves our result. 
+\end{proof}
+
+We want to show that the Wronskian satisfies a linear differential equations. 
+To do this we need a couple things. 
+
+In what follows one needs to recall the definition of an adjugate matrix and how cofactor expansion works. 
+Recall that if $A$ is an invertible $n\times n$ matrix then the \emph{adjugate} is defined by 
+$$\adj(A) = \det(A) A^{-1}.$$
+This is the best way to remember the formula.  
+The adjugate is just what would be the inverse would be had we not inverted the determinant. 
+Unlike inverse, tt turns out that every $n\times n$ matrix and we can obtain its formula from cofactor expansion. 
+We have 
+ $$ \adj(A)_{ji} = (-1)^{i+j} \det(\widetilde{A}_{ij})$$
+where $\widetilde{A}_{ij}$ is the matrix obtains by deleting the $i$th row and $j$th column.
+This all comes from the formula for the inverse of a matrix using cofactor expansion (sometimes also called ``Laplace's Formula'').
+
+Finally, we need to know what the partial derivative of the determinant is with respect to each of its entries. 
+In what follows we are going to consider $X = (x_{ij})$ as an abstract $n\times n$  matrix with entries being variables. 
+This means that $\det(X)$ will be viewed as a polynomial in $\ZZ[x_{ij}\colon 1 \leq i,j \leq n ]$. 
+\begin{lemma}
+	Let $X =(x_{ij})$ be a symbolic matrix. 
+	$$ \dfrac{\partial \det(X)}{\partial x_{ij}} = \adj(X)_{ji}. $$
+\end{lemma}
+\begin{proof}
+	The proof is direct. 
+	By cofactor expansion we have $\det(X) = \sum_{j=1}^n x_{ij} \adj(X)_{ji}$ hence
+	 \begin{align*}
+	 	\dfrac{\partial \det(X)}{\partial x_{ij}} = & \dfrac{\partial}{\partial x_{ij}} \left [ \sum_{\ell=1}^n x_{i\ell} \adj(X)_{\ell i}\right] \\
+	 	&= \sum_{\ell=1}^n \dfrac{\partial x_{i\ell}}{x_{ij}} \adj(X)_{\ell i} + x_{i\ell} \dfrac{\partial }{\partial x_{ij}} \adj(X)_{\ell i} \\
+	 	&= \sum_{\ell=1}^n \delta_{\ell j} \adj(X)_{\ell i} = \adj(X)_{ji}.
+	 \end{align*}
+ 	Note that on the second to last equality we used that $\dfrac{\partial }{\partial x_{ij}} \adj(X)_{\ell i}=0$ since $\adj(X)_{\ell i}$ has no terms with $i$ in the first entry and $\ell$ in the second entry (this is the cofactor expansion formula).
+\end{proof}
+
+To apply this we need the formula for the dot product of matrices. 
+Sometimes this is called the ``Killing form''.\footnote{Named after Wilhelm Killing 1847--1923}.
+If you have never done this exercise in your life you should do it.
+\begin{exercise}
+	Let $A,B \in M_n(R)$ for a commutative ring $R$. 
+	One has 
+	$$\Tr(A^TB) = \sum_{1\leq i,j \leq n}A_{ij}B_{ij}.$$ 
+\end{exercise}
+We can now prove our result.
+\begin{theorem}
+	Let $A = (a_{ij}) \in M_n(R)$ with $(R,\partial)$ a differential ring. 
+	We have 
+	 $$ \partial(\det(A)) = \Tr(\adj(A) \partial(A))$$
+	where $\partial(A)$ denotes the matrix $\partial(A)= ( \partial(a_{ij}))$.
+	Furthermore if $A \in \GL_n(R)$ then 
+	 $$\partial(\det(A)) = \Tr( A^{-1} \partial(A)) \det(A).$$
+\end{theorem}
+\begin{proof}
+	Let $X = (x_{ij})$.
+	We are going to use the chain rule
+	\begin{align*}
+		\partial(\det(X)) =& \sum_{1\leq i,j \leq n} \dfrac{\partial \det(X)}{\partial x_{ij}}\partial(x_{ij}) \\
+		=& \sum_{1\leq i,j \leq n} \adj(X)_{ji} \partial(x_{ij}) \\
+		=& \Tr( \adj(X)\partial(X)).
+	\end{align*}
+    To get the last formula, if $X$ is invertible we use the previous formula $\adj(X) = \det(X) X^{-1}$.
+\end{proof}
+
+
+\section{Stalks and Germs of Holomorphic and Meromorphic Functions}
+
+Recall that for $U' \subset U$ open subset of $\CC^m$ we have injectures $\hol(U) \to \hol(U)$ and $\Mer(U) \to \Mer(U')$ given by restricting the domain of some $f(z)$ to $U'$.
+Both of these ring homomorphisms are injective by the analytic continutation principle (which holds in several variables as well as one variable).\footnote{If you have never showmn that analytic continuation works in two variables this is a good exercise.}
+The \emph{stalk} at some $t_0 \in \CC$ is 
+ $$ \hol_{t_0} = \varinjlim_{U \owns t_0} \hol(U), \quad \Mer_{t_0} \varinjlim_{V \owns t_0} \Mer(U) $$
+where the direct limit is taken over open set $U$ containing $t_0$.
+Any element of a stalk is called a \emph{germ}. 
+
+It is important to know that there is always a ring homomorphism $\hol(U) \to \hol_{t_0}$ and that any element of $\hol(U)$ is determined by its stalk. 
+Same goes for meromorphic functions.
+
+\begin{remark}
+	For the uninitiated, we recall that if $I$ is a partially ordered set then a directed system is a collection $((R_i)_{i\in I},(f_{i,j})_{i<j})$ consisting of rings $R_i$ and morphisms $f_{i,j}:R_i \to R_j$ whenever $i<j$. 
+	
+	The direct limit of the directed system then is the ring 
+	 $$ \varprojlim R_i = (\coprod_{i\in I} R_i)/\sim $$
+	where $r_i \in R_i$ and $r_j \in R_j$ are declared equivalent when for some $k>i,j$ we have $f_{i,k}(r_i)  = f_{j,k}(r_j)$.
+\end{remark}
+
+In the one variable case we for $a\in \CC$ we are going to use the notation 
+ $$ \CC\langle t-a \rangle := \hol_a, \quad \CC\llangle t-a \rrangle = \Mer_a $$
+And in the several variable case for $(a_1,\ldots,a_m) \in \CC^m$ we will use 
+ $$ \CC\langle t_1 -a_1,\ldots, t_m - a_m\rangle = \hol_{(a_1,\ldots,a_m)}, \quad \CC\llangle t_1-a_1,\ldots, t_m-a_m \rrangle = \Mer_{(a_1,\ldots,a_m)}.$$
+ In other books they use $\CC\lbrace t \rbrace$ for convergent power series but we are going to reserve this symbol for the ring of differential polynomials.
+
+\section{Reduction to First Order}
+
+Any system of PDEs is equivalent to a first order system of PDE.\footnote{The word equivalent is loaded since I haven't really defined an equivalence relation. 
+I mean equivalent as $\Delta$-schemes, which I haven't defined.
+They are possibly equivalent as more.
+Let's not take this too seriously and just think of this as a trick for now. }
+The idea is that we can always introduce more variables every times we need to take a new derivative so that all of our expressions only involve single derivatives of variables. 
+
+We illustrate this in the case of linear first order differential equations in one differential indeterminate. 
+Here we consider the equation
+ $$ y^{(r)} + a_{r-1} y^{(r-1)} + \cdots + a_0 y =0. $$
+By introducing ``velocity variables'' $v_j = y^{(j)}$ for $j=0,1,\ldots, r-1$ we get a new system
+$$\begin{cases}
+	v_0' = v_1, \\
+	v_1' = v_2 ,\\
+	\ddots \\
+	v_{r-1}' = -a_{r-1}v_{r-1} - a_{r-2} v_{r-2} - \cdots - a_0 v_0 .
+\end{cases}$$
+which then can be written in matrix form 
+ $$ V' = AV $$
+where 
+ $$ V = \begin{pmatrix}v_0 \\
+ v_1 \\
+ \vdots \\
+ v_{r-1} 
+ \end{pmatrix}, \qquad A = \begin{pmatrix}
+ 0 & 1 & 0  & \cdots & 0 \\
+ 0 & 0 & 1 & \cdots & 0 \\
+ \vdots & \vdots & \vdots & \ddots & \vdots \\
+ 0 & 0 & 0 & \cdots & 1 \\
+ -a_{r-1} & -a_{r-2} & -a_{r-3} & \cdots & -a_0
+ \end{pmatrix}.
+ $$
+Here $A$ is just the transpose of a companion matrix. 
+We will often convert between higher order equations and first order equations in this way. 
+
+\section{Linear Systems}
+Let $A \in M_n(R)$ where $R$ is a differential ring.  
+The system 
+\begin{equation}
+Y' = A Y
+\end{equation}
+ is called a \emph{linear system at over $R$} in the indeterminates $Y=(y_1,\ldots,y_n)$ (I am going to allow myself to abusively conflate row and column vectors). 
+ The letter $n$ is sometimes called the \emph{rank} of the linear system. 
+ 
+\begin{exercise}
+	The solutions of a linear system form an $R^{\partial}$-module. 
+\end{exercise}
+ 
+A matrix $\Phi \in \GL_n(R)$ is called a fundamental set of solutions or \emph{fundamental solution} if 
+ $$ \Phi' = A \Phi,$$
+where the derivatives of $\Phi$ in the expression $\Phi'$ are taken component-wise. 
+The idea is that the columns of the matrix $\Phi$ form a basis of solutions over the constants $R^{\partial}$.
+
+Fundamental matrices are unique. 
+Any solution of the linear system takes the form $\Phi Z$ for some vector $Z \in (R^{\partial})^{\oplus n}$. 
+This menas that if $\widetilde{\Phi}$ is another fundamental matrix there exists some $M \in \GL_n(R^{\partial})$ such that
+\begin{equation} \label{E:monodromy-matrix}
+  \widetilde{\Phi} = \Phi M.
+\end{equation}
+In the theory of monodromy, these will become the monodromy matrices and in the Picard-Vessiot theory of linear differential algebraic extensions of differential fields these matrices are going to become the Galois group elements.
+This is so important we are going to put it in a theorem environment. 
+\begin{theorem}[Existence of ``Monodromy'' Matrices]
+	If $\Phi$ and $\widetilde{\Phi}$ are two fundamental matrices of a rank $n$ linear system over a differential ring $(R,\partial)$ then there exists some $M \in \GL_n(R^{\partial})$ such that $\widetilde{\Phi} = \Phi M$.
+\end{theorem}
+
+To prove a fundamental set of solutions we are going to use existence and uniqueness together with the following lemma.
+
+\begin{lemma}\label{L:linear-independence}
+	Let $K$ be a $\partial$-field. 
+	If $Y_1,\ldots,Y_n \in K^n$ are linearly independent over $K$ then they are linearly independent over $C=K^{\partial}$. 
+\end{lemma}
+\begin{proof}
+	We prove this by proving they are linearly dependent over $K$ if and only if they are linearly dependent over $C$.
+	If they are linearly dependent over $C$ then clearly they are linearly dependent over $K$. 
+	Conversely, suppose that they are linearly dependent over $K$.
+	We will prove this by induction so we can suppose that no proper subset is linearly dependent over $K$ otherwise we could apply the inductive hypothesis. 
+	The base case is immediate. 
+	
+	Now we do the inductive step. 
+	By clearing denominators we have $Y_1 = \sum_{j=2}^n c_j Y_j$ for some $c_j \in K$.
+	We have 
+	\begin{align*}
+	0=&Y_1'-AY_1 \\
+	&= \sum_{j=2}^n c_j' Y_j + \sum_{j=2}^n c_jY_j' - \sum_{j=2}^n c_j AY_j\\
+	&= \sum_{j=2}^n c_j' Y_j 
+	\end{align*}
+	But since $Y_2,\ldots,Y_n$ were assumed to be linearly independent we must have $c_2'=\ldots=c_n'=0$ which proves the $c_j$'s are constants. 
+\end{proof}
+ 
+ \section{Holomorphic Linear Systems}
+A \emph{holomorphic linear system} at $t_0 \in \CC$ is a linear system over $R= \CC\langle t -t_0\rangle$. 
+That is, it is a system of linear differential equations 
+$$ Y' = AY $$
+where the matrix $A$ is holomorphic at $t_0\in \CC$.
+ 
+ We now prove the existence and uniqueness theorem for holomorphic linear systems.
+ 
+ \begin{theorem}[Existence and Uniqueness]
+Let $t_0 \in \CC$
+Let $A \in M_n(\CC\langle t-t_0 \rangle)$. 
+Let $Y_0 \in \CC^n$. 
+There exists a unique $Y \in \CC\langle t-t_0 \rangle^{\oplus n}$ such that 
+$$\begin{cases}
+	Y' = A Y,\\
+	Y(t_0) = Y_0.
+\end{cases}$$
+ \end{theorem}
+ There are three ways of doing this.
+ I might add some more details later.
+ \begin{enumerate}
+ 	\item Use power series expansions, then prove a convergence result. 
+ 	\item Big Hammer: Use Cauchy-Kowalevski\footnote{This is the same as Cauchy-Kovaleskaya.
+ 	Some people spell the Russian name differently. }
+   This theorem is morally the same as above just with more complicated PDEs. 
+   One shows that there is a power series solution then proves convergence.
+    \item Bigger Hammer: Use the existence of differentially closed fields $\widehat{K}$ is the $\partial$-closure of the field $K \subset \CC\llangle t-t_0 \rrangle$ given by $K=\QQ(a_{ij} : 1\leq i,j \leq n )_{\partial}$.
+    This is the differential field generated by the coefficients of the matrix $A$.
+    The Siedenberg embedding theorem then tells us that $\widehat{K} \subset \CC\llangle t-t_0 \rrangle$, and this gives us a holomorphic solution of $Y'=AY$. 
+    By the property of differential closures once we find a solution we can keep adjoining solutions using Blum's axiom. \taylor{explain this further}.
+ \end{enumerate}
+
+We now prove the existence of a fundamental matrix.
+\begin{lemma}
+	Every holomorphic linear system which is holomorphic at $t_0 \in \CC$ admits a fundamental matrix $\Phi(t)$ which is holomorphic at $t_0$.
+\end{lemma}
+\begin{proof}
+By existence and uniqueness we can always find a solution $Y_i \in \CC\langle t-t_0 \rangle^{\oplus n}$ satisfying 
+ $$ Y_i' = AY_i, \quad Y_i(t_0) = e_i $$
+where $e_i$ is an elementary column vector (it has zeros everywhere except for the $i$th position).
+The solutions $Y_1,\ldots,Y_n$ are linearly independent over $K=\CC\langle t-t_0 \rangle^{\oplus n}$ because $e_1,\ldots,e_n$ are linearly independent over $K$. 
+Hence by Lemma~\ref{L:linear-independence} we get that the solutions are linearly independent over over $\CC$.
+ The matrix $$\Phi = [Y_1 \vert Y_2 \vert \cdots \vert Y_n ]$$ 
+ is our fundamental system.
+ \end{proof}
+
+\section{Monodromy of Holomorphic Linear Systems}
+
+Consider a holomorphic linear system 
+$$Y'=AY, \quad A=A(t) \in M_n(\hol(U)),$$ 
+where $U\subset \CC$ a connected open set. 
+By the previous section for each $t_0 \in U$ there exists a fundamental matrix $\Phi$ which is holomorphic in a neighborhood of $t_0$.
+We are going to want to analytically continue $\Phi$ along every path $\gamma$ starting at $t_0$ and obtain $\Phi^{\gamma}$ which will eventually allow us to cook-up a group homomorphism from the fundamental group of paths starting at $t_0$ to $\GL_n(\CC)$ which measures how much $\Phi$ changed once we take it around the look. 
+
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[scale=0.5]{analytic-continuation.eps}
+	\end{center}
+\caption{A picture of analytically continuing a local fundamental matrix along a path.}
+\end{figure}
+
+The group homomorphism 
+ $$ \rho: \pi_1(U,t_0) \to \GL_n(\CC), \quad \rho(\gamma) = M_{\gamma}$$
+is called the \emph{monodromy representation}.
+We will now explain what $M_{\gamma}\in \GL_n(\CC)$ is  supposing $\Phi_{\gamma}$ exists:
+since $\Phi$ and $\Phi_{\gamma}$ are both fundamental matrices at $t_0$ then as in  \eqref{E:monodromy-matrix} there exists some $M_{\gamma}$ such that 
+ $$ \Phi_{\gamma} = \Phi M_{\gamma}.$$
+That is all.
+
+We need to set our convention for concatenation of paths. 
+If $\gamma_1$ and $\gamma_2$ are two paths in $U$ where the endpoint of $\gamma_2$ is the starting point of $\gamma_1$ then we will let $\gamma_2\gamma_1$ denote the path which first performs $\gamma_1$ then performs $\gamma_2$. 
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[scale=0.4]{fundamental-group-convention.eps}\label{F:fundamental-group-convention}
+\end{center}
+\caption{The convention we use for composition of paths. Other people use other conventions and it will mess up your formulas.}
+\end{figure}
+
+\begin{remark}[WARNING]
+	Conventions on concatenation of paths changes from text to text and this will mess with your formulas.
+\end{remark}
+
+With our convention for concatenation of paths we have.
+ $$ \Phi_{\gamma_2\gamma_1} = (\Phi_{\gamma_1})_{\gamma_2}$$
+On one hand we have $\Phi_{\gamma_2\gamma_1} = \Phi M_{\gamma_2\gamma_1}.$
+On the other hand we have $ (\Phi_{\gamma_1})_{\gamma_2}= (\Phi M_{\gamma_1})_{\gamma_2} = \Phi_{\gamma_2} (M_{\gamma_1})_{\gamma_2} = \Phi M_{\gamma_2} M_{\gamma_2}.$
+This proves that 
+ $$ M_{\gamma_2\gamma_1} = M_{\gamma_2}M_{\gamma_1}.$$
+
+Finally, suppose that $\Psi$ is another fundamental matrix at $t_0$.
+Then $\Psi = \Phi M$ for some $t_0$ and let $\Psi_{\gamma} = \Psi N_{\gamma}$. 
+Then we have 
+ $$\Phi M N_{\gamma} =\Psi N_{\gamma}  =\Psi_{\gamma} = \Phi_{\gamma} M = \Phi M_{\gamma} M, $$
+which implies 
+ $$ N_{\gamma} = M^{-1} M_{\gamma} M .$$
+ This proves the representation is independent of the choice of fundamental matrix up to conjugation.
+
+\begin{example}[Babymost Example]
+	In the rank one case we have a differential equations 
+	 $$ y'(t) = a(t) y(t), \quad a(t) \in \hol(U). $$
+	This has a solution $\phi(t) = \exp( \int_{t_0}^t a(s) ds)$ which is also the fundamental matrix. 
+	This formula makes sense in a small disc around $t_0$.
+	For things to be interesting we need  $ \int_{\gamma} a(s) ds $ to have monodromy.
+	
+	If $a(t) = 1/t$ this would be the simplest case. 
+	This is a little to simple as $\int_{t_0}^t \frac{ds}{s}$ would give a branch of $\log(s)$ which would only change the exponent by $2\pi i$.
+	
+	If $a(t) = c/t$ for some constant $c$, then things get a little interesting. 
+	One then has $y(t) = t^{c} := \exp( c \log(t))$ as a solution. 
+	In this case if we let $\gamma_0$ be a loop around the origin and $M_0 = M_{\gamma_0}$ we find that 
+	$$M_{0} = \exp{2 \pi i c}.$$
+	\qed
+\end{example}
+
+For any path $\gamma$ in $U$ starting at $a \in U$ and ending at $b\in U$ and any fundamental matrix $\Phi$ in a neighborhood of $a$ we are going to show that we can analytically continue $\Phi$ along $\gamma$ to get a new fundamental matrix $\Phi^{\gamma}$ which is the analytic continuation of $\Phi$ along gamma.
+There are some issue that we need to address.
+\begin{enumerate}
+\item How do we know that the fundamental matrix doesn't have a natural stopping point where it can't be continued further?
+\item How do we know that the continuation $\Phi^{\gamma}$ doesn't degenerate after leading the initial ball $B$ where the power series defining it converged? How do we know solutions don't become linearly dependent?
+\end{enumerate}
+
+Let's address the first issue. 
+Suppose that $\Phi$ is analytic in some ball $B$ around $a$ and that there is some $a_1$ on the boundary of $B$ where $\Phi$ doesn't extend. 
+Well since $a \in U$ we know that there exist some $\Phi_1$ a fundamental matrix which is valid in some neighborhood $B_1$ of $a_1$. 
+Then on $B\cap B_1$ we there exists some matrix $M_1 \in \GL_n(\CC)$ such that 
+ $$ \Phi_1 = \Phi M_1.$$
+By analytic continuation we could actually extend $\Phi$ to $B\cap B_1$ and hence by the sheaf property there exists some unique $\Phi_2$ such defined on $B \cup B_1$ which restricts to $\Phi$ and $\Phi_1$ on there respective domains.
+
+Let's now address the second issue. 
+Let $\det(\Phi)=W$. 
+We need to show that $W(t)$ is never zero on these continuations. 
+We know that 
+ $$ W'(t) = \Tr( \Phi^{-1} \Phi') W(t). $$
+But since $\Phi' = A\Phi$ we have that $\Phi^{-1} \Phi' = \Phi^{-1}(t) A(t) \Phi(t)$ and since trace is invariant under conjugation our scalar equation becomes 
+ $$ W'(t) = \Tr(A(t)) W(t), $$
+and we see that 
+ $$ W'(t) = \exp(\int_{t_0}^t \Tr(A(s)) ds),$$
+where the integral is understood to be a path integral. 
+This is never zero which implies that $\Phi_{\gamma}(t)$ always remains a fundamental system of solutions.
+
+Finally, we just want to make the remark that $\Phi_{\gamma}$ only depends on the homotopy class $[\gamma]$ of $\gamma$. 
+This is because path integrals are well-defined on homotopy classes.  
 
 
 
+\begin{theorem}
+For every $U \subset \CC$ and every $A(t) \in \hol(U)$ and every $t_0 \in U$, monodromy of a fundamental set of solutions is well-defined and hence induces a well-defined monodromy representation $ \pi_1(U,t_0) \to \GL_n(\CC),$ given by $[\gamma] \mapsto M_{\gamma}$ where $M_{\gamma}$ is the matrix  $\Phi_{\gamma}=\Phi M_{\gamma}$ for a fundamental matrix $\Phi$.
+\end{theorem}
 
+	\begin{example}[Euler Systems]
+	In a punctured neighborhood around $0 \in CC$, consider the system 
+	$$ Y' = \frac{A}{t} Y. $$
+	Consider the function $t^A = \exp(A \log(t))$ for some branch $\log(t)$ and $\exp$ denoting the matrix exponential. We have 
+	$$\dfrac{d}{dt}\left[ t^A\right] = \exp(A \log(t) ) A \frac{1}{t} = \frac{A}{t} t^A,$$
+	so the matrix $\Phi(t) = t^A$ is a local matrix solution of this equation. 
+	Since $\det(e^B) = e^{\Tr(B)}$ for any matrix $B$ we have $\det(\Phi) = t^{\Tr(A)}$ which is never zero and hence $\Phi(t)$ is a fundamental matrix. 
+	
+	Now let $\gamma$ be a loop in $U$ that encloses the origin.  
+	We can compute 
+	 $$\Phi_{\gamma}(t) = \exp( A( \log(t) + 2\pi i) = \Phi(t) \exp(2\pi i A) $$
+	and hence $M_{\gamma} = \exp(2\pi i A).$
+\end{example}
+
+\begin{exercise}
+	Every matrix $M \in \GL_n(\CC)$ can appear as the monodromy matrix of some system. (Hint: use the Euler system and show that for every $M \in \GL_n(\CC)$ there exist some $A \in M_n(\CC)$ such that $\exp(2\pi i A) = M$. This needs some ideas like a matrix logarithm or using a Jordan canonical form.)
+\end{exercise}
+
+\section{Divergent Solutions of Differential Equations}
+Something very strange can happen if one applies the power series technique to innocent looking differential equations. They can have divergent power series solutions. 
+\begin{exercise}
+	Consider the equation 
+	 $$ t^3 y''(t) + (t^2+t) y'(t) - y(t) =0.$$
+	If we expand in a power series we find that for $ y(t) = \sum_{n=0}^{\infty} a_n t^n $
+	to be a solution one had the initial value difference equation
+	$$\begin{cases}
+	a_0 =0, \\
+	a_1 = a, \\
+	a_n = -(n-1)a_{n-1}.
+	\end{cases}$$
+	where $a \in \CC$ is arbitrary. 
+	One finds that 
+	$$ y(t) = a \sum_{n=1}^{\infty} (-1)^{n+1} (n-1)! t^n \in \CC[[t]]\setminus \CC\langle t \rangle$$
+	is a divergent power series solution! Note that $\vert a_{n+1} \vert/\vert a_n \vert = n \to \infty$ as $n\to \infty$.
+\end{exercise}	
+
+So what is the issue? 
+The issue is that when we convert this equation into a first order system of differential equations is has a pole of order bigger than one. 
+One can check that if we let $y'(t)=v(t)$ in the above example we see that  $v'(t) = -\frac{t^2+t}{t^3}v(t)+\frac{1}{t^3}y(t)$ and letting $Y(t) = (y(t),v(t))$ we get the first order system 
+ $$ Y' =A(t) Y $$
+where 
+\begin{align*}
+ A(t) =& 
+\begin{pmatrix}
+0 & 1 \\
+-\frac{t+1}{t^2} & \frac{1}{t^3}
+\end{pmatrix} 
+=&
+\begin{pmatrix}
+0 & 0 \\
+0 & 1
+\end{pmatrix} \frac{1}{t^3}
++\begin{pmatrix}
+0 & 0 \\
+-1 & 0 
+\end{pmatrix}\frac{1}{t^2}
++
+\begin{pmatrix}
+0 & 0 \\
+-1 & 0 
+\end{pmatrix}\frac{1}{t}
++
+\begin{pmatrix}
+0 & 1 \\
+0 & 0  
+\end{pmatrix}
+\end{align*}
+The matrix expansion of $A(t)$ has a pole of order bigger than one at $t=0$. 
+
+In what follows we are going to let $\PP^1$ denote the projective line (equivalently the Riemann sphere). 
+\begin{definition}
+Consider a rank $n$ first order system of differential equations 
+\begin{equation}\label{E:first-order-system}
+  Y' = A(t) Y. 
+ \end{equation}
+with $A(t) \in M_n(\hol(\PP^1\setminus T))$ for $T\subset \PP^1$ a finite collection of points. 
+We say the system  is \emph{Fuchsian at $t_0 \in T$} if $A(t)$ has the form
+		 $$ A(t) = \frac{B(t)}{t-t_0},$$
+where $B(t)$ is  holomorphic at $t_0$. 
+We say the system is \emph{Fuchsian} at if it is Fuchsian at every point in $T$. 
+\end{definition}
+We extend this concept to higher order differential equations in one variable by saying that they at Fuchsian and Fuchsian at a point if there associated first order system is. 
+
+\begin{exercise}[Fuch's Criterion For ODEs In One Variable]
+	Consider a univariate holomorphic system on $\PP^1\setminus S$. 
+	A first order system 
+	 $$ y^{(n)} + a_{n-1}(t) y^{(n-1)} + \cdots + a_0(t)=0 $$
+	is Fuchsian at $t=t_0$ if and only if  the poles of the coefficients are restricted by $\mult_{t=t_0}( a_j(t) ) \geq n-j $.
+	This means that the equation takes the form
+	 	 $$ y^{(n)} + \frac{b_{n-1}(t)}{t-t_0} y^{(n-1)} + \cdots + \frac{b_{0}(t)}{(t-t_0)^n} =0, $$
+	where the $b_j(t)$ are holomorphic at $t=t_0$
+\end{exercise}
+
+\begin{example}[Airy Equation]
+	Consider the Airy equation 
+	 $$ y'' = ty.$$
+	One can see that this system is regular singular at $t \in \PP^1\setminus \infty$.  
+	At $t=\infty \in \PP^1$ we need to change variables $t=1/s$ and we find that $dt = \frac{-1}{s^2}ds$ which means $\frac{d}{dt} = -s^2 \frac{d}{ds}$ and $$\frac{d^2}{dt^2} = s^2 \frac{d}{ds} s^2 \frac{d}{ds}= s^2 (s^2\frac{d}{ds} + 2s)\frac{d}{ds} = s^4\frac{d^2}{ds^2}+2s^3 \frac{d}{ds},$$
+	which gives 
+	%$$s^4 \frac{d^2y}{ds^2}+ 2s^3 \frac{dy}{ds} = \frac{1}{s} y, $$
+	%or 
+	 $$ \frac{d^2y}{ds^2}+ \frac{2}{s} \frac{dy}{ds} - \frac{1}{s^5} y=0. $$
+	From this we see that there is an irregular singular point at $s=0$.
+\end{example}
+
+\begin{remark}
+	There are two ways to compute what $\frac{d^2}{dt^2}$ in the chart at infinity. 
+	The first way is to act on an unknown function $f$ by the operator $-s^2 \frac{d}{ds}$ twice and then pretend line you never used the symbol $f=f(s)$ for a computation.
+	The second way is to consider the non-commutative ring $\CC[s,\partial]$ subject to the relations $\partial s = s\partial + 1$. 
+	This is the a ring of linear differential operators on $\CC[s]$ called the \emph{Weyl algebra}.
+	The second way is really equivalent to the first way.
+\end{remark}
+
+As stated before, we care about Fuchsian differential equations because they tell us that the solutions are nice. 
+By ``nice'' we mean that the singularities are not out of control.
+By ``out of control'' we mean, regular singular. 
+This means that in every sector $S_{t_0}(\alpha,\beta)$, if we approach the points $t=t_0$ with bounded angle of variation then the solution must have at worst a pole.
+Here is a picture of such a sector:
+
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[scale=0.5]{sector.eps}
+	\end{center}
+	\caption{A sector used in the definition of regular singular. }
+\end{figure}
+
+In what follows we will let $S_{t_0}(\alpha,\beta) = \lbrace t \in \CC : \alpha<\arg(t-t_0) <\beta$ where $t_0 \in \CC$, $\alpha,\beta \in [0,2\pi]$ with $\alpha>\beta$ and $\arg$ the branch of the argument taking valued in $[0,2\pi)$.
+We will also let $B_R(t_0)$ denote the open disc of radius $R$ centered at $t_0$.
+A set of the form $S_{t_0}(\alpha,\beta) \cap B_R(t_0)$ will be called a bounded sector eminating from $t=t_0$, and a bounded sector contained in another bounded sector as an open set will be called a bounded subsector.
+\begin{definition}
+Let $S = S_{t_0}(\alpha,\beta) \cap B_R(t_0)$ be a sector of bounded radius eminating from $t_0$ (which is by definition open and doesn't contain $t_0$).
+We say that a matrix $\Phi(t) \in M_{m,n}(\hol(S))$ is \emph{regular singular at $t_0$} if and only if for all subsectors $S' \subset S$ of strictly smaller radius and angle there exists some integer $m$ such that 
+ $$ \lim_{t \to t_0, t\in S'} \Vert \Phi(t) \Vert  = O( \vert t-t_0 \vert^{-m}).$$
+ \end{definition}
+
+That seems like a lot but all this is saying is that as you approach your point in question you don't blow up like an essential singularity.
+\begin{theorem}[Fuch's Criterion]
+	Solutions of Fuchsian systems only have at worst regular singular. 
+\end{theorem}
+\begin{proof}
+\end{proof}
+
+
+\section{Hypergeometric Differential Equations}
+
+\taylor{I need to finish this}
+
+The main claim of this section is that the Gauss's Hypergeometric Differential Equation is the unique rank two Fuchsian differential equation on $\PP^1$ with singularities at  $T=\lbrace 0, 1, \infty\rbrace$ and it takes the form
+$$ Y' = \left(\frac{A_0}{t} + \frac{A_1}{t-1}\right) Y $$
+where $A_0, A_1 \in M_2(\CC)$. 
+It will satisfy $A_0 + A_1 + A_{\infty}=0$.
+
+We will need to talk about residues of differential forms. 
+Recall that to compute a residue of a differential $\omega = f(t)dt$ at $t=t_0$ write everything in terms of the local parameter $s = t-t_0$ and
+ $$ \omega = \left (\frac{a_{-m}}{s^m} + \cdots + \frac{a_{-1}}{s} + a_0  + a_1 s + \cdots \right) ds $$
+then define $\Res_{t=t_0}(\omega) = a_{-1}$.
+
+
+\begin{theorem}[Residue Theorem For Meromorphic Differentials on a Riemann Surface]
+	Let $\omega$ be a meromorphic differential on a compact Riemann surface $X$. 
+	Then it has finitely many poles at $t_1,\ldots,t_n$ and 
+	 $$ \sum_{j=1}^{n} \Res_{t=t_j}(\omega) = 0.$$ 
+\end{theorem}
+\begin{proof}[Sketch Proof]
+	This uses the residue theorem from ordinary complex analysis. 
+	We will do the proof for $X=\PP^1$.
+	
+	\begin{figure}[h]
+		\begin{center}
+		\includegraphics[scale=0.5]{sum-of-residues.eps}
+		\end{center}
+	\caption{Slicing of $\PP^1$ into two opposite interiors for the purpose of showing the sum of the residues of a meromorphic differential form is zero.
+	The x's in the picture are the places where $\omega$ has poles.}
+	\end{figure}
+	
+	Here we make a contour around $\infty$ and note that $\int_{\gamma_1} \omega + \int_{\gamma_2}\omega = 0$ since the integrals are exactly opposite of each other. 
+	On the other hand we have 
+	 $$ \frac{1}{2\pi i}\int_{\gamma_1} \omega = \sum_{s \in \gamma_1^+} \Res_{t=s}\omega$$
+	 $$ \frac{1}{2\pi i}\int_{\gamma_2} \omega =  \sum_{s \in \gamma_2+} \Res_{t=s}\omega$$
+	which shows the residues are zero.
+\end{proof}
+
+We consider the vector values meromorphic differential forms $A(t) dt$.
+The residues are now the matrices which are the coefficients of $t^{-1}$ in the Matrix Laurent series developments. 
+
+
+\appendix 
+\chapter{Analytics Elements of Differential Equations}
+
+\section{Solutions of Homogeneous Differential Equations}
+\taylor{This section needs to be finished}
+
+\begin{theorem}[Solutions of Homogeneous Differential Equations]
+	If $Y'= A(t)Y$ is an ordinary differential equation then 
+	 $$ \Phi(t) = \exp( \int_{t_0}^t A(s)^T ds )^T $$
+	provides a local fundamental matrix. 
+\end{theorem}
+
+
+
+\section{Cauchy-Kovalevskya}
 
 \backmatter
+
+
 
 \bibliographystyle{amsalpha}
 \bibliography{diff-alg.bib}
