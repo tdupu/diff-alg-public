@@ -16,6 +16,7 @@
 \newtheorem{proposition}[theorem]{Proposition}
 
 \theoremstyle{definition}
+\newtheorem{problem}[theorem]{Problem}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{question}[theorem]{Question}
 \newtheorem{conjecture}[theorem]{Conjecture}
@@ -64,6 +65,8 @@
 
 \newcommand{\mult}{\operatorname{mult}}
 \newcommand{\Res}{\operatorname{Res}}
+\newcommand{\res}{\operatorname{res}}
+\newcommand{\ord}{\operatorname{ord}}
 
 
 \usepackage{tabto}
@@ -87,22 +90,25 @@
 
 \section{Why do these notes exist?}
 These notes are from a course taught in Fall 2022 at UVM entitled \emph{The Algebraic Theory of Differential Equations}. 
-I decided to write these notes because there are a lot different sources for Differential Algebra and I can't pick one since none of them will cover exactly what I want to cover and how I want to cover it. 
+I decided to write these notes because there are a lot different sources for graduate students starting out in Differential Algebra but none of them cover exactly what I would like to cover. 
 
 So what is the Algebraic Theory of Differential Equations? 
 For me the starting place are Ritt's books on Differential Algebra. 
-I love Ritt's books \cite{Ritt1932} and \cite{Ritt1950} but they are old and hard to read. 
+I love Ritt's books \cite{Ritt1932} and \cite{Ritt1950}. 
+The issue is that they are a bit out of date and have a lot of dependencies within chapters that are not clearly marked so you almost have the read the books linearly. 
 They are also missing a lot of the classical theory from the 1800's which motivated the subject. 
 The successor to Ritt's books is Kolchin's books \cite{Kolchin1973} which, while mathematically very useful, invokes notation and terminology that gives me nightmares. 
 Also, the algebraic geometry there largely ignores the development of scheme theory between from 1950 to 1970 by the French school. 
 An alternative to these two is Kaplansky's book \cite{Kaplansky1976} which I love but is perhaps too brief. 
-Following the spirit of these Differential Algebra Books are my advisors book  There are also my advisor's books, \cite{Buium1986} (influenced by Matsuda's book \cite{Matsuda1980}),\cite{Buium1992}, and \cite{Buium1994} which are probably the most influential on my perspective. 
-They are about differential field theory (non-movable singularities), differential algebraic groups, and applications of differential algebra to diophantine geometry.
+Following the spirit of these Differential Algebra Books are Buium's books \cite{Buium1986} (influenced by Matsuda's book \cite{Matsuda1980}),\cite{Buium1992}, and \cite{Buium1994} which are probably the most influential on my perspective. 
+Again, to really understand those books (for example the Poincar\'e-Fuchs theorem on equations of the form $P(t,y,y')=0$ for a polynomial $P$ whose solutions have no movable singularities) one needs to go back to some of the older material which is best covered elsewhere.
+They are about differential field theory, differential algebraic groups, and applications of differential algebra to diophantine geometry.
+
 Also, in the spirit of these Differential Algebra books are the are the importants books on Picard-Vessiot Theory by Singer and van der Put \cite{Put2003} and Magid \cite{Magid1994}.
-These books are about the Galois theory for linear differential equations and they are great but they don't really explain the classical origins of linear Galois theory.
+These books are about the Galois theory for linear differential equations.
 
 To cover this perspective one would like to talk about hypergeometric functions, the Painlev\'{e} equations, and monodromy more generally. 
-There is the classic book by Ince \cite{Ince1944} and a standard text \cite{Iwasaki1991} which is nice but not as algebro-geometric enough for my taste.
+There is the classic book by Ince \cite{Ince1944} and a standard text \cite{Iwasaki1991} which is nice but focuses a lot of computations and de-emphasizes global geometry.
 There are great discussion of Hilbert's 21st problem in \cite{Borel1987} and a more modern algebro geometric version in \cite{Deligne1970}.
 Marrying this material with the field theoretic methods of \cite{Buium1986} is something that I want to do. 
 
@@ -223,7 +229,11 @@ A \emph{morphism} of differential rings is a ring homomorphism $f:A\to B$ such t
 In this chapter we are going to move towards Hilbert's 21st problem and some of the classical theory of monodromy of solutions of differential equations.
 
 
-\section{Wronskians}
+\section{The Monodromy Representation}
+In this section we develop some basic tools we need to construct a monodromy representation associated to a linear differential equation on $\PP^1$.
+\taylor{Finish}
+
+\subsection{Wronskians}
 
 Let $(R,\partial)$ be a differential ring. 
 Let $f_1,\ldots,f_n\in R$. 
@@ -336,7 +346,7 @@ We can now prove our result.
 \end{proof}
 
 
-\section{Stalks and Germs of Holomorphic and Meromorphic Functions}
+\subsection{Stalks and Germs of Holomorphic and Meromorphic Functions}
 
 Recall that for $U' \subset U$ open subset of $\CC^m$ we have injectures $\hol(U) \to \hol(U)$ and $\Mer(U) \to \Mer(U')$ given by restricting the domain of some $f(z)$ to $U'$.
 Both of these ring homomorphisms are injective by the analytic continutation principle (which holds in several variables as well as one variable).\footnote{If you have never showmn that analytic continuation works in two variables this is a good exercise.}
@@ -362,13 +372,11 @@ And in the several variable case for $(a_1,\ldots,a_m) \in \CC^m$ we will use
  $$ \CC\langle t_1 -a_1,\ldots, t_m - a_m\rangle = \hol_{(a_1,\ldots,a_m)}, \quad \CC\llangle t_1-a_1,\ldots, t_m-a_m \rrangle = \Mer_{(a_1,\ldots,a_m)}.$$
  In other books they use $\CC\lbrace t \rbrace$ for convergent power series but we are going to reserve this symbol for the ring of differential polynomials.
 
-\section{Reduction to First Order}
+\subsection{Reduction to First Order Systems}
 
-Any system of PDEs is equivalent to a first order system of PDE.\footnote{The word equivalent is loaded since I haven't really defined an equivalence relation. 
-I mean equivalent as $\Delta$-schemes, which I haven't defined.
-They are possibly equivalent as more.
-Let's not take this too seriously and just think of this as a trick for now. }
+Any system of PDEs is equivalent to a first order system of PDEs.
 The idea is that we can always introduce more variables every times we need to take a new derivative so that all of our expressions only involve single derivatives of variables. 
+Later, for linear differential equations we will see that we can actually go backwards. 
 
 We illustrate this in the case of linear first order differential equations in one differential indeterminate. 
 Here we consider the equation
@@ -398,7 +406,7 @@ where
 Here $A$ is just the transpose of a companion matrix. 
 We will often convert between higher order equations and first order equations in this way. 
 
-\section{Linear Systems}
+\subsection{Linear Systems}
 Let $A \in M_n(R)$ where $R$ is a differential ring.  
 The system 
 \begin{equation}
@@ -452,7 +460,7 @@ To prove a fundamental set of solutions we are going to use existence and unique
 	But since $Y_2,\ldots,Y_n$ were assumed to be linearly independent we must have $c_2'=\ldots=c_n'=0$ which proves the $c_j$'s are constants. 
 \end{proof}
  
- \section{Holomorphic Linear Systems}
+ \subsection{Holomorphic Linear Systems}
 A \emph{holomorphic linear system} at $t_0 \in \CC$ is a linear system over $R= \CC\langle t -t_0\rangle$. 
 That is, it is a system of linear differential equations 
 $$ Y' = AY $$
@@ -498,7 +506,7 @@ Hence by Lemma~\ref{L:linear-independence} we get that the solutions are linearl
  is our fundamental system.
  \end{proof}
 
-\section{Monodromy of Holomorphic Linear Systems}
+\subsection{Monodromy of Holomorphic Linear Systems}
 
 Consider a holomorphic linear system 
 $$Y'=AY, \quad A=A(t) \in M_n(\hol(U)),$$ 
@@ -620,8 +628,10 @@ For every $U \subset \CC$ and every $A(t) \in \hol(U)$ and every $t_0 \in U$, mo
 	Every matrix $M \in \GL_n(\CC)$ can appear as the monodromy matrix of some system. (Hint: use the Euler system and show that for every $M \in \GL_n(\CC)$ there exist some $A \in M_n(\CC)$ such that $\exp(2\pi i A) = M$. This needs some ideas like a matrix logarithm or using a Jordan canonical form.)
 \end{exercise}
 
-\section{Divergent Solutions of Differential Equations}
-Something very strange can happen if one applies the power series technique to innocent looking differential equations. They can have divergent power series solutions. 
+\section[Fuchsian Condition]{Fuchsian Differential Equations}
+The Fuchsian condition is a condition on meromorphic differential equations that we impose that make it so that solutions aren't divergent. 
+Maybe this isn't obvious but if one applies the power series technique to innocent looking differential equations they can have formal power series solutions which are completely divergent. 
+The next example shows this.
 \begin{exercise}
 	Consider the equation 
 	 $$ t^3 y''(t) + (t^2+t) y'(t) - y(t) =0.$$
@@ -672,7 +682,9 @@ where
 The matrix expansion of $A(t)$ has a pole of order bigger than one at $t=0$. 
 
 In what follows we are going to let $\PP^1$ denote the projective line (equivalently the Riemann sphere). 
-\begin{definition}
+In order to avoid all of the divergent behavior we introduce the notion of a Fuchsian differential equation. 
+We will later prove that these differential equations have ``regular singular points''.
+\begin{definition}[Fuchsian Differential Equations]
 Consider a rank $n$ first order system of differential equations 
 \begin{equation}\label{E:first-order-system}
   Y' = A(t) Y. 
@@ -731,62 +743,678 @@ Here is a picture of such a sector:
 In what follows we will let $S_{t_0}(\alpha,\beta) = \lbrace t \in \CC : \alpha<\arg(t-t_0) <\beta$ where $t_0 \in \CC$, $\alpha,\beta \in [0,2\pi]$ with $\alpha>\beta$ and $\arg$ the branch of the argument taking valued in $[0,2\pi)$.
 We will also let $B_R(t_0)$ denote the open disc of radius $R$ centered at $t_0$.
 A set of the form $S_{t_0}(\alpha,\beta) \cap B_R(t_0)$ will be called a bounded sector eminating from $t=t_0$, and a bounded sector contained in another bounded sector as an open set will be called a bounded subsector.
+\iffalse 
 \begin{definition}
 Let $S = S_{t_0}(\alpha,\beta) \cap B_R(t_0)$ be a sector of bounded radius eminating from $t_0$ (which is by definition open and doesn't contain $t_0$).
 We say that a matrix $\Phi(t) \in M_{m,n}(\hol(S))$ is \emph{regular singular at $t_0$} if and only if for all subsectors $S' \subset S$ of strictly smaller radius and angle there exists some integer $m$ such that 
  $$ \lim_{t \to t_0, t\in S'} \Vert \Phi(t) \Vert  = O( \vert t-t_0 \vert^{-m}).$$
  \end{definition}
+\fi
+
+\begin{definition}
+	We say that $t=t_0$ is a \emph{regular singular point} if and only if  for every local sector at $t=t_0$ there exists a holomorphic basis of solutions $Y_1(t),\ldots,Y_n(t)$ with $Y_j(t)=(y_{j1}(t),\ldots,y_{jn}(t))^T$ and $\lambda \in \CC$ such that 
+	$$ \lim_{t\to t_0} (t-t_0)^{\lambda} y_{ji}(t) =0. $$
+\end{definition}
 
 That seems like a lot but all this is saying is that as you approach your point in question you don't blow up like an essential singularity.
 \begin{theorem}[Fuch's Criterion]
-	Solutions of Fuchsian systems only have at worst regular singular. 
+	Solutions of Fuchsian systems only have at worst regular singular points locally. 
 \end{theorem}
 \begin{proof}
+	The trick in this proof is to use the isomorphic $\CC^n \cong \RR^{2n}$ and make estimates as if the functions were real valued. 
+	Here we will view $A(t)$ as a function to $M_{2n}(\RR)$ which is real analytic and a soltion $Y(t)$ as a function to $\RR^{2n}$ which is real analytic. 
+	Also we can observe that a solution $Y(t)$ from this real analytic perspective has $\vert Y(t) \vert^2 = Y(t) \cdot Y(t)$. 
+	Also, we let $Y'(t)$ denote it's usual real analytic derivative which coincides with its complex analytic one (after again changing the complex analytic one again to real analytic function). 
+	We have 
+	$$\dfrac{d}{dt}\left[ \ln \vert Y(t) \vert^2 \right] = \dfrac{2 Y'\cdot Y}{\vert Y\vert^2} = 2\frac{ (A Y)\cdot Y}{\vert Y \vert^2}.$$
+	 Taking norms and using $\vert V \cdot W \vert \leq \vert V \vert \cdot \vert W \vert$ with $\vert A V \vert \leq \Vert A \Vert \cdot \vert V \vert $ we get  
+	  $$ \vert \dfrac{d}{dt}\left[ \ln \vert Y(t) \vert \right] \vert  \leq \Vert A(t) \Vert \leq \frac{C_0}{\vert t \vert}$$ 
+	 where in the last line we used the Fuchsian hypothesis.
+	 This then gives along a given contour $\gamma$ starting at $t_0$ and ending at $t$ that $ \ln\vert Y(t) \vert \leq C_1 + \int_{t_0}^t \frac{C_0}{\vert s \vert } ds$ which implies that $\vert Y(t) \vert \leq $
+	\taylor{FIX ME}
+	
+	
 \end{proof}
 
 
-\section{Hypergeometric Differential Equations}
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Hilbert's 21st Problem}
+%%%%%%%%%%%%%%%%%%%%%%%
+We are now in a position to state Hilbert's 21st problem. 
+The Monodromy map associated to every Fuchsian system on $\PP^1$ with poles contained in $T$ a representation of its fundamental group. 
+$$ \frac{\lbrace \mbox{Fuchsian systems, rank $n$ on $\PP^1$ 
+		with poles on $T$ } \rbrace}{\mbox{(global holomophic gauge trans)}} \to\frac{\lbrace \mbox{repns $\rho:\pi_1(\PP^1\setminus T, t_0) \to \GL_n(\CC) $}\rbrace}{(\mbox{matrix conjugation})} $$
+Hilbert's 21st problem asks if this map of sets is surjective. 
+\begin{problem}[Hilbert's 21st Problem]
+	Is it the case that every representation $\rho:\pi_1(\PP^1\setminus T) \to \GL_n(\CC)$ comes from a Fuchsian differential equation with poles supported on $T$?
+\end{problem}
+This problem has a rather crazy history. 
+The problem was first posed by Hilbert in 1900 during the International Congress of Mathematicians (ICM). 
+This is the event where the give out Field's Medals and occurs once every four years. 
+In 1907 Plemelj\footnote{Nalini Joshi pronounces this ``Plum-ell-i'', I'm not sure how to pronounce this name} published a positive answer to the question. 
+In 1983, Treibich-Koch published a gap in the proof; it turns out that previous work from Dekkers in 1979 implies that the map is indeed surjective in the rank two case. 
+Finally, in 1990, Bolibruch showed that the map is not surjective in rank higher than two disproving the conjecture.
 
-\taylor{I need to finish this}
+\taylor{EXPAND}
 
-The main claim of this section is that the Gauss's Hypergeometric Differential Equation is the unique rank two Fuchsian differential equation on $\PP^1$ with singularities at  $T=\lbrace 0, 1, \infty\rbrace$ and it takes the form
-$$ Y' = \left(\frac{A_0}{t} + \frac{A_1}{t-1}\right) Y $$
-where $A_0, A_1 \in M_2(\CC)$. 
-It will satisfy $A_0 + A_1 + A_{\infty}=0$.
+%%%%%%%%%%%%%%%%
+\subsection{Representations of $\pi_1(\PP^1\setminus T)$}
+%%%%%%%%%%%%%%%%
+The representations $\pi_1(\PP^1\setminus T) \to \GL_n(\CC)$ are rather easy to describe. 
+The key observation is that $\PP^1$ minus some points is homotopy equivalent to a bouquet of circles:
+$$ \PP^1 \setminus \lbrace t_1,\ldots,t_n\rbrace \approx \underbrace{S^1 \vee \cdots \vee S^1}_{ \mbox{ $(n-1)$-times}}$$
+where $\approx$ denotes homotopy equivalence and $\vee$ denotes the wedge product of topological spaces. 
+A picture of this homotopy equivalence for $\PP^1 \setminus \lbrace 0,1,\infty\rbrace$ is given in Figure~\ref{F:bouquet}.
+\begin{figure}[h]\label{F:bouquet}
+	\begin{center}
+		\includegraphics[scale=0.5]{bouquet.eps}
+	\end{center}
+	\caption{The figure shows $\PP^1\setminus \lbrace 0, 1, \infty\rbrace$ being deformed into $S^1 \vee S^1$. 
+		The first step is the increase the size of the holes to make it look like a bowling ball. 
+		We then wrap one of the holes completely around to get a disc with two interior discs removed. 
+		This is then seen to be equivalent to a circle with a line through it. 
+		After contracting the middle line one gets the bouquet of circles. 
+	}
+\end{figure}
+The convenient description allows us to see that the fundamental group is just the free group on $(n-1)$ generators
+$$\pi_1(\PP^1\setminus\lbrace t_1,\ldots,t_n\rbrace) \cong F_{n-1} \cong \langle \gamma_1,\gamma_2,\ldots,\gamma_{n-1} \rangle,$$ 
+the generators then can be taken to be homotopy classes of loops around each of the points $t_1,\ldots, t_{n-1}$. 
+The last loop $\gamma_n$ around $t_n$ satisfies the relation 
+$$ \gamma_n \cdots \gamma_2 \gamma_1  = 1.$$
+You can actually see this loop is trivial if you think about it a little bit. 
 
-We will need to talk about residues of differential forms. 
-Recall that to compute a residue of a differential $\omega = f(t)dt$ at $t=t_0$ write everything in terms of the local parameter $s = t-t_0$ and
- $$ \omega = \left (\frac{a_{-m}}{s^m} + \cdots + \frac{a_{-1}}{s} + a_0  + a_1 s + \cdots \right) ds $$
-then define $\Res_{t=t_0}(\omega) = a_{-1}$.
+Anyway, with this description the representations $\pi_1(\PP^1\setminus T) \to \GL_n(\CC)$ are determined by tuples $(M_1,M_2,\ldots,M_{n-1}) \in \GL_n(\CC)^{n-1}$ modulo simultaneous conjugation by an element in $\GL_n(\CC)$.
+Here $M_j = \rho(\gamma_j)$. 
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Gauge Transformations}
+%%%%%%%%%%%%%%%%%%%%%%%
+It remain to describe the equivalence relation of differential equations that we are using in the Hilbert's 21st problem.
+Let $(R,\partial)$ be a $\partial$-ring and consider the equation
+\begin{equation}\label{E:original-equation}
+Y' = AY
+\end{equation}
+where $Y = (y_1,\ldots,y_n)$ and $Y' =(y_1',\ldots,y_n')$ and $A \in M_n(R)$. 
+One can change coordinate in this differential equation and suppose that 
+\begin{equation}\label{E:gauge-trans-one}
+Y = \Phi \widetilde{Y}
+\end{equation}
+for some $\Phi \in \GL_n(R)$. 
+In this situation we get a new equation 
+\begin{equation}\label{E:gauge-transformed-equation}
+\widetilde{Y}' = \widetilde{A} \widetilde{Y} 
+\end{equation}
+which is said to be \emph{gauge equivalent} to the previous equation. 
+We will now compute what $\widetilde{A}$ is by plugging $Y = \Phi \widetilde{Y}$ into $Y'=AY$. 
+We obtain $Y' = (\Phi \widetilde{Y})' = \Phi' \widetilde{Y} + \Phi \widetilde{Y}'$. 
+We also obtain $AY = A\Phi \widetilde{Y}$. 
+Putting these together gives $\Phi \widetilde{Y}' = A\Phi \widetilde{Y} - \Phi' \widetilde{Y}$ or 
+$$ \widetilde{Y}' = \widetilde{A} Y, \qquad \widetilde{A} = \Phi^{-1} A \Phi - \Phi^{-1} \Phi '.$$
+Both $Y \mapsto \Phi^{-1} Y$ and $A \mapsto A^{\Phi} := \Phi^{-1} A \Phi + \Phi^{-1} \Phi'$ are called \emph{gauge transformations} and define right group actions of $\GL_n(R)$ on $R^{\oplus n}$ and $M_n(R)$.
+The equations \eqref{E:original-equation} and \eqref{E:gauge-transformed-equation} are called \emph{gauge equivalent}.
+
+For holomorphic and meromorphic linear systems we can consider holomorphic and meromorphic gauge transformations. 
+These gauge transformations can be local or global. 
+What is interesting is that sometimes we can take a meromorphic linear systems and then convert it into a holomorphic linear systems by some meromorphic gauge transformation. 
+In the case that we can do this the singularities of the original linear system are called \emph{apparent singularities}. 
+
+\begin{example}
+	Consider the linear system 
+	\begin{equation}\label{E:apparent-singularity} 
+	Y' = \begin{pmatrix}1 & \frac{1}{t^2} -\frac{2}{t} \\ t^2 & 0 \end{pmatrix} Y
+	\end{equation}
+	which is holomorphic on $\CC\setminus \lbrace 0 \rbrace$. 
+	The singularty at $t=0$ is actually just apparent as it is gauge equivalent to the system
+	$$ \widetilde{Y}' = \begin{pmatrix} 1 & 1 \\
+	1 & 1 
+	\end{pmatrix} \widetilde{Y}.$$
+	To see this one uses a meromorphic gauge transformation.
+	The point here is that the singularities of \eqref{E:apparent-singularity} are just apparent and that they can be removed by using 
+	$$ Y =\begin{pmatrix}t^2 & 0 \\ 0 & 1 \end{pmatrix} \widetilde{Y}. $$
+	As an exercise one needs to compute 
+	$$ \widetilde{A} = \begin{pmatrix} \frac{1}{t^2} & 0 \\
+	0 & 1\end{pmatrix} \begin{pmatrix}1 & 1 \\ 1 & 1 \end{pmatrix} \begin{pmatrix} t^2 & 0 \\ 0 & 1 \end{pmatrix} - \begin{pmatrix} \frac{1}{t^2} & 0 \\ 0 & 1 \end{pmatrix} \begin{pmatrix} 2t & 0 \\
+	0 & 0 \end{pmatrix}.$$
+	which comes from the formula for gauge transformations.
+\end{example}
+
+The most important example is the case where $\Phi$ is a fundamental matrix. 
+\begin{example}
+	Consider a linear differential system $Y'=AY$ over a differential ring $(R,\partial)$. 
+	Suppose that the system admits a fundamental matrix $\Phi \in \GL_n(R)$. 
+	Then setting $Y = \Phi \widetilde{Y}$ we find that 
+	$$ A^{\Phi} = \Phi^{-1} A \Phi - \Phi^{-1} \Phi' = \Phi^{-1}( A\Phi - \Phi') =0 $$
+	and so that system is gauge equivalent to the trivial system 
+	$$ \widetilde{Y}' =0.$$
+\end{example}
+It is important to observe that there usually aren't \emph{global} fundamental matrices.
+This is what prevents us from trivializing all differential equations.
+
+%%%%%%%%%%%%%%%%%%
+\section[Fuchsian Equations]{Classification of Fuchsian Differential Equations on $\PP^1$}
+%%%%%%%%%%%%%%%%%%
+We are going to show that every Fuchsian differential system on $\PP^1$ with polar locus $S = \lbrace a_1,a_2,\ldots, a_m\rbrace \subset \PP^1\setminus \lbrace \infty \rbrace$ takes the form  
+ $$ Y' = A(t) Y, \qquad A(t) = \frac{A_1}{t-a_1} + \cdots + \frac{A_m}{t-a_m},$$
+where $A_1,A_2,\ldots, A_m \in M_n(\CC)$ are constant matrices.
+To do this we first need to review some facts about residues and Riemann surfaces.
 
 
-\begin{theorem}[Residue Theorem For Meromorphic Differentials on a Riemann Surface]
+%%%%%%%%%%%%%%%%
+\subsection{Some Reminders About Riemann Surfaces}
+%%%%%%%%%%%%%%%%
+Riemann Surfaces are just topological spaces equipped with a system of holomorphic charts that make them locally isomorphic to open subsets of $\CC$. 
+A description of these charts for $\PP^1$ is given in Figure~\ref{F:projective-line}.
+This allows us to make sense of what a holomorphic map is and make sense of what computations ``at infinity'' are. 
+
+\begin{figure}[h]\label{F:projective-line}
+	\begin{center}
+		\includegraphics[scale=0.33]{projective-line.eps}
+	\end{center}
+	\caption{The projective line $\PP^1$ is isomorphic to the Riemann sphere $S^2$ and is composed of two coordinate charts. 
+		The first chart we think of as the ``usual'' copy of $\CC$ (which algebraic geometers upgrade to the affine line $\AA^1$) which has coordinate $t$. 
+		Then when we want to set $t=\infty$ we use another copy of $\CC$ with coordinate $s$ where $s=1/t$.
+		The point $s=0$ corresponds to the points $t=\infty$ and we use this $s$ coordinate to do all of our computations at infinity. }
+\end{figure}
+
+One can upgrade this $\CC$ to $\CC^n$ an get a category of complex manifolds. 
+It turns out that the category of compact Riemann surfaces equivalent to the category of smooth projective algebraic curves over $\CC$.
+These are curves which are cut out by homogeneous polynomial equations in some complex projective space $\PP^n$. 
+The same is not true for higher dimensional compact complex manifolds, there exists compact complex manifolds which aren't projective varieties (see for example \cite[pg 161]{Shafarevich2013}). 
+It is true however, a theorem called Chow's theorem, that every compact complex manifold embedded into complex projective space is a projective variety (i.e. it is cut how by homogeneous equations). 
+
+The case of complex projective curves (or equivalently Riemann Surfaces) is especially nice because this category is equivalent to the category of fields $K/\CC(t)$ which are algebraic. 
+In the case of connected Riemann surfaces $X$the naturally assocaited field is the field of meromorphic functions on $X$ which we denote by $\Mer(X)$. 
+In the case of projective curves $C$ the naturally associated field is the function field $\kappa(C)$.
+Miraculously they are isomorphic even though they have drastically different descriptions away from the case of $X=C=\PP^1$. 
+This case is rather easy to describe. 
+
+We will prove that $\Mer(\PP^1) = \CC(t)$ which is easily seen to be the fraction field $\CC[t]$ of the polynomial functions on one of its open sets. 
+We write $\PP^1 = U_0 \cup U_{\infty}$ and note that some $f \in \Mer(\PP^1)$ has finitely many poles on $U_0$. 
+This means there exists a polynomial $g(t)$ such that $f(t)g(t)$ is entire. 
+Since $f(t)$ is meromorphic and $g(t)$ is meromorphic the order of vanishing at infinity is finite. 
+Here $\ord_{t=\infty} ( f(t) g(t)) = \ord_{s=0}(f(1/s)g(1/s) )$. 
+This means that $f(t)g(t) = g(t) \in \CC[t]$. 
+Hence $f(t) = h(t)/g(t)$ which proves that every Meromorphic function is rational.
+
+In general $\Mer(X)$ is a finite algebraic extension of $\CC(t)$. 
+To give an idea of how different-looking $\Mer(X)$ and $\kappa(X)$ can be consider the case of an elliptic curve $E$. 
+As a Riemann surface we like to describe this as $\CC/\Lambda$ for some lattice $\Lambda \subset \CC$. 
+In this situation, we have $\Mer(E) = \CC(\wp_{\Lambda}(t), \wp_{\Lambda}'(t))$ where $\wp_{\Lambda}(t)$ is the Weierstrass $\wp$-function associated to the lattice $\Lambda$. 
+In the case where we want to present $E$ algebraically, then away from $\infty$ (some curves may have more than one ``point at infinity'' just not the traditional presentations of $\PP^1$ and $E$) we have $E \subset \CC^2$ given by the equation $y^2 = x^3+ax+b$ for some $a,b\in \CC$. 
+Here we are using $(x,y)$ for complex coordinates. 
+The crazy part is that there is a map $\CC/\Lambda \to E$ given by $x = \wp(t)$ and $y=\wp'(t)$ which gives the isomorphism. 
+Here the point $0 \in \CC/\Lambda$ maps to $\infty$ in the projective model of the elliptic curve. 
+
+\subsection{The Residue Theorem For Meromorphic Differential Forms}\label{S:residue-theorem}
+We will need the following theorem about the sum of residues being zero later as we try to classify Fuchsian equations.
+Here we briefly recall that for any meromorphic differential $\omega$ on a compact Riemann surface $X$ we can find a local parameter $t=t_b$ at $b\in X$ and then write $\omega$ as $f(t)dt$. \footnote{In coordinates on say $\CC$ the local parameter for $b\in  \CC$ is $t_b=t-b$ where $t$ is the usual complex variable. }
+We can then develop $f(t)$ in a Laurent series to get 
+$$ \omega =  \left(\frac{a_{-n} }{t^n} + \cdots + \frac{a_{-1}}{t} + a_0 + a_1 t + \cdots  \right) dt$$
+and define the residue at $b$ by the usual formula 
+$$ \Res_b(\omega) = a_{-1}.$$
+We will extend this to vector valued differential forms $A(t)dt$  by doing this component by component and taking the residues there.
+\begin{theorem}[Residue Theorem]
 	Let $\omega$ be a meromorphic differential on a compact Riemann surface $X$. 
-	Then it has finitely many poles at $t_1,\ldots,t_n$ and 
-	 $$ \sum_{j=1}^{n} \Res_{t=t_j}(\omega) = 0.$$ 
+	Then $ \sum_{t \in X} \Res_{t}(\omega) =0.$
 \end{theorem}
-\begin{proof}[Sketch Proof]
-	This uses the residue theorem from ordinary complex analysis. 
-	We will do the proof for $X=\PP^1$.
+\begin{proof}
+	We give a proof in the case that $X=\PP^1$. 
+	A complete proof can be found at \cite[Proposition 6.6]{Schlag2014} and those notes can be found online as of 2022 by a simple Google search.
 	
-	\begin{figure}[h]
+	The basic idea as depicted in figure \ref{F:sum-of-residues} is to take a simple closed contour $\gamma_1$ and its opposite contour $\gamma_2$ and realize that on one hand 
+	$$ \int_{\gamma_1}\omega + \int_{\gamma_2} \omega =0 $$
+	while on the other hand we have the classic residue theorem from complex analysis for each of these integrals
+	$$ \int_{\gamma_1}\omega + \int_{\gamma_2}\omega = 2\pi i \sum_{b \in \PP^1} \Res_b(\omega).$$
+	\begin{figure}[h]\label{F:sum-of-residues}
 		\begin{center}
-		\includegraphics[scale=0.5]{sum-of-residues.eps}
+			\includegraphics[scale=0.5]{sum-of-residues.eps}
 		\end{center}
-	\caption{Slicing of $\PP^1$ into two opposite interiors for the purpose of showing the sum of the residues of a meromorphic differential form is zero.
-	The x's in the picture are the places where $\omega$ has poles.}
+		\caption{One uses the basic residue theorem on two simple integrals which are opposite of each other to prove the residue theorem on $\PP^1$. }
 	\end{figure}
-	
-	Here we make a contour around $\infty$ and note that $\int_{\gamma_1} \omega + \int_{\gamma_2}\omega = 0$ since the integrals are exactly opposite of each other. 
-	On the other hand we have 
-	 $$ \frac{1}{2\pi i}\int_{\gamma_1} \omega = \sum_{s \in \gamma_1^+} \Res_{t=s}\omega$$
-	 $$ \frac{1}{2\pi i}\int_{\gamma_2} \omega =  \sum_{s \in \gamma_2+} \Res_{t=s}\omega$$
-	which shows the residues are zero.
 \end{proof}
 
-We consider the vector values meromorphic differential forms $A(t) dt$.
-The residues are now the matrices which are the coefficients of $t^{-1}$ in the Matrix Laurent series developments. 
+For $A(t) = (a_{ij}(t)) \in M_n(\CC((t)))$ we will do Laurent series developments entry-by-entry and write 
+$$ A(t) = \sum_{j=-\infty}^{\infty} A_j (t-t_0)^j, \qquad A_j \in M_n(\CC).$$
+For entries which are truely meromorphic, then for closed curves $\gamma$ we will have  
+$$\int_{\gamma} A(t)dt = (\int_{\gamma}a_{ij}(t)dt).$$ 
+As above if $A(t)dt$ is a matrix of meromorphic differential forms with poles at $t_1,\ldots,t_m$ on a Riemann surface $X$ with residues $R_j$ for $1\leq j \leq m$ then we get
+$$ \sum_{j=1}^m R_j =0.$$
 
+\begin{corollary}
+	The sum of the residues of meromorphic matrix valued differential forms is zero.
+\end{corollary}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Classification of Fuchsian Differential Equations on $\PP^1 \setminus S$}
+%%%%%%%%%%%%%%%%%%%%%%%
+Fuchsian differential equations on $\PP^1$ have a very simple form.
+For a polar locus $S = \lbrace s_1,\ldots,s_m\rbrace$ we will often assume that $S$ takes the form $S =\lbrace 0,1,\infty,s_4,\ldots,s_m \rbrace$ which we can do by using a M\"{o}bius transformation. 
+We can also if we want assume that the polar locus not contain $\infty$. 
+\begin{theorem}
+	Consider a Fuchsian differential equation on $\PP^1$,
+	$$ Y' = A(t) Y, \qquad A(t) \in M_n(\CC(t)).$$
+	If $A(t)$ has polar locus $S=\lbrace s_1,\ldots,s_m\rbrace \subset \PP^1$ not containing infinity then 
+	$$ A(t) = \frac{A_1}{t-s_1} + \cdots + \frac{A_m}{t-s_m} $$
+	where $A_j \in M_n(\CC)$ and $A_1+\cdots + A_m=0$.
+\end{theorem}
+\begin{proof}
+	We can suppose without loss of generality that there are no poles at infinity. 
+	To prove this one needs to recall that by the Mittag-Leffler theorem \cite[Proposition 2.19]{Schlag2014 } if $f(z)$ is meromorphic on $\CC$ with poles at $s_1,\ldots,s_m$ then there exists $p_j(z) \in \CC[z]$ polynomials such that 
+	$$ f(z) - \sum_{j=1}^m p_j( \frac{1}{z-s_j}) $$
+	is entire and the degree of $p_j$ is the order of the pole of $f$ at $z=s_j$.
+	In our application we have that $A(t)$ has at most a pole at each $s_j$. 
+	Hence there exists some matrices $A_1,\ldots, A_m \in M_n(\CC)$ such that the components of  
+	$$B(t) = A(t) - \frac{A_1}{t-s_1} - \cdots - \frac{A_m}{t-s_m} $$
+	are holomorphic on $\CC$. 
+	Also note that $A_j/(t-s_j) = A_js/(1-ss_j)$ is also holomorphic at $s=0$ or $t=\infty$. 
+	This means that $B(t)$ is entire and bounded and hence constant. 
+	But we know that $\lim_{t\to s_j}B(t) =0$ by construction which means that it must be the constant function zero. 
+	
+	The second part about the sum of the residues being zero follows from the Residue theorem (\S \ref{S:residue-theorem}) but doing it component by component in the matrix $A(t)dt$.
+\end{proof}
+
+The residue matrices are so important we give them a name.
+They are called the \emph{local exponents} of the linear differential equation. 
+We will see that if $\rho$ is a local exponent of $A(t)/t$ where  $A(t)\in M_n(\CC[[t-t_0]])$ at $t=t_0$ with the property that $\rho+r$ is not an eigenvalue for any integer $r>1$ then the system admits a solution of the form $Y(t) = (t-t_0)^{\rho}Z(t)$ where $Z(t) \in \CC[[t]]^n$. 
+If $A(t)$ is holomorphic then $Z(t)$ will be holomorphic.
+
+We conclude this subsection with a classification of equations with one, two, three, and four singular points. 
+The case of three singular points will end up leading to the theory of hypergeometric differential equations. 
+The case of four singular points ends up leading to the theory of isomonodromic deformations and $P_{VI}$ the 6th Painlev\'{e} equation.
+
+In the following examples the singular locus $S = \lbrace s_1,\ldots,s_m \rbrace \subset \PP^1$ can be taken without loss of generality to be $S=\lbrace 0,1,\infty,s_4,\ldots,s_m\rbrace$ since any three points can map to any other three points by a M\"obius transformation. 
+\begin{example}[one singular point]
+	Consider a Fuchsian differential equations with $S = \lbrace 0 \rbrace$. 
+	Then we have 
+	 $$ \dfrac{dY}{dt}= \frac{A_0}{t} Y $$
+	for some constant matrix $A_0 \in M_n(\CC)$. 
+	We then can use the chart at infinity $\partial_t = -s^2 \partial_s$ to conclude that the equation becomes $-s^2 \dfrac{dY}{ds} = s A_0 Y$ which gives 
+	 $$ \dfrac{dY}{ds} = -\frac{A_0}{s}Y,$$
+	which is not holomorphic at $\infty$ unless $A_0 = 0$. 
+	Hence every such system is equivalent to 
+	$$Y'=0.$$
+\end{example}
+
+\begin{example}[two singular points]
+	Consider a Fuchsian differential equation with polar locus $S = \lbrace 0, \infty \rbrace$. 
+	From the previous example we see that it has the form 
+	 $$ \frac{dY}{dt} = \frac{A_0}{t} $$
+	and that $A_0 = -A_{\infty}$.
+\end{example}
+
+The case of three singular points is sometimes called the Gauss case of the hypergeometric case because of its connections to the hypergeometric differential equations.
+\begin{example}[three singular points]
+	Consider a Fuchsian differential equation with polar locus $S= \lbrace 0, 1,\infty\rbrace$. 
+	Such an equation has the form
+	 $$ \frac{dY}{dt} = \left ( \frac{A_0}{t} + \frac{A_1}{t-1}\right) Y$$
+	where $A_0 + A_1 + A_{\infty} =0$.
+	Explicitly after changing coordinates to the chart at infinity (letting $t=1/s$) we find
+	 $$ -s^2 \dfrac{dY}{ds} = \left ( \frac{A_0}{1/s} + \frac{A_1}{1/s-1}\right) Y $$
+	which implies 
+	 $$ \dfrac{dY}{ds} =- \left ( \frac{A_0+A_1}{s} + \frac{A_1}{1-s}\right) Y,$$
+	and we can see $A_{\infty} = -A_0-A_1$ explicitly. 
+	
+	In section \S\ref{S:hypergeometric} we will show every rank two Fuchsian equation with polar locus $S=\lbrace a,b,c\rbrace \subset \PP^1$ can be reduced to the Gauss hypergeometric equation in a single dependent variable 
+	$$ t(t-1)y'' +(c-(a+b+1)t)y'-aby =0.$$
+\end{example}
+
+The case of four singular points is sometimes called the Painlev\'e case because of its connections to the Painlev\'e equations.
+\begin{example}[four singular points]
+	Every Fuchsian differential equation with polar locus containing four points now cannot be normalized to a standard set of points.
+	We can bring the first three points of $S$ to $0,1,\infty$ but a third point $\lambda\in \CC$ remains. 
+	We will have $S=\lbrace 0,1,\infty, \lambda\rbrace$ and the differential equation will take the form 
+	 $$ \dfrac{dY}{dt} = \left( \frac{A_0}{t} + \frac{A_1}{t-1} + \frac{A_{\lambda}}{t-\lambda}\right) Y $$
+	where $A_0,A_1,A_{\lambda}\in M_n(\CC)$ and we define $A_{\infty}$ by the sum of the residues being zero $A_0+A_1+A_{\lambda}+A_{\infty}=0$. 
+	
+	A fun game to play here will be to determine the conditions under which we may vary $A_{\lambda}$ as a function of $\lambda$ and preserve the monodromy representation. 
+	Note that $\pi_1(\PP^1\setminus \lbrace 0,1,\infty,\lambda_1\rbrace) \cong \pi_1(\PP^1\setminus \lbrace 0,1,\infty,\lambda_2\rbrace)$ for every pair of $\lambda_1$ and $\lambda_2$ so it makes sense to ask for monodromy representations to change. 
+	Such deformations are called \emph{isomonodromic}.
+	The criterian for deformations to be isomonodromic are given by Schlesinger's equations for matrices which give rise to the Painlev\'e equations. 
+\end{example}
+
+
+\section[Hypergeometric Equations]{Hypergeometric Differential Equations: Fuchsian Differential Equations of rank two on $\PP^1\setminus \lbrace 0,1,\infty\rbrace$}
+
+ \label{S:hypergeometric}
+
+The Gauss hypergeometric equation is the following homogeneous ordinary differential equation
+\begin{equation}
+   y'' + \frac{(a+b-1)t-c}{t(t-1)} y' + \frac{ab}{t(t-1)} y =0 .
+\end{equation}
+It solutions are so-called hypergeometric functions and has the remarkable property that any rank two Fuchsian differential equations on $\PP^1$ can be reduced to this equation for some collection of parameters $(a,b,c)$. 
+The $(a,b,c)$ really encode eigenvalues of the residue matrices (=local exponents) and the form of the equation is really a consequence of the restriction of these local exponents in part due to Fuch's theorem which says that the sum of the local exponents in this rank 2 case with three singularities must be equal to one. 
+
+\begin{exercise}
+	Show that the local exponents of the hypergeometric differential equation with parameters $(a,b,c)$ fall into the following table:
+	$$\begin{tabular}{ccc}
+		$0$ & $1$ & $\infty$  \\
+	\hline \hline	$0$ & $0$ & $a$ \\
+	$1-c$ & $c-a-b$& $b$
+	\end{tabular}	$$
+	\taylor{This is sort of a hard computation, but it is just computing eigenvalues. 
+		I messed this up quite a bit when I tried it.
+		You can wait until we give a nice equation for the local exponents later.
+	}
+\end{exercise}
+
+The first mystery is showing that $n\times n$ first order linear systems can actually be reduced to an order $n$ equation in one dependent variable.
+This is sort of the opposite of taking an equation of high order and reducing it to an equation a low order but in more variables. 
+The key to this is the theory of $D$-modules. 
+We will show that linear systems gives rise to a $D$-modules and conversely any $D$-module with a choice of basis gives a linear differential equation. 
+Changing the basis will changes the differential equation by a gauge transformation. 
+Now knowing that $D$-modules encode linear differential equations we apply Katz's theorem and show that $D$-modules will admit so called cyclic vectors.
+In the case of rank two Fuchsian differential systems with three poles this reduces our equation to an order two equation linear equation in one dependent variable.
+
+Finally, once we are in the order two case we need to show that all of our equations are determined by the local exponents and that we can manipulate these exponents by a series of gauge transformations and automorphisms of $\PP^1$ to bring our general equations into the Gauss hypergeometric case.
+This involves a basic lemma about how local exponents change under Gauge transformations of the form $Y(t) = t^{\rho} \widetilde{Y}(t)$. 
+
+\subsection{Weyl Algebras and $D$-Modules}
+
+Let $(R,\Delta)$ be a $\Delta$-algebra. 
+\begin{definition}
+	A \emph{Weyl algebra} associated to $(R,\Delta)$ is the ring $R[\Delta]$ of linear operators on associated to $(R,\Delta)$. 
+	It is the non-commutative ring $R[\partial \colon \partial \in \Delta]$ where one has
+	$$ \partial a = a \partial  + \partial(a), \qquad a \in R, \partial \in \Delta.$$
+	One also has $\partial_1 \partial_2 = \delta_2 \delta_1$ for $\partial_1,\partial_2 \in \Delta$.
+\end{definition}
+
+The idea behind the formula $\partial a = a \partial + \partial(a)$ comes from looking a $a \in R$ when viewed as an element $a \in R[\Delta]$ as the linear operator ``multiplication by $a$''.
+In this situation we have 
+$$ (\partial a) \cdot f = \partial( af) = \partial(a)f + a \partial(f) = [\partial(a) + a \partial]\cdot f,$$
+which justifies the rule. 
+
+\begin{definition}
+	A \emph{$D$-module} is a $R[\Delta]$-module. 
+	We will simply call these $R[\Delta]$-modules. 
+\end{definition}
+
+Authors like to get cutesy with the above definition and it is worth pointing some things out. 
+First, many authors define $\mathcal{D} = R[\Delta]$ and then talk about $\mathcal{D}$-modules. See for example Singer and van der Put. 
+Some authors only define Weyl-algebras are for polynomial rings and refer to this particular Weyl algebra as \emph{the} Weyl algebra. 
+In this case they take $R = \CC[x_1,\ldots,x_m]$ with $\Delta = \lbrace \partial_{x_1},\ldots, \partial_{x_m} \rbrace$ and then only talks about Weyl algebras (as we have defined above) as the only Weyl algebras.
+This is useful when searching the literature for propositions about Weyl algebras that you need.
+Finally, many authors restrict to the case $\Delta = \lbrace \partial \rbrace$ which will be the case we are interested in mostly and call these $\partial$-modules. 
+In this case some authors (like Nick Katz) like to define $D$ as the derivation operator on the module $V$ which satisfies $D(av) = \partial(a) v + a D(v)$ for $v\in V$ and $a \in R$.
+I reserve the right to use a mixture of these perspectives (and you should too).
+
+
+\subsection{Linear Systems and $D$-Modules}
+There is a procedure for converting between linear differential equations and $D$-modules which will be useful that we will now explain. 
+In this subsection we will restrict to the case of a single derivative.
+
+Given a rank $n$ linear system over $(R,\partial)$ given by 
+$$ Y' = A Y, \qquad A = (a_{ij}) \in M_n(R), $$
+we can define a $D$-module structure on $V=R^{\oplus n}$.
+Let $e_1,\ldots,e_n$ be a standard basis for $V$.
+Then we define 
+$$ D(e_j) = \sum_{i=1}^n a_{ij} e_i.$$
+Let $V_0 = (R^{\partial})^{\oplus n}$. 
+We now have a $R^{\partial}$-linear operator on $V_0$ and we extend this to all of $V$ by specifying 
+$$ D(b v_0) = \partial(b)v_0 + b D(v_0), \quad v_0 \in V_0, b \in R. $$
+\begin{exercise}
+	Check that this is well defined.
+	This means that if $bv_0 = cw_0$ for some other $c \in R$ and $w_0 \in V_0$ then $D(bv_0) = D(cw_0)$. [This is a silly easy problem.]
+\end{exercise}
+
+Conversely, given a $D$-module structure on $V = R^{\oplus n}$ one then takes a basis $v_1,\ldots, v_n$ and finds that 
+$$ D(v_j) = \sum_{i=1}a_{ij}v_i $$
+for some $a_{ij}\in R$. 
+This allows us to set up a linear differential equation 
+$$ Y' = AY, \qquad A = (a_{ij}) \in M_n(R).$$
+One then finds that the linear differential equation associated to the $D$-module is again the $D$-module with $v_1,\ldots,v_n$ identifying with the standard basis vectors. 
+
+If instead we had chosen a different basis one can check that one will obtain a new differential equation
+$$ \widetilde{Y}' = \widetilde{A} \widetilde{Y} $$
+which is gauge equivalent to the first equation. 
+This gives us a procedure for assigning a linear system of rank $n$ over $R$ (up to gauge equivalent) to every $R[\partial]$-module $V$ of finite rank $n$.
+The point here is that change of basis of the $D$-module is gives rise to a gauge transformation of the associated linear system.
+
+\begin{exercise}
+	Show that indeed a change of coordinates on the $R$-module induces a gauge tranformations of the linear differential equation.
+\end{exercise}
+
+\subsection{Cyclic Vectors and Katz's Theorem}
+In order to convert first order linear systems of rank $n$ into linear differential equations of  order $n$ in a single variable we need the notion of a cyclic vector. 
+\begin{definition}
+	An $R[\Delta]$-module $V$ is \emph{cyclic} if and only if there exists some $v \in V$ such that $V = R[\Delta]\cdot v$. 
+	Such a vector $v \in V$ where $V = R[\Delta]\cdot v$ is called a \emph{cyclic vector}.
+\end{definition}
+
+In the case that $\Delta = \lbrace \partial \rbrace$ and $V \cong R^n$ a $R[\partial]$-module a vector $v \in V$ is cyclic if and only if 
+$$ v, \partial(v), \ldots, \partial^{n-1}(v) $$
+form a basis for $V$. 
+This is probably the most important case. 
+Before proving such cyclic vectors exist, lets take a moment to realize our goal reducing a first order linear system of rank n to an order n linear differential equation in a single dependent variable. 
+
+Following our procedure we set $v_0 = v$ and $v_i = \partial^i(v)$ which gives use $\partial(v_i) = v_{i+1}$ for $0 \leq i \leq n-2$ and then $\partial(v_{n-1}) = b_0v_0 +b_1v_1 + \cdots + b_{n-1} v_{n-1}$ for $b_i \in R$ and we get the linear systems 
+$$ Y' = BY, \qquad B=\begin{pmatrix} 0 & 1 & 0&\cdots & 0 \\
+0 & 0 & 1 &\cdots & 0 \\
+\vdots & \vdots &\vdots & \ddots & \vdots \\
+0& 0 & 0 & \cdots & 1 \\
+b_0 & b_1 & b_2 & \cdots & b_{r-1} \\
+\end{pmatrix}$$
+which gives the linear differential equation 
+$$ y^{(n)} = b_0 y+b_1y' + b_2 y''+ \cdots + b_{n-1}y^{(n-1)}.$$
+
+The following Theorem can be found in \cite{Katz1987} (which is just five pages including citations). 
+\begin{theorem}[Katz's Theorem]\label{T:katz}
+	Let $(R,\partial)$ be a $\partial$-ring with $t\in R$ satisfying $\partial(t)=1$.
+	Let $V$ be a free $R$-module of finite rank $n$ which has the structure of a $R[\partial]$-module. 
+	Then if $R$ is local, and $(n-1)!$ is invertible in $R$ then $V$ admits a cyclic vector of the form
+	$$ v = \sum_{j=0}^{n-1} \frac{(t-a)^j}{j!} \sum_{i=0}^j { j \choose i } D^i(e_{j-i}) $$
+	where $a \in R^{\partial}$ and $e_1,\ldots,e_n$ is the standard elementary basis for $R^n$.
+\end{theorem}
+We will prove this for $R=\CC[[t]]$. 
+
+\begin{lemma}\label{L:katz}
+	Let $V=\CC[[t]]^{\oplus n}$ be a $D$-module. 
+	\begin{enumerate}
+		\item Let $h_0,\ldots,h_{n-1} \in V$ be horizontal (i.e. suppose $\partial(h_j)=0$). 
+		Consider  $v=\sum_{j=0}^n \dfrac{t^j}{j!}h_j.$
+		The vector $v$ is cyclic. 
+		\item For each $v_0\in V$ consider the system 
+		\begin{equation}\label{E:deligne-equation}
+		\begin{cases}
+		v \equiv v_0 \mod tV \\
+		\partial(v) =0 
+		\end{cases}
+		\end{equation}
+		The element  $v:= e^{-t\partial}v_0 = \sum_{j\geq 0}(-1)^j \frac{t^j}{j!}\partial^j(v_0)$
+		is $t$-adically convergent and is the unique element in $V$ satisfying \eqref{E:deligne-equation}.
+	\end{enumerate}
+\end{lemma}
+\begin{proof}
+	Taking derivatives we have 
+	\begin{align*}
+	v=& h_0 + t h_1 + \frac{t^2}{2!} h_2 + \cdots + \frac{t^{n-1}}{(n-1)!}h_{n-1}\\
+	\partial(v) =& h_1 + t h_2 + \frac{t^2}{2!} h_3+ \cdots + \frac{t^{n-2}}{(n-2)!}h_{n-2} \\
+	\vdots & \\
+	\partial^{n-1}(v) =& h_{n-1}
+	\end{align*}
+	starting from the bottom of the list and going up one can see linear independence as they each introduce a new $h_j$.
+	
+	To prove the second part we just compute the derivative of $v$ and expand using the product rule term by term. 
+	For uniqueness, suppose that $w$ is another solution. 
+	One then has $w=v+tu$ for some $u\in V$. 
+	We then get $u+t\partial(u)=0$, by $0 = \partial(w) = \partial(v) + \partial(tu) = \partial(tu)$. 
+	We can expand $u$ in a power series to get $u(t) = \sum_j a_j t^j$ and we find that $\partial(u(t)) = u^{\partial}(t) +u'(t)$ which gives $a_0=0$ and then $a_j^{\partial}+(j+1)a_{j+1} +a_{j+1}=0$. 
+	This allows us to conclude all of the $a_j=0$ inductively. 
+\end{proof}
+
+The proof of the following theorem will use Nakayama's Lemma which can be found in Atiyah-MacDonald \cite[pg 21]{Atiyah2016}.
+\begin{proof}[Proof of Katz's Theorem for Formal Power Series]
+	Let $V = R^n$. 
+	Let $e_0,\ldots,e_{n-1}$ be a basis, then it is a basis modulo $tV$. 
+	Hence by Nakayama, $\widetilde{e}_j:=e^{-t\partial }e_j$ is also a basis for $V$ since it is a basis modulo $tV$. 
+	Furthermore, by the Lemma $\partial(\widetilde{e}_j)=0$. 
+	We now apply part one of Lemma~\ref{L:katz} to get 
+	\begin{align*}
+	\sum_{j=0}^{n-1} \frac{t^j}{j!}\widetilde{e}_j =& \sum_{j=0}^{n-1}\frac{t^j}{j!} \sum_{i\geq 0}\frac{t^i}{i!} \partial^i(e_j) \\
+	=& \sum_{j=0}^{n-1}\sum_{i\geq 0}\frac{t^{i+j}}{i!j!} \partial^i(e_j).
+	\end{align*}
+	We can trim this down (using Nakayama again). 
+	If $v$ is cyclic then $v+t^n c$ is also cyclic. 
+	The ``large'' power $t^n$ ensures that it remains a basis after $n$ derivatives. 
+	This allows us to kill off terms with $j+k \geq n$. 
+	Hence 
+	$$ \sum_{j=0}^{n-1}\sum_{i=0}^{n-1-j}(-1)^i \frac{t^i}{i!}\partial(e_j) $$
+	gives a cyclic vector.
+\end{proof}
+
+%%%%%%%%%%%%%%%%
+\subsection{Local Exponents}
+%%%%%%%%%%%%%%%%
+Consider a first order meromorphic system of rank $n$ on $\PP^1$ given by 
+$$ Y' = A(t) Y, \qquad A(t) \in M_n(\CC(t)).$$
+The eigenvalues of residue matrices play such an important role in the local behavior of solutions of differential equations we give them a name.
+\begin{definition}
+	Let $R= \Res_{t=t_0}(A(t)) \in M_n(\CC)$ be a residue at $t=t_0$.
+	An eigenvalue of $R$ is called a \emph{local exponent} of the system at $t=t_0$.
+\end{definition}
+If $S=\lbrace s_1,s_2,\ldots,s_m \rbrace$ is the polar locus for a differential equation of rank $n$ with eigenvalues $\rho_1(s_j),\rho_2(s_j),\ldots, \rho_n(s_j)$ at the points $j$ we will often write down a so-called \emph{Riemann table} in the form
+$$\begin{array}{cccc}
+	s_1 & s_2 & \cdots & s_m \\
+	\hline \hline 
+	\rho_1(s_1) & \rho_1(s_2) & \cdots & \rho_1(s_m) \\
+	\rho_2(s_1) & \rho_2(s_2) & \cdots & \rho_2(s_m) \\
+	\vdots & \vdots & \ddots &\vdots \\
+	\rho_n(s_1) & \rho_r(s_2) & \cdots & \rho_n(s_m)
+\end{array}$$
+
+We will now go on to show that solutions of $Y(t)$ locally have the form $t^{\rho} Z(t)$ for $\rho$ ``non-resonant'' local exponents. 
+We say that an eigenvalue $\rho$ of $R$ is non-resonant provided there doesn't exist another eigenvalue $\mu$ of $R$ such that $\rho-\mu \in \ZZ$. 
+
+\subsection{Theta Operator and Indicial Equations}
+Consider a linear differential equation in one variable  
+$$ y^{(n)} + a_{n-1}(t) y^{(n-1)} + \cdots + a_0(t) =0 $$
+which is formally Fuchsian at $t=0$ so that 
+$$b_j(t) := t^{n-1}a_j(t) \in \CC[[t]]. $$
+We wish to derive an equation for the local exponents of this equation at $t=0$. 
+To do this it will be convenient to write our operator (which we view as an element of the Weyl algebra)
+$$L = \partial^n  + a_{n-1}(t) \partial^{n-1} + \cdots + a_0(t) \in \CC[[t]][\partial]$$
+in terms of the \emph{theta operator}
+$$\theta = t \partial_t \in \CC[[t]][\partial]$$
+The following basic identities will be useful. 
+\begin{exercise}
+	In this problem $\partial = \partial_t$. 
+	Show that 
+	\begin{enumerate}
+		\item $t^n\partial^n = \theta(\theta-1)\cdots(\theta - n+1)$
+		\item $\theta(t^{\rho} f) =t^{\rho}(\theta+m)f$. 
+		\item $(\theta+\rho)t^j = (j+\rho)t^j$ for all $j\geq 0$
+	\end{enumerate}
+\end{exercise}
+If we let $M = t^n L$ then we see that 
+ $$ M = \sum_{j=0}^n a_j t^{n-j}t^j \partial^j = \sum_{j=0}^n b_j \theta(\theta-1) \cdots (\theta -j +1).$$
+For concreteness we write out the order two case.
+\begin{example}
+	We have $L = a_0 + a_1 \partial + \partial^2$ and $M = b_0 + b_1\theta +\theta(\theta-1)= b_0 + (b_1-1)\theta + \theta^2$. 
+	We can be even more explicit with $b_0 = t^2a_0$ and $b_1 = ta_1$ so that 
+	 $$M = t^2a_0 + (ta_1-1)\theta + \theta^2.$$
+\end{example}
+Now in order to derive the indicial equation for the local exponents of a linear differential operator we will seek solutions of $My=0$ in the form 
+ $$ f(t) = t^{\rho} \sum_{j=0}^{\infty} c_j t^j $$
+and conclude a necessary identity about the exponent $\rho \in \CC$. 
+To proceed we write each $b_i(t)$ for $1\leq i \leq n$ as $b_i(t) = \sum_{j=0}^{\infty} b_{ij}t^j.$.
+We then just proceed with a computation
+\begin{align*}
+Mf =& \left( \sum_{i=0}^n \sum_{j=0}^{\infty} b_{ij}t^j \theta^i \right) \left( t^{\rho} \sum_{k=0}^{\infty} c_k t^k \right) \\
+=&t^{\rho} \sum_{i=0}^n \sum_{j=0}^{\infty} b_{ij} t^j (\theta+\rho)^i \sum_{k=0}^{\infty} c_k t^k \\
+=&t^{\rho} \sum_{i=0}^n \sum_{j=0}^{\infty} \sum_{k=0}^{\infty} b_{ij} c_k t^j (k+\rho)^i  t^{k+j} \\
+=& t^{\rho} \sum_{m=0}^{\infty}\left( \sum_{i=0}^n \sum_{j=0}^m b_{ij} c_{m-j}(\rho+m-j)^i\right)t^m.
+\end{align*}
+If $Mf=0$ as an element of $\CC[[t]][t^{\rho}]$ then by the linear independence of $t^m$ this gives a system of  equations for each $m$ given by 
+ $$   \sum_{i=0}^n \sum_{j=0}^m b_{ij} c_{m-j}(\rho+m-j)^i=0.$$
+In the case $m=0$ we can pull out $c_0$ and use that $b_{i0} = b_0(0)$ and the indicial equation.
+\begin{theorem}[Indicial Equation]
+	If $t^{\rho}f(t)$ is a formal solution of $L$ then $\rho$ is a solution of 
+	 \begin{equation}
+	  b_0(0) + b_1(0) \rho + \cdots + b_{n-1}(0)\rho^{n-1} + \rho^n =0.
+	 \end{equation}
+\end{theorem}
+
+
+For a later application to Fuch's relation it will be useful to compute $b_{n-1}(0)$ explicitly the second to top coefficient is always the sum of the roots:
+ $$ b_{n-1}(0) = -\rho_1 -\rho_2 - \cdots - \rho_n.$$
+This formula is related to a residue and we will later apply the Residue theorem.
+\begin{corollary}
+	 $ b_{n-1}(0) = \res_{t=0}( a_{n-1}(t)dt ) - {n \choose 2}.$
+\end{corollary}
+\begin{proof}
+One sees that 
+\begin{align*}
+M =& \sum_{j=0}^n a_j t^{n-j} \theta(\theta-1)\cdots(\theta-j+1) \\
+=& \theta^n + (-1-2-\cdots-(n-1))\theta^{n-1} + ta_{n-1}(t) \theta^{n-1} + \cdots \\
+=& \theta^n + \left( a_{n-1}(t)t - {n \choose 2} \right)\theta^{n-1} + \cdots  
+\end{align*}
+and hence the statement follows.
+\end{proof}
+
+\subsection{Fuch's Relation}
+Consider a linear differential equation \taylor{Finish me}
+
+
+\subsection{Local Solutions of Exponent $\rho$}
+Consider a first order system of rank $n$ which is formally Fuchsian at $t=0$. 
+We will write 
+$$ Y' = \frac{A(t)}{t} Y, \qquad A(t) \in M_n(\CC[[t]]).$$
+Note that this system is equivalent to $\theta(Y) = A(t) Y$ where $\theta$ operators component-by-component. 
+We will let expand $A(t)$ in a power series
+$$ A(t) = A_0 + A_1 t + \cdots, $$
+and then consider power series solutions of the form $Y(t) = t^{\rho}Z(t)$ and develop $Z(t)$ as a power series 
+$$ Z(t) = Z_0 + Z_1 t + \cdots. $$
+We then find that 
+$$ \theta(Y) = \theta( t^\rho Z) = t^{\rho}(\theta+\rho)Z, \quad AY =  t^\rho A Z, $$
+which leads us to  
+\begin{align*}
+(\theta + \rho)Z(t) &= \rho Z_0 + (\rho Z_1 + Z_1)t + (\rho Z_2 + 2 Z_2)t^2 +\cdots, \\
+A(t) Z(t) &= A_0 Z_0 + (A_1Z_0+A_0Z_1)t + (A_2 Z_0 + A_1Z_1+A_0 Z_2)t^2+\cdots 
+\end{align*}
+which when we equate coefficients tells us that $Z_0$ is an eigenvector of $A_0$ with eigenvalue $\rho$ and that for $n\geq 1$ we have the equation
+$$ nZ_n + \rho Z_n = A_0 Z_n + A_1 Z_{n-1} + \cdots + A_n Z_0.$$
+This equation allows us to solve inductively as long as $(\rho+n)$ is not an eigenvalue of $A_0$ for $n\geq 1$ since we have the expression
+$$( \rho + n + A_0) Z_n = A_1 Z_{n-1} + \cdots + A_n Z_0,$$
+and $\rho+n$ not being an eigenvalue puts $(A_0 - \rho-n)$ invertible. 
+The fancy word for this is that $\rho+n$ is in the resolvent set of the operator $A_0$ (the resolvent set of a linear operator $L$ is precisely the set of $\lambda$ such that $\lambda-L_0$ is invertible). 
+We will omit the proof of convergence. 
+This has to do with estimating the operator norm of $(x-A_0)^{-1}$ for $x$ in the resolvent set. 
+
+This proves the following.
+\begin{theorem}
+	Consider the formal Fuchsian system 
+	\begin{equation}\label{E:formal-fuchsian}
+	Y' = \frac{A(t)}{t} Y, \qquad A(t) \in M_n(\CC[[t]]).
+	\end{equation}
+	Let $A_0\in M_n(\CC)$ be the residue of $A(t)/t$ at $t=0$ and let $\rho$ be an eigenvalue such that $\rho+n$ is not an eigenvalue of $A_0$ for any integer $n\geq 1$. 
+	Then \eqref{E:formal-fuchsian} admits a formal solution $Y(t) \in \CC[[t]]^n$ of the form 
+	$$ Y(t) = t^{\rho}(Y_0 + Y_1 t + \cdots ) $$
+	where $Y_0$ is an eigenvector of $A_0$. 
+	Moreover the series is convergent is the series for $A(t)$ is. 
+\end{theorem}
+Note that even the resonant case where there are eigenvalues $\rho$ and $\mu$ with  $\rho-\mu \in \ZZ$ then still one of these admits a solution of the type above. 
+One just needs some eigenvalue such that there is no positive integer that gives another. 
+If $\rho$ and $\mu$ are equal then we don't need to worry about this. 
+If $\rho-\mu$ is negative then we don't need to worry about this. 
+If $\rho-\mu$ is positive then we can switch the role of $\rho$ and $\mu$ and again not worry about this. 
+
+\begin{lemma}
+	The gauge transformation $Y=(t-t_0)^{\mu}\widetilde{Y}$ has the effect of $A(t)/(t-t_0)\mapsto \widetilde{A}(t)/(t-t_0)$ where $\widetilde{A}(t) = A(t)-\mu$.
+\end{lemma}
+\begin{proof}
+	Without loss of generality we can suppose that $t_0=0$ since $\infty$ is invariant under the transfomation $t\mapsto t-t_0$. 
+	The system has the form 
+	 $$ \theta Y = A(t) Y' $$
+	where $A(t) = A_0 + A_1 t + \cdots \in M_n(\CC[[t]])$ and $A_j \in M_n(\CC)$ for $j\geq 0$. 
+	Then $\theta(t^{\mu}\widetilde{Y}) = t^{\mu}(\theta+\mu)\widetilde{Y}$ and $A(t)t^{\mu}\widetilde{Y} = t^{\mu}A(t)\widetilde{Y}$ which gives the equation
+	 $$ \theta \widetilde{Y} = (A(t)-\mu) \widetilde{Y}.$$
+	One can check that $\sigma_p(A_0-\mu) = \sigma_p(A_0)-\mu$ where $\sigma_p(B)$ denotes the eigenvalues of a matrix $B$.
+\end{proof}
+
+\chapter{Riemann-Hilbert Correspondences}
+
+\taylor{I'm going to put the proof of the various Riemann-Hilbert correspondences here.
+	This section will include basic material on connections.
+}
 
 \appendix 
 \chapter{Analytics Elements of Differential Equations}
