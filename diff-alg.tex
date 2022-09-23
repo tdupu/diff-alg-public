@@ -1,13 +1,14 @@
-\documentclass[]{book}
+\documentclass[12pt]{book}
 \usepackage{amsmath,amsfonts,amssymb,amsthm}
 \usepackage{hyperref}
 
 \usepackage{color}
 \newcommand{\taylor}[1]{{\color{blue} \sf $\spadesuit\spadesuit\spadesuit$ Taylor: [#1]}}
-\newcommand{\anton}[1]{{\color{red} \sf $\spadesuit\spadesuit\spadesuit$ Anton: [#1]}}
 \newcommand{\todo}[1]{{\color{purple} \sf $\spadesuit\spadesuit\spadesuit$ TODO: [#1]}}
 
+\usepackage{tikz-cd}
 \usepackage{graphicx}
+\usepackage{soul}
 
 \numberwithin{equation}{section}
 \newtheorem{theorem}{Theorem}[subsection]
@@ -66,13 +67,36 @@
 \newcommand{\mult}{\operatorname{mult}}
 \newcommand{\Res}{\operatorname{Res}}
 \newcommand{\res}{\operatorname{res}}
+
 \newcommand{\ord}{\operatorname{ord}}
+
+
+%\newcommand{\hol}{\operatorname{hol}}
+\newcommand{\LocSys}{\operatorname{LocSys}}
+\newcommand{\Mod}{\mathsf{Mod}}
+\newcommand{\Pic}{\operatorname{Pic}}
+
+\newcommand{\fin}{\operatorname{fin}}
+
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\Mon}{\operatorname{Mon}}
+\newcommand{\Sys}{\operatorname{Sys}}
+\newcommand{\Conn}{\operatorname{Conn}}
+\newcommand{\Repn}{\operatorname{Repn}}
+\newcommand{\End}{\operatorname{End}}
+
+\newcommand{\QQbar}{\overline{\mathbb{Q}}}
+
 
 
 
 \usepackage{tabto}
 \def\quoteattr#1#2{\setbox0=\hbox{#2}#1\tabto{\dimexpr\linewidth-\wd0}\box0}
-\parskip 1em
+%\parskip 1em
+
+\setlength\parskip{1em plus 0.1em minus 0.2em}
+\setlength\parindent{0pt}
 
 %opening
 \title{An Introduction to the Algebraic Theory of Differential Equations}
@@ -185,7 +209,9 @@ url     = {https://tdupu.github.io/diff-alg-public/diff-alg.pdf},
 \chapter{Differential Algebra Basics}
 I would skip this for now and only come back to this chapter when we need it. 
 
-\section{$\Delta$-Rings and $\partial$-Rings}
+\section{The Basic Objects}
+
+\subsection{$\Delta$-Rings and $\partial$-Rings}
 In this book, unless stated otherwise, all rings are going to be commutative with a multiplicative unit. 
 Let $R$ be a commutative ring. 
 By a \emph{derivation} on $R$ we map a map of sets $\partial:R\to R$ that satisfied 
@@ -226,7 +252,7 @@ We also call such a ring an ordinary differential ring.
 	\end{enumerate}
 \end{example}
 
-\section{Morphisms of $\Delta$-Rings and $\partial$-Rings}
+\subsection{Morphisms of $\Delta$-Rings and $\partial$-Rings}
 Let $(A,\Delta)$ and $(B,\Delta)$ be differential rings where we use $\Delta = \lbrace \partial_1,\ldots,\partial_m\rbrace$ for the derivatives on both $A$ and $B$.
 \begin{definition}
 A \emph{morphism} of differential rings is a ring homomorphism $f:A\to B$ such that for each $\partial_i \in \Delta$ we have $f(\partial_i(a)) = \partial_i(f(a))$ for each $a\in A$. 
@@ -1092,7 +1118,7 @@ The case of four singular points is sometimes called the Painlev\'e case because
 
 The Gauss hypergeometric equation is the following homogeneous ordinary differential equation
 \begin{equation}
-   y'' + \frac{(a+b-1)t-c}{t(t-1)} y' + \frac{ab}{t(t-1)} y =0 .
+   y'' + \frac{(a+b-1)t-c}{t(1-t)} y' + \frac{ab}{t(1-t)} y =0 .
 \end{equation}
 It solutions are so-called hypergeometric functions and has the remarkable property that any rank two Fuchsian differential equations on $\PP^1$ can be reduced to this equation for some collection of parameters $(a,b,c)$. 
 The $(a,b,c)$ really encode eigenvalues of the residue matrices (=local exponents) and the form of the equation is really a consequence of the restriction of these local exponents in part due to Fuch's theorem which says that the sum of the local exponents in this rank 2 case with three singularities must be equal to one. 
@@ -1119,7 +1145,7 @@ In the case of rank two Fuchsian differential systems with three poles this redu
 Finally, once we are in the order two case we need to show that all of our equations are determined by the local exponents and that we can manipulate these exponents by a series of gauge transformations and automorphisms of $\PP^1$ to bring our general equations into the Gauss hypergeometric case.
 This involves a basic lemma about how local exponents change under Gauge transformations of the form $Y(t) = t^{\rho} \widetilde{Y}(t)$. 
 
-\subsection{Weyl Algebras and $D$-Modules}
+\subsection{Weyl Algebras and $D$-Modules}\label{S:weyl-algebras}
 
 Let $(R,\Delta)$ be a $\Delta$-algebra. 
 \begin{definition}
@@ -1391,7 +1417,7 @@ and hence the statement follows.
 Using the formulas above one now has a more systematic approach to computing the local exponents for the hypergeometric functions. 
 \begin{exercise}
 	Compute the local exponents of the hypergeometric equation 
-	 $$ y'' + \dfrac{(a+b-1)t -c}{t(t-1)}y' + \dfrac{ab}{t(t-1)} y =0, $$
+	 $$ y'' + \dfrac{(a+b-1)t -c}{t(1-t)}y' + \dfrac{ab}{t(1-t)} y =0, $$
 	for each $t_0 \in S = \lbrace 0,1,\infty\rbrace$ using the indicial formulas. 
 \end{exercise}
 
@@ -1548,24 +1574,585 @@ Making the gauge transformation $y = t^{-\alpha}(t-1)^{-\beta}\widetilde{y}$ to 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter[Riemann-Hilbert]{Riemann-Hilbert Correspondences}
+\chapter[Riemann-Hilbert]{Connections and Riemann-Hilbert Correspondences}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The main purpose of this section is to present Plemelj's theorem, which at the time what was thought to be a solution to Hilbert's 21st problem.
-The basic strategy of the proof is to glue a bunch of local equations together. 
+I started writing this section to present a proof of Plemelj's theorem, which at the time  (and the 70 years that follows) was thought to be a solution to Hilbert's 21st problem in a modern form. 
+To do this we need to introduce vector bundles with connections which then will later be used again for constructing isomonodromic deformations. 
+
+The basic strategy of Plemelj's proof is to glue a bunch of local equations together. 
 We now understand this technique to be the part of what is called ``descent theory''. 
 This is just a fancy word for ``the theory of gluing things together''.  
 In order to glue things we need to define the things that we are gluing. 
-These are connections on vector bundles $(E,\nabla)$ over a Riemann surface. 
-The word ``connections'' is just a fancy word for $D$-module. 
-In fact it is just a bunch of $D$-modules glued together. 
+These ``things'' are connections on vector bundles $(E,\nabla)$ over a Riemann surface (or complex manifold). 
+The word ``connections'' is just a fancy word for ``locally a $D$-module''. 
  
-The idea of a connection leads to a bunch of interesting mathematics and physics. 
-Physically, all of the basic forces in the standard model of physics the weak, strong, electromagnetic are all determined by the curvature of a connection.
-The idea also brings us close to other more enhanced versions of the Riemann-Hilbert correspondence which we will discuss. 
-We will follow the chapters of Haeflinger and Malgrange the book on $D$-modules  \cite[Chapters III, IV]{Borel1987} which largely follows \cite{Deligne1970}.
+The idea of a connection leads to a bunch of interesting mathematics and physics including the notion of curvature. 
+The basic motto is 
+\begin{center}
+Force = Curvature
+\end{center}
+Physically, all of the basic forces in the standard model of physics the weak, strong, electromagnetic are all Yang-Mills theories which involve this concept.
 
-\section{Connections}
+We will follow the chapters of Haeflinger and Malgrange the book on $D$-modules  \cite[Chapters III, IV]{Borel1987} which largely follows \cite{Deligne1970}.
+There some nice material from the \emph{Holomorphic Foliations and Algebraic Geometry} Summer School in Mathematics in 2019 which has excellent YouTube videos and notes. Viktoria Heu's \href{https://if-summer2019.sciencesconf.org/resource/page/id/1}{Notes} are brief and excellent. 
+Also see Frank Loray's second lecture from the same Summer School \href{https://www.youtube.com/watch?v=qCujE4nU8bc}{here}.\footnote{There are actually many great videos of Frank Loray on YouTube if you do a quick search.}
+
+
+\section{Vector Bundles and Connections}
+In this section we define vector bundles and connections. 
+They are mainly a global language for linear differential equations and give a formalism in which we can talk about complicated changes of coordinates.
+The vector bundle encodes all possible changes of coordinates of the $D$-module and the connection is the derivation part of the $D$-module. 
+More precisely it is the equation. 
+Most importantly this global language allows us to glue together local information in order to solve (or show we can't solve) Hilbert's 21st problem.
+
+Next given a vector bundle and a connection we get to talk about curvature and things like geodesics. 
+A connection is a way to convert a derivative into a $D$-module structure.
+If we think of derivatives as vector fields on space, as one does with tangent bundles, connections are telling us how to associate a direction on our manifold to a direction in our vector bundle. 
+In particular for each direction one gets a differential equation and solving this differential equations tells us how to move things around in the vector bundle. 
+This is just solving an initial value problem in ODEs.
+One issue is that while moving around in our base space commutes, it doesn't necessarily translate to an commutative procedure for moving around in the vector bundle. 
+This leads to a notion of curvature. 
+
+Consider Figure~\ref{F:curvature}. 
+In this picture we have our base space being a sphere $S^2$ and the vector bundle being the tangent bundle itself -- so note in particular that in this setup the tangent bundle is appearing twice: first as an object parametrizing directions and second as the object on which the directions act through covariant derivatives/assigning linear differential equations.
+One can see that if we move a vector from the north pole down a longitude, then along a lattitude, then back up to the north pole around a longitude that we arrive with a vector which is displaced from the original one. 
+This is what curvature is.
+\begin{figure}[h]\label{F:curvature}
+	\begin{center}
+		\includegraphics[scale=0.5]{curvature.eps}
+	\end{center}
+	\caption{Curvature of the tangent bundle of $S^2$ associated to the Levi-Civita connection is evidenced by transporting tangent vectors around the the sphere.}
+\end{figure}
+
+Finally, while curvature is an interesting concept in itself, the conditions for curvature give interesting differential equations. 
+In fact all the gauge theories in particle physics (strong, weak, electro-magnetic), all of the fundamental forces are encoded by curvatures. 
+Later, we are going to need curvature to vanish in order for an overdetermined collection of partial differential equations to be well-defined.
+This is needed for example in order to derive the Schlesinger equations for isomonodromic flows (this is an equation for equations!).
+These conditions are what give rise to the $P_{VI}$, Painlev\'e six.
+This is essentially a condition on equality of mixed partial derivatives for solutions of differential equations. 
+
+\subsection{Vector Bundles (for the uninitiated)}
+There are two objects that we will often conflate: vector bundles and locally free sheaves. 
+Locally free sheaves are essentially modules that we associate to open sets. 
+They are modules over rings of holomorphic functions and they ``glue'' together nicely. 
+Vector bundles are spaces over another space which have the property that local sections of the vector bundle form a locally free sheaf. 
+Later we will conflate the two since for every vector bundle there is a locally free sheaf and conversely, to every locally free sheaf we can construct a vector bundle. 
+If you know what these words mean, this section probably isn't for you. 
+I'm going to begin an introduction into these two fundamental objects with a discussion of coordinates of free modules. 
+I will then extend this idea to describe the data of vector bundles given from two open sets. 
+I will then describe the general definition and say a little bit about what it means to be a sheaf. 
+After this section I'm going to assume everyone is familiar with these objects since a detailed discussion will lead us two far afield. 
+We recommend \cite{Vakil2017} for a more detailed discussion of vector  bundles on schemes.
+
+Let $R$ be a commutative ring and let $E$ be a free $R$-module of rank $n$. 
+We have talked about coordinate isomorphisms $\psi: E \to R^{\oplus n}$ given by $v=f_1v_1 + \cdots + f_n v_n \mapsto (f_1,\ldots,f_n)$ where $v_1,\ldots,v_n$ is a basis for $E$ and $f_1,\ldots,f_n\in R$ are called the coordinates. 
+The map $\psi$ is called a trivialization. 
+We have also talked about how a change in choice of basis for $E$ transforms the coordinates by some element of $\GL_n(R)$. 
+The element of $\GL_n(R)$ transitions from one set of coordinates in one basis to another set of coordinates in another basis. 
+
+A vector bundle is sort of like this naive change of coordinates but we have a varying collection of $R_i$ and $E_i$ for $i$ in some index set $I$ and they need to satisfy compatibility conditions.
+The $R_i$ are the functions on some open set of some space and the $E_i$ are local sections of the vector bundle. 
+
+\begin{example}[Vector Bundles With Two Charts]
+	The data for this is some $E_i$ $R_i$-modules for $i=1,2$ and an additional $R_{12}$-module $E_{12}$.
+	
+	There are ring homomorphisms 
+	$$ \begin{tikzcd}
+	R_1 \arrow[r] & R_{12} & \arrow[l] R_2 
+	\end{tikzcd}$$
+	and morphisms of abelian groups
+	$$ \begin{tikzcd}
+	E_1 \arrow[r] & E_{12} & \arrow[l] E_2 
+	\end{tikzcd}$$
+	which respects the module actions. 
+	Moreover these have the property that a basis for $E_1$ or $E_2$ induce a basis for $E_{12}$ and hence trivializations for $E_1$ or $E_2$ induce trivializations for $E_{12}$. 
+	There are additional glueing properties, but I will state those when I state the official definition.
+\end{example}
+
+\begin{example}[Vector Bundles on $\PP^1$]\label{E:charts-on-p1}
+	In the case of $\PP^1$ we have two open sets $U_0$ and $U_{\infty}$ which cover $\PP^1 = U_0 \cup U_{\infty}$. 
+	\begin{figure}[h]
+		\begin{center}
+			\includegraphics[scale=0.5]{charts-for-p1.eps}
+		\end{center}
+		\caption{$\PP^1$ is covered by $U_0$ and $U_{\infty}$.
+			Here $U_0$ uses the standard $t$-coordinate and  $U_{\infty}$ uses the coordinate at infinity $s$ given by $s=1/t$. 
+			On their intersection $U_0 \cap U_{\infty}$ you can use either coordinate. 
+		}
+	\end{figure}
+	
+	In the previous example (with indexing $0,\infty$ instead of $1,2$) we have 
+	$$ \begin{tikzcd}
+	R_0 =\hol(U_0) \arrow[r] & R_{0\infty} = \hol(U_0\cap U_{\infty}) & \arrow[l] R_{\infty} = \hol(U_{\infty}) 
+	\end{tikzcd}$$
+	where the maps are ``restriction of the domain''.
+	Then to specify a vector bundle one can specify three modules $E_0$, $E_{\infty}$, and $E_{0\infty}$ which are free $R_0,R_{\infty},$ and $R_{0\infty}$-modules respectively. 
+\end{example}
+
+While the basic data above is correct it is terrible to define vector bundles this way. 
+We want a definition that doesn't depend on the choice of cover, works for all spaces, and allows us to glue local objects together. 
+The technical thing we want to say is that a vector bundles $E$ on $X$ is a \emph{locally free sheaf of $\Ocal_X$-modules}.
+There are two categories in which we want to formulate this notion: the category of schemes and the category of complex manifolds. 
+
+
+\begin{itemize} 
+	\item ($\Ocal_X$-modules) 
+	In the category of complex manifolds for an open set $U$ one has $\Ocal_X(U) = \hol(U)$ the set of holomorphic functions on $U$ and in the category of schemes $\Ocal_X(U)$ is the structure sheaf. 
+	
+	\item (Sheaves) For $E$ to be a sheaf of $\Ocal_X$-modules we need that $E(U)$ to be a $\Ocal_X(U)$-module for every $U\subset X$ and it needs to satisfy sheaf axioms. 
+	Elements of $E(U)$ are called sections over $U$. 
+	The first axiom says that if you have bunch of open sets and sections on those open sets that agree on the intersections then there exists a section over the union of the open sets that restricts to each of those sections. 
+	The second axiom says that such a lifting is unique: if you have two sections which agree on a collection of open sets that cover the set it is a section over then the two sections must be the same. 
+	\item (Locally free of rank $n$)
+	Finally, for $E$ to be locally free of rank $n$ that means that for every $x\in X$ there exists some $U$ open containing $x$ and an isomorphism $\psi_U: E(U) \to \Ocal_X(U)^{\oplus n}$. 
+\end{itemize}
+The nice thing about vector bundles is that they satisfy effective descent. 
+This is sort of like the sheaf axiom but for objects of the category themselves. 
+If $E_i$ are vector bundles over $U_i$ and they $E_i \vert U_i \cap U_j \cong E_j \vert U_1 \cap U_j$ and these isomorphisms satisfy some compatibility conditions, then there exists a vector bundle over $\bigcup_{i} U_i$.
+The correct way of talking about this now is to say that fibered category of vector bundles over the category of spaces you are considering is a stack. 
+We aren't going to review this here, this would take an entire class. 
+The take-away is that you can build up vector bundles from local data.
+
+Let's do a simple example of a line bundle on $\PP^1$.
+A line bundle is just a vector bundle of rank one. 
+\begin{example}
+	Lets consider the sheaf of holomorphic differentials on $\PP^1$. 
+	This is the sheaf we denote by $E = \Omega_{\PP^1}^1$. 
+	In our usual coordinates we have 
+	$$ E(U_0) = \Ocal_{\PP^1}(U_0) dt, \quad E(U_{\infty}) = \Ocal_{\PP^1}(U_{\infty})ds.$$
+	There are trivializations 
+	$$ \psi_0\colon E(U_0) \to \Ocal_{\PP^1}(U_0), \quad f(t) dt \mapsto f(t) $$
+	$$ \psi_{\infty} \colon E(U_{\infty}) \to \Ocal_{\PP^1}(U_{\infty}), \quad g(s)ds \mapsto g(s) $$
+	Both of these trivializations are valid on $E(U_0 \cap U_{\infty})$ and over $U_0\cap U_{\infty}$ we have
+	$$ \psi_{\infty}\psi_0^{-1}(1) = \psi_{\infty}(dt) = \psi_{\infty}(\frac{-ds}{s^2}) = \frac{-1}{s^2}\psi_{\infty}(ds) = \frac{-1}{s^2}.$$
+\end{example}
+
+In the above example we see that the transition map was given by multiplication by $-1/s^2$. 
+It turns out that every line bundle on $\PP^1$ and admits trivializations over $U_0$ and $U_{\infty}$ with transition maps of  the form $f \mapsto -s^{-d} f$ for some integer $d$. 
+The integer $d$ characterizes the line bundle up to isomorphism and we call the one with integer $d$, $\Ocal_{\PP^1}(-d)$. 
+So for example, $\Omega_{\PP^1} \cong \Ocal_{\PP^1}(-2)$. 
+There are a couple interpretation of these line bundles, one being sheaves of meromorphic functions with poles at more order $d$ at infinity. 
+The notation is a little wonky too. 
+If $U$ is an open subset of $\PP^1$ then to take sections of this vector bundle we write $\Ocal_{\PP^1}(d)(U)$ so the $d$ has nothing to do with the open sets we were plugging in earlier. 
+\begin{remark}
+	Readers already familiar with algebraic or complex geometry will recognize $-s^{-d} \in \Ocal^{\times}_{\PP^1}(U_0 \cap U_{\infty})$ as a representative of the cohomology class  in $H^1(\PP^1,\Ocal^{\times}) = \Pic(\PP^1)$ given in terms of a \v{C}ech cocycle with two open sets. 
+\end{remark}
+The comment about line bundles extends to vector bundles. 
+The obvious vector bundles we can think of are direct sums of line bundles. 
+These turn out to be all of them.
+
+\begin{theorem}[Birkoff-Grothendieck]
+	All vector bundles on $\PP^1$ are isomorphic to 
+	$$ \Ocal_{\PP^1}(d_1) \oplus \cdots \Ocal_{\PP^1}(d_n) $$
+	for some $d_1,d_2,\ldots,d_n \in \ZZ$.
+\end{theorem}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Babymost case: Covariant Derivatives and Connections Associated to ODEs}
+%%%%%%%%%%%%%%%%%%%%%%%
+Since connections can get abstract, before proceedings with the full definition, I'm going to explain what everything is for an ODE. 
+The main idea is that we can convert ``$Y$ is a solution of a differential equations' into ``$Y$ is horizontal for a connection''.
+$$
+\dfrac{dY}{dt}=B(t)Y \quad \iff \quad \nabla_{\frac{\partial}{\partial t}}(Y) =0.
+$$
+The covariant derivative in this example is the $\CC$-linear operator 
+$$ \nabla_{\frac{\partial}{\partial t}} = \dfrac{\partial}{\partial t} - B(t).$$
+If, say, $B(t)$ is a holomorphic on $U$ some neighborhood of a points in $\PP^1$ then this defined an operator $R^n \to R^n$ whree $R=\hol(U)$.
+The connection in this situation is a map
+$$ \nabla = d-B(t)dt $$
+where $d$ is the exterior differential acting on column vectors in $R^n$ and $-B(t)dt$ is a matric of differential 1-forms. 
+This defined a map $\nabla: R^n \to \Omega^1_{\PP^1}(U) \otimes R^n$.
+Explicitly 
+$$ \nabla \begin{pmatrix}
+y_1 \\
+y_2\\
+\vdots \\
+y_n
+\end{pmatrix} = \begin{pmatrix}
+dy_1 \\
+dy_2\\
+\vdots \\
+dy_n
+\end{pmatrix} - B(t) \begin{pmatrix}
+y_1 \\
+y_2\\
+\vdots \\
+y_n
+\end{pmatrix} dt. $$
+Sometimes the matrix $-B(t)dt$ is called the connection 1-form and usually denoted by $\omega$ or $A(t)dt$ (so that $A(t)=-B(t)$). 
+Before proceeding to the abstract theory we remark that $\nabla$ and $\nabla_{\frac{\partial}{\partial t}}$ are related by the pairing 
+$$ \nabla_{\frac{\partial}{\partial t}}(Y) = \langle \nabla(Y), \dfrac{\partial}{\partial t} \rangle.$$
+Usually this pairing is just defined differential forms and derivations, i.e. between $\Omega_{\PP^1}^1(U)$ and $T_{\PP^1}(U)$ but if $W$ is a vector of $1$-forms given by we extend the pairing to $W$ by pairing with each entry of $W$.
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Connections}
+%%%%%%%%%%%%%%%%%%%%%%%
+There exists definitions of connections for schemes but for concreteness we will work with complex manifolds.\footnote{I'm really working with ringed spaces here.}
+Let $X$ be a complex manifold and let $E$ be a vector bundle on $X$. 
+\begin{definition}
+	A \emph{connection} on $E$ is a $\CC$-linear map 
+	$$ \nabla: E \to \Omega_X^1 \otimes_{\Ocal_X} E $$
+	satisfying 
+	\begin{enumerate}
+		\item For all $f \in \Ocal_X$ and all $s\in E$, $\nabla(fs) = df\otimes s + f\nabla(s).$ 
+		\item For all $s_1,s_2 \in E$, we have $\nabla(s_1+s_2)=\nabla(s_1) + \nabla(s_2)$.
+	\end{enumerate}
+\end{definition}
+We now can extract a more general definition of local system.
+\begin{definition}
+	The space of \emph{horizontal sections} of $(E,\nabla)$ is defined by 
+	$$ U \mapsto E^{\nabla}(U) = \lbrace s \in E(U) \colon \nabla(s) =0 \rbrace.$$
+\end{definition}
+It is an exercise in familiarity with the definitions of vector bundles to check that this is in fact a local system. 
+\begin{exercise}
+	Check that $E^{\nabla}$ is a local system.
+\end{exercise}
+We remark that every connection $\nabla$ can be extended to $\Omega^i_X \otimes E$.
+This means that given $\omega \otimes s \in \Omega^i_X \otimes E$ we define
+$$ \nabla(\omega \otimes s) = d(\omega) \otimes s + (-1)^i \omega \wedge \nabla(S).$$
+
+
+\subsection{Christoffel Symbols}
+Let $X$ be a complex manifold of dimension $n$ and let $E$ be a vector bundle of rank $n$ on $X$.
+Locally (on some open set $U\subset X$) we can fix coordinates $t_1,\ldots,t_m$ of $X$ and a basis $s_1,\ldots,s_n$ of $E$. 
+This means that on $U$ we have 
+$$ E(U) = \Ocal_X(U)s_1 + \cdots + \Ocal_X(U)s_n,$$
+$$ T_X(U) = \Ocal_X(U) \dfrac{\partial }{\partial t_1} + \cdots + \Ocal_X(U) \dfrac{\partial}{\partial t_m},$$
+$$ \Omega_X(U) = \Ocal_X(U)dt_1 + \cdots + \Ocal_X(U)dt_m.$$
+In each of the above expression the sum are direct -- so each $\Ocal_X(U)$-module is free with the given basis. 
+Now to get the Christoffel symbols we can just write down what $\nabla(s_j) \in \Omega^1_X(U) \otimes E(U)$ must look like. 
+It must have the form
+\begin{equation}\label{E:structure-constants}
+\nabla(s_j) = \sum_{i=1}^n\sum_{\alpha=1}^m \Gamma^i_{\ j \alpha} dt_{\alpha} \otimes s_i.
+\end{equation}
+The Christoffel symbols are just the structure ``constants'' for the connection.
+\begin{definition}
+	The elements $\Gamma^i_{\ j \alpha} \in \Ocal_X(U)$ are called the \emph{Christoffel symbols} of $\nabla$ with respect to the local basis $s_1,\ldots,s_n$ of $E$ and local coordinates $t_1,\ldots,t_m$ of $X$.
+\end{definition}
+The is a convenient way to write this down using Einstein notation. 
+If we write $t^{\alpha}$ instead of $t_{\alpha}$ then we can write \eqref{E:structure-constants} in the simple form
+$$\nabla(s_j) = \Gamma^i_{j\alpha} dt^{\alpha}\otimes s_i.$$
+In Einstein summation notation a upper index followed by a repeated lower index implies summation over that variable. 
+So, in this expression, there is an implied sum over $\alpha$ and over $i$. 
+We will make use of Einstein notation freely. 
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Covariant Derivatives}
+%%%%%%%%%%%%%%%%%%%%%%%
+We now given the definition of a covariant derivative.
+\begin{definition}
+	Let $\theta \in T_X(U)$ be a derivation.
+	We define the \emph{covariant derivative associated to $\theta$} to be the operator 
+	$$ \nabla_{\theta}\colon E(U) \to E(U), \quad s\mapsto \nabla_{\theta}(s) = \langle \nabla(s),\theta\rangle.$$
+\end{definition}
+In the above expression the pairing $\Omega_X^1 \times T_X\to \Ocal_X$ (which we can write as $\Omega_X^1\otimes T_X \to \Ocal_X$) is extended to $(E\otimes \Omega_X^1)\otimes T_X \to E\otimes \Ocal_X= E$ by tensoring up to $E$.
+All tensors here are over $\Ocal_X$.
+Note that this pairing just means that we pair each component of $E\otimes \Omega^1_X$ with a tangent vector and take the element of $E$ obtained from the result. 
+Also, since $\nabla$ satisfies a product rule and sum rule we will have 
+$$ \nabla_{\theta}(fs) = \theta(f) s + f \nabla_{\theta}(s), \quad \forall f \in \Ocal_x, \forall s \in E,$$
+$$\nabla_{\theta}(s_1+s_2) = \nabla_{\theta}(s_1) + \nabla_{\theta}(s_2), \quad \forall s_1,s_2 \in E.$$
+
+
+In local coordinates, we have an explicit expression for covariant derivatives using Christoffel symbols.
+Before proceedding I will make some remarks on notation.
+First, derivatives $\dfrac{\partial}{\partial t^{\beta}}$ are ``naturally lowered'' in so Einstein notation and for convenience we often write them as $\partial_{\beta} = \dfrac{\partial}{\partial t^{\beta}}$.
+In this notation, with these local coordinates, a general derivative $\theta$ is written as $\theta = a^{\beta}\partial_{\beta}$. 
+Also, it is annoying to write $\nabla_{\frac{\partial}{\partial t^\beta}}$ all of the time.
+We will write 
+$$ \nabla_{\beta} = \nabla_{\partial_{\beta}} = \nabla_{\frac{\partial}{\partial t^{\beta}}}$$
+to simplify the notation.
+\begin{example}
+	Let $t^1,\ldots,t^m$ be local coordinates for $X$ and let $s_1,\ldots, s_n$ be a local basis for $E$. 
+	Then if $\theta = \dfrac{\partial}{\partial t^{\beta}}$ we have
+	$$\nabla_{\frac{\partial}{\partial t^{\beta}}}(s_j) = \langle \Gamma^i_{\ j \alpha} dt^{\alpha} \otimes s_i, \dfrac{\partial}{\partial t^{\beta}} \rangle 
+	= \Gamma^i_{\ j \alpha} \delta^{\alpha}_{\ \beta} s_i 
+	= \Gamma^i_{\ j \beta} s_i.$$
+	In particular if $s = f^js_j\in E$ then 
+	\begin{align*}
+	\nabla_{\beta}(f^js_j) &=\partial_{\beta}(f^j)s_j + f^j \nabla_{\beta}(s_j) \\
+	&= \partial^{\beta}(f^j)s_j + f^j \Gamma^i_{\ j \beta} s_i\\
+	&= \left(\partial^{\beta}(f^j) + f^i \Gamma^j_{\ i \beta} \right) s_j 
+	\end{align*}
+	
+	
+	A general $\theta$ we can write as $\theta = a^{\beta}\partial_{\beta}$ and
+	$$\nabla_{\theta}(s_j) = \nabla_{a^{\beta} \partial_{\beta}}(s_j) = a^{\beta}\nabla_{\beta}(s_j)=a^{\beta}\Gamma^i_{\ j \beta}s_i. $$
+\end{example}
+
+\subsection{Connection 1-forms}
+The purpose of this section is the show that after fixing a local basis $s_1,\ldots,s_n$ for $E(U)$, that locally 
+$$ \nabla = d + \omega, \quad \mbox{ on $\Ocal_X(U)^{\oplus n}$} $$
+where $\omega \in M_n(\Omega_X^1(U))$ is a matrix of $1$-forms.
+Before proceeding, I need to explain how to multiply matrices of one forms and how the exterior derivative $d$ works.
+
+\subsubsection{Calculus of Connection 1-forms}
+For the purpose of iterating the connection later, we remark that tje exterior algebra $\Omega_X^{\bullet} = \bigoplus_{d=0}^m \Omega_X^{\bullet}$ is a sheaf of skew commutative ring satisfying 
+$$\eta_1 \wedge \eta_2 = (-1)^{d_2} \eta_2 \wedge \eta_1, \quad 
+\eta_j \in \Omega^{d_j}_{X}.$$
+Matrices $\omega,\eta \in M_2(\Omega^{\bullet})$ are then multiplied by using the formula 
+$$ \omega \wedge \eta = ( \sum_{l=1}^n \omega_{i l} \wedge \eta_{l j} ),$$
+if $\omega = (\omega_{ij})$ and $\eta = (\eta_{ij})$.
+
+One more notational remark before proceeding: If $s_i \in E(U)$ form a local basis we will let $s^i$ denote the dueal basis in $E^{\vee}(U)$ where $E^{\vee}$ is the dual vector bundle. 
+It is defined by 
+$$E^{\vee}(V) := E(V)^{\vee} = \Hom_{\Ocal_X(V)}(E(V),\Ocal_X(V))$$ 
+for $V$ an open subset of $X$. 
+The second $\vee$ is just usual $\Ocal_X(V)$-module duality as defined by the last equality.
+
+\begin{exercise}
+	Suppose that $t^{\alpha}$ are local coordinates of $X$ and that $s_i$ is a local basis for $E$. 
+	We can write $\nabla$ as an element of $\Omega_X^1\otimes \End(E)$ by 
+	$$ \nabla = \Gamma^i_{\ j \alpha} dt^{\alpha} \otimes s_i \otimes s^j.$$
+	Here $\End(E)$ is the sheaf of $\Ocal_X$-linear maps from $E$ to itself (endomorphisms) and $\End(E) = E \otimes E^{\vee}$.
+\end{exercise}
+
+We now explain how to work with $\nabla=d+\omega$ as an element of a Weyl algebra.
+The thing to keep in mind here when working with $\nabla =d+\omega$ is that $\omega$ is a matrix over a non-commutative ring i.e. $\omega \in M_n(\Omega_X^{\bullet})$ (so it is like super noncommutative) and $d$ is an operator on this ring. 
+This means we need to do computations in a very weird looking Weyl algebra $M_n(\Omega_X^{\bullet})[d]$ where $d$ here is the exterior derivative. 
+If $\omega \in M_n(\Omega_X^{\bullet})$ we need to understand how $d\omega$ acts on $\eta\in M_n(\Omega_X^{\bullet})$ when $\omega$ is homogenous. 
+The key thing to keep in mind is that  $\omega$ act by wedge-matrix-multiplication:
+$$(d\omega)(\eta) = d(\omega\wedge \eta) = d(\omega) \wedge \eta + (-1)^{\deg(\omega)} \omega \wedge d(\eta).$$
+This proves the following:
+\begin{lemma}[Basic Weyl Algebra Rules]\label{L:exterior-weyl-algebra}
+In the Weyl algebra	$M_n(\Omega_X^{\bullet})[d]$ for $\omega \in M_n(\Omega_X^{\bullet})$ homogeneous we have 
+	\begin{equation}
+	d \wedge \omega = (-1)^{\deg(\omega)} \omega \wedge d + d(\omega).
+	\end{equation}
+\end{lemma}
+This is going to be used when computing our formulas for curvature (Theorem~\ref{T:integrability-conditions}).
+
+\subsubsection{The formula: $\nabla = d +\omega$}
+
+We now verify the claim about the description in local coordinates.
+Let $U$ be an open subset for which $s_1,\ldots,s_n$ is a basis for $E(U)$. 
+Let $\psi: E(U) \to \Ocal_X(U)^{\oplus n}$ be the trivialization given by $\psi(f^is_i) = f^ie_i$ where $e_i$ is the standard basis vector on $\Ocal_X^{\oplus n}$ (say viewed as column vectors).
+The trivialization extends to $E(U) \otimes \Omega_X(U) \to \Ocal_X(U) \otimes \Omega_X^1(U)$ by functorality of the tensor product and we will abusively also denote this isomorphism by $\psi$. 
+We now have a square,
+$$\begin{tikzcd}[contains/.style = {draw=none,"\in" description,sloped}]
+s=f^is_i \arrow[dd,mapsto] \arrow[dr, contains] \arrow[rr,mapsto]& & \nabla(s) \arrow[d,contains] \\ 
+& E(U) \arrow[r, "\nabla"] \arrow[d,above,"\psi"]& \Omega_X(U) \otimes E(U)  \arrow[d, "\psi"]\\
+\begin{pmatrix}
+f^1 \\
+\vdots \\
+f^n 
+\end{pmatrix}\arrow[r,contains]& \Ocal_X(U)^{\oplus n} \arrow[r, "\nabla^{\psi}"] & \Omega_X(U) \otimes \Ocal_X(U)^{\oplus n}
+\end{tikzcd}$$
+where $\nabla^{\psi}$ denotes the connection in trivialized coordinates. 
+Examining the diagram we see that we have 
+$$ \psi(\nabla s) = \nabla^{\psi} \begin{pmatrix}
+f^1 \\
+\vdots \\
+f^n 
+\end{pmatrix},$$
+so it remains to compute what $\psi(\nabla(s))$ is.
+We get 
+\begin{align*}
+\nabla(s) &= df^i\otimes s_i + f^i \Gamma^j_{\ i \alpha} dt^{\alpha} \otimes s_j \\
+&\mapsto \psi(\nabla(s))  =df^i \otimes e_i + f^i \Gamma^j_{\ i \alpha} dt^{\alpha} \otimes e_j = \begin{pmatrix}
+df^1 \\
+\vdots \\
+df^n
+\end{pmatrix} + \omega \begin{pmatrix}
+f^1 \\
+\vdots \\
+f^n
+\end{pmatrix}
+\end{align*}
+where we have written
+$$ f^i \Gamma^j_{\ i \alpha} dt^{\alpha} \otimes e_j= \omega \begin{pmatrix}
+f^1 \\
+\vdots \\
+f^n
+\end{pmatrix}, \quad \omega = A_{\alpha} dt^{\alpha}, \quad A_{\alpha} = (\Gamma^j_{\ i \alpha}).$$
+We summarize the above discussion with the following lemma.
+\begin{lemma}
+	If $E$ is a rank $n$ vector bundle on an $m$-dimensional complex manifold and $U \subset X$ is an open subset such that $X$ has local coordinates $t^1,\ldots,t^m$ and local basis $s_1,\ldots,s_n$ then in local coordinates  $\nabla_{\alpha}:\Ocal_X(U)^{\oplus n} \to \Ocal_X(U)^{\oplus n}$ takes the form
+	$$ \nabla_{\alpha} = \partial_{\alpha} + A_{\alpha},$$
+	where $A_{\alpha} = (\Gamma^j_{\ i \alpha})$ and elements of $\Ocal_X(U)^{\oplus n}$ are viewed as column vectors.
+	In Einstein notation
+	$$ \nabla_{\alpha} f^i = \partial_{\alpha}(f^i) + \Gamma^i_{\ j \alpha}f^j.$$
+\end{lemma}
+
+The matrix of $1$-forms $\omega$ is called the connection 1-form and we record this in a definition environment for those browsing looking for the definition.
+\begin{definition}
+	The matrix $\omega = A_{\alpha}dt^{\alpha} \in \Omega_X(U)\otimes \Ocal_X(U)^{\oplus n}$ is called a \emph{connection 1-form}.
+\end{definition}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Curvature}
+%%%%%%%%%%%%%%%%%%%%%%%
+We keep our notation as in the previous section.
+We will let $E$ be a rank $n$ vector bundle on an $m$-dimensional complex manifold and let $U$ be an open subset of $X$ which admits local coordinate $t^{\alpha}$ for $X$ and a local basis $s_j$ for $E$.
+
+Recall that $\nabla$ tells us how to move on $E$ given movement on the base: to flow from $s_* \in E(U)$ to another point $s$ sufficiently near by along the direction of $\partial_{\alpha}$. 
+See figure~\ref{F:parallel-transport} for a picture of paths in an open set $U\subset X$ being lifted to paths in the vector bundle by solving differential equations.
+\begin{figure}[h]\label{F:parallel-transport}
+	\begin{center}
+		\includegraphics[scale=0.5]{parallel-transport.eps}
+	\end{center}
+	\caption{Movement in the base tells us how to move in the fibers by solving differential equations. The above figure shows paths in the space being transported to the vector bundle locally by solving differential equations.}
+\end{figure}
+
+We describe these equations.
+If $s_* = f^js_j$ then to we just solve 
+\begin{equation}\label{E:parallel-transport}
+\nabla_{\alpha} f^j = 0, \quad j=1,\ldots, n
+\end{equation}
+which is just a linear differential equation with only derivatives in $t^{\alpha}$ appearing. 
+Note that this is just an equation of the form 
+$$ \dfrac{\partial Y}{\partial t^{\alpha}} = -A_{\alpha}(t) Y, $$
+which we are very familiar with by now.
+The two expressions are related by letting $Y = (f^1,\ldots,f^n)$ and viewing it as a column vector.
+
+There are some natural questions that come up when thinking about this transport of motion on the base to motion on the fiber.
+\begin{problem}[Integrability Problem]
+	Is it possible to solve all of our equations \eqref{E:parallel-transport} at once (i.e. simultaneously for $\alpha=1,\ldots,m$)? 
+\end{problem}
+If this is possible we call the connection \emph{integrable}.
+\begin{problem}[Curvature Problem]
+	Is moving the direction of $t^{\alpha}$ then moving in the direction of $t^{\beta}$ the same as moving in the direction of $t^{\beta}$ then moving in the direction of $t^{\alpha}$?
+\end{problem}
+If this is the case we call the connection \emph{flat}.
+
+It turns out that flatness and integrability are really the same thing and that this condition is given $\nabla^2=0$ which is equivalent to vanishing the the curvature tensor.
+We will now explain.
+
+The integrability issue is the is saying that a solution of $\nabla_{\alpha}Y=0$ may not also be a solution of $\nabla_{\beta}Y=0$.
+The first eauation is an equation for $\partial_{\alpha} Y$ and the second equation is an equation for $\partial_{\beta}Y$. 
+It is not guaranteed that $\partial_{\alpha} \partial_{\beta}Y = \partial_{\beta}\partial_{\alpha} Y$. 
+When we can do this, the equation is integrable. 
+
+As lifting directions is really about general derivations, we formulate this commutation problem more generally.
+First recall that if $\theta_1,\theta_2 \in T_X$ then the commutator
+$$[\theta_1,\theta_2] = \theta_1 \theta_2 - \theta_2 \theta_1,$$
+is also a derivation.
+This is part of the fact that $T_X$ is a sheaf of Lie algebras.
+The infinitesimal version of the curvature problem (taking the limit over small paths) leads to a ``curvature zero'' condition.
+\begin{problem}
+	When does $E$ have a well-defined structure of a $T_X$-module via $\nabla$. 
+	In other words, when is it the case that for all $\theta_1,\theta_2 \in T_X$ the following equation holds:
+	\begin{equation}\label{E:commutation}
+	[\nabla_{\theta_1},\nabla_{\theta_2}] = \nabla_{[\theta_1,\theta_2]}?
+	\end{equation}
+\end{problem}
+
+The failure of  the commutation relation \eqref{E:commutation} is measured by the curvature tensor which we now define.
+\begin{definition}
+	The map $R_{\nabla}:T_X\otimes T_X \to \End(E)$ given by 
+	$$ R_{\nabla}(\theta_1,\theta_2)(s) = \nabla_{\theta_1}(\nabla_{\theta_2}(s)) - \nabla_{\theta_2}(\nabla_{\theta_1})(s) - \nabla_{[\theta_1,\theta_2]}(s) $$
+	is called the \emph{curvature tensor}.
+\end{definition}
+When the context is clear we will just use $R=R_{\nabla}$ so that we don't have to keep writing the subscript $\nabla$.
+In what follows we will soon see that $R$ as an alternative description in terms of  $\nabla^2$.
+To see that this even makes sense note that $\nabla^2:E \to \Omega^2_X\otimes E$.
+Hence $\nabla^2$ can eat two tangent vectors $\theta_1$ and $\theta_2$ and a section $s$ and spit out another section.
+The subsequet theorem will prove that for all $s\in E$ and $\theta_1,\theta_2 \in T_X$ we will have 
+$$ R(\theta_1,\theta_2)(s) = \langle \nabla^2(s), \theta_1 \wedge \theta_2 \rangle,$$
+where the pairing $\langle -,-\rangle$ is the one between $\Omega_X^2$ and $T_X\wedge T_X$.
+
+\begin{exercise}
+	In local coordinates $t^{\alpha}$ and $s_i$ find an expression for $R_{\nabla}(\partial_{\alpha},\partial_{\beta})(s_j)$ in terms of the Christoffel symbols.
+\end{exercise}
+
+We now can give our equations for integrability/flatness.
+
+\begin{theorem}[Integrability Conditions]\label{T:integrability-conditions}
+	Let $E$ be a vector bundle of rank $n$ on a complex manifold $X$.
+	Let $\nabla$ be a connection on $E$.
+	The following are equivalent:
+	\begin{enumerate}
+		\item \label{I:nabla-squared}Iterating $\nabla$ twice is zero: $\nabla^2=0$.
+		\item \label{I:vanishing-curvature} The curvature tensor is identically zero: $R_{\nabla}=0$.
+		\item \label{I:connection-one-form} For every set of local coordinate so that $\nabla = d+\omega$ locally with $\omega$ a connection one form with respect to these coordinates we have 
+		$$ d(\omega) + \omega \wedge \omega =0.$$
+		\item \label{I:potentials} For every set of local coordinate so that $\nabla = d+\omega$ with $\omega = A_{\alpha} dt^{\alpha}$ and $A_{\alpha} \in M_n(\Ocal_X(U))$ one has 
+		$$ \dfrac{\partial A_{\alpha}}{\partial t^{\beta}}- \dfrac{\partial A_{\beta}}{\partial t^{\beta}} = -[A_{\alpha},A_{\beta}].$$
+	\end{enumerate}
+	More generally 
+	$$d(\omega) + \omega \wedge \omega= G_{\alpha\beta} \ dt^{\alpha}\wedge dt^{\beta}, \quad G_{\alpha\beta} = \frac{1}{2}\left(  \partial_{\alpha} A_{\beta} - \partial_{\beta} A_{\alpha} + [A_{\alpha},A_{\beta}]\right)$$
+	 is a local expressions of the curvature $2$-form.
+\end{theorem}
+\begin{proof}
+	We will first prove \eqref{I:vanishing-curvature} if and only if \eqref{I:potentials}.
+	Let $U\subset X$ be an open set with coordinates $t^{1},\ldots,t^m$ and where $E(U)$ is has a basis $s_1,\ldots,s_n$. 
+	Since every expression of $R(\theta_1,\theta_2)$ can be expressed in terms of $R(\partial_{\alpha},\partial_{\beta})$, we just need to compute $R(\partial_{\alpha},\partial_{\beta})$.
+	The following computation is a Weyl algebra computation (meaning everything is viewed as an operator).
+	Importantly, for a matrix $A$ and a derivative $\theta$ we have $\theta A = A\theta + \theta(A)$ there $\theta(A)$ denotes the application of $\theta$ to the entries of $A$ and $\theta A$ means the application of $A$ and an operator followed by $\theta$ as an operator.
+	\begin{align*}
+	R(\partial_{\alpha},\partial_{\beta}) =& \nabla_{\alpha}\nabla_{\beta} - \nabla_{\beta}\nabla_{\alpha} - \nabla_{[\partial_{\alpha},\partial_{\beta}]} \\
+	=&\nabla_{\alpha}\nabla_{\beta} - \nabla_{\beta}\nabla_{\alpha} \\
+	=&(\partial_{\alpha}+A_{\alpha})(\partial_{\beta} + A_{\beta}) - (\partial_{\beta}+A_{\beta})(\partial_{\alpha} + A_{\alpha}) \\
+	=& (\partial_{\alpha} A_{\beta} +A_{\alpha}\partial_{\beta}) + A_{\alpha}A_{\beta} + \partial_{\alpha} \partial_{\beta}- \left( (\partial_{\beta} A_{\alpha} +A_{\beta}\partial_{\alpha}) + A_{\beta}A_{\alpha} + \partial_{\beta} \partial_{\alpha} \right) \\
+	=& [A_{\alpha},A_{\beta}] + A_{\alpha} \partial_{\beta}-A_{\beta}\partial_{\alpha} \\
+	& + A_{\beta}\partial_{\alpha} + \partial_{\alpha}(A_{\beta}) \\
+	& + A_{\alpha} \partial_{\beta} + \partial_{\beta}(A_{\alpha}) \\
+	=& \partial_{\alpha}(A_{\beta}) - \partial_{\beta}(A_{\alpha}) + [A_{\alpha},A_{\beta}].
+	\end{align*}
+
+	This implies (in coordinates) 
+	$$ R(\partial_{\alpha},\partial_{\beta})=\partial_{\alpha}(A_{\beta}) - \partial_{\beta}(A_{\alpha}) + [A_{\alpha},A_{\beta}].$$
+	
+	Let's see that \eqref{I:connection-one-form} and \eqref{I:potentials} are equivalent. 
+	We recall that locally $\omega=A_{\alpha}dt^{\alpha}$. 
+	We will compute $d\omega + \omega\wedge \omega$.
+	
+	In what follows we are going to use the following trick: if $H_{\alpha\beta}$ is an antisymmetric tensor, e.g. there is some free $R$-modules $V$ with a basis $v^{\alpha}$ such that $H_{\alpha\beta} v^{\alpha}\wedge v^{\beta} \in V\wedge V$ then $H_{\alpha\beta} = -H_{\beta\alpha}$ and 
+	$$H_{\alpha\beta} = \frac{1}{2}(H_{\alpha\beta} - H_{\beta\alpha} ).$$
+	This will be used when we compute coefficients of differential forms ``coordinate tensor'' is not alternating. 
+	You can just antisymmetrize.
+	If you don't understand what this means now, it should become apparent in the following computation.
+	
+	Write $\omega = A_{\alpha} dt^{\alpha}$ hence in local coordinates.
+	We compute:
+	\begin{align*}
+	\omega \wedge \omega &= A_{\alpha} \ dt^{\alpha} \wedge A_{\beta}\ dt^{\beta} 
+	= A_{\alpha} A_{\beta} \ dt^{\alpha} \wedge dt^{\beta} =\frac{1}{2} (A_{\alpha} A_{\beta} - A_{\beta} A_{\alpha}) \ dt^{\alpha}\wedge dt^{\beta}\\
+	d(\omega) &= d (A_{\beta} \ dt^{\beta}) = \dfrac{\partial A_{\beta}}{\partial t^{\alpha}}\ dt^{\alpha} \wedge dt^{\beta} =  \frac{1}{2}\left(\dfrac{\partial A_{\beta}}{\partial t^{\alpha}}-\dfrac{\partial A_{\alpha}}{\partial t^{\beta}} \right )\ dt^{\alpha}\wedge dt^{\beta} 
+	\end{align*}
+	which gives our desired identity.
+	
+	We will now show the computation $\nabla^2=0$ in \eqref{I:nabla-squared} equivalent to $d\omega + \omega\wedge \omega=0$ in \eqref{I:connection-one-form}.
+	The key idea is to use the relations for the Weyl algebra of the exterior algebra (Lemma~\ref{L:exterior-weyl-algebra}).
+	As elements of $R[d]$ where $R = M_n(\Omega_X^{\bullet})$ we have 
+	\begin{align*}
+	\nabla^2 =& (d+\omega)(d+\omega) = d^2+\omega\wedge d + d\omega + \omega \wedge \omega \\
+	&= \omega \wedge d + (d(\omega) - \omega \wedge d ) + \omega \wedge \omega \\
+	&= d(\omega) + \omega \wedge \omega.
+	\end{align*}
+	This proves the desired equality.
+\end{proof}
+
+%See Theorem~\begin{T:frobenius-integrability}.
+
+
+\begin{exercise}
+	Photons are the force carrying particles for the electro-magnetic force field (changes in force are mediated by the emission of light). 
+	In this exercise the speed of light will be $c=1$.
+	Space time is encoded by a manifold $X$ and the vector bundle is rank one corresponding to the Lie algebra of $U(1)$. 
+	In local coordinates (some chart of spacetime) we let $E=(E_1,E_2,E_3)$ denote a electric field and $B=(B_1,B_2,B_3)$ denote a magnetic field. 
+	Both $E$ and $B$ are functions of $(t,x,y,z)$.
+	They are encoded in the Faraday tensor $F\in \Omega^2_X$ given by 
+	$$F= E_1dx \wedge dt + E_2\ dy \wedge dt + E_3 dz \wedge dt + B_1 dy \wedge dz + B_2 dz \wedge dx + B_3 dx \wedge dy.$$
+	If we order the variables $(x^0,x^1,x^2,x^3)=(t,x,y,z)$ then Faraday tensor is $F_{\mu\nu} = \partial_{\mu}A_{\nu}-\partial_{\nu}A_{\mu}$ is  or as an antisymmetric matrix is
+	$$(F_{\mu\nu})=\begin{bmatrix}
+	0     &  E_1 &  E_2 &  E_3 \\
+	-E_1 &  0     & -B_3   &  B_2    \\
+	-E_2 &  B_3  &  0     & -B_1  \\
+	-E_3 & -B_2   &  B_1  &  0
+	\end{bmatrix}.$$
+	Since we are in rank one everything commutes and there is nothing really interesting to say about the curvature equations. 
+	Maxwell's equations become $dF=0$.
+\end{exercise}
+
+I'm tempted to put an exercise about Yang-Mills equations here but haven't done so. 
+Perhaps you should just google these now and see all of these curvature tensors appearing everywhere.
+
+\section{Plemelj's Construction}
+
+\section{Holomorphic Riemann-Hilbert Correspondence}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1582,8 +2169,13 @@ with $P(u,v,w) \in \CC[x,y,z]$ admit meromorphic solutions $y(t)$ which have the
 \end{problem}
 The Poincar\'e-Fuchs theorem states that the only equations of this form are 1) Ricatti equations and 2) Weierstrass equations. 
 We are going to give two proofs of this. 
-The first is foliation-theoretic and the second is differential algebraic. 
+The first is foliation theoretic and the second is differential algebraic. 
 
+\section{Differential Equations from the Foliation-Theoretic Perspective}
+
+\subsection{Exterior Differential Systems}
+
+\subsection{Comparison to $\Delta$-Schemes}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1597,6 +2189,7 @@ This section is motivated by the following problem.
 	Can the function $\int e^{x^2} dx$ be written in terms of elementary functions?
 \end{problem}
 In order to address this we need to talk about what an elementary function is. 
+We also need to talk about what a special function is. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1606,11 +2199,25 @@ In order to address this we need to talk about what an elementary function is.
 
 This section is motivated by the following problem.
 \begin{problem}
-	Which differential equations 
-	 $$ \dfrac{dy}{dx} = \frac{a(x,y)}{b(x,y)}, $$
-	 for $a(x,y),b(x,y) \in \CC[x,y]$ admit algebraic solutions?
+	Consider differential equations of the form
+	 $$ \dfrac{dy}{dx} = \frac{a(x,y)}{b(x,y)}, \quad a(x,y),b(x,y) \in \CC[x,y].$$
+	 For which $a(x,y),b(x,y) \in \CC[x,y]$ does the equation admit algebraic solutions?
 \end{problem}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter[Dimension Theory]{Dimension Theory}\label{S:dimension-theory}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+This section is motivated by the following problem.
+\begin{problem}
+	Let $(K,\Delta)$ be a $\Delta$-field. 
+	Let $u_1,\ldots,u_n \in K\lbrace x_1,\ldots,x_n\rbrace_{\Delta}$ and consider the system of PDEs
+	 $$ u_1=u_2=\cdots=u_n=0. $$
+	How many constants of integration does a general solution of this equation need?
+\end{problem}
 
 \appendix 
 \chapter[Analytic Elements]{Analytics Elements of Differential Equations}
