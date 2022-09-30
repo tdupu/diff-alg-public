@@ -87,6 +87,7 @@
 \newcommand{\End}{\operatorname{End}}
 
 \newcommand{\QQbar}{\overline{\mathbb{Q}}}
+\newcommand{\Cont}{\operatorname{Cont}}
 
 
 
@@ -168,6 +169,11 @@ It may be that I don't get anywhere on any of this material and we spend 3 month
 We'll see. 
 %At the end of all of this there is going to be many course that could be taught using this book.
 
+\iffalse
+\section{A Note After Fall 2022} 
+There is a manuscript by Manin \cite{Manin1978} which also attempts to unify differential algebraic and foliation theoretic perspectives on differential equations.
+
+\fi
 
 
 \section{Where can I get a digital copy of these notes?}
@@ -271,7 +277,6 @@ In this chapter we are going to move towards Hilbert's 21st problem and some of 
 
 \section{The Monodromy Representation}
 In this section we develop some basic tools we need to construct a monodromy representation associated to a linear differential equation on $\PP^1$.
-\taylor{Finish}
 
 \subsection{Wronskians}
 
@@ -445,6 +450,11 @@ where
  $$
 Here $A$ is just the transpose of a companion matrix. 
 We will often convert between higher order equations and first order equations in this way. 
+
+\begin{remark}
+	In the case of linear differential equations there is a way of going backwards using cyclic vectors. 
+	That is, most first order linear systems of differential equations  $n$ variables in one derivative can be converted into a order $n$ equation in $n$ dependent variables. 
+\end{remark}
 
 \subsection{Linear Systems}
 Let $A \in M_n(R)$ where $R$ is a differential ring.  
@@ -834,7 +844,7 @@ In 1907 Plemelj\footnote{Nalini Joshi pronounces this ``Plum-ell-i'', I'm not su
 In 1983, Treibich-Koch published a gap in the proof; it turns out that previous work from Dekkers in 1979 implies that the map is indeed surjective in the rank two case. 
 Finally, in 1990, Bolibruch showed that the map is not surjective in rank higher than two disproving the conjecture.
 
-\taylor{EXPAND}
+
 
 %%%%%%%%%%%%%%%%
 \subsection{Representations of $\pi_1(\PP^1\setminus T)$}
@@ -1976,7 +1986,7 @@ We summarize the above discussion with the following lemma.
 
 The matrix of $1$-forms $\omega$ is called the connection 1-form and we record this in a definition environment for those browsing looking for the definition.
 \begin{definition}
-	The matrix $\omega = A_{\alpha}dt^{\alpha} \in \Omega_X(U)\otimes \Ocal_X(U)^{\oplus n}$ is called a \emph{connection 1-form}.
+	The matrix $\omega = A_{\alpha}dt^{\alpha} \in M_n(\Omega_X(U))$ is called a \emph{connection 1-form}.
 \end{definition}
 
 
@@ -1992,13 +2002,15 @@ See figure~\ref{F:parallel-transport} for a picture of paths in an open set $U\s
 	\begin{center}
 		\includegraphics[scale=0.5]{parallel-transport.eps}
 	\end{center}
-	\caption{Movement in the base tells us how to move in the fibers by solving differential equations. The above figure shows paths in the space being transported to the vector bundle locally by solving differential equations.}
+	\caption{Movement in the base tells us how to move in the fibers by solving differential equations. The figure shows paths in the space being transported to the vector bundle locally by solving differential equations.}
 \end{figure}
 
 We describe these equations.
 If $s_* = f^js_j$ then to we just solve 
 \begin{equation}\label{E:parallel-transport}
-\nabla_{\alpha} f^j = 0, \quad j=1,\ldots, n
+\nabla_{\alpha} \begin{pmatrix} f^1 \\
+\vdots \\
+f^n  \end{pmatrix} = 0,
 \end{equation}
 which is just a linear differential equation with only derivatives in $t^{\alpha}$ appearing. 
 Note that this is just an equation of the form 
@@ -2019,12 +2031,13 @@ If this is the case we call the connection \emph{flat}.
 It turns out that flatness and integrability are really the same thing and that this condition is given $\nabla^2=0$ which is equivalent to vanishing the the curvature tensor.
 We will now explain.
 
-The integrability issue is the is saying that a solution of $\nabla_{\alpha}Y=0$ may not also be a solution of $\nabla_{\beta}Y=0$.
-The first eauation is an equation for $\partial_{\alpha} Y$ and the second equation is an equation for $\partial_{\beta}Y$. 
+The integrability issue is the concern that a solution of $\nabla_{\alpha}Y=0$ may not also be a solution of $\nabla_{\beta}Y=0$.
+The first equation is imposes a formula for $\partial_{\alpha} Y$ and the second equation imposes a formula for $\partial_{\beta}Y$. 
 It is not guaranteed that $\partial_{\alpha} \partial_{\beta}Y = \partial_{\beta}\partial_{\alpha} Y$. 
-When we can do this, the equation is integrable. 
+When we can do this, the equations (or connection) is integrable. 
 
-As lifting directions is really about general derivations, we formulate this commutation problem more generally.
+As lifting paths is really about general derivations/vector fields.
+We now formulate this commutation problem more generally.
 First recall that if $\theta_1,\theta_2 \in T_X$ then the commutator
 $$[\theta_1,\theta_2] = \theta_1 \theta_2 - \theta_2 \theta_1,$$
 is also a derivation.
@@ -2050,7 +2063,7 @@ To see that this even makes sense note that $\nabla^2:E \to \Omega^2_X\otimes E$
 Hence $\nabla^2$ can eat two tangent vectors $\theta_1$ and $\theta_2$ and a section $s$ and spit out another section.
 The subsequet theorem will prove that for all $s\in E$ and $\theta_1,\theta_2 \in T_X$ we will have 
 $$ R(\theta_1,\theta_2)(s) = \langle \nabla^2(s), \theta_1 \wedge \theta_2 \rangle,$$
-where the pairing $\langle -,-\rangle$ is the one between $\Omega_X^2$ and $T_X\wedge T_X$.
+where the pairing $\langle -,-\rangle$ is between $\Omega_X^2$ and $T_X\wedge T_X$.
 
 \begin{exercise}
 	In local coordinates $t^{\alpha}$ and $s_i$ find an expression for $R_{\nabla}(\partial_{\alpha},\partial_{\beta})(s_j)$ in terms of the Christoffel symbols.
@@ -2151,9 +2164,156 @@ Perhaps you should just google these now and see all of these curvature tensors 
 
 \section{Plemelj's Construction}
 
-\section{Holomorphic Riemann-Hilbert Correspondence}
+\section{Riemann-Hilbert Correspondences}\label{S:rhcs}
+By \emph{a} Riemann-Hilbert correspondence we will mean a theorem which gives some equivalence between a category of differential equations of some flavor with a category of representations of fundamental groups of some flavor. 
+This may not even be a functor but just a bijection of particular sets of some property. 
+
+The general strategy for a functorial version is to have some category of connections or differential equations on some space $X$ which we will call $\Conn(X)$ (e.g. holomorphic connections, Fuchsian connections, holomorphic systems, Fuchsian systesm, holonomic $D$-modules), a category of local systems $\LocSys(X)$ (essentially solutions of the differential equations, perverse sheaves), and a category of representations of the fundamental group $\Repn(X)$. 
+
+The idea is then to pass from differential equations to representations through ``local systems''.
+\begin{equation}
+\Conn(X) \cong \LocSys(X) \cong \Repn(X) .
+\end{equation}
+
+Before going any further we describe what a local system is. 
+This conversation continues in section \ref{S:rhc-strat} which the reader should feel free to skip immediately to on the first reading. 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Local Systems and Representations of $\pi_1(X)$}
+%%%%%%%%%%%%%%%%%%%%%%%
+In this section we are going to introduce the notion of a local system and then prove that the category of local systems on $X$ is equivalent to the category of finite dimensional representations of the fundamental group. 
+
+Along the way we are going to work out what happens with the holomorphic differential equations on $\PP^1\setminus S$ where $S$ is a finite collection of points. 
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Local Systems}
+%%%%%%%%%%%%%%%%%%%%%%%
+In what follows we will let $X$ be a topological space. 
+For a ring or abelian group $K$ we will let $\underline{K}_X$ be the sheaf associated to the presheaf  constant presheaf defined by 
+$$ U\mapsto F(U) = \begin{cases}
+K, & U\neq \emptyset ,\\
+0, & U = \emptyset 
+\end{cases}$$
+The presheaf is not a sheaf because it is possible for there to be two disjoint open sets $U_1$ and $U_2$ which means that any element $a \in F(U_1)$ and $b\in F(U_2)$ agree on their restriction but don't lift to a common element in $F(U_1 \cup U_2)$.
+This is fixed by allowing for elements ``like'' $a\oplus b \in \underline{K}_X(U_1 \cup U_2)$  so that the sheaf axioms are satisfied. 
+On topological spaces (as opposed to general sites) then $\underline{K}_X(U) = \operatorname{Cont}(U, K)$, the collection of continuous map from $U$ to $K$ where $K$ is given the discrete topology.
+
+\begin{definition}
+	Let $X$ be a topological space and let $K$ be a field. 
+	A \emph{$K$-local system} over $X$ is a sheaf $L$ valued in finite dimensional $K$-vector spaces such that $L \cong \underline{K}_X$ locally. 
+\end{definition}
+This forms a category and morphisms are morphism of sheaves of $\CC$-linear vector spaces. 
+The main example comes from solutions of differential equations. 
+Consider the first order holomorphic system defined on $U \subset \CC$, given by 
+$$ Y' = A(t) Y, \quad A \in M_n(\hol(U)).$$
+For every $V \subset U$ open define  
+$$ L(V) = \lbrace Y \in \hol(U)^{\oplus n} \colon Y' = A(t) Y \rbrace.$$
+We know that at each $t_0 \in U$ we have an isomorphism 
+$$ \lbrace Y \in \CC\langle t-t_0 \rangle^{\oplus n} \colon Y'=AY \rbrace \cong \CC^n $$
+since solutions form a finite dimernsional $\CC$-vector space. 
+By considering representatives of each basis element in $\CC\langle t-t_0 \rangle^{\oplus n}$ we know that there exists some $V \subset U$ containing $t_0$ where 
+$$ L(V) \cong \CC^{\oplus n}.$$
+This proves that $L$ is a local system. Note in particular that 
+$$ L(V) = \Phi_V \cdot \CC^{\oplus n } $$
+where $\Phi_V$ is a fundamental matrix valid on $V \subset U$. 
+
+\begin{exercise}
+	The category $\LocSys(X)$ makes sense and for every $f:X\to Y$ one has an induced functor $f^*:\LocSys(X) \to \LocSys(Y)$.
+\end{exercise}
+
+
+\subsection{Representations Associated to Local Systems}
+Let $X$ be a topological space which is connected and locally path connected so that $\pi_1(X,x_0)$ makes sense. 
+Let $L$ be a local system on $X$ and let $\gamma:[0,1] \to X$ be a continuous path contained in $X$. 
+Then $\gamma^*L$ is a local system on $[0,1]$ which is trivial. 
+Furthermore every germ $v \in (\pi^*L)_0$ extends uniquely to $(\gamma^*L)([0,1])$ via monodromy.
+In particular there is a morphism 
+$$ M_{\gamma}: (\gamma^*L)_0 \to (\gamma^*L)_1.$$
+Since $(\gamma^*L)_t \cong L_{\gamma(t)}$ for each $t$ if $\gamma$ is a closed path starting and ending at $x_0\in X$ then $(\gamma^*L)_0 \cong L_{\gamma(0)} \cong L_{x_0} \cong L_{\gamma(1)} \cong (\gamma^*L)_1$.
+This then means that $M_{\gamma}$ induces an automorphism of $L_{x_0}$
+This defines the representation associated to the pair $(L,x_0)$ consisting of a local system $L$ and a point $x_0 \in X$
+\begin{definition}
+	The \emph{monodromy representation} associated to the $(L,x_0)$ is 
+	$$\rho_{(L,x_0)}: \pi_1(X,x_0) \to \Aut(L_{x_0}), \quad \gamma \mapsto M_{\gamma}, $$
+	as described above. 
+\end{definition}
+
+\subsection{Representation from Local System = Monodromy Representation}
+Recall that the category of $K$-representations of a group $\Pi$ is the category of $K[\Pi]$-modules and when we talk about two representations being isomorphic we talk about them being isomorphic as $K[\Pi]$-modules. 
+We are interested in the case when $\Pi = \pi_1(U,t_0)$ for some $U\subset \CC$. 
+
+\begin{theorem}
+	Consider a holomorphic system on $U\subset \CC$ of the form 
+	$$ Y' = A(t) Y, \quad A(t) \in M_n(\hol(U)). $$
+	Let $L_A$ be the local system associated to this system. 
+	Let $\rho_A$ be the monodromy representation associated to the fundamental matrix $\Phi(t)$ satisfying $\Phi(t_0)=I_n$. 
+	Then $\rho_{L_A,t_0} \cong \rho_A$ as reprentations of $\pi_1(U,t_0)$.
+\end{theorem}
+\begin{proof}
+	Our aim is to compute $\rho_{L_A}$ (we will drop the base point $t_0$ from the notation for convenience). 
+	At a point $t_1\in U$ along a curve $\gamma_1$ starting at $t_0$ and ending at $t_1$ we have 
+	$$ \Phi_{\gamma_1} \CC^n \cong L_{A,t_1},$$
+	where $\Phi_{\gamma} \in \GL_n(\CC\langle t-t_1\rangle)$ is the local fundamental matrix. 
+	The representation associated to the local system gives 
+	$$\begin{tikzcd}
+	\CC^n & \arrow[l, "\Phi ^{-1}"] \Phi \CC^n \arrow[r] & \Phi_{\gamma} \CC^n \arrow[r, "\Phi_{\gamma}^{-1}"] & \CC^n  \\
+	& (\gamma^*L_A)_0 \ar[u, equal] & (\gamma^*L_A)_1 \ar[u, equal]& 
+	\end{tikzcd}
+	$$
+	Here $v= \Phi c \mapsto \Phi_{\gamma} c = \Phi M_{\gamma} c$ implies that $\Phi M_{\gamma} \Phi^{-1}$ is the action on the stalk. 
+	In triviallized coordinates we have 
+	$$ v \mapsto \Phi v \mapsto \Phi M_{\gamma} \Phi^{-1} \Phi v \mapsto \Phi_{\gamma}^{-1} M_{\gamma} v \mapsto M_{\gamma}^{-1} \Phi M_{\gamma} v.$$
+\end{proof}
+
+Let $\Pi$ be a group. 
+We will let $\Mod^{\fin}_{\CC[\Pi]}$ denote the category of $\CC[\Pi]$-modules which are finite dimensional as $\CC$-vector spaces. 
+We will often conflate a representation $\rho: \Pi \to \GL(V)$ with its underlying  $\CC[\Pi]$-module, which we also denote by $V$.  
+
+\begin{theorem}
+	Let $X$ be a topological space which admits a fundamental group and let $\Pi = \pi_1(X,x_0)$ for $x_0\in \CC$. 
+	The category of local systems on $X$ is equivalent to the category of finite dimensional complex representations of the fundamental group 
+	$$ \LocSys(X) \xrightarrow{\sim} \Mod_{\CC[\Pi]}^{\fin}, \quad L \mapsto \rho_{L,x_0}.$$
+\end{theorem}
+\begin{proof}[Proof Sketch]
+	The quasi-inverse is given by the so-called suspension construction. 
+	Let $\Pi = \pi_1(X,x_0)$
+	Let $\rho: \Pi \to \GL(V)$ be a finite dimensional complex representation of $\Pi$.
+	Let $f: \widetilde{X} \to X$ be the universal cover of $X$. 
+	Note that we have an action of $\Pi$ on both $\widetilde{X}$ and on $V$ and hence on the complex manifold $\widetilde{X}\times V$ where the action is given by 
+	$$(\gamma, (\widetilde{x},v))\to (\gamma(\widetilde{x}), \rho(\gamma)(v)).$$
+	Note that since the action by deck transformations preserves fibers of $f$ we have that $\Pi$ also acts on $f^{-1}(U) \times V$ for every open subset $U \subset X$. 
+	
+	Define the constant sheaf $ \widetilde{L} = \underline{V}_{\widetilde{X}}.$
+	We claim the total space of this constant sheaf is $\widetilde{X}\times V$ provided we give $V$ the discrete topology; that is, for every $\widetilde{U} \subset \widetilde{X}$ there is a bijection (see exercise~\ref{EX:total-space})
+	\begin{equation}\label{E:total-space}
+	\widetilde{L}(\widetilde{U})  \cong \lbrace \mbox{sections of $\pi_1: \widetilde{X}\times V \to \widetilde{X}$ above $\widetilde{U}$ } \rbrace.
+	\end{equation}
+	Hence there is an action of  $\Pi$ on $(f_*\widetilde{L})(U)$ for every $U$ subset $X$ and it makes sense to define $L(U)$ by the formula 
+	$$ L(U) = (f_*\widetilde{L})(U)^{\Pi}. $$
+	We claim that this is the local system with the corresponding monodromy represenation.
+\end{proof}
+
+\begin{exercise}\label{EX:total-space}
+	In this exercise $M$ will be a topological space where fundamental groups make sense.\footnote{path connected, locally path connected}. 
+	We will let $\Pi = \pi_1(M,x_0)$ for $x_0\in M$ some base point.  	\taylor{I need to check this.}
+	\begin{enumerate}
+		\item Let $A$ be an abelian group.
+		Show that the constant sheaf $\underline{A}$ on $M$ is the same thing as the sheaf  $$U\mapsto\Cont(U,A), \quad U \subset M \mbox{ open }$$ 
+		where $\Cont$ denotes continuous maps if $A$ is given the discrete topology. 
+		\item Check \eqref{E:total-space} regarding the description of the total space of the local system.
+	\end{enumerate}
+\end{exercise}
+%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Strategy for Proving a Riemann-Hilbert Correspondence}\label{S:rhc-strat}
+%%%%%%%%%%%%%%%%%%%%%%%
+In this section we are going to let $X$ be a space and let $\Conn(X)$ be some yet-to-be-specified category of  ``connections'' or ``differential equations'' as we did in the introduction to \ref{S:rhcs}.
+We will let $\LocSys(X)$ denote the category of finite dimensional local systems on $X$ and let $\Repn(X)$ denote the category of finite dimensional representations of $\pi_1(X)$. 
+
+As stated at the beginning of  \ref{S:rhcs}, the functorial version of Riemann-Hilbert correspondences go through local systems:
+$$\Conn(X) \cong \LocSys(X) \cong \Repn(X) .$$
+The equivalence between local systems and representations is very general. 
+Also, in the case of holomorphic connections the equivalence to local systems can be described easily.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2164,18 +2324,34 @@ Perhaps you should just google these now and see all of these curvature tensors 
 This section is motivated by the following problem.
 \begin{problem}
 Which ordinary differential equations of the form
-	  $$ P(t,y,y') =0 $$
+	  $$ P(t,y,y') =0, $$
 with $P(u,v,w) \in \CC[x,y,z]$ admit meromorphic solutions $y(t)$ which have the property that $y(t)$ has no-movable singularities? 
 \end{problem}
 The Poincar\'e-Fuchs theorem states that the only equations of this form are 1) Ricatti equations and 2) Weierstrass equations. 
 We are going to give two proofs of this. 
 The first is foliation theoretic and the second is differential algebraic. 
+The foliation theoretic proof is 
 
-\section{Differential Equations from the Foliation-Theoretic Perspective}
+A basic reference for the foliation theoretic proof is Pan and Sebastian \cite{Pan2004}.
+There is also a great \href{https://www.youtube.com/watch?v=DoCCm8zjvXQ&list=PL0E0n75oNCDk5tuV-t2_K56sEfLd0Od8H&index=21}{YouTube Lecture} by Loray on the topic. 
 
-\subsection{Exterior Differential Systems}
+A basic reference for the differential algebraic proof is Matsuda's book \cite{Matsuda1980} and is based of his paper \cite{Matsuda1978}.
+I will follow the treatment from Buium's book \cite{Buium1986} where he further develops this theory in higher dimensions.
 
-\subsection{Comparison to $\Delta$-Schemes}
+Both \cite{Pan2004} and \cite{Matsuda1978} give with the stated goal of making Poincar\'e's original proof rigorous. 
+See \cite{Matsuda1978} for details.
+%There is a recurring theme of mistakes in differential algebra bring corrected. Painlev\'e Gambier, Poincare Matsuda/Pain, Manin/Coleman/Chai,  
+
+
+%H. Poincaré, C.R. Acad. Sci. Paris 99 (1885), 75–77; JFM 16.0250.01] and [H. Poincaré, Acta Math. 7 (1885), 1–32; JFM 17.0279.01]
+
+
+
+%\section{Differential Equations from the Foliation-Theoretic Perspective}
+
+%\subsection{Exterior Differential Systems}
+
+%\subsection{Comparison to $\Delta$-Schemes}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
