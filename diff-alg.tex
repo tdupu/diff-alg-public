@@ -88,6 +88,7 @@
 
 \newcommand{\QQbar}{\overline{\mathbb{Q}}}
 \newcommand{\Cont}{\operatorname{Cont}}
+\newcommand{\Lie}{\operatorname{Lie}}
 
 
 
@@ -555,6 +556,43 @@ Hence by Lemma~\ref{L:linear-independence} we get that the solutions are linearl
  The matrix $$\Phi = [Y_1 \vert Y_2 \vert \cdots \vert Y_n ]$$ 
  is our fundamental system.
  \end{proof}
+
+\subsection{Restricting the Coefficient Matrix to a Lie Algebra}
+It will be conventient in the equation $ Y' = A Y $ to restrict the matrix $A$ to a particular Lie algebra $\Lie(G)$ of some Lie group $G$. 
+Here we recall that a Lie group (real or complex) is just a manifold (real of complex) with the structure of group. 
+\footnote{There are also algebraic group or group schemes but readers familiar with those already know all of this, so I'm going to not say anything about that as it will take us two far afield.}
+The Lie algebra of such a Lie group $\Lie(G)$ can be described either as the group of tangent vector at the identity of $G$ or as the globally invariant vector fields on $G$ (obtained by propagating the tangent vector at the tangent space at the identity to any other point of the manifold by pushforward by multiplication-by-$g$). 
+All Lie algebras come with a Lie bracket $(A,B) \mapsto [A,B]$ which is an infinitesimal version of the group multiplication. 
+It turns out that this multiplication satisfies the so-called Jacobi identity.
+The fundamental property of Lie algebras of Lie groups are that if $G$ is a matrix Lie group then
+ $$A\in \Lie(G) \implies e^A \in G.$$
+Table~\label{T:lie} gives some common Lie groups with their Lie algebras.
+As a sanity check not that if $A^*=-A$ then $(e^A)^* = e^{A^*}=e^{-A} = (e^{A})^{-1})$ so skew-adjoint matrices give rise to unitary matrices after exponentiation.
+\begin{table}\label{T:lie}
+	\begin{center}
+		\begin{tabular}{ccc}
+			type & Lie Group & Lie Algebra\\
+			\hline complex & $\GL_n(\CC)$ & $M_n(\CC)$ \\
+			real & $U_n$ unitary, $U^*=U^{-1}$ & skew-adjoint $A^*=-A$ \\
+			complex & $\SL_n(\CC)$, $\det(A)=1$ & trace free $\tr(B)=0$ 
+		\end{tabular}
+	\end{center}
+	\caption{Some common Lie groups and their Lie algebras.}
+\end{table}
+
+For the uninitiated we mention that we often axiomatize the notion of a Lie algebra as an $R$-module (or a functor to $R$-modules) which has a Lie bracket and satisfies the Jacobi identity axiom. 
+This is useful but not what we mean here. 
+The collection of abstract vector fields on a space (scheme, complex manifold, real manifold) satisfy these axioms for example and here the ring $R$ is a ring of functions on a space. 
+
+The main reason we mention Lie groups is because if we restrict our linear equations to have values in a Lie algebra, then the solution will be valued in a Lie group.
+\begin{theorem}
+	Consider $Y'(t)=A(t)Y(t)$. If $A(t)$ is valued in $\Lie(G)$ then any fundamental matrix will be valued in $G$. 
+\end{theorem}
+\begin{proof}
+	This is a consequence of Theorem~\ref{T:solutions}
+\end{proof}
+
+
 
 \subsection{Monodromy of Holomorphic Linear Systems}
 
@@ -1509,6 +1547,16 @@ If $\rho$ and $\mu$ are equal then we don't need to worry about this.
 If $\rho-\mu$ is negative then we don't need to worry about this. 
 If $\rho-\mu$ is positive then we can switch the role of $\rho$ and $\mu$ and again not worry about this. 
 
+We record the following for later use. 
+\begin{theorem}\taylor{Check and add. We might need to add more about formal power series solutions to do Stokes stuff later.}
+	More generally, in the non-resonant case one has a fundamental matrix of the form 
+	$$ \Phi(t) = \Psi(t) t^{A_0} $$
+	where $\Psi(t)$ is a matrix of formal power series. 
+	The matrix $\Psi(t)$ is convergent if $A(t)$ is convergent.
+\end{theorem}
+
+\subsection{Exponent Shifting}
+We record the following useful fact.
 \begin{lemma}[Exponent Shifting]\label{L:exponent-shifting}
 	The gauge transformation $Y=(t-t_0)^{\mu}\widetilde{Y}$ has the effect of $A(t)/(t-t_0)\mapsto \widetilde{A}(t)/(t-t_0)$ where $\widetilde{A}(t) = A(t)-\mu$.
 \end{lemma}
@@ -1750,6 +1798,7 @@ If $U$ is an open subset of $\PP^1$ then to take sections of this vector bundle 
 \end{remark}
 The comment about line bundles extends to vector bundles. 
 The obvious vector bundles we can think of are direct sums of line bundles. 
+These have transition matrices which are diagonal of the form $\operatorname{diag}(t^{d_1},t^{d_2},\ldots,t^{d_n}).$
 These turn out to be all of them.
 
 \begin{theorem}[Birkoff-Grothendieck]
@@ -1757,6 +1806,36 @@ These turn out to be all of them.
 	$$ \Ocal_{\PP^1}(d_1) \oplus \cdots \Ocal_{\PP^1}(d_n) $$
 	for some $d_1,d_2,\ldots,d_n \in \ZZ$.
 \end{theorem}
+\begin{proof}[Proof Reference and Sketch]
+	This can be found in \cite{Hazewinkel1982} which works algebraically over a general ring. 
+	By GAGA, that every algebraic vector bundle on $\PP^1$ (considered as a scheme) is equivalent to proving every holomorphic vector bundles on $\PP^1$ has this form.
+	
+	The prove relies on a matrix factorization theorem of Birkoff.
+	If $A \in \GL_n(\CC[t,t^{-1}])$ then there $BAC=D$ where $C=C(t)$ and $B=B(t^{-1})$  have entries in $\CC[t]$ and $\CC[t^{-1}]$ respectively and $D$ is diagonal with each entry of the form $t^s$ for some integer $s$.
+	
+	One works on two charts of $\PP^1$ and then factors the transition data using this theorem. 
+	This is a \v{C}ech cocycle classifying the vector bundle and has the appropriate diagonal form.
+	This proves the results.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Systems vs Connections}
+%%%%%%%%%%%%%%%%%%%%%%%
+Consider a vector bundle of rank $n$ with connection $(E,\nabla)$ on complex manifold $X$.
+In the special case that $E\cong \Ocal_X^{\oplus n}$ we often speak of a the connection as a \emph{system} since there is really no extra global information. 
+For non-compact Riemann surfaces all connections are really just systems.
+\begin{theorem}[Grauert-Röhrl Theorem]
+	Every holomorphic vector bundle of rank $n$ on a non-compact Riemann surface $X$ is isomorphic to $\Ocal_X^{\oplus n}$.
+\end{theorem}
+\begin{proof}[Proof Reference and Sketch]
+	This is \cite[Theorem 30.4]{Forster1981}.
+	The proof is by induction on the rank of the vector bundle. 
+	They show first that line bundles are trivial using the so-called Runge approximation theorem.
+	Then they do an explicit computation with \v{C}ech cocycles after appling the inductive hypothesis to reduce the transition functions to unipotent matrices. 
+	They then reduce further arguing about an additive \v{C}ech cocycle.
+\end{proof}
+
+This will mean that we don't need to worry about global information coming from the vector bundle when trying to establish a Riemann-Hilbert correspondence for log-connections on the projective line minus a finite set of points. 
 
 %%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Babymost case: Covariant Derivatives and Connections Associated to ODEs}
@@ -2295,8 +2374,9 @@ We will often conflate a representation $\rho: \Pi \to \GL(V)$ with its underlyi
 \end{proof}
 
 \begin{exercise}\label{EX:total-space}
+	\taylor{I need to check this.}
 	In this exercise $M$ will be a topological space where fundamental groups make sense.\footnote{path connected, locally path connected}. 
-	We will let $\Pi = \pi_1(M,x_0)$ for $x_0\in M$ some base point.  	\taylor{I need to check this.}
+	We will let $\Pi = \pi_1(M,x_0)$ for $x_0\in M$ some base point.  	
 	\begin{enumerate}
 		\item Let $A$ be an abelian group.
 		Show that the constant sheaf $\underline{A}$ on $M$ is the same thing as the sheaf  $$U\mapsto\Cont(U,A), \quad U \subset M \mbox{ open }$$ 
@@ -2314,6 +2394,171 @@ As stated at the beginning of  \ref{S:rhcs}, the functorial version of Riemann-H
 $$\Conn(X) \cong \LocSys(X) \cong \Repn(X) .$$
 The equivalence between local systems and representations is very general. 
 Also, in the case of holomorphic connections the equivalence to local systems can be described easily.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Isomonodromy}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Consider the case of a Fuchsian differential equation of rank 2 on $\PP^1$ with singular points at $\lbrace 0,1,\infty,x\rbrace$ for some variable $x\in \PP^1$ not equal to $0,1$ or $\infty$,
+$$\begin{cases}
+	  \dfrac{dY}{dt} = A(t,x) Y \\
+	  A(t,x) = \dfrac{A_0(x)}{t} +\dfrac{A_1(x)}{t-1} + \dfrac{A_2(x)}{t-x} 
+\end{cases}$$
+and define $A_{\infty}(x)$ by the equation $A_0+A_1+A_2 +A_{\infty}=0$.
+The matrices $A_j(x)$ we will assume depend holomorphically on the variable $x$ in some unspecified domain (we think of $x$ as varying a little bit around some $x_0$).
+We will often write $A_j=A_j(x)$ for short.
+We note that for a fixed $x=x_0$ the Fuchsian differential equation gives a monodromy representation. 
+Also, as we vary $x\in \PP^1\lbrace 0,1,\infty\rbrace$ the fundamental group does not change (see Figure~\ref{F:moving-point}).
+\begin{figure}[h]\label{F:moving-point}
+	\begin{center}
+		\includegraphics[scale=0.8]{moving-point.eps}
+	\end{center}
+\caption{Varying $x$ in $\PP^1\setminus\lbrace 0,1,\infty,x\rbrace$ does not change the fundamental group.}
+\end{figure}
+In what follows we will let 
+ $$ \Pi=\langle \gamma_0,\gamma_1,\gamma_2 \colon \gamma_0\gamma_1\gamma_2=1\rangle.$$
+For $x_0$ and $x_1$ in $\PP^1$ with $x_0\neq x_1$ we have 
+ $$\Pi\cong \pi_1( \PP^1\setminus\lbrace 0,1,\infty,x_0\rbrace,t_0) \cong \pi_1(\PP^1\setminus\lbrace 0,1,\infty,x_1\rbrace,t_0).$$
+Now fix $x=x_0$ and a fundamental matrix $\Phi_0(t)$ for our system at $x=x_0$ so that $\Phi_0'(t) = A(t,x_0)\Phi_0(t)$. 
+This gives a monodromy representation 
+$$ \rho_0\colon \Pi \to \GL_2(\CC), \quad \gamma \mapsto M_{\gamma},$$
+where $M_{\gamma} \in \GL_2(\CC)$ is the matrix so that $(\Phi_0(t))_{\gamma} = \Phi_0(t) M_{\gamma}$.
+
+\begin{problem}[Isomonodromic Deformations]
+	Find a parameter space $X$ and a function 
+	$$X\mapsto M_2(\CC)^3, \quad x\mapsto (A_0(x),A_1(x),A_2(x))$$
+	so that the fundamental matrix $\Phi(x,t)$ of the system 
+	$$ \dfrac{dY}{dt}(x,t) = \left( \dfrac{A_0(x)}{t} +\dfrac{A_1(x)}{t-1} + \dfrac{A_2(x)}{t-x} \right)Y(x,t) $$
+	satisfies
+	\begin{enumerate}
+		\item (Monodromy at $x_0$) $\Phi(t,x_0) = \Phi_0(t)$ (so that $M_{\gamma}$ define the monodromy representation at that point).
+		\item (Isomonodromy) For each $x\in X$, and all $\gamma \in \Pi$, $$\Phi(t,x)_{\gamma} = \Phi(t,x)M_{\gamma},$$
+		up to conjugation of the collection of $M_{\gamma}$.
+	\end{enumerate}
+\end{problem}
+ If a function $x\to A(x)$ satisfies the isomonodromy problem we call it an \emph{isomonodromic deformation} of the system at $x=x_0$.
+
+\subsection{Schlesinger's Theorem}
+In this section we are going to give some equations that determine when 
+\begin{equation}
+x\mapsto A(x,t) = \dfrac{A_0(x)}{t} +\dfrac{A_1(x)}{t-1} + \dfrac{A_2(x)}{t-x}.
+\end{equation}
+gives an isomonodromic deformation.
+We will make some simplifying assumptions. 
+\begin{enumerate}
+	\item Assume that $A_{\infty}(x)$ is a constant diagonal matrix.
+	\item (Non-resonance) Assume that for each $x$ the eigenvalues of $A_j(x)$ for $j=0,1,\infty$ do not differ by an integer. 
+\end{enumerate}
+Under the conditions above we can give equations.
+Both of these conditations are used in the secret weapon of this theorem: the logarithmic Riemann-Hilbert correspondence. 
+\begin{theorem}
+	Assume the assumptions and work in the notaiton of this section.
+	The map $x\mapsto A(x)$ is isomonodromic if and only if 
+	$$\dfrac{\partial A_0}{\partial x} = \dfrac{[A_0,A_2]}{x}, \quad \dfrac{\partial A_1}{\partial x} = \dfrac{[A_1,A_2]}{x-1}, \quad \dfrac{\partial A_{\infty}}{\partial x}=0.$$
+\end{theorem}
+The above Theorem is a special case of a more general formula we will give. 
+It turns out these equations are equivalent to integrability conditions for a connection on a certain space. 
+To state the connection to connections we will change our setup slightly. 
+We will work with a rank $n$ system on $\PP^1$ and allow it to have singularities at $m$-points (and for simplicity we will exclusing $\infty$) we will let $X$ be a parameter space of points
+ $$ X = \lbrace (x_1,\ldots, x_m) \in \CC^m \colon x_i \neq x_j, \mbox{ for } i\neq j \rbrace .$$
+We will use the notation $x=(x_1,\ldots,x_m)$
+\begin{theorem}[Schlesinger's Equations]
+	Consider the system, 
+	 $$ \dfrac{\partial Y}{
+	 \partial t}(t,x) = \sum_{j=1}^m \dfrac{A_j(x)}{t-x_j} Y(t,x)$$
+ 	on $\PP^1\times X$.
+ 	This system is isomonodromic if and only if 
+ 	\begin{equation}\label{E:schlesinger}
+ 	\begin{cases}
+ 	 \dfrac{\partial A_j}{\partial x_i} = \dfrac{[A_j,A_i]}{x_j-x_i}, &  i \neq j,\\ 
+ 	  \dfrac{\partial A_j}{\partial x_j} = -\sum_{i\neq j}\dfrac{[A_i,A_j]}{x_i-x_j}.
+ 	  \end{cases}.
+ 	 \end{equation}
+\end{theorem}
+In these notes we will call \eqref{E:schlesinger} \emph{Schlesinger's equations}.
+The commutators in the Schlesinger's equation should make the reader suspect that these equations are possibly an integrability/curvature condition on some connection. 
+This is indeed the case and we will actually have a log connection on the space $X\times \PP^1$.
+
+\begin{figure}[h]\label{F:connection-space}
+	\begin{center}
+		\includegraphics[scale=0.75]{connection-space.eps}
+	\end{center}
+\caption{A picture of the $X\times \PP^1$ and the associated divisor $D$ in the case of two points and a single singular point $x$ varying.}
+\end{figure}
+
+\begin{theorem}
+	The following are equivalent for a collection of matrix valued functions $A_j(x)$ on $X$.
+	\begin{enumerate}
+		\item The connection $\nabla=d+\omega$ on $\Ocal_{\PP^1\times X}$ given by 
+		 $$ \omega = \sum_{j=1}^m A_j(x) \dfrac{d(t-x_j)}{t-x_j},$$
+		 is integrable.
+		 \item\label{I:differential-schlesinger} The matrices $A_j$ satisfy
+		  $$ dA_j - \sum_{i\neq j} [A_i,A_j] \dfrac{d(x_i-x_j)}{x_i-x_j} = 0, \quad 1\leq j \leq m.$$
+		  \item Schlesinger's equations \eqref{E:schlesinger} hold.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	 Also \eqref{I:differential-schlesinger} are equivalent to Schlesinger's equations.
+	
+	The computation of the equivalent between \eqref{I:differential-schlesinger} and the integrability condition can be rough if you try to do too much or move to Einstein notation.
+	Also, we should observe that Schlesinger's equation are the literal equations one obtains from integrability but can be derived from the integrability conditions.
+	
+	The key is to not manipulate your equations too much and think about what you are doing.
+	Integrability of the connection is equivalent to (see Theorem~\ref{T:integrability-conditions}) $$d(\omega)+\omega\wedge \omega=0.$$ 
+	We compute.
+	 $$d(\omega) = \sum_{i=1}^m \frac{dA_i}{t-x_i}\wedge dt - \sum_{i=1}^m \frac{dA_i \wedge dx_i}{t-x_i},$$
+	 $$\omega \wedge \omega = \sum_{i,j} \frac{[A_i,A_j]}{t-x_j} \frac{dt\wedge d(x_i-x_j) + dx_i \wedge dx_j}{x_i-x_j}.$$
+	 Collecting the terms with $dt$ in them one finds
+	 \begin{equation}\label{E:take-residue}
+	  \sum_{i} \frac{dA_i}{t-x_i} = \sum_{i,j} \frac{[A_i,A_j]}{t-x_i}\frac{d(x_i-x_j)}{x_i-x_j}
+	 \end{equation}
+	 The remaining terms give
+	 \begin{equation}\label{E:dont-take-residue}
+	  \dfrac{dA_i \wedge dx_i}{(t-x_i)} = \sum_{i,j} \frac{[A_i,A_j]}{t-x_i}\frac{dx_i\wedge dx_j}{x_i-x_j}.
+	 \end{equation}
+	 Taking residues of \eqref{E:take-residue} along $t=x_k$ we find that 
+	  $$ dA_k = \sum_{j\neq k} [A_k,A_j] \frac{d(x_k-x_j)}{x_k-x_j}=0.$$
+	 This proves \eqref{I:differential-schlesinger}.
+	 
+	 To see the converse observe that multiplying \eqref{I:differential-schlesinger} by $\frac{1}{t-x_j}$ and summing over $j$ gives \eqref{E:take-residue}.
+	 To recover \eqref{E:dont-take-residue} we apply $-\wedge \dfrac{dx_i}{t-x_i}$ to \eqref{I:differential-schlesinger} and sum over $i$.
+\end{proof}
+
+
+One can be a little more general with the points if one likes.  
+The following is a description of 
+
+\begin{figure}[h]\label{F:plot-of-s}
+	\begin{center}
+		\includegraphics[scale=0.75]{plot-of-s.eps}
+	\end{center}
+\caption{A picture of $S \subset \PP^1\times X$ in the case of four parametrized points.}
+\end{figure}
+
+\subsection{The Geometry of the Connection}
+
+\taylor{I need to finish this}
+
+In \cite[VI, \S1, pg 192]{Sabbah2007} Sabbah works with an arbitrary complex manifold $X$ some $S \subset X\times \PP^1$ such that the map $f:S \to X$ induced by the projection onto $X$ has degree $m$. 
+This means that over $\mu \in X$ the we have a fiber $S_{\mu}$
+$$S_{\mu} = f^{-1}(\mu) = \lbrace (\mu,x_1(\mu)) (\mu,x_2(\mu)),\ldots,(\mu,x_m(\mu))\rbrace.$$ 
+By assumptions on $X$ (1-connectedness) the manifold $S$ is trivializable: there exists maps $x_j: X \to \PP^1$ such that $S$ is the union of the graphs of these functions:
+ $$ S=S_1 \cup \cdots \cup S_m $$
+where $S_j$ is the graph of the map $x_j$.
+In what we were doing above the maps $x_j$ were the projections from $X\subset (\PP^1)^m$ onto $\PP^1$.
+
+Note now that the fiber of $(X\times \PP^1)\setminus S$ above $x=\mu\in X$ is $\PP^1\setminus S_{\mu} \cong (\PP^1\setminus S_{\mu}) \times \lbrace \mu \rbrace$.
+If we assume that $H_2(X,\ZZ)=0$ or that $\pi_2(X)=0$ then one can use the long exact sequence in homotopy groups to conclude that the inclusion of the fiber 
+ $$ \PP^1\setminus S_{\mu} \hookrightarrow (\PP^1\times X)\setminus S $$
+induces an isomorphism of fundamental groups.
+\begin{lemma}
+	
+\end{lemma}
+
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2399,9 +2644,8 @@ This section is motivated by the following problem.
 \chapter[Analytic Elements]{Analytics Elements of Differential Equations}
 
 \section{Solutions of Homogeneous Differential Equations}
-\taylor{This section needs to be finished}
-
-\begin{theorem}[Solutions of Homogeneous Differential Equations]
+The following is a useful formula.
+\begin{theorem}[Solutions of Homogeneous Differential Equations]\label{T:solutions}
 	If $Y'= A(t)Y$ is an ordinary differential equation then 
 	 $$ \Phi(t) = \exp( \int_{t_0}^t A(s)^T ds )^T $$
 	provides a local fundamental matrix. 
