@@ -89,6 +89,10 @@
 \newcommand{\QQbar}{\overline{\mathbb{Q}}}
 \newcommand{\Cont}{\operatorname{Cont}}
 \newcommand{\Lie}{\operatorname{Lie}}
+\newcommand{\Fcal}{\mathcal{F}}
+\newcommand{\Gcal}{\mathcal{G}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\can}{\operatorname{can}}
 
 
 
@@ -966,7 +970,7 @@ In the case that we can do this the singularities of the original linear system 
 \end{example}
 
 The most important example is the case where $\Phi$ is a fundamental matrix. 
-\begin{example}
+\begin{example}[Equivalence to Trivial Equation]\label{EX:equivalence-to-trivial}
 	Consider a linear differential system $Y'=AY$ over a differential ring $(R,\partial)$. 
 	Suppose that the system admits a fundamental matrix $\Phi \in \GL_n(R)$. 
 	Then setting $Y = \Phi \widetilde{Y}$ we find that 
@@ -1893,10 +1897,8 @@ We now can extract a more general definition of local system.
 	The space of \emph{horizontal sections} of $(E,\nabla)$ is defined by 
 	$$ U \mapsto E^{\nabla}(U) = \lbrace s \in E(U) \colon \nabla(s) =0 \rbrace.$$
 \end{definition}
-It is an exercise in familiarity with the definitions of vector bundles to check that this is in fact a local system. 
-\begin{exercise}
-	Check that $E^{\nabla}$ is a local system.
-\end{exercise}
+This will play an important role in the Riemann-Hilbert correspondence in the case that $\nabla$ is a so-called integrable connection.
+
 We remark that every connection $\nabla$ can be extended to $\Omega^i_X \otimes E$.
 This means that given $\omega \otimes s \in \Omega^i_X \otimes E$ we define
 $$ \nabla(\omega \otimes s) = d(\omega) \otimes s + (-1)^i \omega \wedge \nabla(S).$$
@@ -2259,7 +2261,7 @@ This conversation continues in section \ref{S:rhc-strat} which the reader should
 
 
 %%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Local Systems and Representations of $\pi_1(X)$}
+\section{Local Systems and Representations of $\pi_1(X)$}
 %%%%%%%%%%%%%%%%%%%%%%%
 In this section we are going to introduce the notion of a local system and then prove that the category of local systems on $X$ is equivalent to the category of finite dimensional representations of the fundamental group. 
 
@@ -2283,7 +2285,20 @@ On topological spaces (as opposed to general sites) then $\underline{K}_X(U) = \
 	A \emph{$K$-local system} over $X$ is a sheaf $L$ valued in finite dimensional $K$-vector spaces such that $L \cong \underline{K}_X$ locally. 
 \end{definition}
 This forms a category and morphisms are morphism of sheaves of $\CC$-linear vector spaces. 
-The main example comes from solutions of differential equations. 
+
+\begin{exercise}\label{EX:locally-constant}
+	Let $X$ be a topological space and let $V$ be an $R$-module for some ring $R$. 
+	Show that the constant sheaf $\underline{V}_X$ on $X$ is the same thing as the sheaf  $$U\mapsto\Cont(U,V), \quad U \subset X \mbox{ open }$$ 
+	where $\Cont$ denotes continuous maps.
+	Here $V$ is given the discrete topology. 
+\end{exercise}
+The above exercise is important. 
+Let $X$ be a topological space and let $f:X\to Y$ be a continuous map to a discrete topological space $Y$.
+Then $f^{-1}(\lbrace y\rbrace)$ is open for every $y \in Y$. 
+This holds for every $y\in Y$ and in particular the map $f:X\to Y$ is \emph{locally constant}. 
+
+The main example of a local systems comes from solutions of differential equations. 
+In fact this example is why the definition even exists. 
 Consider the first order holomorphic system defined on $U \subset \CC$, given by 
 $$ Y' = A(t) Y, \quad A \in M_n(\hol(U)).$$
 For every $V \subset U$ open define  
@@ -2297,20 +2312,74 @@ This proves that $L$ is a local system. Note in particular that
 $$ L(V) = \Phi_V \cdot \CC^{\oplus n } $$
 where $\Phi_V$ is a fundamental matrix valid on $V \subset U$. 
 
+\subsection{Pushfowards and Pullbacks of Local Systems}
+I was tempted to add the following exercise without comment:
 \begin{exercise}
-	The category $\LocSys(X)$ makes sense and for every $f:X\to Y$ one has an induced functor $f^*:\LocSys(X) \to \LocSys(Y)$.
+	The category $\LocSys(X)$ the category of local systems of finite dimensional $\CC$-vector spaces makes sense and for every morphism of topological spaces $f:X\to Y$ one a functor $f^*:\LocSys(X) \to \LocSys(Y)$.
+\end{exercise}
+In hindsight, this isn't very nice. 
+
+We are going to need to talk about inverse images of pullback of local systems so I want to say a couple words about inverse images of sheaves in general. 
+Let $\Gcal$ be a sheaf on a topological space $Y$. 
+For a morphism of topological spaces $f:X\to Y$ we want to define the inverse image sheaf $f^{-1}\Gcal$ (sometimes denoted $f^*\Fcal$) which is the left adjoint of $f_*$. 
+Here $f_*$ is the direct image sheaf and it turns sheaves $\Fcal$ on $X$ into sheaves $f_*\Fcal$. 
+These direct image sheaves are super easy to describe: given $V \subset Y$ we have $(f_*\Fcal)(V) = \Fcal(f^{-1}(V))$. 
+That is it.
+The sheaves $f^{-1}\Gcal$, are no so simple. 
+Harshorne, for example, defines $f^{-1}\Gcal$ to be the sheaf associated to the presheaf
+$$ U\mapsto \varinjlim_{V\supset f(U)} \Gcal(U). $$
+Yuck! I think this definition sucks and is hard to work with. 
+
+For every sheaf $\Fcal$ on a topological space $X$, I'm going to introduce a topological space $\overline{\Fcal}$ and a morphism of topological spaces $\pi: \overline{\Fcal} \to X$ that is going to make our life easier. 
+This space is called the \emph{espace \'etale} and has the important property that sections of $\pi$ over an open set $U$ correspond to elements of $\Fcal(U)$.
+By a section over an open set $U$ we mean 
+$$ \Gamma_X(\mathcal{F})(U) :=\lbrace s: U \to \overline{\Fcal} \colon \pi s = \id_U \rbrace. $$
+That is $\Gamma_X(\mathcal{F}) \cong \Fcal$ as sheaves. 
+I should mention that in the description $s$ is just a continuous morphism of topological spaces. 
+The situation is pictured in Figure~\ref{F:section}.
+\begin{figure}[h]\label{F:section}
+	\begin{center}
+		\includegraphics[scale=0.75]{section.eps}
+	\end{center}
+	\caption{A picture of the espace \'etale for a sheaf $\mathcal{F}$. 
+		Pictures is a map $s$ over an open set $U$ such that $\pi s=\id_U$.}
+\end{figure}
+
+\begin{definition}
+	Given a sheaf $\Fcal$ on a topological space $X$ we define the \emph{espace \'etale} of $\Fcal$ to be the topological space $\overline{\Fcal}$ whose underlying set is 
+	$$ \overline{\Fcal} = \coprod_{x\in X} \Fcal_x = \lbrace (x,t) \colon t\in \Fcal_x \rbrace, $$ 
+	and whose topology is generated in the following way: for each $s \in \Fcal(U)$ for $U\subset X$ open declare
+	$$ W(U, s) = \lbrace  (x,s_x) \colon s_x \mbox{ germ of $s$ at $x\in U$ }\rbrace $$
+	to be open and take the topology on $\overline{\Fcal}$ to be the smallest topology so that the $W(U,s)$ are open for every $s\in \Fcal(U)$. 
+\end{definition}
+
+\begin{exercise}
+	Prove that $\Gamma_X(\mathcal{F})$ and $\Fcal$ are isomorphism as sheaves. 
+\end{exercise}
+
+We now turn to the point of introducing this construction. 
+Given a morphism of topological spaces $f:X\to Y$ and a sheaf $\Gcal$ on $Y$ we define take define $f^{-1}\Gcal$ to by its espace \'etale $\overline{f^{-1}\Gcal}$ which is just the pullback of the $\overline{\Gcal}\to Y$ to $Y$.
+That is 
+$$ \overline{f^{-1}\Gcal} = \overline{\Gcal} \times_Y X,$$
+where the fiber product is taken in the category of topological spaces. 
+Similarly, $f_*\Fcal$ for a sheaf $\Fcal$ on $X$ is the pushout 
+
+\begin{exercise}
+	Using this definition of $f^{-1}\Gcal$ show that $(f^{-1},f_*)$ are an adjoint pair of functors. 
 \end{exercise}
 
 
-\subsection{Representations Associated to Local Systems}
+
+\subsection{Representations Associated to Local Systems}\label{S:locsys-to-repn}
 Let $X$ be a topological space which is connected and locally path connected so that $\pi_1(X,x_0)$ makes sense. 
 Let $L$ be a local system on $X$ and let $\gamma:[0,1] \to X$ be a continuous path contained in $X$. 
-Then $\gamma^*L$ is a local system on $[0,1]$ which is trivial. 
+Then $\gamma^*L$ is a local system on $[0,1]$ which is trivial.
+In seeing this, Exercise~\ref{EX:locally-constant} is important.
 Furthermore every germ $v \in (\pi^*L)_0$ extends uniquely to $(\gamma^*L)([0,1])$ via monodromy.
 In particular there is a morphism 
 $$ M_{\gamma}: (\gamma^*L)_0 \to (\gamma^*L)_1.$$
 Since $(\gamma^*L)_t \cong L_{\gamma(t)}$ for each $t$ if $\gamma$ is a closed path starting and ending at $x_0\in X$ then $(\gamma^*L)_0 \cong L_{\gamma(0)} \cong L_{x_0} \cong L_{\gamma(1)} \cong (\gamma^*L)_1$.
-This then means that $M_{\gamma}$ induces an automorphism of $L_{x_0}$
+This then means that $M_{\gamma}$ induces an automorphism of $L_{x_0}$.
 This defines the representation associated to the pair $(L,x_0)$ consisting of a local system $L$ and a point $x_0 \in X$
 \begin{definition}
 	The \emph{monodromy representation} associated to the $(L,x_0)$ is 
@@ -2345,14 +2414,35 @@ We are interested in the case when $\Pi = \pi_1(U,t_0)$ for some $U\subset \CC$.
 	$$ v \mapsto \Phi v \mapsto \Phi M_{\gamma} \Phi^{-1} \Phi v \mapsto \Phi_{\gamma}^{-1} M_{\gamma} v \mapsto M_{\gamma}^{-1} \Phi M_{\gamma} v.$$
 \end{proof}
 
-Let $\Pi$ be a group. 
+\subsection{Monodromy Representations in Higher Dimension}
+In higher dimensions this is how we are going to define the representation associated to a connection. 
+That is to every vector bundle $E$ with integrable connection $\nabla^2=0$ we have the associated local system $E^{\nabla}$ defined by 
+ $$ E^{\nabla}(U) = \lbrace s \in E(U) \colon \nabla(s)=0 \rbrace, \quad U \subset X \mbox{ open }. $$
+The very definition of integrability is exactly so that the system of equations $\nabla(s)=0$ has a local basis of solutions. 
+More precisely if $t^1,\ldots,t^m$ are local coordinates for $X$ and $s_1,\ldots,s_n$ are local basis for $E$ then 
+ $$ \nabla(s)=0 \quad \iff  \quad \nabla_{\partial_j}(Y) = \dfrac{\partial Y}{\partial t^j} + A_j Y =0, \quad 1\leq j \leq m,$$
+where $Y\in \Ocal_X(U)^{\oplus n}$ is a presentation of $s \in E(U)$ under the trivialization given by the local basis and $A_jdt^j$ is the connection 1-form in local coordinates.
+
+This describes the functors
+ $$ \Conn(X) \to \LocSys(X) \to \Repn(X).$$
+The connection, goes to a local set of solutions (a local system), which by \S~\ref{S:locsys-to-repn} gives rise to a representation. 
+Spoiler: for holomorphic vector bundles this will be an equivalence of categories. 
+The map $\LocSys(X) \to \Repn(X)$ is always going to be an equivalence of categories. 
+
+
+\subsection{$\LocSys(X) \cong \Repn(X)$}\label{S:locsys-repn}
+In this section we show that for a general topological space the category of representations is equivalent to the category of local systems. 
+
+First some notation: let $\Pi$ be a group. 
 We will let $\Mod^{\fin}_{\CC[\Pi]}$ denote the category of $\CC[\Pi]$-modules which are finite dimensional as $\CC$-vector spaces. 
 We will often conflate a representation $\rho: \Pi \to \GL(V)$ with its underlying  $\CC[\Pi]$-module, which we also denote by $V$.  
 
+Now we give our theorem.
 \begin{theorem}
 	Let $X$ be a topological space which admits a fundamental group and let $\Pi = \pi_1(X,x_0)$ for $x_0\in \CC$. 
 	The category of local systems on $X$ is equivalent to the category of finite dimensional complex representations of the fundamental group 
-	$$ \LocSys(X) \xrightarrow{\sim} \Mod_{\CC[\Pi]}^{\fin}, \quad L \mapsto \rho_{L,x_0}.$$
+	$$ \LocSys(X) \xrightarrow{\sim} \Repn(X), \quad L \mapsto \rho_{L,x_0},$$
+	Here $\Repn(X)=\Mod_{\CC[\Pi]}^{\fin}$ of finite dimensional complex representations of the fundamental group (= $\CC[\Pi]$-modules).
 \end{theorem}
 \begin{proof}[Proof Sketch]
 	The quasi-inverse is given by the so-called suspension construction. 
@@ -2377,27 +2467,67 @@ We will often conflate a representation $\rho: \Pi \to \GL(V)$ with its underlyi
 	\taylor{I need to check this.}
 	In this exercise $M$ will be a topological space where fundamental groups make sense.\footnote{path connected, locally path connected}. 
 	We will let $\Pi = \pi_1(M,x_0)$ for $x_0\in M$ some base point.  	
-	\begin{enumerate}
-		\item Let $A$ be an abelian group.
-		Show that the constant sheaf $\underline{A}$ on $M$ is the same thing as the sheaf  $$U\mapsto\Cont(U,A), \quad U \subset M \mbox{ open }$$ 
-		where $\Cont$ denotes continuous maps if $A$ is given the discrete topology. 
-		\item Check \eqref{E:total-space} regarding the description of the total space of the local system.
-	\end{enumerate}
+ Check \eqref{E:total-space} regarding the description of the total space of the local system.
 \end{exercise}
-%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Strategy for Proving a Riemann-Hilbert Correspondence}\label{S:rhc-strat}
-%%%%%%%%%%%%%%%%%%%%%%%
-In this section we are going to let $X$ be a space and let $\Conn(X)$ be some yet-to-be-specified category of  ``connections'' or ``differential equations'' as we did in the introduction to \ref{S:rhcs}.
-We will let $\LocSys(X)$ denote the category of finite dimensional local systems on $X$ and let $\Repn(X)$ denote the category of finite dimensional representations of $\pi_1(X)$. 
 
-As stated at the beginning of  \ref{S:rhcs}, the functorial version of Riemann-Hilbert correspondences go through local systems:
-$$\Conn(X) \cong \LocSys(X) \cong \Repn(X) .$$
-The equivalence between local systems and representations is very general. 
-Also, in the case of holomorphic connections the equivalence to local systems can be described easily.
+%%%%%%%%%%%%%%%%%%%
+\section{Holomorphic Riemann Hilbert Correspondence}
+%%%%%%%%%%%%%%%%%%%
+Let $X$ be a complex manifold. 
+We have three categories.
+\begin{align*}
+\Conn(X) =& \mbox{ (holomorphic vector bundles on $X$ with integrable connections)} \\
+\LocSys(X) =& \mbox{ (local systems on $X$) } \\
+\Repn(X) =& \mbox{ (finite dimensional complex representations of $\pi_1(X,x_0)$ )}
+\end{align*}
+The holomorphic Riemann-Hilbert correspondence states that these categories are all equivalent. 
+To estabilish this we will show $\Conn(X) \cong \LocSys(X)$ and that $\LocSys(X) \cong \Repn(X)$. 
+In fact this section part was already established for general topological spaces in \S\ref{S:locsys-repn}.
+
+The functor 
+$$\Conn(X) \to \LocSys(X), \quad (E,\nabla) \mapsto E^{\nabla}$$ was already described.
+Here $E^{\nabla}$ is ``the space of horizontal sections''. 
+It doesn't hurt to repeat that 
+$$ E^{\nabla}(U) = \lbrace s \in E(U) \colon \nabla(s) =0 \rbrace, \quad U\subset X \mbox{ open }.$$
+The key condition here is integrability, which, \emph{by definition} is so that we have equatlity of mixed partials in the system of equations 
+$$ \nabla(s)=0 \quad \iff  \quad \nabla_{\partial_j}(Y) = \dfrac{\partial Y}{\partial t^j} + A_j Y =0, \quad 1\leq j \leq m,$$
+where $t^1,\ldots,t^m$ are local coordinates for $X$ and $s_1,\ldots,s_n$ are a local basis for $E$ giving rise to $s \mapsto Y$. 
+
+The converse construction is as follows.
+$$ \LocSys(X) \to \Conn(X), \quad L \mapsto (\Ocal_X\otimes_{\CC_X} L, \nabla_L),$$
+where $\nabla_L(f\otimes v) = df \otimes v$ for $f\otimes v \in \Ocal_X \otimes L$, and then the definition is given by extending linearly.
+
+Readers can check as much detail as they want that this construction is a quasi-inverse of $(E,\nabla)\mapsto E^{\nabla}$. 
+The main idea here is that a basis of solutions always gives a matrix $\Phi$ which makes the connection equivalent to the trivial connection (see exercise~\ref{EX:equivalence-to-trivial}).
+
+One of the major points here is that a connection is determined by its space of horizontal solutions. 
+This allows us to define connections by declaring what their horizontal space is. 
+When studying connections in characteristic $p$ on schemes we can define a canonical connection of the pullback of a vector bundle by the Frobenius $\nabla^{\can}$ by declaring the inverse image under the Frobenius to be horizontal.
+
+\begin{theorem}[Holomorphic Riemann-Hilbert]
+	We have the following equivalences of categories for $X$ a complex manifold:
+	$$ \Conn(X) \cong \LocSys(X) \cong \Repn(X).$$
+\end{theorem}
+
+Later we will modify the category $\Conn(X)$ to get more information about the differential equations at the singularities. 
+
+
+\chapter{Isomonodromic Deformations}
+
+The Painlev\'e VI equation takes the form
+ \begin{align*}\frac{d^2y}{dt^2}&=
+ \frac{1}{2}\left(\frac{1}{y}+\frac{1}{y-1}+\frac{1}{y-t}\right)\left( \frac{dy}{dt} \right)^2
+ -\left(\frac{1}{t}+\frac{1}{t-1}+\frac{1}{y-t}\right)\frac{dy}{dt} \\&\quad +
+ \frac{y(y-1)(y-t)}{t^2(t-1)^2}
+ \left(\alpha+\beta\frac{t}{y^2}+\gamma\frac{t-1}{(y-1)^2}+\delta\frac{t(t-1)}{(y-t)^2}\right),\\ 
+ \end{align*}
+where $\alpha,\beta,\gamma,\delta \in \CC$ are constants.
+The aim of this section is to show that this equation is really about isomonodromic deformations of rank two Fuchsian equations with trace free entries on $\PP^1\setminus \lbrace 0,1,\infty, x\rbrace$ where $x$ is a variable point.
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Isomonodromy}
+\section{Schlesinger's Equations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Consider the case of a Fuchsian differential equation of rank 2 on $\PP^1$ with singular points at $\lbrace 0,1,\infty,x\rbrace$ for some variable $x\in \PP^1$ not equal to $0,1$ or $\infty$,
 $$\begin{cases}
@@ -2575,7 +2705,6 @@ with $P(u,v,w) \in \CC[x,y,z]$ admit meromorphic solutions $y(t)$ which have the
 The Poincar\'e-Fuchs theorem states that the only equations of this form are 1) Ricatti equations and 2) Weierstrass equations. 
 We are going to give two proofs of this. 
 The first is foliation theoretic and the second is differential algebraic. 
-The foliation theoretic proof is 
 
 A basic reference for the foliation theoretic proof is Pan and Sebastian \cite{Pan2004}.
 There is also a great \href{https://www.youtube.com/watch?v=DoCCm8zjvXQ&list=PL0E0n75oNCDk5tuV-t2_K56sEfLd0Od8H&index=21}{YouTube Lecture} by Loray on the topic. 
