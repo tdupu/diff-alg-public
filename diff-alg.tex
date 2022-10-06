@@ -93,6 +93,7 @@
 \newcommand{\Gcal}{\mathcal{G}}
 \newcommand{\id}{\operatorname{id}}
 \newcommand{\can}{\operatorname{can}}
+\newcommand{\Clf}{\operatorname{Clf}}
 
 
 
@@ -129,11 +130,12 @@ I love Ritt's books \cite{Ritt1932} and \cite{Ritt1950}.
 The issue is that they are a bit out of date and have a lot of dependencies within chapters that are not clearly marked so you almost have the read the books linearly. 
 They are also missing a lot of the classical theory from the 1800's which motivated the subject. 
 The successor to Ritt's books is Kolchin's books \cite{Kolchin1973} which, while mathematically very useful, invokes notation and terminology that gives me nightmares. 
-Also, the algebraic geometry there largely ignores the development of scheme theory between from 1950 to 1970 by the French school. 
+Also, the algebraic geometry there largely ignores the development of scheme theory between 1950 to 1970 by the French school. 
 An alternative to these two is Kaplansky's book \cite{Kaplansky1976} which I love but is perhaps too brief. 
 Following the spirit of these Differential Algebra Books are Buium's books \cite{Buium1986} (influenced by Matsuda's book \cite{Matsuda1980}),\cite{Buium1992}, and \cite{Buium1994} which are probably the most influential on my perspective. 
-Again, to really understand those books (for example the Poincar\'e-Fuchs theorem on equations of the form $P(t,y,y')=0$ for a polynomial $P$ whose solutions have no movable singularities) one needs to go back to some of the older material which is best covered elsewhere.
 They are about differential field theory, differential algebraic groups, and applications of differential algebra to diophantine geometry.
+
+To really understand those books (for example the Poincar\'e-Fuchs theorem on equations of the form $P(t,y,y')=0$ for a polynomial $P$ whose solutions have no movable singularities) one needs to go back to some of the older material which is best covered elsewhere. 
 
 Also, in the spirit of these Differential Algebra books are the are the importants books on Picard-Vessiot Theory by Singer and van der Put \cite{Put2003} and Magid \cite{Magid1994}.
 These books are about the Galois theory for linear differential equations.
@@ -141,15 +143,16 @@ These books are about the Galois theory for linear differential equations.
 To cover this perspective one would like to talk about hypergeometric functions, the Painlev\'{e} equations, and monodromy more generally. 
 There is the classic book by Ince \cite{Ince1944} and a standard text \cite{Iwasaki1991} which is nice but focuses a lot of computations and de-emphasizes global geometry.
 There are great discussion of Hilbert's 21st problem in \cite{Borel1987} and a more modern algebro geometric version in \cite{Deligne1970}.
-Marrying this material with the field theoretic methods of \cite{Buium1986} is something that I want to do. 
+Marrying this material with the field theoretic methods of \cite{Buium1986} is something that I want to do and there is some folklore here that needs to be fleshed out in my humble opinion.
 
-Once one gets into the Painlev\'{e} equations more algebraic geometry surfaces. The japanese following  Okomoto \cite{Okamoto1987b,Okamoto1987,Okamoto1986, Okamoto1987a} (and many many papers which I'm not going to list following this thread) showed that there exist rational surfaces of ``spaces of initial conditions'' for the Painlev\'{e} which capture a lot of geometry. 
+Once one gets into the Painlev\'{e} equations more algebraic geometry surfaces. The Japanese following  Okomoto \cite{Okamoto1987b,Okamoto1987,Okamoto1986, Okamoto1987a} (and many many papers which I'm not going to list following this thread) showed that there exist rational surfaces of ``spaces of initial conditions'' for the Painlev\'{e} which capture a lot of geometry. 
 
 Also, there are so-called Lax Pairs for these Painlev\'{e} equations which leads to a theory of ``algebraic complete integrability''. 
 The notion of algebraic complete integrability is discussed in, say, \cite{Beauville1990}\cite{Adler2004}. 
-From here one can see that equations like the KP equation admit Lax Pairs and this theory again makes connections to algebraic geometry (this time abelian varieties) through so-called Jacobian Flows and Krichever modules \cite{Mulase1994}.
+From here one can see that equations like the KP equation admit Lax Pairs and this theory again makes connections to algebraic geometry (this time abelian varieties) through Spectral Curves, Grassmannians, Jacobian Flows, and Krichever modules \cite{Mulase1994}.
+We would be crazy not to mention the work of Sato and the book by Miwa, Jimbo, and Date about infinite dimensional Grassmannians.
 
-On top of all this there is a general differential Galois Theory beyond linear equations  developed by Umemura \cite{Umemura2011} and a general theory of Riemann-Hilbert  Problems and D-Modules following Malgrange and Kashiwara \cite{Borel1987}.
+On top of all this there is a general differential Galois Theory beyond linear equations  developed by Umemura \cite{Umemura2011} and a general theory of Riemann-Hilbert  Problems and holonomic D-Modules following Malgrange and Kashiwara \cite{Borel1987}.
 
 I haven't even mentioned differential algebraic geometry (it's associated tussles with dimension theory) and the geometry of foliations. To make things worse, much of this material generalizes beyond differential equations, to difference equations, $p$-derivations, and other operations.
 
@@ -157,7 +160,7 @@ Understandably, I can't cover this all.
 I'm not even going to pretend to try. 
 My goal is to survey material.
 Because of this, I'm going to need to assume some mathematics at times --- there already exists excellent references for much of the material we need to source.  
-This will at times include basic Differential \cite{Ince1944} and Partial Differential Equations \cite{Evans2010}, Commutative Algebra \cite{Atiyah2016}, Galois Theory \cite{Cox2012}, Complex Analysis \cite{Ullrich2008}, Algebraic Topology \cite{Hatcher2002}, Manifolds \cite{Lee2013}, and Algebraic Geometry \cite{Vakil2017}. 
+This will at times include basic Differential \cite{Ince1944} and Partial Differential Equations \cite{Evans2010}, Commutative Algebra \cite{Atiyah2016}, Galois Theory \cite{Cox2012}, Complex Analysis \cite{Ullrich2008}, Algebraic Topology \cite{Hatcher2002}, Manifolds \cite{Lee2013} (mostly complex manifolds which are not covered in loc cit.), and Algebraic Geometry \cite{Vakil2017}. 
 At the same time, I'm not crazy. 
 I don't want to be writing to nobody. 
 Things that I feel are part of a good introduction for well-prepared graduate students I will review. 
@@ -167,7 +170,7 @@ I have a number of things I would like to understand better. What is a $\tau$-fu
 What is a Jacobian flow? What proofs work for differential equations but not for difference equations? 
 What do we \emph{really} mean when we say $X$ equation is a limiting case of $Y$ equation?
 What are the most fundamental examples to keep in mind and teach students when talking about this material?
-How are classical asymptotic methods ``enriched by $D$-modules and sheaves''?
+What do people mean when they say classical asymptotic methods are ``enriched by $D$-modules and sheaves''?
 
 The subject is vast and I hope we have a fun time exploring it. 
 It may be that I don't get anywhere on any of this material and we spend 3 months defining what a differential ideal is. 
@@ -182,7 +185,7 @@ There is a manuscript by Manin \cite{Manin1978} which also attempts to unify dif
 
 
 \section{Where can I get a digital copy of these notes?}
-A link to the .tex can be found here:
+A link to the .pdf can be found here:
 \begin{center}
 	\url{https://tdupu.github.io/diff-alg-public/diff-alg.pdf}.
 \end{center}
@@ -1226,6 +1229,63 @@ Finally, many authors restrict to the case $\Delta = \lbrace \partial \rbrace$ w
 In this case some authors (like Nick Katz) like to define $D$ as the derivation operator on the module $V$ which satisfies $D(av) = \partial(a) v + a D(v)$ for $v\in V$ and $a \in R$.
 I reserve the right to use a mixture of these perspectives (and you should too).
 
+\subsection{A Bosonic Fock Space and Weyl Algebras}
+A frequently used physical perspective of $D$-modules that occurs is the following. 
+Let  
+ $$ B=\CC[x_1,x_2,\ldots][\partial_1,\partial_2,\ldots], \quad \partial_j = \dfrac{\partial}{\partial x_j}.$$
+This is just a usual Weyl algebra but in countably many variables. 
+In some portions of the algebraic theory of differential equations literature \cite{Sato1983, Miwa2000}, one uses the terminology of creation and annihilation operators,
+ $$ a_n = \partial_n =\mbox{(annihilation operator)}, \quad a_n^* = x_n = \mbox{ (creation operator) },$$
+and observes that these satisfy the rules 
+ $$ [a_n,a_m]=0, \quad [a_m^*,a_n^*]=0, \quad [a_m,a_n^*]= \delta_{mn}, \qquad m,n \in \ZZ.$$
+From this viewpoint we think of $a_n$  and $a_n^*$ as acting on a space of functions which create and annihilate bosonic particles on the $\ZZ$ and the $D$-module (which is a $B$-module in this case) $\CC[x_1,x_2,\ldots]$ of polynomials in infinitely many indeterminates is called the bosonic Fock space. 
+The idea here is that particles along the lattice $\ZZ$ are built-up by acting by these creation and annihilation operators on $1\in \CC[x_1,x_2,\ldots]$ which is called the \emph{vacuum state}.
+
+None of this is really important at the moment and we just say this so that the reader can recognize in the literature that people talking about Bosonic Fock Spaces are really just talking about Weyl algebras. 
+
+\begin{remark}
+For the uninitiated we mention that Bosons are particles that mediate the exchange of forces in physics.\footnote{with the exception of the Higgs boson.} 
+There are a set of special Bosons for each of the fundamental forces: the photon the $\gamma$-boson for the electromagnetic force; the weak force for three bosons the $W^+$-boson, the $W^-$-boson, and the $Z$-boson -- the $W$-bosons carry a charge and the $Z$-boson does not; the strong force has  six bosons called gluons.
+
+In addition to there there is a Higgs boson which gives particles mass by the so called Higgs Mechanism.
+\end{remark}
+
+
+\subsubsection{Fermionic Fock Spaces}
+Recall that for every quadratic space $(V,q)$ we can associated a Clifford algebra $\Clf(V,q)$ where $\Clf(V,q) = T(V)/I_q$ and $I_q$ is generated by $v^2 = q(v)$ and $T(V) = \bigoplus_{n\geq 0} V^{\otimes n}$ is the tensor algbra (so $v^2$ really is $v\otimes v$ but we are dropping the $\otimes$ to make notation simple).
+For any such $(V,q)$ there is an associated bilinear form $2B_q(v+w) = q(v+w)-q(v)-q(w)$ and we have the identity for $v,w \in V \subset \Clf(V,q)$ given by 
+ $$ \lbrace v,w\rbrace = vw+wv = 2B_q(v,w).$$
+When $2$ is invertible in your base ring the data of a bilinear form or quadratic form are equivalent. 
+
+We now perform our construction of the ring of so-called Grassmann numbers.  
+Let $V$ be a countably generated vector space with a basis $v_i$ for $i\in \ZZ^*$. 
+Let $W$ be a countably generated vector sapce with a basis $w_i$ for $i\in \ZZ^*$. 
+We then give a bilinear form $B_q$ on $V\oplus W$ given by
+$$ B_q(v_i,v_j)=0, \quad B_q(w_i,w_j)=0, \quad B_q(v_i,w_j) = \begin{cases}
+0, & i+j\neq 0 \\
+\frac{1}{2}, & i+j=0
+\end{cases}.$$
+This gives a quadratic space and we have the description as a clifford algebra being given by 
+$$ A = \Clf( V\oplus W, q).$$
+For some reason, we then use the notation $v_n=\psi_n$ and $w_n=\psi^*_n$ for $n\in \ZZ^*$ and observe the identities:
+ $$\lbrace \psi_m,\psi_n \rbrace =0, \quad \lbrace \psi_m^*,\psi_n^* \rbrace =0, \quad \lbrace \psi_{m}^*,\psi_n^*\rbrace = \delta_{n+m,0}, \qquad m,n\in \ZZ^*.$$
+Traditionally, the $\psi_n$'s and $\psi_n^*$'s are indexed by $m,n \in \frac{1}{2}+\ZZ$ but we are going to forego this tradition because these are math notes and physics notation is silly. 
+Note in particular that $\psi_n^2=0$ and $(\psi_n^*)^2=0$.
+Mathematically the ring generated by $\psi_n$ for $n \in \ZZ^*$ is the exterior algebra of a countably generated free module and the same can be said for $\psi_n^*$. 
+
+\begin{remark}
+For the uninitiated we mention that Fermions are particles like electrons on which forces act. 
+Several behave very similarly to electrons mathematically and these are called leptons (12 in total). 
+First every lepton has an anti-particle. 
+For the electron this is a positron. 
+These mathematically are pretty much identical but with time reversed (yes, weird, but mathematically simple). 
+Then there are ``heavier electrons'' called muons and tauons which are like electrons but, well,  heavier.
+Then there are the baby versions where are called neutrinos.
+There are electron neutrinos, muon neutrinos, and tauon neutrinos.
+These also have antiparticles. 
+
+The other six elementary Fermions in the standard model of 2022 are the quarks which are associated with the strong force. These are the cute sounding up, down, strange, charm, top, and bottom quarks.
+\end{remark}
 
 \subsection{Linear Systems and $D$-Modules}
 There is a procedure for converting between linear differential equations and $D$-modules which will be useful that we will now explain. 
@@ -2753,6 +2813,13 @@ This section is motivated by the following problem.
 	 $$ \dfrac{dy}{dx} = \frac{a(x,y)}{b(x,y)}, \quad a(x,y),b(x,y) \in \CC[x,y].$$
 	 For which $a(x,y),b(x,y) \in \CC[x,y]$ does the equation admit algebraic solutions?
 \end{problem}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter[Kolchin Irreducibility]{The Kolchin Irreducibility Theorem}\label{S:kolchin-irreducibility}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
