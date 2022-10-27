@@ -114,7 +114,10 @@
 \newcommand{\rk}{\operatorname{rk}}
 \newcommand{\Khat}{\widehat{K}}
 \newcommand{\Fbar}{\overline{F}}
+\newcommand{\PGL}{\operatorname{PGL}}
 
+\usepackage{listings}
+\usepackage{spverbatim}
 
 
 \usepackage{tabto}
@@ -156,30 +159,32 @@ They are about differential field theory, differential algebraic groups, and app
 
 To really understand those books (for example the Poincar\'e-Fuchs theorem on equations of the form $P(t,y,y')=0$ for a polynomial $P$ whose solutions have no movable singularities) one needs to go back to some of the older material which is best covered elsewhere. 
 
-Also, in the spirit of these Differential Algebra books are the are the importants books on Picard-Vessiot Theory by Singer and van der Put \cite{Put2003} and Magid \cite{Magid1994}.
-These books are about the Galois theory for linear differential equations.
-
 To cover this perspective one would like to talk about hypergeometric functions, the Painlev\'{e} equations, and monodromy more generally. 
-There is the classic book by Ince \cite{Ince1944} and a standard text \cite{Iwasaki1991} which is nice but focuses a lot of computations and de-emphasizes global geometry.
-There are great discussion of Hilbert's 21st problem in \cite{Borel1987} and a more modern algebro geometric version in \cite{Deligne1970}.
+For us, monodromy is going to be the starting point.
+The main idea is that monodromy problems lead to the notion of classification (which gives hypergeometric functions) and isomonodromy problems (which gives Painlev\'e VI). 
+For Painlev\'e there is the classical book of Ince \cite{Ince1944} and a standard text \cite{Iwasaki1991} which is nice but focuses a lot of computations and de-emphasizes global geometry.
+For a rigorous treatment of the Riemann-Hilbert problem there are great discussion of Hilbert's 21st problem in \cite{Borel1987} and a more modern algebro geometric version in \cite{Deligne1970}.
 Marrying this material with the field theoretic methods of \cite{Buium1986} is something that I want to do and there is some folklore here that needs to be fleshed out in my humble opinion.
+In that spirit, we also want to marry Monodromy with the classical Galois Theory of Linear Differential Equations which goes by the name ``Picard-Vessiot Theory'' by Singer and van der Put \cite{Put2003} and Magid \cite{Magid1994}.
+
 
 Once one gets into the Painlev\'{e} equations more algebraic geometry surfaces. The Japanese following  Okomoto \cite{Okamoto1987b,Okamoto1987,Okamoto1986, Okamoto1987a} (and many many papers which I'm not going to list following this thread) showed that there exist rational surfaces of ``spaces of initial conditions'' for the Painlev\'{e} which capture a lot of geometry. 
+This really has to do with foliations and foliation theory which is also tied into this subject. 
 
 Also, there are so-called Lax Pairs for these Painlev\'{e} equations which leads to a theory of ``algebraic complete integrability''. 
-The notion of algebraic complete integrability is discussed in, say, \cite{Beauville1990}\cite{Adler2004}. 
-From here one can see that equations like the KP equation admit Lax Pairs and this theory again makes connections to algebraic geometry (this time abelian varieties) through Spectral Curves, Grassmannians, Jacobian Flows, and Krichever modules \cite{Mulase1994}.
-We would be crazy not to mention the work of Sato and the book by Miwa, Jimbo, and Date about infinite dimensional Grassmannians.
+The notion of algebraic complete integrability is discussed in, say, \cite{Beauville1990}, \cite{Adler2004}, but for us what we would like to discuss more is the notion of isospectral deformations, its relationship to Soliton Theory and Algebraic Geometry.
+From here one can see that equations like the KP equation makes connections to algebraic geometry through Spectral Curves, Grassmannians, Jacobian Flows, and Krichever modules \cite{Mulase1994} \cite{Segal1998} \cite{Sato1983} \cite{Miwa2000}.
 
 On top of all this there is a general differential Galois Theory beyond linear equations  developed by Umemura \cite{Umemura2011} and a general theory of Riemann-Hilbert  Problems and holonomic D-Modules following Malgrange and Kashiwara \cite{Borel1987}.
 
-I haven't even mentioned differential algebraic geometry (it's associated tussles with dimension theory) and the geometry of foliations. To make things worse, much of this material generalizes beyond differential equations, to difference equations, $p$-derivations, and other operations.
+I haven't even mentioned differential algebraic geometry (it's associated tussles with dimension theory) and the geometry of foliations \cite{Bryant1991} (or anything by Periera). To make things much harder, much of this material generalizes beyond differential equations , to difference equations \cite{Hrushovski2004}, $p$-derivations \cite{Buium2005}, and other operations \cite{Borger2005}.
+These generalizations aren't just for sport and have real consequences outside of differential algebra.
 
 Understandably, I can't cover this all. 
 I'm not even going to pretend to try. 
 My goal is to survey material.
 Because of this, I'm going to need to assume some mathematics at times --- there already exists excellent references for much of the material we need to source.  
-This will at times include basic Differential \cite{Ince1944} and Partial Differential Equations \cite{Evans2010}, Commutative Algebra \cite{Atiyah2016}, Galois Theory \cite{Cox2012}, Complex Analysis \cite{Ullrich2008}, Algebraic Topology \cite{Hatcher2002}, Manifolds \cite{Lee2013} (mostly complex manifolds which are not covered in loc cit.), and Algebraic Geometry \cite{Vakil2017}. 
+We will assume some basic Differential \cite{Ince1944} and Partial Differential Equations \cite{Evans2010}, Commutative Algebra \cite{Atiyah2016}, Galois Theory \cite{Cox2012}, Complex Analysis \cite{Ullrich2008}, Algebraic Topology \cite{Hatcher2002}, Manifold Theory \cite{Lee2013} (mostly complex manifolds which are not covered in loc cit.), and Algebraic Geometry \cite{Vakil2017}. 
 At the same time, I'm not crazy. 
 I don't want to be writing to nobody. 
 Things that I feel are part of a good introduction for well-prepared graduate students I will review. 
@@ -213,7 +218,8 @@ A link to the .pdf can be found here:
 
 \taylor{WARNING: These notes have not been peer reviewed! Use at your own peril! (Also email me if you find mistakes: taylor.dupuy@gmail.com)}
 
-\begin{verbatim}
+
+\begin{spverbatim}
 @Unpublished{Dupuy2022,
 author  = {Dupuy, Taylor},
 title   = {An Introduction to the Algebraic Theory of Differential Equations},
@@ -222,8 +228,8 @@ comment = {Course notes from lectures given at the University of Vermont in Fall
 journal = {preprint},
 url     = {https://tdupu.github.io/diff-alg-public/diff-alg.pdf},
 }
+\end{spverbatim}
 
-\end{verbatim}
 
 \newpage 
 \section{Notation}
@@ -517,7 +523,7 @@ Here $A$ is just the transpose of a companion matrix.
 We will often convert between higher order equations and first order equations in this way. 
 
 \begin{remark}
-	In the case of linear differential equations there is a way of going backwards using cyclic vectors. 
+	In the case of linear differential equations there is a way of going backwards using cyclic vectors (\S\ref{S:cyclic-vectors}). 
 	That is, most first order linear systems of differential equations  $n$ variables in one derivative can be converted into a order $n$ equation in $n$ dependent variables. 
 \end{remark}
 
@@ -780,7 +786,12 @@ For every $U \subset \CC$ and every $A(t) \in \hol(U)$ and every $t_0 \in U$, mo
 	Every matrix $M \in \GL_n(\CC)$ can appear as the monodromy matrix of some system. (Hint: use the Euler system and show that for every $M \in \GL_n(\CC)$ there exist some $A \in M_n(\CC)$ such that $\exp(2\pi i A) = M$. This needs some ideas like a matrix logarithm or using a Jordan canonical form.)
 \end{exercise}
 
+
 \section[Fuchsian Condition]{Classification of Fuchsian Equations}
+
+
+\taylor{In hindsight, I would have preferred to follow the logic of \cite[Chapters III,IV]{Borel1987} and peppering in the examples}
+
 The Fuchsian condition is a condition on meromorphic differential equations that we impose that make it so that solutions aren't divergent. 
 Maybe this isn't obvious but if one applies the power series technique to innocent looking differential equations they can have formal power series solutions which are completely divergent. 
 The next example shows this.
@@ -842,14 +853,34 @@ Consider a rank $n$ first order system of differential equations
   Y' = A(t) Y. 
  \end{equation}
 with $A(t) \in M_n(\hol(\PP^1\setminus T))$ for $T\subset \PP^1$ a finite collection of points. 
-We say the system  is \emph{Fuchsian at $t_0 \in T$} if $A(t)$ has the form
+We say the system  is \emph{Fuchsian at $t_0 \in T$} (or \emph{regular singular} or \emph{logarithmic}) if $A(t)$ has the form
 		 $$ A(t) = \frac{B(t)}{t-t_0},$$
 where $B(t)$ is  holomorphic at $t_0$. 
-We say the system is \emph{Fuchsian} at if it is Fuchsian at every point in $T$. 
+We say the system is \emph{Fuchsian} (or \emph{regular singular} or \emph{logarithmic}) at if it is Fuchsian at every point in $T$. 
 \end{definition}
+The collection of rank $r$ Fuchsian differentiall equations on $\PP^1\setminus T$ is going to be denoted by 
+ $$ \Sys_+^r(\PP^1\setminus T). $$
+This is to be put in contrast with $\Sys^r(\PP^1\setminus T)$ which we are using to denote holomorphic systems.
+We are going to want to compare these to $\Char_{\GL_r}(\PP^1\setminus T)$ for the Riemann-Hilbert problem.
+
+\begin{remark}[Fuchsian/Regular/Logarithmic]
+	\begin{enumerate}
+		\item 	The words ``Fuchsian'', ``regular singular'', and ``logarithmic'' all mean the same thing.
+		\item 	When a differential equation has a point which is not a regular singular point, people almost always use the term \emph{irregular singular point}.
+		\item The systems $\Sys_+^n(X)$ will be generalized to $\Conn_+^n(X)$ integrable logarithmic connections on a vector bundle. 
+		We use ``linear system'' to mean connection on a trivial vector bundle.
+		We also (following Ogus) use a symbol ``$+$'' every time we are really making a logarithmic construction.
+	\end{enumerate}
+	
+
+	
+	
+\end{remark}
+
+There is a simple translation of this criterion into ODEs.
 We extend this concept to higher order differential equations in one variable by saying that they at Fuchsian and Fuchsian at a point if there associated first order system is. 
 
-\begin{exercise}[Fuch's Criterion For ODEs In One Variable]
+\begin{exercise}[Fuch's Criterion For ODEs In One Variable]\label{E:fuchsian-odes}
 	Consider a univariate holomorphic system on $\PP^1\setminus S$. 
 	A first order system 
 	 $$ y^{(n)} + a_{n-1}(t) y^{(n-1)} + \cdots + a_0(t)=0 $$
@@ -859,6 +890,19 @@ We extend this concept to higher order differential equations in one variable by
 	where the $b_j(t)$ are holomorphic at $t=t_0$
 \end{exercise}
 
+\begin{exercise}\label{E:fuchsian-parameters}
+	Suppose that $S = \lbrace t_1,\ldots,t_m, t_{m+1}=\infty\rbrace$.
+	Show that the coefficient 
+	 $$a_{n-j}(t)= \frac{b_{n-j}(t)}{\prod_{j=1}^m(t-t_j)^j}, \quad \deg(b_{n-j}) \leq j(m-1). $$
+	define a Fuchsian equation an every Fuchsian equation of order $n$ takes this form.
+	
+	Conclude that the number of coefficients one needs to select is 
+	 $$ \sum_{j=1}^{n} j(m-1) = {n \choose 2} (m-1). $$
+	(It turns out the coefficents need to satisfy a Fuch's relation (Theorem~\ref{T:fuchs-relation}) which will cut this dimension down by one)
+\end{exercise}
+
+The Airy equation is a famous example of a irregular linear differential equation.
+This is a primary example when we want to talk about Stokes data which is the generalization of monodromy data (a monodromy reprepresentation) for differential equtions with irregular singular points.
 \begin{example}[Airy Equation]
 	Consider the Airy equation 
 	 $$ y'' = ty.$$
@@ -871,7 +915,7 @@ We extend this concept to higher order differential equations in one variable by
 	From this we see that there is an irregular singular point at $s=0$.
 \end{example}
 
-\begin{remark}
+\begin{remark}[Computations at Infinity]
 	There are two ways to compute what $\frac{d^2}{dt^2}$ in the chart at infinity. 
 	The first way is to act on an unknown function $f$ by the operator $-s^2 \frac{d}{ds}$ twice and then pretend line you never used the symbol $f=f(s)$ for a computation.
 	The second way is to consider the non-commutative ring $\CC[s,\partial]$ subject to the relations $\partial s = s\partial + 1$. 
@@ -906,13 +950,15 @@ We say that a matrix $\Phi(t) \in M_{m,n}(\hol(S))$ is \emph{regular singular at
 \begin{definition}
 	We say that $t=t_0$ is a \emph{regular singular point} if and only if  for every local sector at $t=t_0$ there exists a holomorphic basis of solutions $Y_1(t),\ldots,Y_n(t)$ with $Y_j(t)=(y_{j1}(t),\ldots,y_{jn}(t))^T$ and $\lambda \in \CC$ such that 
 	$$ \lim_{t\to t_0} (t-t_0)^{\lambda} y_{ji}(t) =0. $$
+	
+	\taylor{}
 \end{definition}
 
 That seems like a lot but all this is saying is that as you approach your point in question you don't blow up like an essential singularity.
 \begin{theorem}[Fuch's Criterion]
 	Solutions of Fuchsian systems only have at worst regular singular points locally. 
 \end{theorem}
-\begin{proof}
+\begin{proof}[Regularity Estimate Proof]
 	The trick in this proof is to use the isomorphic $\CC^n \cong \RR^{2n}$ and make estimates as if the functions were real valued. 
 	Here we will view $A(t)$ as a function to $M_{2n}(\RR)$ which is real analytic and a soltion $Y(t)$ as a function to $\RR^{2n}$ which is real analytic. 
 	Also we can observe that a solution $Y(t)$ from this real analytic perspective has $\vert Y(t) \vert^2 = Y(t) \cdot Y(t)$. 
@@ -924,33 +970,41 @@ That seems like a lot but all this is saying is that as you approach your point 
 	 where in the last line we used the Fuchsian hypothesis.
 	 This then gives along a given contour $\gamma(r) = e^{i\theta_0}(r_0-r)$ starting at $\gamma(r_0) = t_0 = e^{i\theta_0}r_0$ and ending at $t=e^{i\theta_0}(r_0-r)$ that $$ \ln\vert Y(t) \vert \leq C_1 + \int_{\gamma}\frac{C_0}{\vert s \vert } d\vert s\vert =  C_1 - \int_{0}^r \frac{C_0}{r-r_0} \vert e^{i\theta_0}dr\vert = C_1 - C_0 \ln \vert r-r_0 \vert $$ 
 	 which implies that $\vert Y(t) \vert \leq e^{C_1} \vert t \vert^{-C_0}$.	
-	 \taylor{FIXME, add Gronwall-like statement to appendix}
 \end{proof}
+
+\begin{proof}[Power Series Proof]
+	\cite[Chapters III 1.3.1]{Borel1987} \taylor{This actually is a cleaner statement and we are going to replace that above with this discussion in a future version.}
+\end{proof}
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%
 \section{Hilbert's 21st Problem}
 %%%%%%%%%%%%%%%%%%%%%%%
 We are now in a position to state Hilbert's 21st problem. 
-The Monodromy map associated to every Fuchsian system on $\PP^1$ with poles contained in $T$ a representation of its fundamental group. 
-$$ \frac{\lbrace \mbox{Fuchsian systems, rank $n$ on $\PP^1$ 
-		with poles on $T$ } \rbrace}{\mbox{(global holomophic gauge trans)}} \to\frac{\lbrace \mbox{repns $\rho:\pi_1(\PP^1\setminus T, t_0) \to \GL_n(\CC) $}\rbrace}{(\mbox{matrix conjugation})} $$
+The Monodromy map associated to every Fuchsian system on $\PP^1$ with poles contained in a finite set $T \subset \PP^1$ a representation of its fundamental group. 
+In what follows $\Char_{\GL_n}(\PP^1\setminus T)$ denotes the set of representations of $\pi_1(\PP^1\setminus T) \to \GL_n(\CC)$ modulo conjugation and $\Sys_+^n(\PP^1\setminus T)$ denotes the collection of Fuchsian systems.
+We have constructed a map
+$$ \Sys_+^n(\PP^1\setminus T)  \to \Char_{\GL_n}(\PP^1\setminus T), \quad \mbox{(ODE) $\mapsto$ (Monodromy Rep)}.$$
 Hilbert's 21st problem asks if this map of sets is surjective. 
 \begin{problem}[Hilbert's 21st Problem]
 	Is it the case that every representation $\rho:\pi_1(\PP^1\setminus T) \to \GL_n(\CC)$ comes from a Fuchsian differential equation with poles supported on $T$?
 \end{problem}
 This problem has a rather crazy history. 
-The problem was first posed by Hilbert in 1900 during the International Congress of Mathematicians (ICM). 
-This is the event where the give out Field's Medals and occurs once every four years. 
-In 1907 Plemelj\footnote{Nalini Joshi pronounces this ``Plum-ell-i'', I'm not sure how to pronounce this name} published a positive answer to the question. 
+The problem was first posed by Hilbert in 1900 during the International Congress of Mathematicians (ICM) during his famous ``Hilbert's Problems'' address.
+In 1907 Plemelj\footnote{Nalini Joshi pronounces this ``Plum-ell-i'', I'm not sure how to pronounce this name so perhaps we should copy her.} published a positive answer to the question. 
 In 1983, Treibich-Koch published a gap in the proof; it turns out that previous work from Dekkers in 1979 implies that the map is indeed surjective in the rank two case. 
 Finally, in 1990, Bolibruch showed that the map is not surjective in rank higher than two disproving the conjecture.
 
+In this section we are going to show that this conjecture is False as stated (Theorem~\ref{T:naive-rhc-false}) for simple dimension reasons.
+We will then give Plemelj's construction is given in section \S\ref{S:plemelj}.
+It turns out this construction relies on ``apparent singularities'' -- monodromy matrices which are trivial.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Representations}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%
-\subsection{Representations of $\pi_1(\PP^1\setminus T)$}
-%%%%%%%%%%%%%%%%
 The representations $\pi_1(\PP^1\setminus T) \to \GL_n(\CC)$ are rather easy to describe. 
 The key observation is that $\PP^1$ minus some points is homotopy equivalent to a bouquet of circles:
 $$ \PP^1 \setminus \lbrace t_1,\ldots,t_n\rbrace \approx \underbrace{S^1 \vee \cdots \vee S^1}_{ \mbox{ $(n-1)$-times}}$$
@@ -977,10 +1031,200 @@ You can actually see this loop is trivial if you think about it a little bit.
 Anyway, with this description the representations $\pi_1(\PP^1\setminus T) \to \GL_n(\CC)$ are determined by tuples $(M_1,M_2,\ldots,M_{n-1}) \in \GL_n(\CC)^{n-1}$ modulo simultaneous conjugation by an element in $\GL_n(\CC)$.
 Here $M_j = \rho(\gamma_j)$. 
 
+To collection of representations of a fundamental group can be given the structure of a variety. 
+This variety is the representation variety. 
+To get representations up to isomorphism, we need to mod out by conjugation. 
+After doing this we get the Character variety. 
+\subsubsection{Representation Varieties}
+The term ``representation variety'' is non-standard, I think. 
+Let $\Pi$ be a finitely presented group. 
+This means that 
+$$ \Pi = \langle \gamma_1,\ldots,\gamma_{\ell} \colon R_1, \ldots, R_s \rangle$$
+where the $R_j$ are relations of the form
+$$ \gamma_{i_1}^{a_1} \gamma_{i_2}^{a_2} \cdots \gamma_{i_k}^{a_k} = 1,$$
+for some $k\geq 0$, $\lbrace i_1,\ldots, i_k \rbrace \subset \lbrace 1,\ldots, \ell\rbrace$ and $a_1,\ldots, a_k \in \ZZ$. 
+A representation of $\Pi\to \GL_n(\CC)$ is determined by $\gamma_i \mapsto M_i$ where $M_i \in \GL_n(\CC)$ satisfy relations of the type 
+$$ M_{i_1}^{a_1} M_{i_2}^{a_2} \cdots M_{i_k}^{a_k} = I_n$$
+where $I_n$ is the $n\times n$ identity matrix.
+Viewing the entries of $M_{i}$ as variables we find get an algebraic variety $\Repn_{\GL_n}(\Pi)(\CC)$ whose points are in bijection with representations $\rho: \Pi \to \GL_n(\CC)$.
+
+Note that the equations are actually defined over $\ZZ$ and the construction is quite general so $\Repn_{\GL_n}(\Pi)(\CC)$ is actually the $\CC$-points of a scheme $\Repn_{\GL_n}(\Pi)$ defined over $\CC$.
+In fact,  one can replace any $\GL_n$ with $\SL_n$ or any other algebraic group $G$ to obtain a variety defined over any ring $R$ to get a group scheme over $R$, $\Repn_{G}(\Pi)$. 
+In fact if $G_1 \subset G_0$ then we have 
+$$ \Repn_{G_1}(\Pi) = (G_1)^{\ell} \cap \Repn_{G_0}(\Pi).$$
+The scheme $\Repn_{G_1}(\Pi)$ is actually a fiber product for the following diagram
+$$ \begin{tikzcd}
+& \Repn_{G_0}(\Pi) \ar[d] \\
+G_2^{\ell} \ar[r] & G_0^{\ell}
+\end{tikzcd}.$$
+We also want to mention that the construction is functorial in $\Pi$.
+If $\Pi_0 \to \Pi_1$ is a morphism of finitely presented groups then there is an induced morphism $\Repn_G(\Pi_1) \to \Repn_{G}(\Pi_0)$.
+If $w:\Pi_0 \to \Pi_1$ is given by sending a generator of $\Pi_0$ to a word in the generators of $\Pi_1$, $w\colon \gamma_i \mapsto w_i$ then $N=(N_0,\ldots,N_{\ell_1}) \in \Repn_G(\Pi_1)$ are mapped to $(w_1(N), w_2(N),\ldots,w_{\ell_0}(N)) \in \Repn_G(\Pi_0)$.
+Since the map $w$ is a group homomorphism the matrices $w_1(N),w_2(N),\ldots,w_{\ell_0}(N)$ must necessarily satisfy the relations for $\Pi_0$.
+\begin{definition}
+	Given $\Pi$ a finitely presented group with $\ell$ generators and $G$ a group scheme over a ring $R$ the $R$-scheme $\Repn_{G}(\Pi) \subset G^{l}$ is called \emph{representation scheme} (or \emph{representation variety} of $G$ and $\Pi)$). 
+	It is cut out by the relations imposed by the relations in the finite presentation.
+\end{definition}
+
+When $\Pi=\pi_1(X)$ for some complex manifold these are also called \emph{character varieties}. They are well-defined since the groups are well-defined up to conjugation. 
+We use the notation
+$$\Repn_G(\Pi) = \Repn_G(X).$$ 
+This is again contravariant in $X$. 
+
+\begin{example}
+	In the case that $X=\PP^1\setminus \lbrace 0,1,x,\infty\rbrace$ then $\pi_1(X)=F_3$ the free group on three generators and the $\Repn_{\GL_2}(X) \subset \GL_2^4$ defined by the equation $M_0M_1M_2M_{\infty}=I_2$ which is just isomorphic to $\GL_2^3$.
+\end{example}
+
+
+\begin{example}
+	Let $X$ be a genus two surface. 
+	Then
+	$$\pi_1(X) = \langle \alpha_1,\beta_1,\alpha_2,\beta_2 \colon \alpha_1\beta_1\alpha_1^{-1}\beta_1^{-1}\alpha_2\beta_2\alpha_2^{-1}\beta_2^{-1}=1\rangle,$$
+	so $\Repn_{\GL_2}(X)\subset \GL_2(\CC)^4$ needs 16 variables and 4 equations. 
+	\begin{figure}[h]
+		\begin{center}
+			\includegraphics[scale=0.33]{genus2.eps}
+		\end{center}
+		\caption{A picture of the generating cycles on a genus two compact real manifold of dimension two.}
+	\end{figure}
+\end{example}
+
+\subsubsection{Character Varieties}
+
+t $G$ be a group scheme.
+Two representations $\pi_1(X) \to G$ are equivalent if and only if they are conjugate. 
+Hence we have an action by $B\in\GL_n$ on $(M_1,\ldots,M_l)$ given by 
+$$ B\cdot (M_1,M_2,\ldots,M_l) = (B M_1 B^{-1}, BM_2B^{-1},\ldots, BM_lB^{-1}). $$
+We want to quotient by this action.
+\begin{definition}
+	The algebraic stack 
+	$$\Char_{G}(\Pi) := [\Repn_{G}(\Pi)/G]$$ 
+	is called the \emph{character stack}.
+\end{definition}
+When it is represented by a scheme, that scheme is unique up to isomorphism and we call it the \emph{character scheme}. 
+In the case that it is a variety we call it the \emph{character variety}. 
+We will abusively denote all of these things by $\Char_{G}(\Pi)$.
+
+\begin{remark}
+	The point of using an algebraic stack here is not to be a jerk but to state that quotients are a delicate mathematical issue that are often abused and that we need to contend with.
+	For the uninitiated we mention that there are several theories available to us. 
+	First there is the approach is Geometric Invariant Theory for which there is the famous book \cite{Mumford1994}. 
+	The second there is theory of Algebraic Stacks for which there is an entire Stacks Project. 
+	One can also use quotients in the category of sheaves too which is described here \cite[\href{https://stacks.math.columbia.edu/tag/07S5}{Tag 07S5}]{stacks-project}.
+\end{remark}
+
+We can actually prove that $\Char_G(\Pi)$ is represented by a scheme.
+\begin{theorem}
+	$\Char_G(\Pi)$ is an algebraic variety. 
+\end{theorem}
+\begin{proof}
+	See Gunning's book \cite[Theorem 27]{Gunning1967}.
+	Also see \cite[pg 149]{Iwasaki1991} for futher discussion.
+\end{proof}
+
+We can actually compute the dimension of this variety without knowing much. 
+\begin{example}[$\GL_2$-Representations of $\PP^1\setminus S$]\label{E:rank2-repns}
+	We will look at the case where $G= \GL_2$ and $X = \PP^1\setminus S$ where $S$ is a finite collection of points.
+	We claim that $\dim(\Char_{\GL_2}(\PP^1\setminus S))=4(\vert S\vert -1)-3$.
+	Here we use that $\pi_1(\PP^1\setminus S) = F_{\vert S \vert-1}$ the free group on $\vert S \vert-1$ letters.
+	We have $\overline{G}=\GL_2(\CC)/\lbrace c I_2 \colon c\in \CC^{\times}\rbrace$ acting freely on the open subset $U$ of $\GL_2(\CC)^{\vert S \vert -1}$ corresponding to irreducible representations by Schur's Lemma (the only equivariant conjugation actions must be constants).
+	Then we have
+	\begin{align*}
+	\dim( \Char_{\GL_2}(\PP^1\setminus S) )=& \dim(U) - \dim(\overline{G}) \\
+	=& 4\cdot (\vert S \vert -1) -(\dim(\GL_2) -1) \\
+	=& 4(\vert S \vert-1) -3,
+	\end{align*}
+	which proves our result.
+\end{example}
+
+As before, we let $\Char_G(X)=\Char_G(\Pi)$ for $\Pi=\pi_1(X)$ when $X$ is connected topological space with fundamental group $\Pi$.
+
+The following example is the situation in the Hypergeometric case. 
+\begin{example}[$\SL_2$-Representations of $\PP^1\setminus \lbrace 0,1,\infty\rbrace$]
+	In the case of $X=\PP^1\setminus \lbrace 0,1,\infty\rbrace$ and $G=\SL_2$ the character variety is $\AA^3$:
+	$$ \Char_{\SL_2}(\PP^1\setminus \lbrace 0,1,\infty \rbrace) \cong \AA^3.$$
+	The representation space $\Repn_{\SL_2}(\PP^1\setminus \lbrace 0,1,\infty \rbrace)$ is determined by three matrices in $\SL_2$, $M_0,M_1,M_{\infty}$ satisfying $M_0M_1M_{\infty}=I_2$. 
+	Using conjugation we can bring these into standard hypergeometric form with $(\theta_0,\theta_1,\theta_2)$ uniquely determining the monodromy matrices. 
+	This corresponds to the fact that the Gauss hypergeometric function has three parameters $(a,b,c)$ see \S\ref{S:hypergeometric-case}.
+\end{example}
+
+We have another example for which I won't give a proof. 
+You can read more about these spaces in Loray's note \href{https://arxiv.org/pdf/1503.06781.pdf}{here}.
+The following example is the situation in the Painlev\'e case.
+\begin{example}[$\SL_2$-Representations of $\PP^1\setminus \lbrace 0,1,\infty, x\rbrace$]
+	In the case $X = \PP^1\setminus \lbrace 0,1,\infty,x\rbrace$ as before with $G=\SL_2$ then the representation variety $\Repn_{\SL_2}(X)\cong \SL_2^3$ since $\pi_1(\PP^1\setminus \lbrace 0,1,\infty,x\rbrace) \cong F_3$, the free group on three letters (in terms of monodromy matrices there are three $M_0,M_1,M_2,M_{\infty}$ and they satisfy $M_0M_1M_2M_{\infty}=1$ so we think of $M_{\infty}$ being determined by the first three). 
+	
+	
+	It is a fact that the character variety $\Char_{\SL_2}(X)$ is a degree four hypersurface in $\AA^7$ with coordinates $(a,b,c,d,x,y,z)$ given by 
+	$$a^2+b^2+c^2+d^2 + x^2+y^2+z^2 -(ab+cd)x-(ad+bc)y-(ac+bd)z + abcd + xyz - 4 = 0.$$
+\end{example}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Failure of Surjectivity of the Naive Riemann-Hilbert Morphism}
+%%%%%%%%%%%%%%%%%%%%%%%
+Building on what we have already done we can already show that the map
+
+\begin{theorem}[Failure of Naive Hilbert's 21st]\label{T:naive-rhc-false}
+	Let $T \subset \PP^1$ be a nonempty finite collection of points with $\vert T \vert \geq 3$.
+	The naive Riemann-Hilbert map
+	 $$ \Sys_+^2( \PP^1\setminus T) \to \Char_{\GL_2}(\PP^1\setminus T), \quad \mbox{(ODE) $\mapsto$ (Monodromy Rep)},$$
+	from Fuchsian systems of rank two to rank two monodromy representations modulo conjugation, is not surjective.
+\end{theorem}
+\begin{proof}
+	We are going to make a dimension count and show that this is impossible. 
+	Let $T = \lbrace t_1,\ldots,t_m,\infty\rbrace$.
+	First, order 1, rank 2 differential equations are equivalent to order 2 rank 1 differential equations by the theory of cyclic vector (\S\ref{S:cyclic-vectors}). 
+	By Exercise~\ref{E:fuchsian-odes} and we know that order two Fuchsian differential equations take the form 
+	 $$ y''(t) + a_1(t)y'(t) + a_2(t) =0 $$
+	where $a_j(t)=b_j(t)/\prod_j^m(t-t_j)$ where $b_j(t)$ has degree at most $j(m-1)$.
+	The coeffiecients of the polynomials $b_1(t),b_2(t)$ then provide a parameter space for the system of differential equations which shows 
+	 $$ \dim(\Sys_+^2( \PP^1\setminus T) ) = (m-1) + 2(m-1) = 3m-3.$$
+	On the other hand, from example~\ref{E:rank2-repns} we know that 
+	 $$ \dim( \Char_{\GL_2}(\PP^1\setminus T)) = 4m-3.$$
+	This then gives 
+	 $$\dim( \Char_{\GL_2}(\PP^1\setminus T))-\dim(\Sys_+^2( \PP^1\setminus T) ) = m.$$
+	Hence for $\vert T\vert = m+1$ bigger than 2 the map can't be surjective.
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Painlev\'e VI and Monodromy}
+%%%%%%%%%%%%%%%%%%%%%%%
+We will look at the monodromy representations of $\PP^1\setminus \lbrace t_1,t_3,t_3,t_4\rbrace$ coming from rank two Fuchsian differential equations with singular locus $\lbrace t_0,t_1,t_3,t_3,t_4\rbrace$ with $t_0$ being an apparent singularity. 
+We will show that in this situation:
+ $$ \mbox{(dimensions of space of equations)} = 10, $$
+  $$ \mbox{(dimensions of space of representations)} = 9, $$
+which suggest that we should be able to move through the space of equations in one dimensional families and preserve the monodromy.
+Such a deformation is called an isomonodromic deformation.
+
+Let's first count the number of parameters involved in defining a differential equation
+ $$ \dfrac{d^2y}{dt^2} + a_1(t) \dfrac{dy}{dt} + a_2(t)y=0,$$ 
+with singular points $\lbrace t_0,t_1,t_3,t_3,t_5\rbrace$ such that the singularity at $t_0$ is ``apparent''. 
+This means the solution of the ODE is meromorphic at $t_0$. 
+Equivalently, loops around $t_0$ make no contribution to the monodromy representation and hence giving a representation 
+ $$ \pi_1(\PP^1\setminus \lbrace t_1,t_2,t_3,t_4\rbrace) \to \GL_2(\CC).$$ 
+Using the cross-ratio, we only need two parameters to describe the relative positions of the point. 
+One can think of this also as sending $\lbrace t_0,t_1,t_2,t_3,t_5\rbrace$ to $\lbrace 0,1,\infty,x,z\rbrace$ using a Moebius transformation. 
+In what follows we are going to assume $z$ is the apparent singularity so our associated monodromy representations take the form
+ $$ \pi_1(\PP^1\setminus \lbrace 0,1,\infty,x\rbrace) \to \GL_2(\CC).$$
+By Exercise~\ref{E:fuchsian-parameters}, the coefficients $a_j(t)$ require $j(m-1)$ parameters where $5=\vert T \vert =m+1$.
+So $m=4$.
+This gives 
+ $$ \mbox{(number of coefficients)} = (1)(m-1) + (2)(m-1) = 3(m-1) = 9.$$
+The coefficients are not independent by Fuch's Relation (Theorem~\ref{T:fuchs-relation}).
+This cuts down the dimension by one giving us 
+$$\mbox{(dimensions of space of equations)} = 2 \mbox{ [for $x$ and $z$]}+(9-1) \mbox{ [for the coeffs]} = 10. $$
+
+We now count the representations.
+These are given by $\pi_1(\PP^1\setminus \lbrace 0,1,\infty,x \rbrace) \to \GL_2(\CC)$ which is determined by three matrices in $\GL_2(\CC)$. 
+We then mod out by conjugation which is an action of $\PGL_2(\CC)$. 
+This gives 
+$$ \dim(\Char_{\GL_2}(\PP^1\setminus \lbrace 0,1,\infty,x\rbrace)) = \dim( \GL_2(\CC)^3/\PGL_2(\CC) ) = (4)(3) - (4-1) = 9.$$
+
 %%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Gauge Transformations}
 %%%%%%%%%%%%%%%%%%%%%%%
-It remain to describe the equivalence relation of differential equations that we are using in the Hilbert's 21st problem.
+To get a full description of equivalence, it remain to describe the equivalence relation on differential equations.
 Let $(R,\partial)$ be a $\partial$-ring and consider the equation
 \begin{equation}\label{E:original-equation}
 Y' = AY
@@ -1286,7 +1530,7 @@ Finally, many authors restrict to the case $\Delta = \lbrace \partial \rbrace$ w
 In this case some authors (like Nick Katz) like to define $D$ as the derivation operator on the module $V$ which satisfies $D(av) = \partial(a) v + a D(v)$ for $v\in V$ and $a \in R$.
 I reserve the right to use a mixture of these perspectives (and you should too).
 
-\subsection{A Bosonic Fock Space and Weyl Algebras}
+\subsubsection{A Bosonic Fock Space and Weyl Algebras}
 A frequently used physical perspective of $D$-modules that occurs is the following. 
 Let  
  $$ B=\CC[x_1,x_2,\ldots][\partial_1,\partial_2,\ldots], \quad \partial_j = \dfrac{\partial}{\partial x_j}.$$
@@ -1379,7 +1623,7 @@ The point here is that change of basis of the $D$-module is gives rise to a gaug
 	Show that indeed a change of coordinates on the $R$-module induces a gauge tranformations of the linear differential equation.
 \end{exercise}
 
-\subsection{Cyclic Vectors and Katz's Theorem}
+\subsection{Cyclic Vectors and Katz's Theorem}\label{S:cyclic-vectors}
 In order to convert first order linear systems of rank $n$ into linear differential equations of  order $n$ in a single variable we need the notion of a cyclic vector. 
 \begin{definition}
 	An $R[\Delta]$-module $V$ is \emph{cyclic} if and only if there exists some $v \in V$ such that $V = R[\Delta]\cdot v$. 
@@ -1669,12 +1913,15 @@ If $\rho-\mu$ is negative then we don't need to worry about this.
 If $\rho-\mu$ is positive then we can switch the role of $\rho$ and $\mu$ and again not worry about this. 
 
 We record the following for later use. 
-\begin{theorem}\taylor{Check and add. We might need to add more about formal power series solutions to do Stokes stuff later.}
+\begin{theorem}
 	More generally, in the non-resonant case one has a fundamental matrix of the form 
 	$$ \Phi(t) = \Psi(t) t^{A_0} $$
 	where $\Psi(t)$ is a matrix of formal power series. 
 	The matrix $\Psi(t)$ is convergent if $A(t)$ is convergent.
 \end{theorem}
+\begin{proof}
+	This is \cite[III, Proposition 1.2.1]{Borel1987}
+\end{proof}
 
 \subsection{Exponent Shifting}
 We record the following useful fact.
@@ -3042,111 +3289,6 @@ If we assume that $H_2(X,\ZZ)=0$ or that $\pi_2(X)=0$ then one can use the long 
  $$ \PP^1\setminus S_{\mu} \hookrightarrow (\PP^1\times X)\setminus S $$
 induces an isomorphism of fundamental groups.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Representation and Character Varieties}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-To collection of representations of a fundamental group can be given the structure of a variety. 
-This variety is the representation variety. 
-To get representations up to isomorphism, we need to mod out by conjugation. 
-After doing this we get the Character variety. 
-\subsection{Representation Varieties}
-The term ``representation variety'' is non-standard, I think. 
-Let $\Pi$ be a finitely presented group. 
-This means that 
-$$ \Pi = \langle \gamma_1,\ldots,\gamma_{\ell} \colon R_1, \ldots, R_s \rangle$$
-where the $R_j$ are relations of the form
-$$ \gamma_{i_1}^{a_1} \gamma_{i_2}^{a_2} \cdots \gamma_{i_k}^{a_k} = 1,$$
-for some $k\geq 0$, $\lbrace i_1,\ldots, i_k \rbrace \subset \lbrace 1,\ldots, \ell\rbrace$ and $a_1,\ldots, a_k \in \ZZ$. 
-A representation of $\Pi\to \GL_n(\CC)$ is determined by $\gamma_i \mapsto M_i$ where $M_i \in \GL_n(\CC)$ satisfy relations of the type 
-$$ M_{i_1}^{a_1} M_{i_2}^{a_2} \cdots M_{i_k}^{a_k} = I_n$$
-where $I_n$ is the $n\times n$ identity matrix.
-Viewing the entries of $M_{i}$ as variables we find get an algebraic variety $\Repn_{\GL_n}(\Pi)(\CC)$ whose points are in bijection with representations $\rho: \Pi \to \GL_n(\CC)$.
-
-Note that the equations are actually defined over $\ZZ$ and the construction is quite general so $\Repn_{\GL_n}(\Pi)(\CC)$ is actually the $\CC$-points of a scheme $\Repn_{\GL_n}(\Pi)$ defined over $\CC$.
-In fact,  one can replace any $\GL_n$ with $\SL_n$ or any other algebraic group $G$ to obtain a variety defined over any ring $R$ to get a group scheme over $R$, $\Repn_{G}(\Pi)$. 
-In fact if $G_1 \subset G_0$ then we have 
-$$ \Repn_{G_1}(\Pi) = (G_1)^{\ell} \cap \Repn_{G_0}(\Pi).$$
-The scheme $\Repn_{G_1}(\Pi)$ is actually a fiber product for the following diagram
-$$ \begin{tikzcd}
-& \Repn_{G_0}(\Pi) \ar[d] \\
-G_2^{\ell} \ar[r] & G_0^{\ell}
-\end{tikzcd}.$$
-We also want to mention that the construction is functorial in $\Pi$.
-If $\Pi_0 \to \Pi_1$ is a morphism of finitely presented groups then there is an induced morphism $\Repn_G(\Pi_1) \to \Repn_{G}(\Pi_0)$.
-If $w:\Pi_0 \to \Pi_1$ is given by sending a generator of $\Pi_0$ to a word in the generators of $\Pi_1$, $w\colon \gamma_i \mapsto w_i$ then $N=(N_0,\ldots,N_{\ell_1}) \in \Repn_G(\Pi_1)$ are mapped to $(w_1(N), w_2(N),\ldots,w_{\ell_0}(N)) \in \Repn_G(\Pi_0)$.
-Since the map $w$ is a group homomorphism the matrices $w_1(N),w_2(N),\ldots,w_{\ell_0}(N)$ must necessarily satisfy the relations for $\Pi_0$.
-\begin{definition}
-	Given $\Pi$ a finitely presented group with $\ell$ generators and $G$ a group scheme over a ring $R$ the $R$-scheme $\Repn_{G}(\Pi) \subset G^{l}$ is called \emph{representation scheme} (or \emph{representation variety} of $G$ and $\Pi)$). 
-	It is cut out by the relations imposed by the relations in the finite presentation.
-\end{definition}
-
-When $\Pi=\pi_1(X)$ for some complex manifold these are also called \emph{character varieties}. They are well-defined since the groups are well-defined up to conjugation. 
-We use the notation
-$$\Repn_G(\Pi) = \Repn_G(X).$$ 
-This is again contravariant in $X$. 
-
-\begin{example}
-	In the case that $X=\PP^1\setminus \lbrace 0,1,x,\infty\rbrace$ then $\pi_1(X)=F_3$ the free group on three generators and the $\Repn_{\GL_2}(X) \subset \GL_2^4$ defined by the equation $M_0M_1M_2M_{\infty}=I_2$ which is just isomorphic to $\GL_2^3$.
-\end{example}
-
-
-\begin{example}
-	Let $X$ be a genus two surface. 
-	Then
-	$$\pi_1(X) = \langle \alpha_1,\beta_1,\alpha_2,\beta_2 \colon \alpha_1\beta_1\alpha_1^{-1}\beta_1^{-1}\alpha_2\beta_2\alpha_2^{-1}\beta_2^{-1}=1\rangle,$$
-	so $\Repn_{\GL_2}(X)\subset \GL_2(\CC)^4$ needs 16 variables and 4 equations. 
-	\begin{figure}[h]
-		\begin{center}
-			\includegraphics[scale=0.33]{genus2.eps}
-		\end{center}
-		\caption{A picture of the generating cycles on a genus two compact real manifold of dimension two.}
-	\end{figure}
-\end{example}
-
-\subsection{Character Varieties}
-
-t $G$ be a group scheme.
-Two representations $\pi_1(X) \to G$ are equivalent if and only if they are conjugate. 
-Hence we have an action by $B\in\GL_n$ on $(M_1,\ldots,M_l)$ given by 
-$$ B\cdot (M_1,M_2,\ldots,M_l) = (B M_1 B^{-1}, BM_2B^{-1},\ldots, BM_lB^{-1}). $$
-We want to quotient by this action.
-\begin{definition}
-	The algebraic stack 
-	$$\Char_{G}(\Pi) := [\Repn_{G}(\Pi)/G]$$ 
-	is called the \emph{character stack}.
-\end{definition}
-When it is represented by a scheme, that scheme is unique up to isomorphism and we call it the \emph{character scheme}. 
-In the case that it is a variety we call it the \emph{character variety}. 
-We will abusively denote all of these things by $\Char_{G}(\Pi)$.
-\begin{remark}
-	The point of using an algebraic stack here is not to be a jerk but to state that there is a serious mathematical issue that we need to contend with. 
-	It's very complicated and two complicated theories for which there exist entire books written about them are devoted to dealing with this issue. 
-	The first approach is Geometric Invariant Theory for which there is the famous book \cite{Mumford1994}. 
-	The second would be the theory of Algebraic Stacks for which there is an entire Stacks Project. 
-	One can also use quotients in the category of sheaves too which is described here \cite[\href{https://stacks.math.columbia.edu/tag/07S5}{Tag 07S5}]{stacks-project}.
-\end{remark}
-
-
-As before, we let $\Char_G(X)=\Char_G(\Pi)$ for $\Pi=\pi_1(X)$ when $X$ is connected topological space with fundamental group $\Pi$.
-
-
-\begin{example}
-	In the case of $X=\PP^1\setminus \lbrace 0,1,\infty\rbrace$ and $G=\SL_2$ the character variety is $\AA^3$:
-	$$ \Char_{\SL_2}(\PP^1\setminus \lbrace 0,1,\infty \rbrace) \cong \AA^3.$$
-	The representation space $\Repn_{\SL_2}(\PP^1\setminus \lbrace 0,1,\infty \rbrace)$ is determined by three matrices in $\SL_2$, $M_0,M_1,M_{\infty}$ satisfying $M_0M_1M_{\infty}=I_2$. 
-	Using conjugation we can bring these into standard hypergeometric form with $(\theta_0,\theta_1,\theta_2)$ uniquely determining the monodromy matrices. 
-	This corresponds to the fact that the Gauss hypergeometric function has three parameters $(a,b,c)$ see \S\ref{S:hypergeometric-case}.
-\end{example}
-
-We have another example for which I won't give a proof. \taylor{add reference, maybe Loray}
-\begin{example}
-	In the case $X = \PP^1\setminus \lbrace 0,1,\infty,x\rbrace$ as before with $G=\SL_2$ then the representation variety $\Repn_{\SL_2}(X)\cong \SL_2^3$ since $\pi_1(\PP^1\setminus \lbrace 0,1,\infty,x\rbrace) \cong F_3$, the free group on three letters (in terms of monodromy matrices there are three $M_0,M_1,M_2,M_{\infty}$ and they satisfy $M_0M_1M_2M_{\infty}=1$ so we think of $M_{\infty}$ being determined by the first three). 
-	
-	
-	It is a fact that the character variety $\Char_{\SL_2}(X)$ is a degree four hypersurface in $\AA^7$ with coordinates $(a,b,c,d,x,y,z)$ given by 
-	$$a^2+b^2+c^2+d^2 + x^2+y^2+z^2 -(ab+cd)x-(ad+bc)y-(ac+bd)z + abcd + xyz - 4 = 0.$$
-\end{example}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The Painlev\'e Property}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -3158,7 +3300,7 @@ This is how they came up with Airy functions, Bessel functions, hypergeometric f
 	An ordinary differential equation in one variable has the \emph{Painlev\'e property} if and only if germ $f\in\CC\langle t-t_0\rangle$ admits a well-defined analytic continuation.
 \end{definition}
 
-The main result concerning the 
+%The main result concerning the 
 \begin{theorem}
 	Consider a differential equation of the form 
 	$$ \dfrac{d^2q}{dx^2} = R(x,q,q'). $$
@@ -3337,7 +3479,7 @@ The proof of this is given in \S\ref{S:application-of-division}.
 We remind the reader that for an ideal $I$ in a ring $R$ and an element $s\in R$ we have $(I:s) = \lbrace r \in R \colon sr \in I\rbrace$ is an larger ideal containing $I$ (see \cite{Atiyah2016}).
 
 
-The second item in this theorem leads to two imporant ideals. 
+The second item in this theorem leads to two imporant ideas. 
 The first idea is that simple field extensions and prime ideals in the differential setting are not so simple. 
 Second, if we remember how prime and primary decompositions work from Commutative algebra, we see that this item is telling someting about the components of $\lbrace g\rbrace_{\partial}$.
 In particular by localizing (or specifying the inequation $S_g\neq 0$) we are picking out an irreducible component of the variety of solutions.
@@ -3580,8 +3722,15 @@ Both perspectives are useful.
 \end{figure}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Differential Closures}\label{S:univariate-differential-closures}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+For this section I'm going to borrow heavily from my model theory friends.
+See for example Ronnie Nagloo's thesis or David Marker's notes \cite{Marker2000}.
+
+
 %%%%%%%%%%%%%%%%%%%%%%%
-\section{Appendix: Levi's Lemmas on $[y^n]$ and $[xy]$}\ref{S:levi}
+\section{Appendix: Levi's Lemmas on $[y^n]$ and $[xy]$}\label{S:levi}
 %%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Monomials in Ordinary Differential Polynomial Rings}
