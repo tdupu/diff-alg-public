@@ -6,6 +6,10 @@
 \newcommand{\taylor}[1]{{\color{blue} \sf $\spadesuit\spadesuit\spadesuit$ Taylor: [#1]}}
 \newcommand{\todo}[1]{{\color{purple} \sf $\spadesuit\spadesuit\spadesuit$ TODO: [#1]}}
 
+\usepackage{enumitem}
+
+
+\usepackage{tikz}
 \usepackage{tikz-cd}
 \usepackage{graphicx}
 \usepackage{soul}
@@ -28,6 +32,8 @@
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{remarks}[theorem]{Remarks}
 \newtheorem{warning}[theorem]{Warning}
+
+
 
 
 \newcommand{\trdeg}{\operatorname{trdeg}}
@@ -91,10 +97,21 @@
 \newcommand{\Lie}{\operatorname{Lie}}
 \newcommand{\Fcal}{\mathcal{F}}
 \newcommand{\Gcal}{\mathcal{G}}
+\newcommand{\Hcal}{\mathcal{H}}
 \newcommand{\id}{\operatorname{id}}
 \newcommand{\can}{\operatorname{can}}
 \newcommand{\Clf}{\operatorname{Clf}}
+\newcommand{\pr}{\operatorname{pr}}
 
+
+\newcommand{\bra}[1]{\langle #1 \vert }
+\newcommand{\ket}[1]{\vert #1 \rangle}
+\newcommand{\Jac}{\operatorname{Jac}}
+\newcommand{\Char}{\operatorname{Char}}
+\newcommand{\an}{\operatorname{an}}
+\newcommand{\ldeg}{\operatorname{ldeg}}
+\newcommand{\red}{\operatorname{red}}
+\newcommand{\rk}{\operatorname{rk}}
 
 
 
@@ -273,12 +290,13 @@ A \emph{morphism} of differential rings is a ring homomorphism $f:A\to B$ such t
 \end{definition}
 
 \chapter{Monodromy and Hilbert's 21st Problem }
+The statement of Hilbert's 21st problem to the 1900 International Congress of Mathematicians (ICM) is as follows. 
 
-\quoteattr{In the theory of linear differential equations with one independent variable $z$, I wish to indicate an important problem one which very likely Riemann himself may have had in mind. 
+\quoteattr{``In the theory of linear differential equations with one independent variable $z$, I wish to indicate an important problem one which very likely Riemann himself may have had in mind. 
 	This problem is as follows: To show that there always exists a linear differential equation of the Fuchsian class, with given singular points and monodromic group. 
 	The problem requires the production of $n$ functions of the variable $z$, regular\footnote{Hilbert means holomorphic.} throughout the complex $z$-plane except at the given singular points; at these points the functions may become infinite of only finite order, and when $z$ describes circuits about these points the functions shall undergo the prescribed linear substitutions. 
 	The existence of such differential equations has been shown to be probable by counting the constants, but the rigorous proof has been obtained up to this time only in the particular case where the fundamental equations of the given substitutions have roots all of absolute magnitude unity. L. Schlesinger (1895) has given this proof, based upon Poincaré's theory of the Fuchsian zeta-functions. 
-	The theory of linear differential equations would evidently have a more finished appearance if the problem here sketched could be disposed of by some perfectly general method.}{Hilbert's 21st Problem}
+	The theory of linear differential equations would evidently have a more finished appearance if the problem here sketched could be disposed of by some perfectly general method.''}{Hilbert's 21st Problem}
 
 In this chapter we are going to move towards Hilbert's 21st problem and some of the classical theory of monodromy of solutions of differential equations.
 
@@ -1634,7 +1652,7 @@ We record the following useful fact.
 	One can check that $\sigma_p(A_0-\mu) = \sigma_p(A_0)-\mu$ where $\sigma_p(B)$ denotes the eigenvalues of a matrix $B$.
 \end{proof}
 
-\subsection[Exponents Determine Equations]{Local Exponents Determine Equations in Hypergeometric Case}
+\subsection[Exponents Determine Equations]{Local Exponents Determine Equations in Hypergeometric Case}\label{S:hypergeometric-case}
 In this subsection we work in the Fuchsian case where $\#S=3$ and rank two. 
 In particular we work with single ordinary differential equations of the form
  $$ y'' + a_1(t)y' + a_0(t) y =0 $$
@@ -2074,7 +2092,6 @@ In the Weyl algebra	$M_n(\Omega_X^{\bullet})[d]$ for $\omega \in M_n(\Omega_X^{\
 This is going to be used when computing our formulas for curvature (Theorem~\ref{T:integrability-conditions}).
 
 \subsubsection{The formula: $\nabla = d +\omega$}
-
 We now verify the claim about the description in local coordinates.
 Let $U$ be an open subset for which $s_1,\ldots,s_n$ is a basis for $E(U)$. 
 Let $\psi: E(U) \to \Ocal_X(U)^{\oplus n}$ be the trivialization given by $\psi(f^is_i) = f^ie_i$ where $e_i$ is the standard basis vector on $\Ocal_X^{\oplus n}$ (say viewed as column vectors).
@@ -2305,6 +2322,8 @@ Perhaps you should just google these now and see all of these curvature tensors 
 
 \section{Plemelj's Construction}
 
+\taylor{I need to add my notes here}
+
 \section{Riemann-Hilbert Correspondences}\label{S:rhcs}
 By \emph{a} Riemann-Hilbert correspondence we will mean a theorem which gives some equivalence between a category of differential equations of some flavor with a category of representations of fundamental groups of some flavor. 
 This may not even be a functor but just a bijection of particular sets of some property. 
@@ -2372,12 +2391,13 @@ This proves that $L$ is a local system. Note in particular that
 $$ L(V) = \Phi_V \cdot \CC^{\oplus n } $$
 where $\Phi_V$ is a fundamental matrix valid on $V \subset U$. 
 
-\subsection{Pushfowards and Pullbacks of Local Systems}
+\subsection{The Espace \'Etale: Pullbacks and Pushforwards}
+
 I was tempted to add the following exercise without comment:
 \begin{exercise}
-	The category $\LocSys(X)$ the category of local systems of finite dimensional $\CC$-vector spaces makes sense and for every morphism of topological spaces $f:X\to Y$ one a functor $f^*:\LocSys(X) \to \LocSys(Y)$.
+	The category $\LocSys(X)$ the category of local systems of finite dimensional $\CC$-vector spaces makes sense and for every morphism of topological spaces $f:X\to Y$ one a functor $f^{-1}:\LocSys(X) \to \LocSys(Y)$.
 \end{exercise}
-In hindsight, this isn't very nice. 
+I thought about it a second time and concluded this isn't very nice.
 
 We are going to need to talk about inverse images of pullback of local systems so I want to say a couple words about inverse images of sheaves in general. 
 Let $\Gcal$ be a sheaf on a topological space $Y$. 
@@ -2429,8 +2449,155 @@ Similarly, $f_*\Fcal$ for a sheaf $\Fcal$ on $X$ is the pushout
 \end{exercise}
 
 
+\subsection{Every Riemann Surface at Once}
+Using the espace \'etale construction in the case of the sheaf of holomorphic functions in the complex plane give something amazing. 
+Here points are really $(z_0,s_{z_0})$ where $z\in \CC$ and $s_{z_0} \in \CC\langle z-z_0\rangle$ is a germ of a holomorphic function on $z_0$.
+This for example could be a germ of some branch of $\sqrt{z}$ at the points $z=1$. 
+Then this continues to all other branches of $\sqrt{z}$. 
 
-\subsection{Representations Associated to Local Systems}\label{S:locsys-to-repn}
+This branch determines a leaf or connected component of $\mathcal{X}$ where 
+$$ \pi: \mathcal{X} =\overline{ \Ocal_{\AA^{1,\an}} } \to \CC,$$
+is the espace \'etale for the sheaf of holomorphic functions on $\CC$. 
+
+The topology of the espace \'etale is crazy looking. 
+For every germ of a holomorphic function over a point $z_0$ there is an element $\mathcal{X}$. 
+So the fibers are uncountable. 
+Also, for any element $f$ of any fiber we can analytically continue germ around to get a connected component $\mathcal{X}(f) \subset \mathcal{X}$. 
+This is actually a connected Riemann surface that maps to $\CC$ and is the Riemann surface of the germ $f$.
+It may not be surjective onto $\CC$ since not every germ admits an analytic continuation to every points of $\CC$ (some ``overconvergent'' functions have a natural boundary) but it will give something. 
+
+So that is it. The espace \'etale $\mathcal{X} \to \CC$ has as connected components all of the possible Riemann surfaces that come from analytic continuation of a germ, with many of them appearing with uncountable multiplicity.
+
+
+\subsection{\'Etale Morphisms, Coverings, and Locally Trivial Sheafs}
+The espace \'etale is very strange and to describe it geometrically we are going to recall the notions of \'etale and covering. 
+The difference between these two notions is pictured in Figure~\ref{F:etale-vs-covering}.
+In particular we have drawn something a priori horrible (a posteriori not so horrible) corresponding to what we might thing an espace \'etale of a sheaf might look like.
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[scale=0.33]{etale-vs-covering.eps}
+	\end{center}
+	\caption{Both \'etale and covering morphisms are local homeomorphisms, it is just that \'etale morphisms can be weirder and include things in the fibers like lines with two origins which are not Hausdorff.}\label{F:etale-vs-covering}
+\end{figure}
+
+\begin{definition}
+	In what follows we consider a morphism $f: Y\to X$ a morphism of topological spaces. 
+	\begin{enumerate}
+		\item We say that $f$ is \emph{\'etale} if and only if 
+		\begin{enumerate}
+			\item $f$ is locally a homeomorphism.
+			\item For all $x\in X$, $f^{-1}(x)$ has the discrete topology. 
+		\end{enumerate}
+		\item We say that $f$ is a \emph{covering map} if and only if it is \'etale and locally trivial. 
+	\end{enumerate}
+\end{definition}
+Covering spaces are just like the covering spaces you have seen from Hatcher but perhaps the fibers are larger (and too large of fibers indicates in many cases that there needs to be multiple connected components). 
+\'{E}tale morphisms are like coverings by includes things like the an arbitrary disjoint union of any collection of open subsets of $X$; the fibers don't need to have any particular uniform size or anything like that. 
+Also there can be issues with separatedness where you can have things like the line with two origins appearing above an open set.
+
+
+We now show the espace \'etale is indeed gives an \'etale morphism. 
+The theorem below is actually a good exercise and you should try it.
+\begin{theorem}
+	If $F$ is a sheaf of sets on a topological space $X$ then the morphism $\pi: \overline{F}\to X$ from the espace \'etale of $F$ to $X$ is an \'etale morphism.
+\end{theorem}
+\begin{proof}
+	The morphism $\pi$ is given by $(x,s_x)\mapsto x$. 
+	By definition the $F_x = \varinjlim_{U \owns x} F(U)$ we know there exists some $U$ such that $s\in F(U)$ restricts to $s_x \in F(U)$. 
+	By definition of $\overline{F}$ we have $\lbrace (x,s_x) \colon x\in U, s_x = (s)_x \rbrace$ mapping homoemorphically onto $U$. 
+	We are using $(s)_x$ to denote taking the stalk of $s \in F(U)$ at $x$.
+	
+	Given two points $(x,t_x)$ and $(x,s_x)$ corresponding sets above separate these points giving the fiber above $x$ the discrete topology.
+\end{proof}
+
+If $F$ is a sheaf of sets on $X$ then $\pi: \overline{F} \to X$ is an \'etale morphism yet $\pi^{-1}(x) = F_x$. 
+In general \'etale morphisms and covering morphisms can seem awful. 
+This is horribly large. 
+Here $F_x$ is the stalk at the point. 
+In the case when $F = \Ocal_X$ where $X$ is a complex manifold then $\Ocal_{X,x}$ is like a ring of power series which is uncountable, so the fiber is an uncountable set in the discrete topology. 
+
+
+The following is Sabbah exercise 15.1 + a corollary around there. 
+One needs to recall the Fundamental Theorem of Galois Theory for Covering Spaces: Given a connected space $X$, every subgroup of $\pi_1(X)$ comes from a connected covering of $X$ 
+Conversely given a covering, its connected components correspond to subgroups of $\pi_1(X)$. 
+The construction is to quotient the universal cover by the group $\Pi \subset \pi_1(X)$ which acts discretely.
+
+\begin{theorem}
+	Let $X$ be a connected topological space. 
+	Let $F$ be a sheaf of sets on $X$.
+	\begin{enumerate}
+		\item The sheaf $F$ is constant if and only if $\pi:\overline{F}\to X$ is trivial in the sense that $\overline{F} \cong X\times F_0$ for some fixed $F_0$ with the discrete topology. 
+		\item The sheaf $F$ is locally constant if and only if $\pi: \overline{F} \to X$ is a covering. 
+		\item If $X$ is simply connected then any locally constant sheaf is constant.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	Suppose that $F$ is constant with $F(U)=F_0$ for all $U$ nonempty.
+	Then for all $x$ and all $y$ we have $F_x=F_y=F_0$.
+	Then $\overline{F} \cong X \times F_0$. 
+	The map is given by $(x,s_x) \mapsto (x,s_x)$ since there is a canonical isomorphism between $F_x$ and $F_0$.
+	
+	Conversely, take sections and use the property that continuous maps to discrete things are constant (Exercise~\ref{EX:locally-constant}).
+	
+	The second part follows from the first as we restrict to an open set. 
+	Locally constant implies locally trivial. 
+	
+	We now use the remarks proceeding the statement of the theorem about fundamental groups. 
+	If $X$ is simply connected then $\pi_1(X)=1$. 
+	This means that there are no non-trivial coverings. 
+	This means that every sheat is isomorphic to $X$ and hence $\overline{F} \cong \coprod_{d\in D} X=X\times D$ where $D$ is some space with the discrete topology. 
+	This is the constant sheaf of sets that we are after.
+\end{proof}
+
+We now use this to disentangle the relationship beween $(E,\nabla)$ and $E^{\nabla}$.
+
+\subsection{Local Systems vs Vector Bundles}
+In this section we discuss the difference between a local system associated to some integrable $(E,\nabla)$ and the vector bundles $E$ itself.
+In what follows we will let $L = E^{\nabla}$ and try to compare $\overline{L}$ and the physical vector bundle $E$.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[scale=0.33]{connected-components.eps}
+	\end{center}
+	\caption{The shredding of the vector bundle $E$ by the foliation, giving us the espace \'etale.}\label{F:connected-components}
+\end{figure}
+
+
+Since there is sometimes some confusion in notation I want to review the difference between stalks of locally free sheafs and fibers of vector bundles. 
+As stated previous we often conflate $\mathcal{E}$ the sheaf of sections of a vector bundle $E$ with $E$ itself and just write $E$ in place of $\mathcal{E}$.
+Technically, $E$ is a geometric object with a morphism $f: E\to X$ a morphisms of spaces (schemes, complex manifolds, whatever).  
+Also, technically, $\mathcal{E}$ is a locally free sheaf of $\Ocal_X$-modules. 
+These two things live in different categories and $E$ ``represents'' $\mathcal{E}$.
+
+With this conflation in mind there are two possible meanings for $E_x$ given $x\in X$ that can be conflated. 
+It can mean either the stalk 
+$$E_x = \varinjlim_{U \owns x} \mathcal{E}(U)$$ 
+or the fiber  
+$$E_x = f^{-1}(x).$$
+In the case it is the stalk we are thinking of $E$ as a locally free sheaf and in the case of the fiber we are thinking about $E \to X$ as a physical vector bundle which is a space. 
+The stalk description is huge and is the module over a local ring $\Ocal_{X,x}$, which when working with complex manifolds is a ring of power series so an infinite dimensional vector space. 
+In the case of a fiber $E_x$ is a finite dimensional complex vector space. 
+These are not the same.
+Not even close. 
+One needs to reduce the stalk modulo the maximal ideal of $\Ocal_{X,x}$ to get a comparison.
+
+Now for a locally free sheaf, things start to get a little closer.
+The picture of the discussion that follows is Figure~\ref{F:connected-components}.
+In this discussion we restrict our attention to $X$ being a complex manifold.
+If $E$ a vector bundle of rank $n$ (which we think of as a physical vector bundle) then $E_x$ is a vector space of rank $n$. 
+For the espace \'etale $\pi:\overline{L}\to X$ of a local system $L$ we have $L_x = \overline{L}_x$, the fiber is the stalk. 
+Also $L_x \cong \CC^n$ so we have a vector space of rank $n$ as the fiber of the espace \'etale. 
+The big difference here is the topology!
+The topology of $E_x$ is that of usual topological vector space. 
+The topology of $\overline{L}_x$ discrete.
+What have we done?
+Well, the local system $L$ parametrizes local solutions of of our differential equation.
+They are a linear combination of a basis of solutions.
+The connection defined a flow on the space $E$ and the leaves of this flow are the solutions of the differential equation. 
+What $\overline{L}$ is (at least locally), is the shredding of $E$ by these leaves (again see Figure~\ref{F:connected-components}). 
+So $E$ has sort-of been ripped apart and reassembled initial condition by initial condition to give uncountably many fibers sitting discretely together.
+
+\section{Monodromy Representations and Local Systems}\label{S:locsys-to-repn}
 Let $X$ be a topological space which is connected and locally path connected so that $\pi_1(X,x_0)$ makes sense. 
 Let $L$ be a local system on $X$ and let $\gamma:[0,1] \to X$ be a continuous path contained in $X$. 
 Then $\gamma^*L$ is a local system on $[0,1]$ which is trivial.
@@ -2447,7 +2614,8 @@ This defines the representation associated to the pair $(L,x_0)$ consisting of a
 	as described above. 
 \end{definition}
 
-\subsection{Representation from Local System = Monodromy Representation}
+We now want to give a comparison between the representation above and the monodromy representation we had previously discussed in dimension one. 
+
 Recall that the category of $K$-representations of a group $\Pi$ is the category of $K[\Pi]$-modules and when we talk about two representations being isomorphic we talk about them being isomorphic as $K[\Pi]$-modules. 
 We are interested in the case when $\Pi = \pi_1(U,t_0)$ for some $U\subset \CC$. 
 
@@ -2473,8 +2641,6 @@ We are interested in the case when $\Pi = \pi_1(U,t_0)$ for some $U\subset \CC$.
 	In triviallized coordinates we have 
 	$$ v \mapsto \Phi v \mapsto \Phi M_{\gamma} \Phi^{-1} \Phi v \mapsto \Phi_{\gamma}^{-1} M_{\gamma} v \mapsto M_{\gamma}^{-1} \Phi M_{\gamma} v.$$
 \end{proof}
-
-\subsection{Monodromy Representations in Higher Dimension}
 In higher dimensions this is how we are going to define the representation associated to a connection. 
 That is to every vector bundle $E$ with integrable connection $\nabla^2=0$ we have the associated local system $E^{\nabla}$ defined by 
  $$ E^{\nabla}(U) = \lbrace s \in E(U) \colon \nabla(s)=0 \rbrace, \quad U \subset X \mbox{ open }. $$
@@ -2483,6 +2649,16 @@ More precisely if $t^1,\ldots,t^m$ are local coordinates for $X$ and $s_1,\ldots
  $$ \nabla(s)=0 \quad \iff  \quad \nabla_{\partial_j}(Y) = \dfrac{\partial Y}{\partial t^j} + A_j Y =0, \quad 1\leq j \leq m,$$
 where $Y\in \Ocal_X(U)^{\oplus n}$ is a presentation of $s \in E(U)$ under the trivialization given by the local basis and $A_jdt^j$ is the connection 1-form in local coordinates.
 
+\begin{definition}
+	Let $(E,\nabla)$ module be a module with integrable connection. 
+	The construction $(E,\nabla)\mapsto E^{\nabla}$ is \emph{local system associated to $(E,\nabla)$} 
+\end{definition}
+
+\begin{definition}
+	Let $(E,\nabla)$ be an integrable connection on a complex manifold $X$. 
+	We define the \emph{monodromy representation} of $(E,\nabla)$ to be the monodromy representation of $E^{\nabla}$.
+\end{definition}
+
 This describes the functors
  $$ \Conn(X) \to \LocSys(X) \to \Repn(X).$$
 The connection, goes to a local set of solutions (a local system), which by \S~\ref{S:locsys-to-repn} gives rise to a representation. 
@@ -2490,7 +2666,7 @@ Spoiler: for holomorphic vector bundles this will be an equivalence of categorie
 The map $\LocSys(X) \to \Repn(X)$ is always going to be an equivalence of categories. 
 
 
-\subsection{$\LocSys(X) \cong \Repn(X)$}\label{S:locsys-repn}
+\subsection{Local Systems and Representations are Equivalent}\label{S:locsys-repn}
 In this section we show that for a general topological space the category of representations is equivalent to the category of local systems. 
 
 First some notation: let $\Pi$ be a group. 
@@ -2506,9 +2682,13 @@ Now we give our theorem.
 \end{theorem}
 \begin{proof}[Proof Sketch]
 	The quasi-inverse is given by the so-called suspension construction. 
-	Let $\Pi = \pi_1(X,x_0)$
+	From representaions to local systems is the map
+	 $$ V \mapsto \widetilde{X} \times_{\Pi} V = \overline{L},$$
+	which gives the espace \'etale of the local system $L$. 
+	Here, $\Pi = \pi_1(X,x_0)$, $V$ is the underlying vector space of the $\Pi$-representation (it must be given the discrete topology), $\widetilde{X} \to X$ is the universal cover, and $\times_{\Pi}$ denotes the amalgamated product.
+	
+	We give some more details.
 	Let $\rho: \Pi \to \GL(V)$ be a finite dimensional complex representation of $\Pi$.
-	Let $f: \widetilde{X} \to X$ be the universal cover of $X$. 
 	Note that we have an action of $\Pi$ on both $\widetilde{X}$ and on $V$ and hence on the complex manifold $\widetilde{X}\times V$ where the action is given by 
 	$$(\gamma, (\widetilde{x},v))\to (\gamma(\widetilde{x}), \rho(\gamma)(v)).$$
 	Note that since the action by deck transformations preserves fibers of $f$ we have that $\Pi$ also acts on $f^{-1}(U) \times V$ for every open subset $U \subset X$. 
@@ -2524,14 +2704,14 @@ Now we give our theorem.
 \end{proof}
 
 \begin{exercise}\label{EX:total-space}
-	\taylor{I need to check this.}
 	In this exercise $M$ will be a topological space where fundamental groups make sense.\footnote{path connected, locally path connected}. 
 	We will let $\Pi = \pi_1(M,x_0)$ for $x_0\in M$ some base point.  	
  Check \eqref{E:total-space} regarding the description of the total space of the local system.
 \end{exercise}
 
+
 %%%%%%%%%%%%%%%%%%%
-\section{Holomorphic Riemann Hilbert Correspondence}
+\section{Holomorphic Riemann Hilbert Correspondence}\label{S:rhc-strat}
 %%%%%%%%%%%%%%%%%%%
 Let $X$ be a complex manifold. 
 We have three categories.
@@ -2571,15 +2751,93 @@ When studying connections in characteristic $p$ on schemes we can define a canon
 
 Later we will modify the category $\Conn(X)$ to get more information about the differential equations at the singularities. 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Families of Differential Equations and Local Systems}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Relative connections are the way we formalize families of differential equations depending on a parameters. 
+This become relevant in section \S\ref{S:schlesinger} when we first start to discuss Schlesinger's equations and isomonodromy.
+Here we seek a family of differential equations which when you deform a parameter you retain the same monodromy. 
 
+\subsection{Relative Connections}
+Recall that given a morphism $\pi:X \to S$ we think of the fibers over $s\in S$ which we denote as $X_s$ as a family. 
+We will even call a morphism $\pi:X\to S$ a family. 
+One way of thinking about relative connections are as families of differential equations (or more generally connections). 
+Given morphism $\pi: X\to S$ of complex manifolds or schemes one can define a relative connection on a vector bundle $E$ on $S$ we make the following definition.
+\begin{definition}
+A \emph{relative connection} $\nabla_{X/S}$ on $E$ is an additive map 
+ $$ \nabla_{X/S}: E \to \Omega_{X/S} \otimes E $$
+such that $\nabla_{X/S}(f s) = df \otimes s + f \nabla_{X/S}(s)$ for all $f \in \Ocal_X$ and all $s \in E$. 
+We say that the connection is \emph{integrable} if $\nabla_{X/S}^2=0$. 
+\end{definition}
+The fact that $df=0$ for $f \in \pi^{-1}\Ocal_S$ says that relative connections are $\pi^{-1}\Ocal_S$-linear.
+Note that this makes sense: because we have a map $\Ocal_S \to \pi_* \Ocal_X$ there is an adjoint map $\pi^{-1}\Ocal_S \to \Ocal_X$ and it makes sense to talk about elements of $\pi^{-1}\Ocal_S$ as elements of $\Ocal_X$ (we are thinking about them via their image under the morphism just described). 
+
+Morphisms of relative connections are morphisms of vector bundles which are equivariant with respect to their connection. 
+We denote the category of integrable relative connections for $\pi:X\to S$ by $\Conn(X/S)$.
+
+\begin{exercise}
+	Given a relative connection check that $(E,\nabla)\vert_{X_s}$ makes sense as a module with integrable connection on $X_s$.
+\end{exercise}
+
+\subsection{Relative Local Systems}
+Again we have a local system associated to an integrable relative connection
+$$ (E,\nabla_{X/S}) \to E^{\nabla_{X/S}} $$
+where for $U \subset X$ open we have 
+ $$ E^{\nabla_{X/S}}(U) = \lbrace s \in E(U) \colon \nabla_{X/S}(s) =0 \rbrace.$$
+
+Given a family $\pi:X\to S$ we make the following definition. 
+\begin{definition}
+	A \emph{local system relative to $\pi$} (of rank $n$) is a sheaf $L$ of $\pi^{-1}\Ocal_S$-modules on $X$ such that for all $x\in X$ there exists a $U\owns x$ open with 
+	 $$ L \vert_U \cong (\pi^{-1}\Ocal_S)^{\oplus n}\vert_U $$
+	 as sheaves of $\pi^{-1}\Ocal_S\vert_U$-modules. 
+\end{definition}
+
+The story is pretty much the same in the relative setting as it was in the absolute setting. 
+We define morphisms of relative local systems as morphisms of $\pi^{-1}\Ocal_S$-modules and denote the category of relative local systems for a morphism $\pi:X \to S$ by $\LocSys(X/S)$.
+
+
+For the following exercises $\pi:X\to S$ will be a morphism of complex manifolds. 
+\begin{exercise}
+	Given an vector bundle $E$ on $X$ with a relative connection $\nabla_{X/S}$ which is integrable check that $E^{\nabla_{X/S}}$ is a relative local system. 
+\end{exercise}
+
+\begin{exercise}
+	Check that relative local systems restrict to local systems on fibers.
+\end{exercise}
+
+\begin{exercise}
+	Check that relative connections restrict to connections on the fibers. 
+\end{exercise}
+
+
+
+\subsection{Relative Riemann-Hilbert Correspondence}
+From relative local systems to relative integrable connections we use 
+ $$ L \mapsto E_L = \Ocal_X\otimes_{\pi^{-1} \Ocal_S} L $$
+and gives it the connection by extending $\pi^{-1}\Ocal_S$-linearly the map 
+ $$ f \otimes v \mapsto df \otimes v.$$
+
+\begin{exercise}
+	Check that the map 
+	$$\LocSys(X/S) \to \Conn(X/S), \quad L \mapsto E_L $$
+	is an equivalence of categories with quasi-inverse $(E,\nabla_{X/S}) \mapsto E^{\nabla_{X/S}}$. 
+\end{exercise}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Isomonodromic Deformations}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The Painlev\'e VI equation takes the form
- \begin{align*}\frac{d^2y}{dt^2}&=
- \frac{1}{2}\left(\frac{1}{y}+\frac{1}{y-1}+\frac{1}{y-t}\right)\left( \frac{dy}{dt} \right)^2
- -\left(\frac{1}{t}+\frac{1}{t-1}+\frac{1}{y-t}\right)\frac{dy}{dt} \\&\quad +
- \frac{y(y-1)(y-t)}{t^2(t-1)^2}
- \left(\alpha+\beta\frac{t}{y^2}+\gamma\frac{t-1}{(y-1)^2}+\delta\frac{t(t-1)}{(y-t)^2}\right),\\ 
+ \begin{align*}\frac{d^2q}{dx^2}&=
+ \frac{1}{2}\left(\frac{1}{q}+\frac{1}{q-1}+\frac{1}{q-x}\right)\left( \frac{dq}{dx} \right)^2
+ -\left(\frac{1}{x}+\frac{1}{x-1}+\frac{1}{q-x}\right)\frac{dq}{dx} \\&\quad +
+ \frac{q(q-1)(q-x)}{x^2(x-1)^2}
+ \left(\alpha+\beta\frac{x}{q^2}+\gamma\frac{x-1}{(q-1)^2}+\delta\frac{x(x-1)}{(q-x)^2}\right),
  \end{align*}
 where $\alpha,\beta,\gamma,\delta \in \CC$ are constants.
 The aim of this section is to show that this equation is really about isomonodromic deformations of rank two Fuchsian equations with trace free entries on $\PP^1\setminus \lbrace 0,1,\infty, x\rbrace$ where $x$ is a variable point.
@@ -2587,7 +2845,7 @@ The aim of this section is to show that this equation is really about isomonodro
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Schlesinger's Equations}
+\section{Schlesinger's Equations}\label{S:schlesinger}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Consider the case of a Fuchsian differential equation of rank 2 on $\PP^1$ with singular points at $\lbrace 0,1,\infty,x\rbrace$ for some variable $x\in \PP^1$ not equal to $0,1$ or $\infty$,
 $$\begin{cases}
@@ -2642,7 +2900,7 @@ We will make some simplifying assumptions.
 Under the conditions above we can give equations.
 Both of these conditations are used in the secret weapon of this theorem: the logarithmic Riemann-Hilbert correspondence. 
 \begin{theorem}
-	Assume the assumptions and work in the notaiton of this section.
+	Assume the assumptions and work in the notation of this section.
 	The map $x\mapsto A(x)$ is isomonodromic if and only if 
 	$$\dfrac{\partial A_0}{\partial x} = \dfrac{[A_0,A_2]}{x}, \quad \dfrac{\partial A_1}{\partial x} = \dfrac{[A_1,A_2]}{x-1}, \quad \dfrac{\partial A_{\infty}}{\partial x}=0.$$
 \end{theorem}
@@ -2667,7 +2925,7 @@ We will use the notation $x=(x_1,\ldots,x_m)$
 \end{theorem}
 In these notes we will call \eqref{E:schlesinger} \emph{Schlesinger's equations}.
 The commutators in the Schlesinger's equation should make the reader suspect that these equations are possibly an integrability/curvature condition on some connection. 
-This is indeed the case and we will actually have a log connection on the space $X\times \PP^1$.
+This is indeed the case and we will actually have a ``logarithmic connection'' on the space $X\times \PP^1$.
 
 \begin{figure}[h]\label{F:connection-space}
 	\begin{center}
@@ -2741,15 +2999,770 @@ Note now that the fiber of $(X\times \PP^1)\setminus S$ above $x=\mu\in X$ is $\
 If we assume that $H_2(X,\ZZ)=0$ or that $\pi_2(X)=0$ then one can use the long exact sequence in homotopy groups to conclude that the inclusion of the fiber 
  $$ \PP^1\setminus S_{\mu} \hookrightarrow (\PP^1\times X)\setminus S $$
 induces an isomorphism of fundamental groups.
-\begin{lemma}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Representation and Character Varieties}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+To collection of representations of a fundamental group can be given the structure of a variety. 
+This variety is the representation variety. 
+To get representations up to isomorphism, we need to mod out by conjugation. 
+After doing this we get the Character variety. 
+\subsection{Representation Varieties}
+The term ``representation variety'' is non-standard, I think. 
+Let $\Pi$ be a finitely presented group. 
+This means that 
+$$ \Pi = \langle \gamma_1,\ldots,\gamma_{\ell} \colon R_1, \ldots, R_s \rangle$$
+where the $R_j$ are relations of the form
+$$ \gamma_{i_1}^{a_1} \gamma_{i_2}^{a_2} \cdots \gamma_{i_k}^{a_k} = 1,$$
+for some $k\geq 0$, $\lbrace i_1,\ldots, i_k \rbrace \subset \lbrace 1,\ldots, \ell\rbrace$ and $a_1,\ldots, a_k \in \ZZ$. 
+A representation of $\Pi\to \GL_n(\CC)$ is determined by $\gamma_i \mapsto M_i$ where $M_i \in \GL_n(\CC)$ satisfy relations of the type 
+$$ M_{i_1}^{a_1} M_{i_2}^{a_2} \cdots M_{i_k}^{a_k} = I_n$$
+where $I_n$ is the $n\times n$ identity matrix.
+Viewing the entries of $M_{i}$ as variables we find get an algebraic variety $\Repn_{\GL_n}(\Pi)(\CC)$ whose points are in bijection with representations $\rho: \Pi \to \GL_n(\CC)$.
+
+Note that the equations are actually defined over $\ZZ$ and the construction is quite general so $\Repn_{\GL_n}(\Pi)(\CC)$ is actually the $\CC$-points of a scheme $\Repn_{\GL_n}(\Pi)$ defined over $\CC$.
+In fact,  one can replace any $\GL_n$ with $\SL_n$ or any other algebraic group $G$ to obtain a variety defined over any ring $R$ to get a group scheme over $R$, $\Repn_{G}(\Pi)$. 
+In fact if $G_1 \subset G_0$ then we have 
+$$ \Repn_{G_1}(\Pi) = (G_1)^{\ell} \cap \Repn_{G_0}(\Pi).$$
+The scheme $\Repn_{G_1}(\Pi)$ is actually a fiber product for the following diagram
+$$ \begin{tikzcd}
+& \Repn_{G_0}(\Pi) \ar[d] \\
+G_2^{\ell} \ar[r] & G_0^{\ell}
+\end{tikzcd}.$$
+We also want to mention that the construction is functorial in $\Pi$.
+If $\Pi_0 \to \Pi_1$ is a morphism of finitely presented groups then there is an induced morphism $\Repn_G(\Pi_1) \to \Repn_{G}(\Pi_0)$.
+If $w:\Pi_0 \to \Pi_1$ is given by sending a generator of $\Pi_0$ to a word in the generators of $\Pi_1$, $w\colon \gamma_i \mapsto w_i$ then $N=(N_0,\ldots,N_{\ell_1}) \in \Repn_G(\Pi_1)$ are mapped to $(w_1(N), w_2(N),\ldots,w_{\ell_0}(N)) \in \Repn_G(\Pi_0)$.
+Since the map $w$ is a group homomorphism the matrices $w_1(N),w_2(N),\ldots,w_{\ell_0}(N)$ must necessarily satisfy the relations for $\Pi_0$.
+\begin{definition}
+	Given $\Pi$ a finitely presented group with $\ell$ generators and $G$ a group scheme over a ring $R$ the $R$-scheme $\Repn_{G}(\Pi) \subset G^{l}$ is called \emph{representation scheme} (or \emph{representation variety} of $G$ and $\Pi)$). 
+	It is cut out by the relations imposed by the relations in the finite presentation.
+\end{definition}
+
+When $\Pi=\pi_1(X)$ for some complex manifold these are also called \emph{character varieties}. They are well-defined since the groups are well-defined up to conjugation. 
+We use the notation
+$$\Repn_G(\Pi) = \Repn_G(X).$$ 
+This is again contravariant in $X$. 
+
+\begin{example}
+	In the case that $X=\PP^1\setminus \lbrace 0,1,x,\infty\rbrace$ then $\pi_1(X)=F_3$ the free group on three generators and the $\Repn_{\GL_2}(X) \subset \GL_2^4$ defined by the equation $M_0M_1M_2M_{\infty}=I_2$ which is just isomorphic to $\GL_2^3$.
+\end{example}
+
+
+\begin{example}
+	Let $X$ be a genus two surface. 
+	Then
+	$$\pi_1(X) = \langle \alpha_1,\beta_1,\alpha_2,\beta_2 \colon \alpha_1\beta_1\alpha_1^{-1}\beta_1^{-1}\alpha_2\beta_2\alpha_2^{-1}\beta_2^{-1}=1\rangle,$$
+	so $\Repn_{\GL_2}(X)\subset \GL_2(\CC)^4$ needs 16 variables and 4 equations. 
+	\begin{figure}[h]
+		\begin{center}
+			\includegraphics[scale=0.33]{genus2.eps}
+		\end{center}
+		\caption{A picture of the generating cycles on a genus two compact real manifold of dimension two.}
+	\end{figure}
+\end{example}
+
+\subsection{Character Varieties}
+
+t $G$ be a group scheme.
+Two representations $\pi_1(X) \to G$ are equivalent if and only if they are conjugate. 
+Hence we have an action by $B\in\GL_n$ on $(M_1,\ldots,M_l)$ given by 
+$$ B\cdot (M_1,M_2,\ldots,M_l) = (B M_1 B^{-1}, BM_2B^{-1},\ldots, BM_lB^{-1}). $$
+We want to quotient by this action.
+\begin{definition}
+	The algebraic stack 
+	$$\Char_{G}(\Pi) := [\Repn_{G}(\Pi)/G]$$ 
+	is called the \emph{character stack}.
+\end{definition}
+When it is represented by a scheme, that scheme is unique up to isomorphism and we call it the \emph{character scheme}. 
+In the case that it is a variety we call it the \emph{character variety}. 
+We will abusively denote all of these things by $\Char_{G}(\Pi)$.
+\begin{remark}
+	The point of using an algebraic stack here is not to be a jerk but to state that there is a serious mathematical issue that we need to contend with. 
+	It's very complicated and two complicated theories for which there exist entire books written about them are devoted to dealing with this issue. 
+	The first approach is Geometric Invariant Theory for which there is the famous book \cite{Mumford1994}. 
+	The second would be the theory of Algebraic Stacks for which there is an entire Stacks Project. 
+	One can also use quotients in the category of sheaves too which is described here \cite[\href{https://stacks.math.columbia.edu/tag/07S5}{Tag 07S5}]{stacks-project}.
+\end{remark}
+
+
+As before, we let $\Char_G(X)=\Char_G(\Pi)$ for $\Pi=\pi_1(X)$ when $X$ is connected topological space with fundamental group $\Pi$.
+
+
+\begin{example}
+	In the case of $X=\PP^1\setminus \lbrace 0,1,\infty\rbrace$ and $G=\SL_2$ the character variety is $\AA^3$:
+	$$ \Char_{\SL_2}(\PP^1\setminus \lbrace 0,1,\infty \rbrace) \cong \AA^3.$$
+	The representation space $\Repn_{\SL_2}(\PP^1\setminus \lbrace 0,1,\infty \rbrace)$ is determined by three matrices in $\SL_2$, $M_0,M_1,M_{\infty}$ satisfying $M_0M_1M_{\infty}=I_2$. 
+	Using conjugation we can bring these into standard hypergeometric form with $(\theta_0,\theta_1,\theta_2)$ uniquely determining the monodromy matrices. 
+	This corresponds to the fact that the Gauss hypergeometric function has three parameters $(a,b,c)$ see \S\ref{S:hypergeometric-case}.
+\end{example}
+
+We have another example for which I won't give a proof. \taylor{add reference, maybe Loray}
+\begin{example}
+	In the case $X = \PP^1\setminus \lbrace 0,1,\infty,x\rbrace$ as before with $G=\SL_2$ then the representation variety $\Repn_{\SL_2}(X)\cong \SL_2^3$ since $\pi_1(\PP^1\setminus \lbrace 0,1,\infty,x\rbrace) \cong F_3$, the free group on three letters (in terms of monodromy matrices there are three $M_0,M_1,M_2,M_{\infty}$ and they satisfy $M_0M_1M_2M_{\infty}=1$ so we think of $M_{\infty}$ being determined by the first three). 
 	
+	
+	It is a fact that the character variety $\Char_{\SL_2}(X)$ is a degree four hypersurface in $\AA^7$ with coordinates $(a,b,c,d,x,y,z)$ given by 
+	$$a^2+b^2+c^2+d^2 + x^2+y^2+z^2 -(ab+cd)x-(ad+bc)y-(ac+bd)z + abcd + xyz - 4 = 0.$$
+\end{example}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Painlev\'e Property}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The Painlev\'e equations were not originally derived via the Schlesinger equations. 
+Classically, mathematicians were looking for special functions which were solutions of differential equations.
+This is how they came up with Airy functions, Bessel functions, hypergeometric functions, trigonometric functions, etc.
+
+\begin{definition}
+	An ordinary differential equation in one variable has the \emph{Painlev\'e property} if and only if germ $f\in\CC\langle t-t_0\rangle$ admits a well-defined analytic continuation.
+\end{definition}
+
+The main result concerning the 
+\begin{theorem}
+	Consider a differential equation of the form 
+	$$ \dfrac{d^2q}{dx^2} = R(x,q,q'). $$
+	If this equation has the Painlev\'{e} property then it is a specialization of the PVI.
+\end{theorem}
+
+An overview of the proofs can be found in \cite{Shimomura2003}.
+The first proof is in the back of Ince's book \cite{Ince1944}. 
+The second proof is due to Malgrange 
+
+The classificiation 
+
+
+It then remains to determine if the functions obtained as solutions of the Painlev\'e differential equations are genuinely new. 
+This was done by Umemura and others. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Ordinary Differential Algebra}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In this section we are going to develop more the theory of $\partial$-algebra done previously with an eye towards computation. 
+In this section and the next we are following Kaplansky \cite{Kaplansky1976}, Ritt\cite{Ritt1950}, Kolchin \cite{Kolchin1973}, and Boulier \cite[\href{https://hal.archives-ouvertes.fr/hal-02378197v2/document}{online version}]{Boulier2019}, Marker's notes \cite{Marker2000}, as well as Buium and Cassidy's chapter in Kolchin's selected works \cite{Kolchin1999}.
+
+The goals of this section are two-fold. 
+\begin{enumerate}
+	\item Get to a point where complicated computations like the reduction of Schlesinger to Painlev\'e can be done routinely on a computer. 
+	\item Give foundations for differential algebraic geometry.
+\end{enumerate}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Differential Ideals}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Monomials in Ordinary Differential Polynomial Rings}
+It will be conveniant to introduce some notation for monomials in $K[ y ]_{\partial}$ where $y$ is a single indeterminant. 
+For $\alpha \in \ZZ_{\geq 0}[\partial]$ with $\alpha = a_0 + a_1 \partial + \cdots + a_r \partial^r$ we will write 
+$$ y^{\alpha} = y^{a_0} (y')^{a_1} \cdots (y^{(r)})^{a_r}.$$
+We assign two gradings to $K[y]_{\partial}$. 
+A grading by weight and grading by degree. 
+We say that the \emph{degree} of $y^{\alpha}$ (or just $\alpha$) is 
+$$\deg(y^{\alpha}) = a_0 + a_1 + \cdots + a_r.$$
+Similarly, we define the \emph{weight} of $y^{\alpha}$ (or just $\alpha$) is 
+$$ \wt(y^{\alpha}) = a_1 + 2a_2 + \cdots + r a_r.$$
+A basic observation is that terms with no derivatives have weight zero, terms with single derivatives have weight one, terms with only second derivatives have weight two etc. 
+If we view $\alpha$ as a polynomial $\alpha(x) \in \ZZ[x]$ then $\deg(\alpha) = \alpha(0)$ and $\wt(\alpha) = \alpha'(0)$. 
+
+\begin{exercise}
+	Let $A \in K\lbrace y \rbrace$ be a differential monomial which is homogeneous in both degree and weight. Show that $\partial(A)$ is homogeneous in both degree and weight and that 
+	$$ \deg(\partial(A)) = \deg(A), \quad \wt(\partial(A)) = \wt(A)+1.$$
+\end{exercise}
+
+In several $\partial$-indeterminates $x=(x_1,\ldots,x_n)$ we can again use a multi-index notation. 
+We will take $\alpha = (\alpha_1,\ldots,\alpha_n) \in \ZZ_{\geq 0}[\partial]^n$ and let 
+$$ x^{\alpha} = (x_1,\ldots,x_n)^{(\alpha_1,\ldots,\alpha_n)} = x_1^{\alpha_1}\cdots x_n^{\alpha_n}$$
+as where for each $i$ we have $\alpha_i = a_{i0} + a_{i1}\partial + \cdots + a_{ir_i}\partial^{r_i}$ and
+$$x_i^{\alpha_i} = x_i^{a_{i0} + a_{i1}\partial + \cdots + a_{ir_i}\partial^{r_i}}$$
+as before. 
+
+
+\subsection{Radicals of Differential Ideals}
+Let $K$ be a $\partial$-field and let 
+$$K\lbrace x \rbrace = K\lbrace x \rbrace_{\partial} = K[x]_{\partial}=K[x,x',x'',\ldots]$$ 
+be the ring of $\partial$-polynomials.
+
+For a subset $A$ of $K\lbrace x \rbrace$ we will let 
+$$ [A]=[A]_{\partial} $$
+be the $\partial$-ideal generated by $A$. 
+It is the smalled $\delta$-ideal containing $A$. 
+We will let 
+ $$ \lbrace A \rbrace = \lbrace A \rbrace_{\partial} = \sqrt{[A]} $$
+be the smallest radical ideal containing $A$. 
+
+\begin{lemma}[Radicals of Differential Ideals are Differential Ideals]
+	Let $A$ be a differential $\QQ$-algebra. 
+	If $I$ is a differential ideal then $\sqrt{I}$ is a differential ideal. 
+\end{lemma}
+\begin{proof}
+	Suppose $a \in \sqrt{I}$. 
+	Then there exists some natural number $n$ such that $a^n \in I$. 
+	By the Power Lemma~\ref{lem:power-lemma} we have that $(a')^n \in I$. 
+	This implies $a' \in \sqrt{I}$. 
+\end{proof}
+
+\begin{exercise}
+	Show that the intersection of two radical ideals is radical.
+\end{exercise}
+
+\begin{exercise}
+	Give an example of an ideal $I$ which is radical such that $I^2$ is not radical.
+\end{exercise}
+
+
+
+\subsection{$\partial$-Finite Generation}
+We will set a $\partial$-ideal $I$ is \emph{$\partial$-finitely generated} if and only if there exist some $f_1,\ldots,f_n \in R$ such that $I=[f_1,\ldots,f_n]_{\partial}$.
+This is a terrible notion in $\partial$-algebra. 
+
+The next example is one of the product of two $\partial$-finitely generated ideals which is not finitely generated. 
+
+\begin{example}
+	We will see later that the ideal $\lbrace x y\rbrace_{\partial}$ is not $\partial$-finitely generated.
+	We have $[x][y] = \langle x^{(i)}y^{(j)} \colon i,j \geq 0 \rangle = \lbrace xy \rbrace_{\partial} = [x]_{\partial} \cap [y]_{\partial}$.
+\end{example}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Univariate Pseudodivision Algorithm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+We are going to give a preliminary definition. 
+We are going to need to redo this computation later.
+Let $R$ be a $\partial$-ring and let $f \in R\lbrace x \rbrace$. 
+\begin{definition}
+	\begin{enumerate}
+		\item The \emph{leader} $\ell_f$ of $f$ is the highest derivative of $x$, $x^{(r)}$ appearing in $f$ (i.e. such that $\partial f/\partial x^{(r)} \neq 0$). 
+		\item The \emph{separant} of $f$ is $S_f:=\partial F/\partial \ell_f$. 
+		\item The \emph{initial} of $F$ is the coefficient $I_F$ of the leader, in other words
+		 $$ f = a_0 + a_1 \ell_f + \cdots + a_d \ell_F^d, \quad I_f = a_d $$
+		where if $\ell_f = x^{(r)}$ then $a_j \in R\lbrace x,x',\ldots,x^{(r-1)}]$. 
+	\end{enumerate}
+\end{definition}
+I want to point out that we treat $x,x',x'',\ldots$ like indeterminates. 
+In particular $\partial x^{(i)}/\partial x^{(j)} = \delta_{ij}$ where $\delta_{ij}$ is the Kronecker delta. 
+For concreteness we give an example.
+\begin{example}
+	If $f = 2x(x')^2 + x^3$ then $\ell_f = x'$, $I_f = 2x$ and $S_f = 2x'x$. 
+\end{example}
+
+\begin{remark}
+	The separant is really going to be a source of a lot of our computational troubles in differential algebra that don't appear in algebra. 
+\end{remark}
+
+We now define a term order on $K\lbrace x \rbrace$ induces by the lexicographic ordering such that $x^{(r)} \prec x^{(r+1)}$ for all $r\geq 0$. 
+This then defined an ordering on the collection of all polynomials where we say that $A\prec B$ if and only if $\LT(A)\prec\LT(B)$ where $\LT$ denotes the leading term.
+
+\begin{lemma}
+	Let $F \in K\lbrace x \rbrace$ be a non-constant $\partial$-polynomial. 
+	\begin{enumerate}
+		\item $\ell_{\partial^n(F)} = \partial^n(\ell_F)$
+		\item $I_{\partial^n(F)} = S_F$.
+	\end{enumerate}
+\end{lemma}
+\begin{proof}
+	We can write $\ell=\ell_F$ and then expand $F$ as $ F = \sum_{j=0}^d a_j \ell^j$.
+	We then have 
+	 $$ \partial(F) = \left( \sum_{j=0}^d \partial(a_j) \ell^j\right) + \partial(\ell) \left( \sum_{j=0}^d a_j j \ell^{j-1} \right ). $$
+	This proves that $I_{\partial(F)} = S_F$ and $\ell_{\partial(F)} = \partial(\ell_F)$.
+	The formula $\ell_{\partial^n(F)}=\partial(\ell_F)$ is evident. 
+	Also, one can see from differentiating the formula repeatedly that $I_{\partial^n(F)} = S_F$. 
+\end{proof}
+
+We now get the following algorithm for pseudodivision. 
+This is really the heart of the method of characteristics in several variables for determining ideal membership. 
+
+\begin{theorem}[The Pseudodivision Algorithm]\label{T:ode-pseudodivision}
+	Fix some non-constant $F \in K\lbrace x \rbrace$. 
+	For all $A \in K\lbrace x \rbrace$ there exists integers $a,b\geq 0$, and some $\widetilde{A}\in K\lbrace x \rbrace$ with $\widetilde{A} \prec F$ such that 
+	 $$ I^a S^b A \equiv \widetilde{A} \quad [F],$$
+	where $I=I_F$ is the initial of $F$ and $S=S_F$ is the separant of $F$.
+\end{theorem}
+\begin{proof}
+	We break the proof into cases. 
+	\begin{itemize}
+		\item (case 1) $A$ is lower than $F$. 
+		\item (case 2) $\ord^{\partial}_x(A) = \ord^{\partial}_x(F)$ but $\deg_{\ell}(A) > \deg_{\ell}(F)$.
+		\item (case 3) $\ord^{\partial}_x(A)>\ord^{\partial}_x(F)$
+	\end{itemize}
+    For simplicity of notation we will let $\ord^{\partial}_x(A) = r_A$, $\ord^{\partial}_x(F) = r_F$, $\deg_{\ell_A}(A)=d_A$ and $\deg_{\ell_F}(F)=d_F$.
+    
+    In case 1, we are done so we do nothing. 
+    
+    In case 2, we let $A_1= I_FA_0 - I_A\ell^{d_A-d_F}F$.
+    We have $A_1$ of lower degree than $A_0=A$ in $\ell_A$. 
+    If $A_1$ is lower than $F$ we are done. 
+    If not, we repeat this process.
+    Since the degree is lowered after every interation we eventually terminate. 
+    
+    In case 3, we let $A_0 = A$ and $F_0=\partial^{r_A-r_F}(F)$.
+    These two polynomials will have the same order and we can now apply case 2. 
+    Note that $I_{F_0} = S_F$ so we will eventually get 
+     $$ S_F^b A \equiv \widetilde{A} \mod [F],$$
+    with $\widetilde{A}$ lower than $F_0$. 
+\end{proof}
+
+In formulas this reads,
+$$ I^a S^b A = (a_0F + a_1 \partial(F) + \cdots + a_r \partial^aS^b A) + \widetilde{A}$$ 
+with remainder $\widetilde{A}$. 
+We get a contribution to $a$ for every time case 1 is used in the proof and a contribution to $b$ every times case 2 is used in the proof. 
+There is no clean division here like in the division algorithm for polynomials. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Noetherianity}
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+The following examples shows us that there eare changes of 
+\begin{example}
+	Consider the chain of ideals in $K\lbrace x \rbrace$ gives a non-trivial infinite ascending chain 
+	$$ [x^2]  \subset [x^2, (x')^2] \subset [ x^2, (x')^2, (x'')^2 ] \subset \cdots. $$
+	This is a non-terminating ascending chain which shows that differential ideals don't satisfy the ascending chain condition.
+\end{example}
+
+The Ritt-Raudenbacher basis theorem implies Noetherianity.
+\begin{theorem}
+The Ritt-Raudenbacher basis property implies any infinite ascending chain of radial differential ideals terminates.
+\end{theorem}
+\begin{proof}
+	Consider for the sake of contradiction and infinite ascending chain of $\Delta$-ideals
+	 $$I_1 \subsetneq I_2 \subsetneq I_3 \subsetneq \cdots. $$
+	Let $I = \bigcup_{j \geq 1} I_j$.
+	By the Ritt-Raudenbacher basis theorem there exists some $f_1,\ldots,f_n\in R$ such that $I = \lbrace f_1,f_1,\ldots,f_n\rbrace_{\Delta}$.
+	Since $f_i \in I$ there exists some $N_i$ such that $f_i \in I_{N_i}$. 
+	Let $N= \max\lbrace N_1,\ldots,N_n\rbrace$. 
+	We have $I \subset I_N$ and hence $I=I_N$ and the chain terminates.
+\end{proof}
+
+\begin{corollary}
+	The Kolchin topology on $\widehat{K}^n$ is Noetherian.
+\end{corollary}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Levi's Lemmas on $[y^n]$ and $[xy]$}
+%%%%%%%%%%%%%%%%%%%%%%%
+This section is about nilpotents which are largely ignored in modern differential algebra. 
+This is sad. 
+
+Consider the differential ring $(\QQ[x,y],\partial)$.
+In this section we are just going to work with a single derivative and use $[]$ for differential ideas. 
+We also retain the monomial notation $x^{\alpha} = x^{\alpha}=x^{a_0}\dot{x}^{a_1} \ddot{x}^{a_2} \cdots (x^{(r)})^{a_r}$ for $\alpha = a_0 + a_1 \partial + \cdots + a_r \partial^r \in \ZZ_{\geq 0}[\partial]$.
+In \cite{Levi1942} the following interesting questions were addressed:
+\begin{problem}
+\begin{enumerate}
+	\item Consider the differential ideal $[x^n]$.
+	Which monomials  are in $[x^n]$? 
+	\item Consider the $\partial$-ideal $[xy]$. 
+	Which monomials $x^{\alpha}y^{\beta}$ are in $[xy]$?
+	\item What about for $\lbrace xy \rbrace_{\partial}$?
+\end{enumerate}
+\end{problem}
+
+
+\subsection{Levi's Lemmas for $[x^n]$}
+The following is the most basic thing we can prove. 
+\begin{lemma}\label{lem:power-lemma}
+	Let $R$ be a differential $\QQ$-algebra. 
+	Let $I$ be a differential ideal. 
+	Suppose that $a\in R$ satisfies $a^n \in I$. 
+	Then $\dot{a}^{n} \in I$. 
+\end{lemma}
+\begin{proof}
+	If $a^n \in I$ then $\partial(a^n) = n a^{n-1} \dot{a}\in I$. 
+	By the $\QQ$-algebra hypothesis, $a^{n-1}\dot{a}\in I$. 
+	Taking derivatives again we get $(n-1)a^{n-2}\dot{a}^2 + a^{n-1}\ddot{a}\in I.$
+	After multiplying by $a'$ this implies $a^{n-2} \dot{a}^2 \in I$ since $a^{n-1}\dot{a} \in I$.
+	This process continues. 
+	Knowing that $a^{n-j}\dot{a}^j \in I$ allows us to show that $a^{n-j-1}\dot{a}^{j+1} \in I$ by taking derivatives, multiplying by $\dot{a}$ and using the inductive hypothesis to get rid of a term. 
+	Setting $n-j-1=0$ we get $j=n-1$ which shows $\dot{a}^n \in I$.
+\end{proof}
+
+We aim to give a much stronger version of the above in what follows culminating in Lemma~\ref{lem:levi}.
+\begin{lemma}\label{lem:monomials-of-derivative}
+	A monomial $y^{\alpha}$ for $\alpha \in \ZZ_{\geq 0}[\partial]$ appears in $\partial^r(y^n)$ nontrivially if and only if it has degree $n$ and weight $r$.
+\end{lemma}
+\begin{proof}
+	The proof is by induction on $r$.
+	The case $r=0$ is trivial.
+	In the inductive step one needs to take a derivative of $y^{a_0} \dot{y}^{a_1}\cdots (y^{(r)})^{a_r}$ and observe that every monomial has an exponent which is a modification of $(a_0, a_1,\ldots, a_r,0)$ by one of  $(-1,1,0,\ldots, 0,0), (0,-1,1,\ldots, 0,0), \ldots, (0,0,0, \ldots, -1,1)$.
+	Note that 
+	\begin{align*}
+	\partial(y^{a_0} \dot{y}^{a_1}\cdots (y^{(r)})^{a_r}) =& \partial(y^{a_0}) \dot{y}^{a_1}\cdots (y^{(r)})^{a_r} \\
+	&+ y^{a_0} \partial(\dot{y}^{a_1})\cdots (y^{(r)})^{a_r} \\
+	&+ \cdots \\
+	&+ y^{a_0} \dot{y}^{a_1}\cdots \partial(y^{(r)a_r}).
+	\end{align*}
+	Since  $\partial((y^{(j)})^{a_j})=(y^{(j)})^{a_j-1}y^{(a_j+1)}$.
+	This gives the contribution $-e_j+e_{j+1}$ in the exponent if $e_j$ is the $j$th elementary basis vector. 
+	In the notation where exponents are $\ZZ_{\geq 0}[\partial]$ the new exponent is $-\partial^j + \partial^{j+1}$.
+\end{proof}
+
+Before diving in to the next Lemma the reader may wish to consult the example found directly after the proof.
+\begin{lemma}\label{lem:lowest-monomial}
+	The lowest monomial of $\partial^m(y^n) \in K\lbrace y \rbrace$ with respect to its unique ranking is 
+	$$\Low(\partial^m(y^n)):= \partial^q(y)^{n-r}\partial^{q+1}(y)^r$$
+	where $q, r \in \ZZ_{\geq 0}$ are the unique integers with $0 \leq r \leq n$ in the Euclidean algorithm such that
+	$m= qn+r$.
+\end{lemma}
+\begin{proof}[Proof of Lemma~\ref{lem:lowest-monomial}]
+	First observe that 
+	$$ \deg( \partial^q(y)^{n-r}\partial^{q+1}(y)^r)= n,$$
+	$$ \wt( \partial^q(y)^{n-r}\partial^{q+1}(y)^r) = q(n-r) + (q+1)r  =qn+r =m,$$
+	so by Lemma~\ref{lem:monomials-of-derivative}, $\partial^q(y)^{n-r}\partial^{q+1}(y)^r$ appears as a monomial of $\partial^m(y^n)$.
+	We now prove this is the lowest by induction on $m$. 
+	We will let $y^{\beta}$ be a minimal term with $\beta\in \ZZ_{\geq 0}[\partial]$.
+	If $m=0$ then $y^n$ is the lowest term which is when $q=0$ and $r=0$.
+	We now do the inductive step. 
+	The lower term of $\partial^{m+1}(y^n)$ will be a term of $\partial(y^{\gamma})$ where $\gamma= (n-r)\partial^q + r \partial^{q+1}$. 
+	This is because if $\beta \prec \beta'$ then $\beta -\partial^i + \partial^{i+1} \prec \beta' -\partial^i + \partial^{i+1}$. 
+	Now $\gamma - \partial^q + \partial^{q+1}$ is the smallest term.
+	In the case $r=n-1$ we find that $m+1 = (q+1)n$ and can check directly that $\partial( \partial^q(y) \partial^q(y)^{n-1})$ has the term $\partial^{q+1}(y)^n$. 
+	In the case $r<n-1$ we find that $m+1 = n+r+1$ and that $\gamma -\partial^q + \partial^{q+1} = (n-(r+1))+(r+1)\partial^{q+1}$ is the lowest term.
+	\cite[\S21]{Ritt1943}
+\end{proof}
+Here is an example of the above theorem.
+\begin{example}
+	In the case $m=10$ and $n=3$ the proposition is saying that $\partial^{10}(y^3)$ has $\partial^3(y)^2\partial^4(y)$ as the lowest term in the ordering since $10=3(3)+1$.
+\end{example}
+
+
+Levi's Criterion will give a recipe on the weight and degree of $y^{\alpha}$ for membership in the differential ideal generated by $y^n$.
+\begin{theorem}[Levi's Lemma]\label{lem:levi}
+	Let $n$ be a non-negative integer. 
+	Suppose that $y^{\alpha}$ for $\alpha \in \ZZ_{\geq 0}[\partial]$ has weight $w$ and degree $d$. We have the following
+	$$ w < f(n,d) \implies y^{\alpha} \in [ y^{n+1} ] $$
+	where $f(n,d) = q_d(q_d-1)(n-1)+2q_dr_d$ where $q_d$ and $r_d$ are the unique integers such that $d=q_dn+r_d$.
+\end{theorem}
+\begin{proof}
+	We will say a monomial $y^{a_0 + a_1 \partial + \cdots + a_s \partial^s}$ is \emph{dilute} (for $n$) if and only if for all $j$, $a_j + a_{j+1} < n$. 
+	If $y^{\alpha}$ is not dilute it will be called \emph{concentrated} (for $n$).
+	We will omit the ``for $n$'' from now on.
+	A differential polynomial is called \emph{concentrated} (resp \emph{dilute}) if all of its monomials are. 
+	There are a series of claims:
+	\begin{enumerate}
+		\item \label{L:division} If $y^{\alpha}$ is concentrated then there exists some $j$ such that $L_j=\Low(\partial^j(y^n))$ divides $y^{\alpha}$.
+		\begin{proof}
+			Recall that $\Low( \partial^j(y^n)) = \partial^{q_j}(y)^{n-r_j}\partial^{q_j+1}(y)^{r_j}$ where $j=q_jn+r_j$ is the representation from the division algorithm.
+			By definition $y^{\beta}=\partial^i(y)^a\partial^{i+1}(y)^{b}\vert y^{\alpha}$ for some $a,b$ with $a+b\geq n$. 
+			Without loss of generality we can asume $a+b=n$. 
+			We also must have $\wt(y^{\beta})=ia+(i+1)b=m$.
+			To get the division we increase $j$ until $q_j=a$ so that $j = an$.
+			In this case $L_j = \partial^a(y)^n$.
+			We can then increase $j$ further to get $j=an+r$ for $0\leq r <n$ and $L_j=\partial^a(y)^{n-r}\partial^{a+1}(y)^r$.
+		\end{proof}
+		\item  
+		\begin{lemma}
+			If $A$ is degree-homogeneous of degree $d$ and weight-homogenous of weight $w$ it is congruent to a dilute bihomogenous polynomial of the same degree and weight modulo $[y^n]$.
+		\end{lemma}
+		\begin{proof}
+			By the previous $y^{\alpha}\equiv 0 \mod [y^n]$ for every $y^{\alpha}$ concentrated. 
+			The result follows.
+		\end{proof}
+		This shows that every $A$ is congruent to an $n$-dilute $\partial$-polynomial modulo $[y^n]$. 
+		Conversely, we will show that the only $n$-dilute polynomial in $[y^n]$ is the zero polynomial.
+		\item If $y^{\alpha}$ is degree $d$ and has weight less than $f(n,d)$ then $y^{\alpha}$ is $n$-concentrated. 
+		\item By hypothesis, we have a concentrated polynomial which is equivalent to a dilute one. 
+	\end{enumerate}
+	
+	We can peel off the concentrated terms, term-by-term and kill them. 
+	Suppose $A$ is not dilute. 
+	Then let $A=bB+R$ where $B$ is the lowest concentrated. 
+	We have $B = L_j H$ for some $H$ and $j$. 
+	We have $\partial^j(y^n) = cL_j + \sum_{i=1}^s c_i P_i$ where $P_i \succ L_j$. 
+	Then 
+	\begin{align*}
+	A &= bB+R \\
+	&= b \left( \frac{1}{c} \left[ \partial^j(y^n) - \sum_{i=1}^s c_i P_i \right] \right)H + R\\
+	&\equiv \frac{-b}{c} \sum_{i=1}^s c_i P_i H + R \mod [y^n],
+	\end{align*}
+	and the terns $P_iH$ are higher that $G$ in the ordering. 
+	We now repeat this process to kill higher and higher terms. 
+	Since there are only finitely many terms we can do this with, the process terminates. 
+\end{proof}
+
+\subsection{Levi's Lemmas for $[xy]$}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Partial Differential Algebra}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Monomials, Ranking, and Orders}\label{S:PDE-ranking}
+Let $R$ be a $\Delta$-ring with $\Delta = \lbrace \partial_1,\ldots,\partial_m \rbrace$.
+Let $A = R[y_1,\ldots,y_n]_{\Delta}$. 
+Let $\Theta$ be the collection of differential operators
+$$ \Theta = \lbrace \partial^{\alpha} \colon \alpha \in \ZZ_{\geq 0}^n \rbrace$$
+where $\partial^{\alpha} = \partial_1^{\alpha_1}\cdots \partial_m^{\alpha_m}$.
+\begin{definition}
+	A \emph{ranking} is a total ordering $\prec$ on the set of differential variables
+	$ \lbrace \theta(y_j) \colon \theta \in \Theta, 1\leq j \leq n \rbrace $
+	satisfying the following two axioms
+	\begin{enumerate}[topsep=0pt]
+		\item $ u \prec \theta u$, 
+		\item $u \prec v \implies \theta u \prec \theta v $
+	\end{enumerate}
+\end{definition}
+For a given indeterminate $\theta(u)$ we define a filtration $(K[y_1,\ldots,y_n]_{\Delta})_{\leq \theta(u)}$ to be the ring generated by variables of lower rank.
+
+Just as in the ordinary case we make a sequence of definitions.
+\begin{definition}
+	Let $f \in K[x_1,\ldots,x_m]_{\Delta}$ and fix a ranking on the variables. 
+	The \emph{leader} $\ell_f$ of $f$ is the higher rank element of $\lbrace \theta x_j \colon 1\leq j \leq n, \theta \in \Theta$ such that $\partial f/\partial \ell_f\neq 0$. 
+	If let $\ell = \ell_f$ and write 
+	$$f = a_d \ell^d + a_{d-1} \ell^{d-1} + \cdots + a_0,$$
+	with $a_j \in K[x_1,\ldots,x_n]_{\Delta, \leq \ell}$ then
+	\begin{itemize}[topsep=0pt]	 
+		\item  The top coefficient $a_d = I_A$ is called the \emph{initial} respect to the ranking.
+		\item The partial derivative of $f$ with respect to the leader $\partial f/\partial \ell$ is called the \emph{separant} of $f$ with respect to the ranking and we denote it by $S_f$.
+		\item The degree $d$ is the \emph{leader degree} and we denote it by $\ldeg(f)$.
+	\end{itemize}
+\end{definition}
+
+
+Note that to compare $f$ and $g$ we can use $\ell_f^{\ldeg(f)}$ and $\ell_g^{\ldeg(g)}$.
+The set of elements 
+ $$ \lbrace \theta(x_j)^d \colon \theta \in \Theta, d\geq 1 \rbrace $$
+is an ordered set called the set of ranks. 
+We will set $\rk(f) = \ell_f^{\ldeg(f)}$ and call it the \emph{rank} of $f$ and write $f\prec g$ if and only if $\rk(f) \prec \rk(g)$.
+
+Recall that a \emph{term order} is total ordering on monomial that respects multiplication. 
+That is, it is a total ordering $\prec$ for that for all monomial $M$,$N$, and $L$ if $M\prec N$ then $LM \prec LN$. 
+Given a ranking there is an induced term order on the collection of monomials given by taking lexicographic order on the differential variables. 
+We will let $\prec$ also denote the term order induced by the ranking $\prec$. 
+
+\begin{example}
+	For a single variable $y$ there is a unique term in $K\lbrace y \rbrace$. 
+	The monomials $y^{\alpha}$ are ordered first by order and then by degree. 
+	Ritt phrases this as saying $y^{\alpha} \prec y^{\beta}$ if and only if the greatest $i$ such that $\alpha_i - \beta_i \neq 0$ we have $\alpha_i -\beta_i <0$.  
+\end{example}
+
+\begin{theorem}
+	Fix a ranking on a ring of differential polynomials.
+	If $A$ is a differential polynomial and $\LM(A) = I \ell^m$ where $I$ is the initial and $\ell^m$ is the leader to some power then $\LM(\partial(A)) = (I m \ell^{m-1}) \partial(\ell)$ with new leader $\partial(\ell)$ and new initial $mI\ell^{m-1}$.
+\end{theorem}
+\begin{proof}
+	We have $\partial(I \ell^m) = \partial(I)\ell^m + m\ell^{m-1}\partial(\ell)I$. 
+	We have $\partial(\ell) \succ \ell \succ I$. 
+	This means that $\partial(\ell)$ will precede any differential variable in any of the monomials of $\partial(I)$ by the second axiom of rankings.
+	Hence $\LT(\partial(A) ) = m\ell^{m-1}I \partial(\ell)$ and $I_{\partial(A)} = m \ell_A^{m-1} I_A$ and $\ell_{\partial(A)} = \partial(\ell_A)$.
+\end{proof}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Characteristic Sequences}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Characteristic sequences $G=(g_1,\ldots,g_r)$ are things that characterize membership in a $\partial$-ideal $I$.
+There are like a crappy version of a Groebner basis for an ideal in that they can determine membership of the ideal but they actually don't generate the ideal. 
+They are a valuable computational technique but also a source of many of our headaches in that one of the largest open problems in differential algebra, the Ritt Problem, is centered around them.
+
+For the purpose of having something to focus on we state the main result of this section. 
+Definitions will be developed as we go along. 
+\begin{theorem}
+	Let $I$ be a $\Delta$-ideal in $K[x_1,\ldots,x_n]_{\Delta}$. 
+	Fix a ranking on $K[x_1,\ldots,x_n]_{\Delta}$.
+	The following are equivalent for an ordered set $G=(g_1,\ldots,g_r)$ of elements from $I$,
+	\begin{enumerate}[topsep=0pt]
+		\item The sequence $G$ is a characteristic sequence of $I$.
+		\item $f \in I$ if and only if $\red_G(f)=0$. 
+	\end{enumerate}
+\end{theorem}
+In the above theorem, $\red_G(f)$ is the output of our pseudodivision algorithm analogous to the one we developed in the univariate case.
+
+\subsection{Chomp}\label{S:chomp}
+
+The game chomp is a game that is useful for describe when certain processes terminate. 
+This can be used in a proof of the Hilbert Basis Theorem or when we want to show that Buchberger's Algorithm terminates. 
+A drawing of three moved in the game played in the plane is pictured in Figure~\ref{F:chomp}.
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[scale=0.33]{chomp.eps}
+	\end{center}
+\caption{The moves in the game chomp are pictured.
+At each stage a vertex is selected in $\ZZ_{\geq 0}^2$ and every lattice point above and below it are removed. 
+After a finite number of moves this game must terminate. }\label{F:chomp}
+\end{figure}
+
+The initial board is setup so there is a bead at each point in the first quadrant of the xy-plane including the lattice points on the axes. 
+At each round a chomp is made. 
+To make a chomp you select one bead is selected and all the beads above above and to the right are removed (so an infinite number of beads are removed at each stage). 
+The game is over when there are no more chomps to be made.
+I really didn't describe a two player winning or losing strategy, but that doesn't really matter. 
+What matters is that the game terminates. 
+
+The idea is that each node $(i,j)$ in the $xy$-plane represents a monomial $x^iy^j$ and the chomp represents all of the monomials that are divisible the node we selected. 
+
+The are obvious variants of this game in higher dimensions.
+
+\subsection{Well Orderings}
+In this section we will let $(S,\leq)$ be a partially ordered set.
+When we want a strict inequality we will use the $a<b$ to mean $a\leq b$ and $a\neq b$ for $a,b\in S$. 
+
+We recall that a partially ordered set $(S,\leq)$ is a \emph{well ordered set} if and only every $S_0 \subset S$ has a minimal element. 
+
+\begin{exercise}
+	The following are equivalent for a partially ordered set $(S,\leq)$.
+	\begin{enumerate}[topsep=0pt]
+	\item \label{I:well-order} The set $(S,\leq)$ is a well ordering.
+	\item \label{I:dcc} Every descending sequence $s_1\geq s_2 \geq \ldots$ in $S$ terminates. 
+	\end{enumerate}
+\end{exercise}
+\begin{proof}
+	To show that the descending chain condition implies a well ordering we will argue by contrapositive. 
+	Suppose there is a set without a minimal element. 
+	Then form a descending chain. 
+	
+	To show that the well ordering property implies descending chains we again use a contrapositive. 
+	Given an infinite descending chain $a_0>a_1>a_2 >\cdots$ the set $S_0 = \lbrace a_j \rbrace_{j \geq 0}$ is a set without a minimal element. 
+\end{proof}
+
+\subsection{Characteristic Sets}
+Let $\Delta = \lbrace \partial_1,\ldots,\partial_m\rbrace$ and let $\Theta = \lbrace \partial^{\alpha} \colon \alpha \in \ZZ_{\geq 0}^m\rbrace$ whre $\partial^{\alpha} = \partial_1^{\alpha_1} \cdots \partial_m^{\alpha_m}$. 
+
+\begin{lemma}\label{L:dickson}
+	There denote not exist an infinite sequence $\theta_1,\theta_2,\ldots$ where $\theta_j \in \Theta$ such that $\theta_j \nmid \theta_{j+i}$ for all $j\geq 1$ and $r>1$. 
 \end{lemma}
 
+\begin{exercise}
+	Prove Lemma~\ref{L:dickson} using the idea that the game chomp from \S\ref{S:chomp} terminates. 
+\end{exercise}
+
+\begin{definition}
+Fix a ranking on $K[x_1,\ldots,x_n]_{\Delta}$. 
+Let $f,g \in K[x_1,\ldots,x_n]_{\Delta}$.
+We say that $f$ is \emph{reduced} with respect to $g$ if and only if 
+\begin{enumerate}[topsep=0pt]
+	\item No property derivative of the leader of $g$ appears in $f$: for all $\theta \in \Theta$, $\partial f/\partial \theta(\ell_g) =0.$
+	\item If the leaders are the same then $g$ has bigger leader degree: $\ldeg(g) > \ldeg(f)$.
+\end{enumerate}
+\end{definition}
+
+There exists a division algorithm similar for reducing $f$ with respect to some $g$ and the output of the algorithm is some $\red_g(f)$ which satisfies where 
+$$
+\red_g(d) = \begin{cases}
+\widetilde{f}, & \mbox{reduced} \\
+f, & \mbox{if $f$ reduced } 
+\end{cases}
+$$
+where one has 
+ $$ s f \equiv \widetilde{f} \qquad [g]_{\Delta} $$
+and $s$ is in the multiplicative set generated by $I_g$ and $S_g$.
+\begin{exercise}
+	Building on the pseudodivision algorithm in the ODE case (Theorem~\ref{T:ode-pseudodivision}) construct an algorithm which gives the desired output.
+\end{exercise}
+
+For sequences $G=(g_1,\ldots,g_r)$ of differential polynomials we will use the notation $\vert G \vert = r$.
+
+\begin{definition}
+	A ordered sequence $G=(g_1,\ldots,g_r)$ is \emph{autoreduced} if and only if for all $g_i,g_j$ with $i\neq j$ we have $g_i$ reduced with respect to $g_j$. 
+\end{definition}
+
+We will always order our sequences with respect to a ranking for that $g_1 \prec g_2 \prec \cdots \prec g_r$.
+
+\begin{definition}
+	We will say that $f$ is reduced with respect to $G=(g_1,\ldots,g_r)$ if and only if $f$ is reduced with respect to $g_j$ for each $j$.
+\end{definition}
+
+For any $h_1 \prec h_2 \prec \cdots \prec h_r$ which is comparable, we will have $\rk(h_i) = \rk(g_i)$ for each $i$. 
+
+\begin{theorem}
+	The do not exist infinite autoreduced sequences in $K[x_1,\ldots,x_n]_{\Delta}$. 
+\end{theorem}
+\begin{proof}
+	Suppose there is some $g_1,g_2,\ldots$ which is infinite and autoreduced. 
+	Then there is some $x_j$ such that infinitely manu leader have the form $\theta x_j$ for some $\theta \in \Theta$. 
+	By the Lemma~\ref{L:dickson}, there is not infinite sequence $\theta_1,\theta_2,\ldots$ in $\Theta$ with $\theta_i \nmid \theta_{i+j}$ for $i\geq 1$ and $j>0$. 
+	This means that $\theta_{3}(\theta_1(x_j))=\theta_2(x_j)$ for some $\theta_1 x_j$ and $\theta_2 x_j$ in the sequence. 
+	This implies the set is not autoreduced.
+\end{proof}
+
+We now define a partial ordering on the collection of autoreduced sequences for the purposes of showing minimal ones exist. 
+These will be the characteristic sequences.
+
+\begin{definition} \ \taylor{double check}
+Let $G = (g_1,\ldots,g_r)$ and $G=(h_1,\ldots,h_s)$ be two autoreduced sequences with respect to some ranking. 
+We say that $H\prec G$ if and only if	
+\begin{enumerate}[topsep=0pt]
+	\item Reading from left to right we find some $j$ such that $h_j \prec g_j$ (we will assume that this $j$ is minimal and that for all of $i<j$ this does not hold)
+	\item They match all the way but $s>r$. In other words, $H$ has more elements.
+\end{enumerate}
+\end{definition}
+
+We now give the well-ordering property.
+\begin{theorem}
+	Any set of autoreduced sequences has a minimal element.
+\end{theorem}
+\begin{proof}
+	Let $\mathcal{G}$ be a collection of autoreduced sequences. 
+	Form the sequences $\mathcal{G}_0 = \mathcal{G}$ and 
+	 $$ \mathcal{G}_i = \lbrace (g_1,g_2,\ldots, g_i,\ldots) \in \mathcal{G}_{i-1} \colon \vert G \vert \geq i, \mbox{ $g_i$ minimal } \rbrace, \qquad i \geq 1. $$
+	 Note that minimality makes sense since the collection of ranks
+	 $$ \lbrace \ell_{g_i}^{\ldeg(g_i)} \colon (g_1,\ldots,g_i,\ldots) \in \mathcal{G}_{i-1} \rbrace $$
+	is either empty or has a minimal element.
+	If for every $i$ the set $\mathcal{G}_i$ is not empty then we could construct an infinite autoreduced sequence. 
+	This is impossible. 
+	
+	Hence there exists some $N\geq 0$ such that $\mathcal{G}_N \neq \emptyset$ and $\mathcal{G}_{N+1}=\emptyset$. 
+	At each stage $g_i$ was constructed to be minimal. 
+	There will be no other autoreduced set below it by ``breaking an characterizer'' and there will be no autoreduced sets which are longer, any $G \in \mathcal{G}_N$ will be a minimal.
+\end{proof}
+
+\begin{definition}
+	Fix a $\Delta$-ideal $I$ in $K[x_1,\ldots,x_n]_{\Delta}$ and some ranking. 
+	A \emph{characteristic sequence} $G=(g_1,\ldots,g_r)$ for $I$ is a minimal (with respect to the ordering $\prec$ where longer sequences are ``smaller'') autoreduced sequence of elements from $I$.
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Ideal Membership}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{theorem}
+	Let $I$ be a $\Delta$-ideal in $K[x_1,\ldots,x_n]_{\Delta}$. 
+	Fix a ranking on $K[x_1,\ldots,x_n]_{\Delta}$.
+	The following are equivalent for an ordered set $G=(g_1,\ldots,g_r)$ of elements from $I$,
+	\begin{enumerate}[topsep=0pt]
+		\item The sequence $G$ is a characteristic sequence of $I$.
+		\item $f \in I$ if and only if $\red_G(f)=0$. 
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	We will show that $G$ is not minimal implies there exists some nonzero $f$ reduced with respect to $G$.
+	This is the contrapositive of the ``membership characterization property'' implying that $G$ is a characteristic set.
+	Suppose that $G=(g_1,\ldots,g_r)$ is an autoreduced subset of $I$ which is not minimal.
+	Let $H=(h_1,\ldots,h_s)$ be a characteristic set below $G$. 
+	The relationship $H\prec G$ can happen in two ways.
+	
+	First there exists some $i$ with $1\leq i \leq r$ such that 
+	$$\rk(h_1)= \rk(g_1), \quad\rk(h_2)=\rk(g_2), \quad \ldots \quad \rk(h_{i-1})=\rk(g_{i-1}), \quad h_i \prec g_i. $$
+	This $h_i$ will be reduced with respect to $G$ as reducedness with respect to $H$ imply this for $g_1,\ldots,g_{i-1}$ and being lower implies this for $g_i,\ldots,g_r$.
+	
+	The second way if for $\rk(h_j) = \rk(g_j)$ for $1\leq i \leq r$ but $r<s$. 
+	In this case $h_{r+1}$ produces our element which is reduced with respect to $G$.
+	
+	Conversely suppose that $G$ is a characteristic set for some ranking $\prec$ and, for the sake of contradiction. that $f\in I$ is reduced with respect to $G$ and but not zero.
+	
+	There are two cases.
+	In the first case there exists some minimal $j$ with $1\leq j \leq r$ such that $f\prec g_j$.
+	In this case we have  
+	 $$ (g_1,\ldots,g_{j-1},f) \prec G, $$
+	which contradicts minimality.
+	 
+	In the second case we have $f \nprec g_j$ for $1\leq j \leq r$. 
+	We then construct 
+	 $$ (g_1,\ldots, g_r,f) \prec G $$
+	which again contradicts minimality.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Prime Decomposition}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
-
-
+ 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter[Poincar\'{e}-Fuchs]{The Poincar\'{e}-Fuchs Theorem}
@@ -2836,8 +3849,21 @@ This section is motivated by the following problem.
 	How many constants of integration does a general solution of this equation need?
 \end{problem}
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \appendix 
-\chapter[Analytic Elements]{Analytics Elements of Differential Equations}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter[Analytic Aspects]{Analytic Aspects of Differential Equations}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Solutions of Homogeneous Differential Equations}
 The following is a useful formula.
@@ -2849,7 +3875,85 @@ The following is a useful formula.
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Cauchy-Kovalevskya (Cauchy-Kowalevski)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter[Spaces]{Manifolds}
+In this section we collect the results we need regarding smooth manifolds, schemes, and algebraic varieties.
+\section{Ehresmann's Theorem}
+The following Theorem will be used when discussing local systems. 
+A consequence of this is that all elliptic curves are drawn topologically as donuts. 
+In fact, all smooth complex algebraic varieties in families when viewed as smooth manifolds are topologically the same. 
+They have the same hodge and betti numbers, fundamental groups, etc. 
+To establish this we use Ehresmann's Theorem.
+\begin{theorem}[Ehresmann's Theorem]
+	Any proper submersions $f:X\to S$ of smooth manifolds is locally (diffeomorphically) trivial. 
+\end{theorem}
+We will remind the reader of the terms.
+\begin{itemize}
+	\item A morphism $f:X\to S$ is \emph{proper} if and only if the inverse image of a compact set is compact.\footnote{for those familiar with algebraic geometry, you know that you can rephrase this in terms of universal closedness and separatedness which can be formulated diagramatically.}
+	\item A morphism $f:X\to S$ is a \emph{submersion} if and only if for every $x\in X$ the induced map $(TX)_x \to (TS)_{f(x)}$ is surjective. 
+	\item A morphism $f:X\to S$ is locally trivial if and only if for every $s_0 \in S$ there exists a $U \owns s_0$ open and an diffeomorphism $\psi$ fitting into the diagram
+	$$\begin{tikzcd}
+	f^{-1}(U) \ar[rr, "\psi"]\ar[dr, "f"]& & U \times X_{s_0} \ar[dl, "\pr_1"] \\
+	& U & 
+	\end{tikzcd}.$$	
+	In the above diagram $X_{s_0} = f^{-1}(s_0)$ is the fiber above $s_0$.
+\end{itemize}
+
+\begin{proof}[Sketch Proof]
+	A doodle of the proof is found in Figure~\ref{F:ehresmann}.
+	Without loss of generality we can assume that $U = \RR^n$ with coordinates $y^i$ for $1\leq i \leq n$. 
+	\begin{itemize}
+		\item We use the submersion property to show that there exists vector fields $w_i$ on $X$ lifting the vector fields $v_i =\frac{\partial}{\partial y^i}$.
+		If $\phi_{v_i}^t$ and $\phi_{w_i}^t$ denote the flows (partially defined self maps $Y\to Y$ and $X\to X$ respectively) given by solving the flow ODE with the vector fields $v_i$ and $w_i$ respectively satisfying 
+		$$ \phi_{v_i}^t \circ f = f \circ \phi_{w_i}^t $$
+		for some time $t$. 
+		\item We use the properness property to show that for each $s\in U$, the set 
+		$$f^{-1}\lbrace \phi^t_{v_i}(s) \colon t\in [a,b] \rbrace$$ is a compact set for $[a,b]$ where the map is defined.
+		This allows us to argue that the flows $\phi^t_{w_i}$ need to be defined for just as many $t\in [a,b]$ flows $\phi^t_{v_i}$ are. 
+		\item We then define $\psi\colon f^{-1}(U) \to U\times X_{s_0}$ using two maps. 
+		The first is projection to $U$, and the second is flowing to $X_{s_0}$ using the vector fields. 
+	\end{itemize}
+	
+	\begin{figure}
+		\begin{center}
+			\includegraphics[scale=0.5]{ehresmann.eps}
+		\end{center}
+		\caption{A picture of the proof of Ehresmann's Theorem. 
+			The first frame shows us lifting the vector field. 
+			The second frame shows the flow-lines for the vector field. 
+			The third frame shows the morphism ``go to the fiber'' using the flow lines.}\label{F:ehresmann}
+	\end{figure}
+\end{proof}
+
+
+Some consequences of this are that the Betti and Hodge numbers of varieties in proper families are preserved.
+
+Another consequence in that proper submersions $f:W \to S$ are actually fiber bundles with a common fiber $F$ over an open subset of $S$ where the fibers are smooth manifolds. 
+\begin{corollary}[Lefschetz Fibration]
+	Let $\pi:W\to S$ be a proper submersion of connected smooth manifolds. 
+	Over a dense open subset of $S$ the map $\pi$ is a fiber bundle in the category of smooth manifolds with fiber $W_{s_0}$. 
+\end{corollary}
+\begin{proof}
+	The open subset of $S$ is the set where $W_{s}$ is a smooth manifold. 
+	We just need to show that the fibers are all diffeomorphic. 
+	If $U$ and $V$ are two trivializing opens with $\psi_U$ and $\psi_V$ trivializations to $U\times W_{s_0}$ and $V \times W_{s_1}$ then we have isomorphisms over $U\cap V$ (obtained from base changing our trivializations via $U\cap V \to U$ and $U\cap V \to V$) 
+	fitting into the diagram
+	$$\begin{tikzcd}
+	(U\cap V) \times W_{s_0} \ar[dr,"\pr_1"]&\pi^{-1}(U\cap V)\ar[d] \ar[r, "\psi_V"]  \ar[l, "\psi_U"]  & (U\cap V)\times W_{s_1} \ar[dl,"\pr_1"]\\
+	& U \cap V &
+	\end{tikzcd}
+	$$
+	Now the map $\psi_{U,V} = \psi_V\psi_U^{-1}:( U\cap V)\times W_{s_0} \to (U\cap V)\times W_{s_1}$ over $U\cap V$ which we can base change by any point. 
+	This shows that $W_{s_0} \cong W_{s_1}$. 
+	We then cover $S$ by trivializing open sets and use the transitive property of diffeomorphism to get a common fiber. 
+\end{proof}
+
+\taylor{Check this smooth fiber condition}
+
+
 
 \backmatter
 
