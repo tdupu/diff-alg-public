@@ -115,6 +115,7 @@
 \newcommand{\Khat}{\widehat{K}}
 \newcommand{\Fbar}{\overline{F}}
 \newcommand{\PGL}{\operatorname{PGL}}
+\newcommand{\deligne}[1]{\cite[ #1 ,\href{https://labs.thosgood.com/translations/978-3-540-05190-9.pdf}{Hosgood translation}]{Deligne1970}}
 
 \usepackage{listings}
 \usepackage{spverbatim}
@@ -138,11 +139,9 @@
 
 \frontmatter
 
-\tableofcontents
-
 \chapter{FrontMatter}
 
-\section{Why do these notes exist?}
+\section*{Why do these notes exist?}
 These notes are from a course taught in Fall 2022 at UVM entitled \emph{The Algebraic Theory of Differential Equations}. 
 I decided to write these notes because there are a lot different sources for graduate students starting out in Differential Algebra but none of them cover exactly what I would like to cover. 
 
@@ -202,19 +201,19 @@ We'll see.
 %At the end of all of this there is going to be many course that could be taught using this book.
 
 \iffalse
-\section{A Note After Fall 2022} 
+\section*{A Note After Fall 2022} 
 There is a manuscript by Manin \cite{Manin1978} which also attempts to unify differential algebraic and foliation theoretic perspectives on differential equations.
 
 \fi
 
 
-\section{Where can I get a digital copy of these notes?}
+\section*{Where can I get a digital copy of these notes?}
 A link to the .pdf can be found here:
 \begin{center}
 	\url{https://tdupu.github.io/diff-alg-public/diff-alg.pdf}.
 \end{center}
 
-\section{How do I cite these notes?}
+\section*{How do I cite these notes?}
 
 \taylor{WARNING: These notes have not been peer reviewed! Use at your own peril! (Also email me if you find mistakes: taylor.dupuy@gmail.com)}
 
@@ -245,6 +244,7 @@ url     = {https://tdupu.github.io/diff-alg-public/diff-alg.pdf},
 
 \mainmatter
 
+\tableofcontents
 
 
 \chapter{Differential Algebra Basics}
@@ -950,8 +950,7 @@ We say that a matrix $\Phi(t) \in M_{m,n}(\hol(S))$ is \emph{regular singular at
 \begin{definition}
 	We say that $t=t_0$ is a \emph{regular singular point} if and only if  for every local sector at $t=t_0$ there exists a holomorphic basis of solutions $Y_1(t),\ldots,Y_n(t)$ with $Y_j(t)=(y_{j1}(t),\ldots,y_{jn}(t))^T$ and $\lambda \in \CC$ such that 
 	$$ \lim_{t\to t_0} (t-t_0)^{\lambda} y_{ji}(t) =0. $$
-	
-	\taylor{}
+	\taylor{Change for Next Round: convert this to a definition for systems}
 \end{definition}
 
 That seems like a lot but all this is saying is that as you approach your point in question you don't blow up like an essential singularity.
@@ -3112,6 +3111,7 @@ and gives it the connection by extending $\pi^{-1}\Ocal_S$-linearly the map
 	Check that the map 
 	$$\LocSys(X/S) \to \Conn(X/S), \quad L \mapsto E_L $$
 	is an equivalence of categories with quasi-inverse $(E,\nabla_{X/S}) \mapsto E^{\nabla_{X/S}}$. 
+	\deligne{Chapter I, Prop 2.23}
 \end{exercise}
 
 
@@ -3272,6 +3272,153 @@ The following is a description of
 \caption{A picture of $S \subset \PP^1\times X$ in the case of four parametrized points.}
 \end{figure}
 
+\section{Isomonodromy Theorem}
+
+The aim of this section is to prove the that all isomonodromic collections of differential equations come from connections on the total space. 
+This is one of the tools that we need to show that the Schlesinger equations actually describe an isomonodromic deformation.
+
+\subsection{Isomonodromy In Terms of Relative Local Systems}
+Let $\pi:W\to S$ be a morphism of complex manifolds.
+Let $L$ be a relative local system of rank $n$ (so that $L \cong (\pi^{-1}\Ocal_S)^{\oplus n}$ locally).
+For each $s_0\in S$ we will let $j_{s_0}$ denote the closed immersion $j_{s_0}\colon W_{s_0} \to W$ which includes the fiber $W_{s_0} = \pi^{-1}(s_0)$ into the total space $W$. 
+For each $s_0\in S$ we have $j_{s_0}^{-1}(L)$ a local system on $W_{s_0}$.
+For varying $s$ we would like to compare the local systems $j_s^{-1}(L)$ on $W_s$ near for $s$ near $s_0$ to $j_{s_0}^{-1}(L)$. 
+We will do this using Ehresmann's theorem.
+
+By Ehresmann's Theorem, there for every $s_0$ there exists some $U  \owns s_0$ be an open such and a diffeomorphism $\psi$ such that 
+$$\begin{tikzcd}
+\pi^{-1}(U) \ar[rr, "\psi"] \ar[dr, "\pi"] & & U\times W_{s_0} \ar[dl, "\pr_1"]\\
+& U &
+\end{tikzcd},$$
+commutes. 
+For $s \in U$, consider $i_s: \lbrace s \rbrace \to U$ the inclusion of the point $s$ into $U$. 
+Pulling back the trivialization diagram for $\psi$ along this morphism gives
+$$\begin{tikzcd}
+W_s \ar[r, equal]& \pi^{-1}(x) \ar[rr, "\psi_s"] \ar[dr, "\pi"] & & \lbrace s \rbrace \times W_{s_0} \ar[dl, "\pr_1"]\\
+& & U &
+\end{tikzcd},$$
+which, after abusively identifying $\lbrace s \rbrace \times W_{s_0}$ with $W_{s_0}$ with the projection $\pr_2$ given by the projection onto the second factor, gives an isomorphism $\psi_s: W_s\to W_{s_0}$. 
+We can now pullback $j_{s_0}^{-1}(L)$ along $\psi_s$ to get $j_s^{-1}(L)$ and $\psi_s^{-1} j_{s_0}^{-1}L$ two local systems on $W_s$ which are comparable. 
+Equivalently we can pullback by $\psi_s^{-1}$ to get a collection of local systems (one for each $s\in U$) on $W_{s_0}$ which can now be compared:
+$$ L_s := ( j_s \psi_s^{-1})^{-1}(L) \in \LocSys(W_{s_0}). $$
+This notation is very unfortunate because it has two ``$-1$''s which mean totally different things.
+
+\begin{definition}
+	Let $\pi: W\to S$ be a proper submersion of complex manifolds. 
+	A relative local system $L \in \LocSys(W/S)$ is \emph{isomonodromic} near $s_0$ if and only if there exists a local topologically trivializing open set $U\owns s_0$ for the morphism $\pi$ such that $L_s = L_t$ for all $s,t\in U$. 
+\end{definition}
+
+Since we defined the monodromy of a general integrable connection in terms of the local system in then makes sense to define the monodromy of family of connections (i.e. a relative connection $\nabla_{W/S}$) in terms of a relative local system. 
+\begin{definition}
+	Let $\pi:W \to S$ be a proper submersion of complex manifolds. 
+	Let $(E,\nabla_{W/S})$ be an relative connection which is integrable. 
+	We say $(E,\nabla_{W/S})$ is \emph{isomonodromic} it associated relative local system is isomonodromic.
+\end{definition}
+
+
+\subsection{Existence of Isomonodromic Deformations}
+Let $\pi: W\to S$ be a morphism of complex manifolds and let $(E,\nabla)$ be an vector bundle with an integrable connection of $W$.
+To each such vector bundle with integrable connection we can associate a relative connection $\overline{\nabla}\colon E \to \Omega_{W/S} \otimes E$ by using the quotient $\Omega_{W} \to \Omega_{W/S}$. 
+In other words, $\overline{\nabla}$ is defined by the diagram 
+$$\begin{tikzcd}
+E \ar[r, "\nabla"] \ar[d, equal] & \Omega_{W} \otimes E\ar[d] \\
+E \ar[r,"\overline{\nabla}"] &  \Omega_{W/S}\otimes E
+\end{tikzcd}.$$
+The following theorem says that isomonodromy is of a family of differential equations is characterized by the existence to a lift of a connection on the whole space. 
+This is what gives rise to Schlesinger. 
+\begin{theorem}[Isomonodromy Comes From Integrable Connections on the Total Space]
+	Fix a proper submersion $\pi: W\to S$. 
+	A relative integrable connection $\nabla_{W/S}: E\to \Omega_{W/S}\otimes E$ is isomonodromic if and only if there exists some integrable $\nabla: E\to \Omega_W \otimes E$ such that $\overline{\nabla} = \nabla_{W/S}$.
+\end{theorem}
+
+In what follows for a complex manifold $X$ we let $\Repn(X)$ denote the category of finite dimensional $\pi_1(X)$ representations. 
+We let $\LocSys(X)$ denote the category of local systems.
+We let $\Conn(X)$ denote the category of vector bundles with integrable connections. 
+\begin{lemma}
+	Given a morphism of schemes $f: Z \to W$ (which in applications will be a closed immersion) we have the following 2-commutative diagram of functors,
+	$$\begin{tikzcd}
+	\Repn(W) \ar[r, "f^*"] & \Repn(Z)  & \pi_1(Z)\to \pi_1(W) \mbox{ induced}\\
+	\LocSys(W) \ar[r,"f^{-1}"] \ar[u,"\sim"]& \LocSys(Z) \ar[u,"\sim"] & \mbox{inverse image} &\\
+	\Conn(W) \ar[r, "f^*"] \ar[u, "\sim"]& \Conn(Z) \ar[u,"\sim"] & \mbox{ pullback}
+	\end{tikzcd}
+	$$
+	where the vertical arrows are functors in the Riemann-Hilbert Correspondence. 
+\end{lemma}
+We remind the reader that for $(E,\nabla) \mapsto E^{\nabla}$ and that $L\mapsto (\Ocal_X \otimes L, d\otimes \id)$ give the correspondence between local systems and integrable connections. 
+
+There is a similar description in the relative setting.
+\begin{lemma}\label{L:relative-functorality}
+	Let $\pi: W\to S$ be a family and $j: W_{s_0} \to W$ be a closed immersion of a fiber over $s_0$. 
+	The diagram is 2-commutative.
+	$$\begin{tikzcd}[contains/.style = {draw=none,"\in" description,sloped}]
+	L \ar[d,contains]  \ar[r,mapsto] & \pi^{-1} \Ocal_S \otimes L \ar[d, contains]& \\
+	\LocSys(W) \ar[r] & \LocSys(W/S) \ar[r,"j^*"] & \LocSys(W_{s_0}) \\
+	\Conn(W) \ar[r] \ar[u] & \Conn(W/S) \ar[u] \ar[r, "j^*"]& \Conn(W_{s_0}) \ar[u] \\
+	(E,\nabla) \ar[u,contains] \ar[r,mapsto] & (E,\overline{\nabla}) \ar[r,mapsto] \ar[u,contains] & (E,\overline{\nabla})\vert_{W_{s_0}} \ar[u,contains]
+	\end{tikzcd}
+	$$
+	The map $j^*$ from local systems to relative local system commutes with $j^{-1}: \LocSys(W) \to \LocSys(W_{s_0})$. 
+	Similarly with the restriction of connections.
+\end{lemma}
+
+The following criterion is useful for showing that there exists a connection lifting a relative connection. 
+\begin{theorem}
+	Let $\pi:W \to S$ be a morphism of complex manifolds.
+	Let $(\nabla_1,E)$ be a connection of $W$ with local system $L_1 = E^{\nabla_1}$. 
+	Let $(\overline{\nabla}_1,E)$ be a relative connection for $\pi:W\to S$ and let $L_2 = E^{\overline{\nabla}_2}$ be the associated relative local system.
+	The following are equivalent.
+	\begin{enumerate}
+		\item The connection resticts to the relative connection $(\overline{\nabla_1},E) \cong (\overline{\nabla}_2,E_2)$.
+		\item The local system extends to the relative local system $L_2 \cong \pi^{-1}\Ocal_S\otimes L_1$.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	This follows from the relative Riemann-Hilbert correspondence and the commutativity of the diagrams in Lemma~\ref{L:relative-functorality}.
+\end{proof}
+
+Let $\pi: W\to B$ be a family where $B$ is a ball. 
+The fiber $W_0=W_{b_0}$ connected and smooth. 
+Consider now an inclusion of a fiber $W_{0}$ into a total space $W$, where we let $j_{b_0} =j_0$ to simplify notation.  
+$$\begin{tikzcd}
+W_{0} \ar[r, "j_{0}" ] \ar[d] & W\ar[d,"\pi"] \\
+\lbrace b_0 \rbrace \ar[r] & B 
+\end{tikzcd}
+$$
+Using the long exact sequence of homotopy groups 
+$$ \cdots \to \pi_2(B) \to \pi_1(W_0) \to \pi_1(W) \to \pi_1(B) \to \pi_0(F) \to \cdots   $$ 
+we have $\pi_1(W_0) \cong \pi_1(W)$ since $\pi_i(B)=0$ for all $i$.
+This means that $\Repn(W)\cong \Repn(W_0)$.
+
+\begin{theorem}
+	Integrable connections $(E_0,\nabla_0)$ on a fiber $W_0$ lift to integrable connections $(E,\nabla)$ on the total space.
+	and hence can be put into some isomonodromic family of flat connections $(E,\nabla_{W/S}) = (E,\overline{\nabla})$. 
+\end{theorem}
+\begin{proof}
+	We will now explain how to use this to lift an integrable connection $(E_0,\nabla_0)$ on $W_0$ to an integrable connection $(E,\nabla)$ on $W$. 
+	We use the diagram 
+	$$\begin{tikzcd}
+	\Repn(W) \ar[r, "\sim"] & \Repn(W_0) \\
+	\Conn(W) \ar[r]\ar[u] & \Conn(W_0) \ar[u,"\sim"]
+	\end{tikzcd}
+	$$ 
+	The composition from $\Conn(W_0)$ going up, then left, then down in the diagram shows there exists some $(E,\nabla) \in \Conn(W)$ with the monodromy representation we want.
+	Applying commutativity of the diagram we get $(E,\nabla)\vert_{W_0} \cong (E_0,\nabla_0)$. 
+	
+	Let $(E,\nabla_{W/B})$ be a family of isomonodromic connections and let $(E_0,\nabla_0)$ be the connection resticted to $b_0$. 
+	The shape of the Schlesinger equations then comes from the logarithmic Riemann-Hilbert correspondence which says that all connections can actually be made to be Fuchsian.
+\end{proof}
+
+
+The converse of this statement is also true. 
+\begin{theorem}
+	Every isomonodromic family of integrable connections comes from an integrable connection on the total space. 
+\end{theorem}
+
+These two theorem explain the existence of the Schlesinger equations and why we are looking at connections on the space of parameters of Fuchsian differential equations of rank two.
+
+
+\iffalse 
+
 \subsection{The Geometry of the Connection}
 
 \taylor{LOTS OF NOTES NEED TO BE PUT IN HERE. They are mostly from Sabbah, with some parts from Deligne and Malgrange for the Riemann Hilbert Correspondence stuff.}
@@ -3288,6 +3435,105 @@ Note now that the fiber of $(X\times \PP^1)\setminus S$ above $x=\mu\in X$ is $\
 If we assume that $H_2(X,\ZZ)=0$ or that $\pi_2(X)=0$ then one can use the long exact sequence in homotopy groups to conclude that the inclusion of the fiber 
  $$ \PP^1\setminus S_{\mu} \hookrightarrow (\PP^1\times X)\setminus S $$
 induces an isomorphism of fundamental groups.
+
+\fi
+
+\section{Painlev\'e Equations}
+
+Consider the systems on $\PP^1\setminus \lbrace 0,1,\infty,x\rbrace$ 
+$$ \dfrac{dY}{dt} = AY, \quad A = \frac{A_0(x)}{t}+\frac{A_1(x)}{t-1}+ \frac{A_2(x)}{t-x},$$
+where the matrices are in $\Lie(\SL_2)$ (and hence are trace free) and  $A_0+A_1+A_2+A_{\infty}=0$.
+If the system is isomonodromic this defines a connection on 
+$$W=(B\times \PP^1)\setminus D_0\cup D_1 \cup D_x \cup D_{\infty}$$ 
+where $D_j$ is the divisor given by the line $\lbrace t = x_j \rbrace \subset B\times \PP^1$ where $(x_0,x_1,x_2,x_{\infty}) = (0,1,x,\infty)$ and $x\in B$ is the standard coordinate.
+Here we have a map $\pi\colon W\to B$ and $\pi^{-1}(x) = \PP^1\setminus \lbrace 0,1,x,\infty\rbrace$.
+
+We know that each matrix $A_j(x)$ has eigenvalues $\pm \theta_j(x)$.We will suppose that the collections are isomonodromic which implies several things.
+First is tells us that $\theta_j(x)$ are constant. 
+Also it tells us that the matrices $A_j(x)$ satisfy Schlesinger's equations. 
+
+Using the theory of cyclic vectors we can suppose that $A_{\infty}$ is lower triangular. 
+In particular we will have 
+$$ A_{\infty} = \begin{pmatrix} \theta_{\infty} & 0 \\
+*   & -\theta_{\infty}\end{pmatrix}.$$
+where $*$ is some unspecified entry.
+\begin{lemma}
+	\taylor{This lemma is broken as stated. It needs to be modified using \cite[\S 6]{Iwasaki1991} }
+	Let $R$ be a $\partial$-ring. 
+	Every trace free matrix $A$ with eigenvalues $\pm \theta \in R^{\partial}$ can be written as 
+	$$A=\begin{pmatrix}
+	z & u(\theta-z) \\
+	u^{-1}(\theta+z) & -z
+	\end{pmatrix}$$
+	for some $\theta,z\in R$ and $u\in R^{\times}$.
+\end{lemma}
+\begin{proof}
+	First observe sufficiency.
+	The matrix of the form in the statement has trace zero.
+	Also the determinant is $-z^2-(\theta-z)(\theta+z)=-z^2-(\theta^2-z^2)=-\theta^2$
+	
+	Conversely, write $A = \begin{pmatrix} a &b \\ c & d \end{pmatrix}$.
+	We know that $\tr(A)=0$ which means that $a=-d$.
+	Letting $a=z$ we are good.
+	We now that $\det(A) = -z^2-bc=-\theta^2$. 
+	This implies that $bc=\theta^2-z^2=(\theta-z)(\theta+z)$.
+	\taylor{This is the lie:}One can now see that it suffices to have $b=u(\theta-z)$ and $c=u^{-1}(\theta+z)$ to get $A$ trace free with the prescribed eigenvalues. 
+\end{proof}
+
+We will now explain the relationship to the 6th Painlev\'e equation.
+Let's write 
+$$ A = \begin{pmatrix}
+a_{11} & a_{12} \\
+a_{21} & a_{22} 
+\end{pmatrix} \frac{1}{t(t-1)(t-x)},$$ 
+where we view $a_{ij}=a_{ij}(t)$ as polynomials in $t,x$ and the entries $(A_j)_{\mu\nu}$ (which we think of as functions of $x$). 
+We have 
+$$  \begin{pmatrix}
+a_{11} & a_{12} \\
+a_{21} & a_{22} 
+\end{pmatrix} = (A_0+A_1+A_2)t^2 -((1+x)A_0 + xA_1 + A_2)t + A_0x. $$
+The $q$ for the Painlev\'e VI now appears as a root of $a_{12}(t)$ as we will explain.
+\begin{lemma}
+	The polynomial $a_{12}$ has degree 1 in $t$. 
+\end{lemma}
+\begin{proof}
+	$A_0+A_1+A_2=-A_{\infty}$ and $(A_{\infty})_{12}=0$.
+\end{proof}
+We can now proceed in two ways. 
+We now introduce a differential variables $k$ and $q$ which are constant with respect to $\partial_t$ and write  
+	$$a_{12} = k(t-q).$$ 
+We now state the result. 
+
+\begin{theorem}
+	The variable $q =q(x)$ satisfies 
+	\begin{align*}\frac{d^2q}{dx^2}&=
+	\frac{1}{2}\left(\frac{1}{q}+\frac{1}{q-1}+\frac{1}{q-x}\right)\left( \frac{dq}{dx} \right)^2
+	-\left(\frac{1}{x}+\frac{1}{x-1}+\frac{1}{q-x}\right)\frac{dq}{dx} \\&\quad +
+	\frac{q(q-1)(q-x)}{x^2(x-1)^2}
+	\left(\alpha+\beta\frac{x}{q^2}+\gamma\frac{x-1}{(q-1)^2}+\delta\frac{x(x-1)}{(q-x)^2}\right).
+	\end{align*}
+	where the constants $\alpha,\beta,\gamma,\delta$ are related to the eigenvalues $\theta_0,\theta_1,\theta_2,\theta_{\infty}$ by the formula
+	$$ \alpha = \frac{1}{2}\left( \frac{\theta_{\infty}}{2}- 1 \right)^2, \quad \beta = \theta_0^2/8, \quad \gamma = \theta_2/4, \quad \delta = \frac{1}{2}-\frac{\theta_1^2}{4}.$$
+\end{theorem}
+\begin{proof}[Proof Idea]
+	The proof is a computational romp. 
+	You essentially get a large system of equations from the entries of our matrices given by the Schlesinger equations.
+	There is an differential equation for $a_{21}$ which we write in terms of $k$ and $q$ and then we systematically eliminate all of the other variables and put everything in terms of $q$. 
+	There is actually an algorithm for this coming from Elimination Theory and we are going to use this horrible computation as a chance to advertise the computational differential algebraic tools at our disposal.
+	Skip to the introduction of Chapter \ref{S:computational} to see how this works in \textsf{Maple}.
+\end{proof}
+The equation above we denote by $P_{IV,\theta}$ there $\theta=(\theta_0,\theta_1,\theta_2,\theta_{\infty})$ is the Painlev\'e VI.
+
+There is amazingly a converse to this. 
+\begin{theorem}
+Every $q$ also gives an isomonodromic deformation.
+\end{theorem}
+
+The $q$ is also one half of a collection of angle-action coordinates with $p$ given by 
+$$ p = \frac{1}{2}\left( \frac{(t-1)q'-\theta_1/2}{q} + \frac{q'-1-\theta_2/2}{q-x} + \frac{xq'-\theta_3/2}{q-1} \right). $$
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The Painlev\'e Property}
@@ -3387,6 +3633,16 @@ This is the maximal $n$ such that there exists an injection of rings $K\lbrace x
 \section{Differential Equations in One Variable}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+In this section I want to study a differential algebraic variety associated to a single ordinary differential polynomial $f \in K\lbrace y \rbrace$.
+That is $f = f(y) = F(y,y',y'',\ldots,y^{(r)})$ where $F(x_0,x_1,\ldots,x_r) \in K[x_0,x_1,\ldots,x_r]$ is just some polynomial and we investigate  $\Sigma \subset \widehat{K}$ be defined by 
+ $$ \Sigma\colon F(y,y',y'',\ldots, y^{(r)}) =0. $$
+Here $\widehat{K}$ is a differential closure of the differential field $(K,\partial)$ (which is something we haven't defined properly yet). 
+Some of our finding will motivate its definition.
+\begin{definition}
+ A field $\widehat{K}$ is \emph{differentially closed} if and only if for every $f,s\in \Khat\lbrace y\rbrace$ with 
+ $$\ord^{\partial}(s)<\ord^{\partial}(f) \implies \exists \alpha \in \Khat, \ \ f(\alpha)=0 \mbox{ and } s(\alpha)\neq 0. $$
+\end{definition}
+We also hope this section motivates our discussion of the decomposition of radical differential ideals into an intersection of prime ideals and what these things can look like. 
 
 
 \subsection{Envelopes and Separants}
@@ -3596,10 +3852,11 @@ There is no clean division here like in the division algorithm for polynomials.
 	Since $S\prec g$ this implies that $g\nmid S$ and hence that $g \vert f$. 
 \end{proof}
 
-
-\begin{lemma}[Irreducibility Lemma]
+The next Theorem we give should be contrasted with what happens in usual field theory from Dummit and Foote. 
+We don't just mod out by irreducible polynomials, but we need to mod out by \emph{saturations} of irreducible polynomials. 
+\begin{theorem}[Irreducibility Lemma]
 If $g$ is irreducible then $J = ( \lbrace g \rbrace_{\partial} : S_g)$ is a prime ideal. 
-\end{lemma}
+\end{theorem}
 \begin{proof}
 	Suppose that $f_1f_2 \in J$.
 	We will show that $f_1 \in J$ or $f_2 \in J$.
@@ -3909,9 +4166,87 @@ Levi's Criterion will give a recipe on the weight and degree of $y^{\alpha}$ for
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Partial Differential Algebra}
+\chapter{Partial and Computational Differential Algebra}\label{S:computational}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+We have a large system of differential equations given by the Schlesinger equations for $A_0(x),A_1(x),A_2(x)$ and $A_{\infty}(x)$ which define the isomonodromic deformation. 
+We have a matrix element $a_{12}=k(x)(t-q(x))$ of 
+$$\begin{pmatrix}
+a_{11} & a_{12} \\ a_{21} & a_{22} \\
+\end{pmatrix} \frac{1}{t(t-1)(t-x)} = \frac{A_0(x)}{t}+\frac{A_1(x)}{t-1}+\frac{A_2(x)}{t-x}.$$
+We want to derive Painlev\'e VI equation
+\begin{align*}
+\end{align*}
+
+We need to plug this into the system 
+$$ \dfrac{dA_0}{dx} = [A_0,A_2], \quad \dfrac{dA_1}{dx} = [A_1,A_2], \quad \dfrac{dA_{\infty}}{dx}=0,$$ 
+which has a horrific number of variables (in addition to $k(x)$ and $q(x)$)
+$$ A_0(x) = \begin{pmatrix}
+a_0(x) & b_0(x) \\
+c_0(x) & d_0(x)
+\end{pmatrix}, \quad A_1(x) = \begin{pmatrix}
+a_1(x) & b_1(x) \\
+c_1(x) & d_1(x)
+\end{pmatrix}, $$
+$$\quad A_2(x) = \begin{pmatrix}
+a_2(x) & b_2(x) \\
+c_2(x) & d_2(x)
+\end{pmatrix},
+\quad A_{\infty}(x) = \begin{pmatrix}
+\theta_{\infty} & 0\\
+c_{\infty}(x) & -\theta_{\infty}
+\end{pmatrix}.$$
+Moreover these differential equation are subject to algebraic equations in addition to differential equations:
+$$ A_0+A_1+A_2+A_{\infty}=0, \qquad a_j(x) + d_j(x)=0, \quad j=0,1,2,\infty$$
+$$k(x) +(1 +x)b_0(x) + xb_1(x) + b_2=0, \quad k(x)q(x) + b_0(x)x=0.$$
+I'm going to use a computer to write eliminate all of these equations systematically and just derive an equation for $q(x)$. 
+This equation will be the Painlev\'e IV. 
+
+We are going to follow Boulier's \href{https://hal.archives-ouvertes.fr/hal-00139364/document}{notes}.
+
+\noindent In \textsf{Maple}, I enter the following commands
+\taylor{This command is incorrect as given}
+\begin{spverbatim}
+	>with(diffalg)
+	>syst1 := [y(x)*diff(a0(x), x) - b0(x)*c2(x) - c0(x)*b2(x), y(x)*diff(b0(x), x) - a0(x)*b2(x) + b0(x)*d2(x) - a2(x)*b0(x) - b2(x)*d0(x), y(x)*diff(c0(x), x) - c0(x)*a2(x) + d0(x)*c2(x) - c2(x)*a0(x) - d2(x)*c0(x), y(x)*diff(d0(x), x) - c0(x)*b2(x) - b0(x)*c2(x), (y(x) - 1)*diff(a2(x), x) - b1(x)*c2(x) - c1(x)*b2(x), (y(x) - 1)*diff(b2(x), x) - a1(x)*b2(x) + b1(x)*d2(x) - a2(x)*b1(x) - b2(x)*d1(x), (y(x) - 1)*diff(c2(x), x) - c1(x)*a2(x) + d1(x)*c2(x) - c2(x)*a1(x) - d2(x)*c1(x), (y(x) - 1)*diff(d2(x), x) - c1(x)*b2(x) - b1(x)*c2(x), diff(c3(x), x), a0(x) + a1(x) + a2(x) + theta4(x), (y(x) - 1)*diff(d2(x), x) - c1(x)*b2(x) - b1(x)*c2(x), diff(c3(x), x), a0(x) + a1(x) + a2(x) + theta4(x), b0(x) + b1(x) + b2(x), c0(x) + c1(x) + c2(x) + c3(x), d0(x) + d1(x) + d2(x) - theta4(x), a0(x) + d0(x), a1(x) + d1(x), a2(x) + d2(x), k(x) - (-1 - y(x))*b0(x) + y(x)*b1(x) + b2(x), diff(y(x), x) - 1, diff(theta4(x), x)]
+	>R1 := differential_ring(derivations = [x], notation = diff, ranking = [a0, b0, c0, d0, a1, b1, c1, d1, a2, b2, c2, d2, c3, k, y, q, theta4]);
+	>ideal1 := Rosenfeld_Groebner(syst1, R1);
+\end{spverbatim}
+\ \newline
+The first line imports the differential algebra package authored by Boullier et al into \textsf{Maple}. 
+The second line is our system of differential equations where everything is expressed as a function of $x$. 
+I did a quite a number of symbolic computations to arrive at these equations in the matrix entries. 
+These are the entries in the equations above. 
+Note that there are both algebraic equations and differential equations. 
+The instantiation of the differential ring sets up what we are going to work with. 
+It says we are working with a single derivative in $x$ and at we are going to use a term order determined by a so called orderly ranking with 
+$$a_0\succ b_0 \succ c_0 \succ d_0 \succ a_1 \succ b_1 \succ c_1 \succ d_1 \succ a_2\succ b_2 \succ c_2 \succ d_2 \succ c_3 \succ  k \succ  y \succ q \succ  \theta_4.$$
+The output of the Roesenfeld-Groebner computation is going to be a list of list
+$$ C_1, C_2,\ldots, C_c, \quad C_j = \lbrace u_{j1}, u_{j2},\ldots, u_{js_j} \rbrace $$
+of ordered list of $\partial$-polynomials $C_j$ called characteristics sets with respect to our ordering.
+
+Each one of these is associated to a differential prime ideal $P_h$ associated to the radical of the $\partial$-ideal generated $I$ generated by our equations.
+That is our radical $\partial$-ideal $I$ has 
+$$ I = P_1 \cap P_2 \cap \cdots \cap P_c $$
+where the $P_i$ are prime ideals and the collections.
+They aren't quite generators of the prime ideal but they allow us to solve the membership problem in the sense that there is a multivariate division algorithm (which, IMHO, is crappy and unsatisfying) where $f$. 
+That for a characteristic set $C$ associated to a prime ideal $P$ one has 
+$$ u\in P \iff r_C(u) =0 $$
+whre $r_C(u)$ is the remainder after shitty-division by $C$.
+
+While we are here I have to mention an extremely famous and important open problem in differential algebra and that is the Ritt Problem.
+\begin{problem}[Ritt Problem]
+	Given characteristic sets $C_1$ and $C_2$ of two differential prime ideals $P_1$ and $P_2$ determine if $P_1 \subset P_2$.
+\end{problem}
+This problem is very open and the solution with undoubtedly be an Annals paper.  
+The main issue is subtle and a lot of introductions don't point this out so I'm going to try to be explicit about this.
+The process we describe for getting characteristic sets \emph{doesn't} give rise to $\partial$-generators of the differential ideal like Groebner bases do. 
+It is much weaker than that. 
+They only \emph{characterize} membership.
+In fact, although we know for every radical differential ideal $I$ there exists a finite set $u_1,u_2,\ldots,u_e$ such that the radical of the $\partial$-ideal generated by the $u_i$'s is $I$, we don't really know what these $u_i$'s are. 
+In particular our algorithm only returns characteristic sets $C$ which isn't a collection of $\partial$-radical generators but is sort of a discount groebner basis in that their division algorithm determines membership but only a certain colon ideal determines membership.
+
+If they were, we could just test for membership and be done and solve the Ritt problem. 
 
 \section{Monomials, Ranking, and Orders}\label{S:PDE-ranking}
 Let $R$ be a $\Delta$-ring with $\Delta = \lbrace \partial_1,\ldots,\partial_m \rbrace$.
