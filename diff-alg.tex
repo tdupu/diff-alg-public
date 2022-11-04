@@ -207,31 +207,37 @@ There is a manuscript by Manin \cite{Manin1978} which also attempts to unify dif
 \fi
 
 
-\section*{Where can I get a digital copy of these notes?}
-A link to the .pdf can be found here:
+\section*{Citing These Notes and Version Control}
+A link to \today \ version of the .pdf can be found here.
 \begin{center}
 	\url{https://tdupu.github.io/diff-alg-public/diff-alg.pdf}.
 \end{center}
+Any version of these notes you would like to recover can be found from tracing the github history. 
+You just need to record the dates.
 
-\section*{How do I cite these notes?}
+These notes have not been peer reviewed! In fact, I have accepted that these notes are going to be a working document for some time. 
+Because of this, I have added the label ``unstable'' to titles of chapters, sections, or subsections when the material is will undergo significant changes.
+The general rule of thumb that I'm using is if the majority of material is going to undergo significant changes it deserves and ``unstable'' label. 
+That being said, even material which is stable is subject to being organized and reorganized. 
 
-\taylor{WARNING: These notes have not been peer reviewed! Use at your own peril! (Also email me if you find mistakes: taylor.dupuy@gmail.com)}
+If you find a mistake or have comments about history or citations or really anything that you think will contribute to the material please email taylor.dupuy@gmail.com. Interesting examples are always welcome. 
 
-
+Here is the bibtex citation for ``\today''. Please add ``\today'' in where it says [TODAY] in the citation. 
 \begin{spverbatim}
 @Unpublished{Dupuy2022,
 author  = {Dupuy, Taylor},
 title   = {An Introduction to the Algebraic Theory of Differential Equations},
 year    = {2022},
-comment = {Course notes from lectures given at the University of Vermont in Fall 2022.},
+comment = {Course notes from lectures given at the University of Vermont in Fall 2022 ([TODAY] version)},
 journal = {preprint},
 url     = {https://tdupu.github.io/diff-alg-public/diff-alg.pdf},
 }
 \end{spverbatim}
 
 
+
 \newpage 
-\section{Notation}
+\section{Notation (unstable)}
 \begin{itemize}
 	\item $R^{\Delta}$ (or $R^{\partial}$) the constants of the derivations (or derivation). 
 	\item $R\lbrace x \rbrace$ the ring of differential polynomials over $R$.
@@ -2605,7 +2611,7 @@ We now can give our equations for integrability/flatness.
 I'm tempted to put an exercise about Yang-Mills equations here but haven't done so. 
 Perhaps you should just google these now and see all of these curvature tensors appearing everywhere.
 
-\section{Plemelj's Construction}
+\section{Plemelj's Construction (unstable)}
 
 \taylor{I need to add my notes here,
 This has to do with gluing together local solutions.
@@ -3316,7 +3322,7 @@ Since we defined the monodromy of a general integrable connection in terms of th
 \end{definition}
 
 
-\subsection{Existence of Isomonodromic Deformations}
+\subsection{Existence of Isomonodromic Deformations (unstable)}
 Let $\pi: W\to S$ be a morphism of complex manifolds and let $(E,\nabla)$ be an vector bundle with an integrable connection of $W$.
 To each such vector bundle with integrable connection we can associate a relative connection $\overline{\nabla}\colon E \to \Omega_{W/S} \otimes E$ by using the quotient $\Omega_{W} \to \Omega_{W/S}$. 
 In other words, $\overline{\nabla}$ is defined by the diagram 
@@ -3438,7 +3444,7 @@ induces an isomorphism of fundamental groups.
 
 \fi
 
-\section{Painlev\'e Equations}
+\section{Painlev\'e Equations (unstable)}
 
 Consider the systems on $\PP^1\setminus \lbrace 0,1,\infty,x\rbrace$ 
 $$ \dfrac{dY}{dt} = AY, \quad A = \frac{A_0(x)}{t}+\frac{A_1(x)}{t-1}+ \frac{A_2(x)}{t-x},$$
@@ -3536,7 +3542,7 @@ $$ p = \frac{1}{2}\left( \frac{(t-1)q'-\theta_1/2}{q} + \frac{q'-1-\theta_2/2}{q
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The Painlev\'e Property}
+\section{The Painlev\'e Property (unstable)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The Painlev\'e equations were not originally derived via the Schlesinger equations. 
 Classically, mathematicians were looking for special functions which were solutions of differential equations.
@@ -3862,7 +3868,7 @@ There is no clean division here like in the division algorithm for polynomials.
 The next Theorem we give should be contrasted with what happens in usual field theory from Dummit and Foote. 
 We don't just mod out by irreducible polynomials, but we need to mod out by \emph{saturations} of irreducible polynomials. 
 The following statement is the analog of the statement that the field $F[x]$ is a PID via the Euclidean algorithm.
-\begin{theorem}[Structure Theorem]
+\begin{theorem}[Structure Theorem]\label{T:structure-theorem}
 If $g \in K\lbrace x \rbrace$ is irreducible then $( \lbrace g \rbrace_{\partial} : S_g)$ is a prime ideal. 
 Conversely, for every prime $\partial$-ideal $P \subset K\lbrace x \rbrace$ there exists some $g\in K\lbrace x \rbrace$ such that $P=( \lbrace g \rbrace_{\partial} : S_g)$ furthermore this $g$ is unique up to associates.
 \end{theorem}
@@ -3925,7 +3931,7 @@ The following lemma tells us that the smaller the order we are using the deeper 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%
-\section{Bigger Fish: Ritt-Raudenbaush, Noetherianity, Prime Decomposition}
+\section{Ritt-Raudenbaush, Noetherianity, Prime Decomposition (unstable)}
 %%%%%%%%%%%%%%%%%%%%%%%%
 
 One thing that we have to contend with in differential algebra is non-Noetherianity. 
@@ -3968,8 +3974,10 @@ Here is the counter-example.
 \end{exercise}
 To do this exercise it is useful to have Levi's Lemmas in hand which are given in \S\ref{S:levi}.
 
+
+
 So what *do* we get?  We get the Ritt basis theorem.
-\begin{theorem}
+\begin{theorem}[Ritt Basis Theorem]
 	If $I \subset K\lbrace x_1,\ldots,x_n \rbrace$ is a radical ideal then there exists some $u_1,\ldots,u_e$ such that 
 	 $$ I = \lbrace u_1,\ldots,u_e \rbrace_{\partial}.$$
 \end{theorem}
@@ -3979,43 +3987,51 @@ $$ \mbox{ (Basis Theorem) $\implies$ (Noetherianity), (Prime Decomposition) }$$
 \taylor{Explain how radicals miss a large part of the story}
 
 \subsection{Noetherianity}
-We have
- $$ \lbrace x' =0 \rbrace \supset \lbrace x'' =0 \rbrace \supset \lbrace x''' =0 \rbrace \supset \cdots $$
+In the Kolchin topology there can exist infinite descending chains of ideals.
+\begin{example}
+In $K\lbrace x \rbrace$ the chain 
+$$[x]\supset [x'] \supset [x''] \supset \cdots$$
+for an infinite descending chain of prime ideals.
+Geometrically this corresponds to the constants being contained in linear polynomials being contained in quadratic polynomials etc. 
+ $$ \lbrace x' =0 \rbrace \subset \lbrace x'' =0 \rbrace \subset \lbrace x''' =0 \rbrace \subset \cdots. $$
+\end{example}
+For ascending chains of radical ideals there can be no such example: Ritt's Basis Theorem implies the Kolchin topology on $\widehat{K}^n$ is Noetherian (A topological space is Noetherian if and only if any infinite descending chain of irreducible closed sets terminates). 
 
-One of the big consequences of the Basis Theorem is the Noetherianity of the Kolchin topology.
-That is every nested sequence of Kolchin closed subsets 
- $$ \Khat^n \supset \Gamma_1 \supset \Gamma_2 \supset \cdots $$
-must terminate. 
-
-\begin{theorem}
-The Ritt basis property implies any infinite ascending chain of radial differential ideals terminates.
+\begin{theorem}[Noetherianity of the Kolchin Topology]
+ Kolchin topology on $\widehat{K}^n$ is Noetherian. 
+ Equivalently any infinite ascending chain of radial differential ideals in $K\lbrace x_1,\ldots, x_n\rbrace$ terminates.
 \end{theorem}
 \begin{proof}
 	Consider for the sake of contradiction and infinite ascending chain of $\Delta$-ideals
 	 $$I_1 \subsetneq I_2 \subsetneq I_3 \subsetneq \cdots. $$
 	Let $I = \bigcup_{j \geq 1} I_j$.
-	By the Ritt-Raudenbacher basis theorem there exists some $f_1,\ldots,f_n\in R$ such that $I = \lbrace f_1,f_1,\ldots,f_n\rbrace_{\Delta}$.
+	By the Ritt Basis Theorem there exists some $f_1,\ldots,f_n\in R$ such that $I = \lbrace f_1,f_1,\ldots,f_n\rbrace_{\Delta}$.
 	Since $f_i \in I$ there exists some $N_i$ such that $f_i \in I_{N_i}$. 
 	Let $N= \max\lbrace N_1,\ldots,N_n\rbrace$. 
 	We have $I \subset I_N$ and hence $I=I_N$ and the chain terminates.
 \end{proof}
 
-\begin{corollary}
-	The Kolchin topology on $\widehat{K}^n$ is Noetherian.
-\end{corollary}
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Differential Transcendence}
+\section{Differential Transcendence (unstable)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Let $f_1,\ldots,f_n \in K\lbrace x_1,\ldots,x_n\rbrace$ and consider the differential system 
  $$ \Gamma \colon \quad f_1=\cdots = f_e =0.$$
 This is just a space of solutions of differential equations. 
 
 The algebraic object associated to this space is the ring 
- $$ K\lbrace x_1,\ldots, x_n\rbrace/[f_1,\ldots,f_e],$$
-and we try to read off properties of the space from 
+ $$ A=K\lbrace x_1,\ldots, x_n\rbrace/[f_1,\ldots,f_e],$$
+and we try to read off properties of the space from the ring $A$.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[scale=0.5]{levi.eps}
+	\end{center}
+	\caption{A picture of the variety $xy=0$ in the classical and differential algebraic case. 
+		The big thick origin depicts the nilpotents contained in $[xy]_{\partial}$}
+\end{figure}
 
 A big difference between algebraic geometry and differential algebraic geometry is how intersection theory works, as shown in Figure~\ref{F:two-pictures}.
 
@@ -4056,14 +4072,14 @@ Both perspectives are useful.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Differential Closures}\label{S:univariate-differential-closures}
+\section{Differential Closures (unstable) \label{S:univariate-differential-closures}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 For this section I'm going to borrow heavily from my model theory friends.
 See for example Ronnie Nagloo's thesis or David Marker's notes \cite{Marker2000}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%
-\section{Appendix: Levi's Lemmas on $[y^n]$ and $[xy]$}\label{S:levi}
+\section{Appendix: Levi's Lemmas on $[y^n]$ and $[xy]$ (unstable)}\label{S:levi}
 %%%%%%%%%%%%%%%%%%%%%%%
 
 In \cite{Levi1942} the following interesting questions were addressed:
@@ -4106,7 +4122,7 @@ $$ x^{\alpha} = (x_1,\ldots,x_n)^{(\alpha_1,\ldots,\alpha_n)} = x_1^{\alpha_1}\c
 as where for each $i$ we have $\alpha_i = a_{i0} + a_{i1}\partial + \cdots + a_{ir_i}\partial^{r_i}$ and $x_i^{\alpha_i} = x_i^{a_{i0} + a_{i1}\partial + \cdots + a_{ir_i}\partial^{r_i}}$ as before. 
 
 
-\subsection{Levi's Lemmas for $[xy]$}
+\subsection{Levi's Lemmas for $[xy]$ (unstable) }
 
 \begin{theorem}
 	We have the following equality of ideals in $K\lbrace x,y\rbrace$,
@@ -4121,7 +4137,7 @@ The following computation is the babymost example.
 	This means $x^2\partial(y) \in [xy] $ and $x^2\partial(y)^2 \in [xy]$ which proves $x\partial(y) \in \lbrace xy\rbrace_{\partial}$.
 \end{example}
 
-\subsection{Levi's Lemmas for $[x^n]$}
+\subsection{Levi's Lemmas for $[x^n]$ (unstable) }
 
 \taylor{Copy over notes}
 The following is the most basic thing we can prove. 
@@ -4246,8 +4262,16 @@ Levi's Criterion will give a recipe on the weight and degree of $y^{\alpha}$ for
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Partial and Computational Differential Algebra}\label{S:computational}
+\chapter{Partial and Computational Differential Algebra (unstable)}\label{S:computational}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+I want to describe our motivating computational problem with the Painlev\'e IV again, but before doing that I want to give some references. 
+We are going to follow Boulier's notes \href{https://hal.archives-ouvertes.fr/hal-02378197v2/document}{here} and \href{https://hal.archives-ouvertes.fr/hal-00139364/document}{here} for this romp through computational differential algebra.
+Boulier is one of the current experts on Computational Differential Algebra and he wrote the base of the software I'm going to be using.
+There is also Ovchinnikov's \href{http://qcpages.qc.cuny.edu/~aovchinnikov/MATH87800/notes.pdf}{course notes} who is another expert on Computational Differential Algebra and whose style and notation I think is closer to say Atiyah-MacDonald \cite{Atiyah2016}
+or Kaplansky \cite{Kaplansky1976}. 
+A lot of the basic proofs are similar to the proofs in  Ritt's second book \cite{Ritt1950} but are a bit harder to read.
+
 
 We have a large system of differential equations given by the Schlesinger equations for $A_0(x),A_1(x),A_2(x)$ and $A_{\infty}(x)$ which define the isomonodromic deformation. 
 We have a matrix element $a_{12}=k(x)(t-q(x))$ of 
@@ -4282,8 +4306,7 @@ $$k(x) +(1 +x)b_0(x) + xb_1(x) + b_2=0, \quad k(x)q(x) + b_0(x)x=0.$$
 I'm going to use a computer to write eliminate all of these equations systematically and just derive an equation for $q(x)$. 
 This equation will be the Painlev\'e IV. 
 
-We are going to follow Boulier's notes \href{https://hal.archives-ouvertes.fr/hal-02378197v2/document}{here} and \href{https://hal.archives-ouvertes.fr/hal-00139364/document}{here} for this romp through computational differential algebra.
-Boulier is one of the current experts on Computational Differential Algebra and he wrote the base of the software I'm going to be using.
+
 
 \noindent In \textsf{Maple}, I enter the following commands
 \taylor{This command is incorrect as given}
@@ -4294,7 +4317,7 @@ Boulier is one of the current experts on Computational Differential Algebra and 
 	>ideal1 := Rosenfeld_Groebner(syst1, R1);
 \end{spverbatim}
 \ \newline
-The first line imports the differential algebra package authored by Boullier et al into \textsf{Maple}. 
+The first line imports the differential algebra package authored by Boulier et al into \textsf{Maple}. 
 The second line is our system of differential equations where everything is expressed as a function of $x$. 
 I did a quite a number of symbolic computations to arrive at these equations in the matrix entries. 
 These are the entries in the equations above. 
@@ -4313,7 +4336,7 @@ $$ I = P_1 \cap P_2 \cap \cdots \cap P_c $$
 where the $P_i$ are prime ideals and the collections.
 They aren't quite generators of the prime ideal but they allow us to solve the membership problem in the sense that there is a multivariate division algorithm (which, IMHO, is crappy and unsatisfying) where $f$. 
 That for a characteristic set $C$ associated to a prime ideal $P$ one has 
-$$ u\in P \iff r_C(u) =0 $$
+$$ u\in P \iff \red_C(u) =0 $$
 whre $r_C(u)$ is the remainder after pseudodivision by $C$.
 
 While we are here I have to mention an extremely famous and important open problem in differential algebra and that is the Ritt Problem.
@@ -4402,7 +4425,7 @@ We will let $\prec$ also denote the term order induced by the ranking $\prec$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Characteristic Sequences}
+\section{Characteristic Sequences (unstable)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Characteristic sequences $G=(g_1,\ldots,g_r)$ are things that characterize membership in a $\partial$-ideal $I$.
@@ -4411,16 +4434,6 @@ They are a valuable computational technique but also a source of many of our hea
 
 For the purpose of having something to focus on we state the main result of this section. 
 Definitions will be developed as we go along. 
-\begin{theorem}
-	Let $I$ be a $\Delta$-ideal in $K[x_1,\ldots,x_n]_{\Delta}$. 
-	Fix a ranking on $K[x_1,\ldots,x_n]_{\Delta}$.
-	The following are equivalent for an ordered set $G=(g_1,\ldots,g_r)$ of elements from $I$,
-	\begin{enumerate}[topsep=0pt]
-		\item The sequence $G$ is a characteristic sequence of $I$.
-		\item $f \in I$ if and only if $\red_G(f)=0$. 
-	\end{enumerate}
-\end{theorem}
-In the above theorem, $\red_G(f)$ is the output of our pseudodivision algorithm analogous to the one we developed in the univariate case.
 
 \subsection{Chomp}\label{S:chomp}
 
@@ -4469,7 +4482,7 @@ We recall that a partially ordered set $(S,\leq)$ is a \emph{well ordered set} i
 	Given an infinite descending chain $a_0>a_1>a_2 >\cdots$ the set $S_0 = \lbrace a_j \rbrace_{j \geq 0}$ is a set without a minimal element. 
 \end{proof}
 
-\subsection{Characteristic Sets}
+\subsection{Characteristic Sequences}
 Let $\Delta = \lbrace \partial_1,\ldots,\partial_m\rbrace$ and let $\Theta = \lbrace \partial^{\alpha} \colon \alpha \in \ZZ_{\geq 0}^m\rbrace$ whre $\partial^{\alpha} = \partial_1^{\alpha_1} \cdots \partial_m^{\alpha_m}$. 
 
 \begin{lemma}\label{L:dickson}
@@ -4490,14 +4503,14 @@ We say that $f$ is \emph{reduced} with respect to $g$ if and only if
 \end{enumerate}
 \end{definition}
 
-\begin{theorem}[Pseudodivision Algorithm]
+\begin{theorem}[Pseudodivision Algorithm]\label{T:pde-pseudodivision}
 	Let $g \in K[x_1,\ldots,x_n]_{\Delta}$. 
 	For all $f \in K[x_1,\ldots,x_n]_{\Delta}$ there exists some $\widetilde{f}$ reduced with respect to $g$ such that
 	 $$ s f \equiv \widetilde{f} \qquad [g]_{\Delta} $$
 	where $s$ is in the multiplicative set generated by $I_g$ and $S_g$.
 \end{theorem}
 
-The algorithm above we call the pseudodivision algorithm and we use the notation $\red_g(f) = \widetilde{f}$. 
+The algorithm above we call the pseudodivision algorithm with respect to a single variable. 
 
 \begin{exercise}
 	Building on the pseudodivision algorithm in the ODE case (Theorem~\ref{T:ode-pseudodivision}) construct an algorithm which gives the desired output to Theorem~\ref{T:pde-pseudodivision}.
@@ -4509,11 +4522,26 @@ For sequences $G=(g_1,\ldots,g_r)$ of differential polynomials we will use the n
 	A ordered sequence $G=(g_1,\ldots,g_r)$ is \emph{autoreduced} if and only if for all $g_i,g_j$ with $i\neq j$ we have $g_i$ reduced with respect to $g_j$. 
 \end{definition}
 
-We will always order our sequences with respect to a ranking for that $g_1 \prec g_2 \prec \cdots \prec g_r$.
+We will always order our sequences with respect to a ranking for that 
+$$g_1 \prec g_2 \prec \cdots \prec g_r.$$
+Notice that if $\rk(g_i)=\rk(g_j)$ then the sequence is not autoreduced, so this arrangement can always be performed. 
 
 \begin{definition}
 	We will say that $f$ is reduced with respect to $G=(g_1,\ldots,g_r)$ if and only if $f$ is reduced with respect to $g_j$ for each $j$.
 \end{definition}
+
+\begin{theorem}[Pseudodivision Algorithm]\label{T:pde-pseudodivision}
+	Let $g \in K[x_1,\ldots,x_n]_{\Delta}$. 
+	For all $f \in K[x_1,\ldots,x_n]_{\Delta}$ there exists some $\widetilde{f}$ reduced with respect to $g$ such that
+	$$ s f \equiv \widetilde{f} \qquad [g]_{\Delta} $$
+	where $s$ is in the multiplicative set generated by $I_g$ and $S_g$.
+\end{theorem}
+
+\begin{itemize}
+	\item $\red_G(f) = \widetilde{f}$ the reduction of $f$ with respect to $G$.
+	\item $m_G(f)=s$ the element of $S_G$ given by the reduction algorithm.
+	\item  $S_G$ the multiplicative set generated by $I_{g_i}$ and $S_{g_i}$ for $1\leq i \leq r$.
+\end{itemize}
 
 For any $h_1 \prec h_2 \prec \cdots \prec h_r$ which is comparable, we will have $\rk(h_i) = \rk(g_i)$ for each $i$. 
 
@@ -4565,9 +4593,48 @@ We now give the well-ordering property.
 \end{definition}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Ideal Membership}
+\subsection{Ideal Membership (unstable)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{theorem}
+	Let $I$ be a $\Delta$-ideal in $K[x_1,\ldots,x_n]_{\Delta}$. 
+	Fix a ranking on $K[x_1,\ldots,x_n]_{\Delta}$.
+	The following are equivalent for an ordered set $G=(g_1,\ldots,g_r)$ of elements from $I$,
+	\begin{enumerate}[topsep=0pt]
+		\item The sequence $G$ is a characteristic sequence of $I$.
+		\item $f \in I$ if and only if $\red_G(f)=0$. 
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	We will show that $G$ is not minimal implies there exists some nonzero $f$ reduced with respect to $G$.
+	This is the contrapositive of the ``membership characterization property'' implying that $G$ is a characteristic set.
+	Suppose that $G=(g_1,\ldots,g_r)$ is an autoreduced subset of $I$ which is not minimal.
+	Let $H=(h_1,\ldots,h_s)$ be a characteristic set below $G$. 
+	The relationship $H\prec G$ can happen in two ways.
+	
+	First there exists some $i$ with $1\leq i \leq r$ such that 
+	$$\rk(h_1)= \rk(g_1), \quad\rk(h_2)=\rk(g_2), \quad \ldots \quad \rk(h_{i-1})=\rk(g_{i-1}), \quad h_i \prec g_i. $$
+	This $h_i$ will be reduced with respect to $G$ as reducedness with respect to $H$ imply this for $g_1,\ldots,g_{i-1}$ and being lower implies this for $g_i,\ldots,g_r$.
+	
+	The second way if for $\rk(h_j) = \rk(g_j)$ for $1\leq i \leq r$ but $r<s$. 
+	In this case $h_{r+1}$ produces our element which is reduced with respect to $G$.
+	
+	Conversely suppose that $G$ is a characteristic set for some ranking $\prec$ and, for the sake of contradiction. that $f\in I$ is reduced with respect to $G$ and but not zero.
+	
+	There are two cases.
+	In the first case there exists some minimal $j$ with $1\leq j \leq r$ such that $f\prec g_j$.
+	In this case we have  
+	$$ (g_1,\ldots,g_{j-1},f) \prec G, $$
+	which contradicts minimality.
+	
+	In the second case we have $f \nprec g_j$ for $1\leq j \leq r$. 
+	We then construct 
+	$$ (g_1,\ldots, g_r,f) \prec G $$
+	which again contradicts minimality.
+\end{proof}
+
+
+\iffalse 
 \begin{theorem}
 	Let $I$ be a $\Delta$-ideal in $K[x_1,\ldots,x_n]_{\Delta}$. 
 	Fix a ranking on $K[x_1,\ldots,x_n]_{\Delta}$.
@@ -4604,9 +4671,12 @@ We now give the well-ordering property.
 	 $$ (g_1,\ldots, g_r,f) \prec G $$
 	which again contradicts minimality.
 \end{proof}
+\fi 
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Prime Decomposition}
+\section{Prime Decomposition (unstable)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
