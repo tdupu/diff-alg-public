@@ -104,6 +104,7 @@
 \newcommand{\pr}{\operatorname{pr}}
 
 
+
 \newcommand{\bra}[1]{\langle #1 \vert }
 \newcommand{\ket}[1]{\vert #1 \rangle}
 \newcommand{\Jac}{\operatorname{Jac}}
@@ -116,6 +117,8 @@
 \newcommand{\Fbar}{\overline{F}}
 \newcommand{\PGL}{\operatorname{PGL}}
 \newcommand{\deligne}[1]{\cite[ #1 ,\href{https://labs.thosgood.com/translations/978-3-540-05190-9.pdf}{Hosgood translation}]{Deligne1970}}
+
+
 
 \usepackage{listings}
 \usepackage{spverbatim}
@@ -142,7 +145,7 @@
 \chapter{FrontMatter}
 
 \section*{Why do these notes exist?}
-These notes are from a course taught in Fall 2022 at UVM entitled \emph{The Algebraic Theory of Differential Equations}. 
+These started from course notes for a course taught in Fall 2022 at University of Vermont entitled \emph{The Algebraic Theory of Differential Equations}. 
 I decided to write these notes because there are a lot different sources for graduate students starting out in Differential Algebra but none of them cover exactly what I would like to cover. 
 
 So what is the Algebraic Theory of Differential Equations? 
@@ -151,10 +154,11 @@ I love Ritt's books \cite{Ritt1932} and \cite{Ritt1950}.
 The issue is that they are a bit out of date and have a lot of dependencies within chapters that are not clearly marked so you almost have the read the books linearly. 
 They are also missing a lot of the classical theory from the 1800's which motivated the subject. 
 The successor to Ritt's books is Kolchin's books \cite{Kolchin1973} which, while mathematically very useful, invokes notation and terminology that gives me nightmares. 
-Also, the algebraic geometry there largely ignores the development of scheme theory between 1950 to 1970 by the French school. 
+Also, the algebraic geometry there largely ignores the development of scheme theory between 1950 and 1970 by the French school. 
 An alternative to these two is Kaplansky's book \cite{Kaplansky1976} which I love but is perhaps too brief. 
-Following the spirit of these Differential Algebra Books are Buium's books \cite{Buium1986} (influenced by Matsuda's book \cite{Matsuda1980}),\cite{Buium1992}, and \cite{Buium1994} which are probably the most influential on my perspective. 
+We also have \cite{Buium1986} (influenced by Matsuda's book \cite{Matsuda1980}),\cite{Buium1992}, and \cite{Buium1994} which are probably the most influential on my perspective. 
 They are about differential field theory, differential algebraic groups, and applications of differential algebra to diophantine geometry.
+None of these books are perfect and there is a serious need for a consolidated resource in this subject.
 
 To really understand those books (for example the Poincar\'e-Fuchs theorem on equations of the form $P(t,y,y')=0$ for a polynomial $P$ whose solutions have no movable singularities) one needs to go back to some of the older material which is best covered elsewhere. 
 
@@ -163,7 +167,7 @@ For us, monodromy is going to be the starting point.
 The main idea is that monodromy problems lead to the notion of classification (which gives hypergeometric functions) and isomonodromy problems (which gives Painlev\'e VI). 
 For Painlev\'e there is the classical book of Ince \cite{Ince1944} and a standard text \cite{Iwasaki1991} which is nice but focuses a lot of computations and de-emphasizes global geometry.
 For a rigorous treatment of the Riemann-Hilbert problem there are great discussion of Hilbert's 21st problem in \cite{Borel1987} and a more modern algebro geometric version in \cite{Deligne1970}.
-Marrying this material with the field theoretic methods of \cite{Buium1986} is something that I want to do and there is some folklore here that needs to be fleshed out in my humble opinion.
+Marrying this material with the field theoretic methods of \cite{Buium1986} is something that I want to do and there is some ``folklore theorems'' relating these two approaches that I would like to put in print.
 In that spirit, we also want to marry Monodromy with the classical Galois Theory of Linear Differential Equations which goes by the name ``Picard-Vessiot Theory'' by Singer and van der Put \cite{Put2003} and Magid \cite{Magid1994}.
 
 
@@ -3959,7 +3963,7 @@ Properties (1) and (2) above are false.
 \begin{exercise}[Counter Example to ACC]
 	Consider the chain of $\partial$-ideals in $K\lbrace x \rbrace$ given by 
 	$$ [x^2]  \subset [x^2, (x')^2] \subset [ x^2, (x')^2, (x'')^2 ] \subset \cdots, $$
-	is an infinite ascending chain.
+	is an infinite ascending chain. (See Pogudin's \href{http://www.lix.polytechnique.fr/Labo/Gleb.POGUDIN/files/da_notes.pdf}{notes} Proposition 1.13)
 \end{exercise}
 
 The examples given in the next exercise show that not only are all ideals not $\partial$-finitely generated but even products of $\partial$-finitely generated ideals are mostly not $\partial$-finitely generated.
@@ -3968,8 +3972,9 @@ Here is the counter-example.
 \begin{exercise}[Example of Infinite Generation]
 	\begin{enumerate}
 		\item The ideal $\lbrace x y\rbrace_{\partial}$ is not $\partial$-finitely generated.
-		\item The ideals $[x]$ and $[y]$ in $K\lbrace x,y\rbrace$ are not $\partial$-finitely generated by 
-		$$[x][y] = \langle x^{(i)}y^{(j)} \colon i,j \geq 0 \rangle = \lbrace xy \rbrace_{\partial} = [x]_{\partial} \cap [y]_{\partial}.$$ 
+		\item The ideals $[x]$ and $[y]$ in $K\lbrace x,y\rbrace$ are $\partial$-finitely generated but the product
+		$$[x][y] = \langle x^{(i)}y^{(j)} \colon i,j \geq 0 \rangle = \lbrace xy \rbrace_{\partial} = [x]_{\partial} \cap [y]_{\partial}$$ 
+		is not finitely $\partial$-generated.
 	\end{enumerate}
 \end{exercise}
 To do this exercise it is useful to have Levi's Lemmas in hand which are given in \S\ref{S:levi}.
@@ -3988,7 +3993,7 @@ $$ \mbox{ (Basis Theorem) $\implies$ (Noetherianity), (Prime Decomposition) }$$
 
 \subsection{Noetherianity}
 In the Kolchin topology there can exist infinite descending chains of ideals.
-\begin{example}
+\begin{example}[Gap Chain]
 In $K\lbrace x \rbrace$ the chain 
 $$[x]\supset [x'] \supset [x''] \supset \cdots$$
 for an infinite descending chain of prime ideals.
@@ -4013,7 +4018,6 @@ For ascending chains of radical ideals there can be no such example: Ritt's Basi
 
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Differential Transcendence (unstable)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -4025,13 +4029,7 @@ The algebraic object associated to this space is the ring
  $$ A=K\lbrace x_1,\ldots, x_n\rbrace/[f_1,\ldots,f_e],$$
 and we try to read off properties of the space from the ring $A$.
 
-\begin{figure}[h]
-	\begin{center}
-		\includegraphics[scale=0.5]{levi.eps}
-	\end{center}
-	\caption{A picture of the variety $xy=0$ in the classical and differential algebraic case. 
-		The big thick origin depicts the nilpotents contained in $[xy]_{\partial}$}
-\end{figure}
+
 
 A big difference between algebraic geometry and differential algebraic geometry is how intersection theory works, as shown in Figure~\ref{F:two-pictures}.
 
@@ -4071,6 +4069,9 @@ Both perspectives are useful.
 \end{figure}
 
 
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Differential Closures (unstable) \label{S:univariate-differential-closures}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -4092,6 +4093,14 @@ In \cite{Levi1942} the following interesting questions were addressed:
 		\item What about for $\lbrace xy \rbrace_{\partial}$?
 	\end{enumerate}
 \end{problem}
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[scale=0.5]{levi.eps}
+	\end{center}
+	\caption{A picture of the variety $xy=0$ in the classical and differential algebraic case. 
+		The big thick origin depicts the nilpotents contained in $[xy]_{\partial}$}
+\end{figure}
 Levi's Lemmas tell us exactly which monomials are in these rings. 
 These results are particularly interesting because $xy=0$ and $x^n=0$ are exactly the two ways that zero divisors appear in differential algebra. 
 One is telling us what happens at the intersection of two curves and one is telling us what happens at nilpotents.
@@ -4800,7 +4809,7 @@ See \cite{Matsuda1978} for details.
 In the 18th and first half of the 19th century mathematicians sought an explicit formula for solutions of the quintic 
 $$ ax^5+bx^4+cx^3+dx^2+ex+f=0 $$
 in terms of radicals.
-Less well known is the fact that they also wanted to determine general formulas for all ordinary  differential equations in terms of some collection of ``elementary functions''. 
+Less well known is the fact that they also wanted to determine general formulas for all ordinary  differential equations in terms of some collection of ``elementary functions''.
 The most famous problem is the following:
 \begin{problem}
 	Can the function $\int e^{x^2} dx$ be written in terms of elementary functions?
@@ -4830,9 +4839,281 @@ This is again another example of how finiteness is replaced by finite dimensiona
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{}
+\section{Integration in Finite Terms}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+The aim of this section is to prove the following theorem.\footnote{Most of this section follows Rosenlicht's Monthly Article \cite{Rosenlicht1972}. 
+We also use Hardy's Book on Integration \cite{Hardy1979}.
+The presentation here starts with Liouville, then Ostrowski 1946, then Ritt 1948, then Risch 1969, and finally another paper of Rosenlicht 1968. 
+}
+\begin{theorem}[No Elementary Integral of $e^{x^2}$]
+The is no ``closed form'' for $\int e^{x^2}dx$ in terms of ``elementary function''. 
+\end{theorem} 
+First observe that there is an expression for $\int e^{x^2}dx$ given by a convergent power series:
+$$ \int e^{x^2}dx = \int \sum_{n=0}^{\infty} \frac{x^{2n}}{n!} dx = \sum_{n=0}^{\infty} \frac{x^{2n+1}}{(2n+1)n!} \in \CC\langle x\rangle.$$
+This is not what we mean by a ``closed form''. 
+By a closed from we will mean an element of a $\partial$-field $L$ which is a $\partial$-algebraic extension of $\CC(x)$. 
+In terms of Galois Theory, $L$ plays the same role as the solvable closure of $\CC(x)$ and it is sometimes called ``Liouvillian''. 
+This will be defined after we a preliminary discussion.
+It will contain things like $\exp(x)$, $\log(x)$, polynomials, algebraic functions, and combinations of these. 
+
+To show $e^{x^2}$ has no elementary antiderivative we will use Liouville's criterion. 
+\begin{theorem}[Liouville's Criterion]
+	Suppose that $f(x)$ and $g(x)$ are elementary. 
+	The integral $\int f(x) e^{g(x)} dx$ has an ``elementary closed form'' if and only if there exist some $\mu(x) \in \CC(x)$ such that 
+	 $$ f(x) = \mu'(x) + \mu(x) g'(x).$$
+\end{theorem}
+\begin{proof}[Proof of the Easy Direction]
+One direction is way easier than the other.
+Suppose that there exists some $\mu(x) \in \CC(x)$ such that 
+ $$ f(x) = \mu'(x)+\mu(x)g'(x).$$
+ Then we have 
+  $$\dfrac{d}{dx}\left[ \mu(x) e^{g(x)}\right] = \mu'(x) e^{g(x)} + \mu(x) g'(x) e^{g(x)} = f(x)e^{g(x)}. $$
+ We conclude by the Fundamental Theorem of Calculus, 
+ $$\int f(x)e^{g(x)} dx= \mu(x) e^{g(x)} + c,$$
+ where $c$ is some constant. 
+\end{proof}
+
+We now apply Liouville's Criterion to conclude that $e^{x^2}$ does not have an elementary derivative.
+\begin{example}[Proof That $\int e^{x^2} dx$ Is Not Elementary]
+	We will apply Liouville's Criterion. We have 
+	 $$ \int e^{x^2} dx = \int f(x) e^{g(x)} dx,$$
+	where $f(x) = 1$ and $g(x) = x^2$. 
+	Our differential equation for $\mu(x)\in\CC(x)$ becomes 
+	 $$ \mu'(x) + 2x \mu(x) =  1.$$
+	Suppose that there exists some nontrivial $\mu(x) = p(x)/q(x) \in \CC(x)$ satisfying our equation for the sake of contradiction. 
+	We will suppose that $p(x),q(x) \in \CC[x]$ are coprime polynomials with $q(x)\neq 0$. 
+	Plugging in we get  
+	 $$ \frac{p'(x)q(x) - p(x) q'(x)}{q(x)^2} + 2x \frac{p(x)}{q(x)} = 1,$$
+	which is equivalent to 
+	\begin{equation}\label{E:poly-id}
+ q'(x) p(x) = q(x)( p'(x)-2xp(x)-q(x))
+	\end{equation}
+	Let $(x-\lambda)$ be an irreducible divisor of $q(x)$ appearing with multiplicity $m$.
+	Then $(x-\lambda)^m \vert q'(x)p(x)$. 
+	But $\ord_{\lambda}(q') = m-1$ which means $p(\lambda)=0$. \footnote{To see that the multiplicity of a root must go down after taking a derivative of the series expansion around $x=\lambda$,  $q(x)=\sum_{n=m}^d a_n (x-\lambda)^n. $}
+	But we supposed that $p(x)$ and $q(x)$ were coprime. 
+	This is a contradiction.	 
+\end{example}
+
+The general form of the equation \eqref{E:poly-id} takes the form 
+\begin{equation}\label{E:poly-eqn}
+q'(x) p(x) = q(x)( g'(x)p(x) + p'(x)-f(x)q(x)).
+\end{equation}
+
+The next example shows that $\int \dfrac{e^x}{x}dx$ has no elementary closed form. 
+This example can be used to derive a number of other examples. 
+\begin{example}[Antiderivative of $e^x/x$]
+	The integral $\int \dfrac{e^x}{x}dx$ has no elementary closed form.
+	We suppose there exists some $\mu(x) = p(x)/q(x)$ with $p,q$ coprime polynomials and $q\neq 0$. 
+	To see this we use equation \eqref{E:poly-eqn} to get 
+	 $$ xq'(x)p(x) = q(x)( xp(x) + xp'(x) -q(x)).$$
+	 
+	 If $\lambda\in \CC$ is a nonzero root of $q(x)$ of multiplicity $m$ one finds from $(x-\lambda)^m \mid x q'(x)p(x)$ that $(x-\lambda)\vert p(x)$ which gives a contradiction. 
+	 
+	 If $q(x) = x^m$ then we have $mx^m p(x) = x^m( xp(x)+xp'(x)-x^m)$ which implies $mp(x) = x( p(x) + p'(x) - x^{m-1})$ which proves $x \vert p(x)$ which again shows that $p(x)$ and $q(x)$ are not coprime.
+	 
+	 We conclude that no such $\mu(x) = p(x)/q(x)$ exists and hence the integral is not elementary. 
+\end{example}
+
+The next example shows how you can get more examples from $u$-substitution.
+\begin{example}[Logarithmic Integrals]\label{E:log-recip}
+	The integral $\int \dfrac{dx}{\ln(x)}$ has no elementary closed form.
+	We use just some $u = \ln(x)$ substitution to get 
+	$$\int \dfrac{e^x}{x} dx = \int \frac{du}{\ln(u)}.$$
+	The previous example shows $e^x/x$ has no elementary anti-derivative. 
+\end{example}
+The next example shows how you can get more examples from integration by parts. 
+\begin{example}[Log Log]
+	The integral $\int \ln(\ln(x)) dx$ has no elementary closed form.
+	We do an integration by parts with $u = \ln(\ln(x))$ and $dv=dx$. 
+	This gives 
+	$$\int \ln\ln(x) dx = \frac{1}{\ln(x)} + \int \dfrac{dx}{\ln(x)},$$
+	which by Example~\ref{E:log-recip} has no elementary closed form.
+\end{example}
+
+\begin{exercise}
+	Show that $\sin(x)/x$ has no elementary anti-derivative.
+\end{exercise}
+
+More interesting explicit examples can be found in Hardy's book \cite[pg 52]{Hardy1971}.
+
+\subsection{Elementary Functions}
+
+We are going to define what elementary functions are in this subsection. 
+Before doing that observe that the two following elementary identities:
+ $$ \varphi(x) = \exp( \int f(x) dx) \implies \dfrac{\varphi'(x)}{\varphi(x)} = f(x), $$
+ $$ \varphi(x) = \log(f(x)) \implies \varphi'(x) = \dfrac{f'(x)}{f(x)}.$$
+
+We now deal with these abstractly. 
+Let $K$ be a $\partial$-field and let $f\in K$.
+Let $\widehat{K}$ be a saturated $\partial$-field containing $K$.
+\begin{itemize}
+	\item We let $\int f$ to denote some $\varphi \in \widehat{K}$ such that $\varphi' = f$. 
+	We call such an element an \emph{antiderivative} or \emph{integral} of $f$. 
+	\item We let $e^f$ denote some $\varphi \in \widehat{K}$ such that $\varphi' = f'\varphi$. 
+	We call such an element an \emph{exponential} of $f$.
+	\item We let $\log(f)$ denote some $\varphi \in \widehat{K}$ such that $\varphi'= f'/f$. 
+	We call such an element a \emph{logarithm} of $f$. 
+\end{itemize}
+
+In a manner similar to usual field theory for ``solving by radicals'' we introduce the notion of a basic extension then define a class of fields from these basic extensions inductively.
+\begin{definition}
+	Let $K$ be a $\partial$-field. 
+	A \emph{basic elementary extension} (resp. \emph{basic Liouville extension}) $F \supset K$ is some $\partial$-field of the form $F=K(\varphi)$ where one of the following holds. 
+	\begin{enumerate}[topsep=0pt]
+		\item $\varphi$ is algebraic over $K$.
+		\item $\varphi = \log(\psi)$ for some $\psi \in K$ (resp. $\varphi = \int \psi$).
+		\item $\varphi=\exp(\psi)$ for some $\psi \in K$. 
+	\end{enumerate}
+\end{definition}
+So the only difference between a basic Liouvillian extension and a basic elementary extension is that we replace logarithms with integrals. 
+It will turn out these definitions are equivalent but we include both here because the style changes from reference to reference. 
+
+We say that an element $\varphi$ is \emph{basic Liouvillian} (resp. \emph{basic elementary}) if and only if $\varphi$ is an element of a basic Liouvilliean extension (resp basic elementary extension).
+
+\begin{example}
+	Let $K= \CC(t)$. 
+	Then $\sin(t)$ is basic elementary and basic Liouvillian since $\sin(t) \in K(e^{it})$.
+\end{example}
+
+\begin{example}
+	Let $K = \CC(t)$. 
+	The element $\varphi = \exp(t)$ is basic elementary as $\varphi'=f'\varphi$ with $f=t \in K$. 
+\end{example}
+
+An important philosophical point here is that these differential equations are really encoding composition of functions. 
+Meditate on that. 
+
+\begin{definition}
+	A finitely generated $\partial$-field extension $F \supset K$ is \emph{elementary} (resp \emph{Liouvillian}) if and only if it is obtained by a finite sequence of basic elementary (resp basic Liouvillian) extensions.
+	
+	A $\partial$-field extension $F \supset K$ (which is not necessarily finitely generated) is called \emph{elementary} (resp. \emph{Liouvillian}) if an only if for all $\varphi \in F$ there exists some intermediate field $\widetilde{F}$ with $K \subset \widetilde{F} \subset F$ which contains $\varphi$ and is a finitely generated elementary (resp. Liouvillian) field extension. 
+\end{definition}
+For inductive arguments it is helpful to observe that elementary every finitely generated $\partial$-field extension can be written as 
+ $$ F = K(\varphi_1,\ldots,\varphi_n) $$
+for some $\varphi_1,\ldots,\varphi_n$ where if we let $F_0 = K$ and $F_i = K(\varphi_1,\ldots,\varphi_i)$ where each $\varphi_i$ satisfies on of the following
+\begin{enumerate}
+	\item $\varphi_i$ is algebraic over $K_{i-1}$.
+	\item $\varphi_i$ is a logarithm of some element of $K_{i-1}$.
+	\item $\varphi_i$ is some exponential of some element of $K_{i-1}$.
+\end{enumerate} 
+The same can be said about finitely generated Liouvillian extensions where we replace logarithms with integrals in the above definition.
+
+\begin{lemma}
+	Elementary extensions and Liouvillian extensions are the same thing. 
+\end{lemma}
+\begin{proof}
+	We will show that every basic Liouvillian extension is elementary.
+	We only need to show this for integrals. 
+	Let $f \in K$ and suppose $\varphi = \int f$.
+	Then $\int f = \log( e^{\int f})$ and logarithms and exponentials are basic elementary. 
+	
+	Conversely, we need to show that every logarithm is elementary. 
+	Let $f\in K$ be nonzero and suppose that $\varphi =\log(f)$. 
+	We use that $\log(f) = \int \frac{f'}{f}$.
+	Note that $f'/f \in K$ so we are just taking an integral of a basic element. 
+	This proves $\log(f)$ is Liouvillian.
+\end{proof}
+
+%%%%%%%%%%%%%%%%
+\subsection{Proof of Liouville's Criterion}
+%%%%%%%%%%%%%%%%
+
+The following theorem is a sort of converse to the definition of elementary extensions. 
+It says that any elementary integrand is a linear combination over the constants of derivatives and logarithmic derivatives. 
+\begin{theorem}[Liouville's Theorem]
+Let $K$ be a differential field and let $F \supset K$ be an elementary extension with $F^{\partial} = K^{\partial}$. 
+Then $\int \varphi \in F$ if and only if there exists some $u_0,\ldots,u_n \in K$ and some $c_i \in K^{\partial}$ such that  
+ $$ \varphi = u_0' + \sum_{i=1}^n c_i \dfrac{u_i'}{u_i}.$$ 
+\end{theorem}
+\begin{proof}
+	See \cite[pg 169]{Risch1969}. 
+	See also \cite[pg 59]{Hardy1971} for a ``proof by example''.
+\end{proof}
+
+\begin{remark}
+If $F \supset K$ is $\partial$-algebraic then $F^{\partial}\supset K^{\partial}$ is algebraic. 
+This means that if $K^{\partial}=\CC$ then the condition on the constants is vacuous.
+
+This assumption is necessary since $\int \frac{dx}{1+x^2} = \tan^{-1}(x)$ is elementary but one needs to use elements of $\CC$ to express this in the appropriate form.
+\end{remark} 
+
+We will also need the following Lemma on transcendence of $e^g$.
+\begin{lemma}
+	If $g \in \CC(x)$ is non-constant then $e^g$ is transcendental over $\CC(x)$. 
+\end{lemma}
+\begin{proof}[Analytic Proof]
+	First since $g(z) \in \CC(z)$ is non-constant then $\exp(g(z))$ has an essential singularity.
+	But algebraic functions don't have essential singularities. 
+\end{proof}
+
+\begin{proof}[Algebraic Proof]
+	Work over a general differential field $K$.
+	Let $\tau = e^g \in F\setminus K$ where $g \in K$ nonconstant.  
+	
+	Suppose that $\tau$ is algebraic over $K$ and let $f(T) \in K[T]$ be its minimal polynomial. 
+	We may write  
+	$$f(T) = a_0 + a_1 T + \cdots + T^d$$ for $a_i \in K$.
+	Using that 
+	$$\partial(a_n \tau^n) = n \tau^{n-1} g \tau = a_n' \tau^n + n g a_n \tau^n = (a_n' + n a_n g) \tau^n$$ 
+	we see that the identity
+	 $0=\partial(f(\tau))$ gives rise to another monic degree $d$ polynomial on which $\tau$ vanishes. 
+	 Let's call this polynomial $F(T)\in K[T]$. 
+	 It has the form
+	  $$ F(T) = ng' T^n + (a_{n-1}' + (n-1) a_{n-1}g')T^{n-1} + \cdots + a_0 $$ 
+	 We have $f(T) \vert F(T)$ (both of degree $d$) which implies that 
+	  $$ a_{n-1}  = \frac{a_{n-1}' + (n-1) a_{n-1}g'}{n g'},$$
+	 or that $a_{n-1}'/a_{n-1} = g'$ or that $a_{n-1} = e^g$.
+	 This is a coefficient, so this is in $K$. 
+	 One the other hand, by hypothesis, this is in $F\setminus K$. 
+	 This gives a contradiction.
+\end{proof}
+
+\subsection{Proof of Liouville's Criterion}
+
+Let $K_0 =\CC(x)$ and $C = K^{\partial}$.
+We will show that $\int f e^g$ is elementary if and only if there exist some $\mu\in K_0$ satisfying the differential equation $\mu'+g'\mu = f$. 
+Let $\tau = e^g$ and work in $K = K_0(\tau)$.
+By Liouville's theorem there exists constants $c_i \in C$ and functions $u_i \in K$ such that 
+ $$ f\tau = u_0' + \sum_{i=1}^n c_i \dfrac{u_i'}{u_i}$$
+By the homomorphic properties of logarithmic derivatives we can assume that $u_j \in K_0[\tau]$ for $j\geq 1$ are monic irreducible polynomials.
+
+Without loss of generality we can assume that $\sum_{i=1}^n c_i u_i'/u_i \in K_0$. 
+
+We can expand $v \in K_0(\tau)$ as a Laurent series to get as an expresions in $K_0((\tau))$ a sum of linearly independent $K_0$-vectors
+ $$ u_0 = L + b_1 \tau + H$$
+Taking derivatives we get 
+ $$ u_0' = L' + b_1'\tau + b_1 \tau' + H'= L'+H' + (b_1' +b_1 g') \tau,$$
+where in the last equality we used that $\tau' = g' \tau$.
+
+Linear independence then gives $f\tau = (b_1' + b_1 g')\tau$.
+
+
+\subsection{Algebraic Functions Satisfy Linear Differential Equations}
+In what follows if $f(x) = \sum_{i=0}^n a_i x^i \in K[x]$ where $K$ is a $\partial$-field we will write 
+$$ f^{\partial}(x) = \sum_{i=0}^n \partial(a_i) x^i.$$
+These polynomials come up in terms when differentiating polynomials with coefficients in a differential field via the product rule. 
+\begin{lemma}
+	Let $F \supset K$ be an extension of $\partial$-fields.
+	If $\alpha \in F$ is algebraic over $K$ then it satisfies a linear differential equations over $K$.
+\end{lemma}
+\begin{proof}
+	Let $\alpha \in F$ be any element which is algebraic over $K$. 
+	Let $f(x) \in K[x]$ be the minimal polynomial of $\alpha$. 
+	Then we have $f(\alpha)=0$ and $\partial(f(\alpha)) = f^{\partial}(\alpha) + f'(\alpha) \partial(\alpha) =0$. 
+	We know that $f'(\alpha)\neq 0$ by minimality. 
+	This implies that 
+	$$\partial(\alpha) = -\frac{f^{\partial}(\alpha)}{f'(\alpha)} \in K(\alpha).$$
+	We can now iterate the above construction an get $\alpha, \alpha', \alpha'', \ldots$ all as elements of $K(\alpha)$. 
+	Since $K(\alpha)$ have finite dimension as a $K$-vector space there exists some $a_j \in K$ and some $r$ such that 
+	$$ a_0 \alpha + a_1 \alpha' + \cdots + a_r \alpha^{(r)} =0,$$
+	which proves that $\alpha$ satisfies a linear differential equation over $K$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \taylor{Explain how Hopf algebras are groups with the axioms written out backwards}
 
 
