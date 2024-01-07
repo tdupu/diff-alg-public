@@ -118,6 +118,10 @@
 \newcommand{\PGL}{\operatorname{PGL}}
 \newcommand{\deligne}[1]{\cite[ #1 ,\href{https://labs.thosgood.com/translations/978-3-540-05190-9.pdf}{Hosgood translation}]{Deligne1970}}
 
+\newcommand{\Fil}{\operatorname{Fil}}
+\newcommand{\len}{\operatorname{len}}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Ring}{\mathsf{Ring}}
 
 
 \usepackage{listings}
@@ -3575,7 +3579,7 @@ This was done by Umemura and others.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Ordinary Differential Algebra}
+\chapter{Differential Algebra}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 In this section we are going to develop more the theory of $\partial$-algebra done previously with an eye towards computation. 
@@ -3979,9 +3983,7 @@ Here is the counter-example.
 \end{exercise}
 To do this exercise it is useful to have Levi's Lemmas in hand which are given in \S\ref{S:levi}.
 
-
-
-So what *do* we get?  We get the Ritt basis theorem.
+So what do we get?  We get the Ritt basis theorem.
 \begin{theorem}[Ritt Basis Theorem]
 	If $I \subset K\lbrace x_1,\ldots,x_n \rbrace$ is a radical ideal then there exists some $u_1,\ldots,u_e$ such that 
 	 $$ I = \lbrace u_1,\ldots,u_e \rbrace_{\partial}.$$
@@ -4018,57 +4020,465 @@ For ascending chains of radical ideals there can be no such example: Ritt's Basi
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Differential Transcendence (unstable)}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Let $f_1,\ldots,f_n \in K\lbrace x_1,\ldots,x_n\rbrace$ and consider the differential system 
- $$ \Gamma \colon \quad f_1=\cdots = f_e =0.$$
-This is just a space of solutions of differential equations. 
 
-The algebraic object associated to this space is the ring 
- $$ A=K\lbrace x_1,\ldots, x_n\rbrace/[f_1,\ldots,f_e],$$
-and we try to read off properties of the space from the ring $A$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{$\Delta$-Algebraic Independence}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+First and foremost the ``correct'' way to study algebraic dependence is through model theory. 
+We won't do that here but we should. 
+We might add more notes on this later.
 
+The definitions for $\Delta$-algebraic independence follow the usual case.
+Let $A/R$ be an extension of $\Delta$-rings. 
+Let $S \subset A$. 
+Recall that a set $S$ is called \emph{algebraically independent} if and only if the ring homomorphism
+$$ R[x_s \colon s\in S] \to A, \quad x_s \mapsto s $$ 
+is injective. 
+In the above definition $\lbrace x_s \colon s\in S\rbrace$ are a collection of indeterminates. 
+If a set is not algebraically independent it is called \emph{algebraically dependent}.
+The $\Delta$-definition is exactly the same. 
+\begin{definition}
+	We say that $S$ is \emph{$\Delta$-algebraically independent} if and only if $\Theta S$ is algebraically independent over $R$.
+	If the set $S$ is not $\Delta$-algebraically independent then it is called \emph{$\Delta$-algebraically dependent}.
+\end{definition}
 
+\begin{definition}
+	An extension of fields $F\supset K$ where every elements $\varphi \in F$ is $\Delta$-algebraic over $K$ is called a $\Delta$-\emph{algebraic extension}.  
+	If no element of $F$ is $\Delta$-algebraic we call the extension $\Delta$-\emph{transcendental}.
+\end{definition}
 
-A big difference between algebraic geometry and differential algebraic geometry is how intersection theory works, as shown in Figure~\ref{F:two-pictures}.
+In what follows we let $\nabla^{\infty} y = (\partial^{\alpha} y)_{\alpha \in \ZZ_{\geq0}^{m}}$ be the collection of formal derivatives. 
+So for example if $\Delta = \lbrace \partial_t, \partial_x\rbrace$ then 
+$$ \nabla^{\infty}(y) = (y,y_t,y_x,y_{tt},y_{tx},y_{xx}, \ldots),$$
+is all the formal partial derivatives in $x$ and $t$ encoded into a single vector.
+\begin{theorem}
+	If $F/K$ is a $\Delta$-algebraic extension then $F^{\Delta}$ is algebraic over $K^{\Delta}$. 
+\end{theorem}
+\begin{proof}
+	Let $\varphi \in F^{\Delta}$ it is $\Delta$-algebraic so there exists some $f \in K\lbrace y \rbrace$ such that $f(\varphi)=0$. 
+	Since all the derivatives of $\varphi$ vanish we can assume that the polynomial $P_f$ such that $f = P_f(\nabla^{\infty}y)$ only depends on a single variable without derivatives which proves it is algebraic. 
+\end{proof}
 
-\taylor{
-
-For random $f,g \in K\lbrace x,y \rbrace$ we expect $K\lbrace x,y\rbrace/[f,g]$ to be finite dimensional. 
-The idea is that (say) $f$ will kill off the higher derivatives of $x$ and $g$ will kill off the higher derivatives of $y$ and we will only be left with a ring which is the quotient of finitely many variables $x$ and $y$.
-
-}
-
-
-
-Let $F\supset K$ be a $\partial$-finitely generated extension of $\partial$-fields.
-One has the following important correspondence:
-$$ \trdeg_K^{\partial}(F)=0 \iff \trdeg_K(F)<\infty. $$
-Geometrically this corresponds to the fact that a differential algebraic variety $\Sigma$ over $K$ has differential dimension zero if and only if it has finite absolute dimension
-$$\dim^{\partial}(\Sigma)=0 \iff a(\Sigma)<\infty.$$ 
-The number $a(\Sigma)$ is the \emph{absolute dimension} of the differential algebraic variety $\Sigma$ \cite[\S 2, pg 485]{Buium1993}. 
-
-In the case that $\Sigma$ is irreducible $a(\Sigma)$ can be computed as the transcendence degree of the function field $K(\Sigma)$ over $K$.
-Equivalently it can be computed as the (Krull) dimension of the underlying jet scheme $\Sigma^{[\infty]}$ of $\Sigma$.
-By this we just mean the usual scheme-theoretic dimension of the scheme $\Sigma^{[\infty]}$. 
-One issue we have to contend with is the fact that rings and ideals defining $\Sigma^{[\infty]}$ are not finitely generated, so the proofs of many theorems we would like to use do not apply directly.
-
-The existence of the two notions of dimension means there are two ways to think about differential algebraic varieties: in terms of  $\partial$-indeterminates $\lbrace x_i \colon 1\leq i \leq n \rbrace$ and in terms of classical indeterminates $\lbrace x_i^{(j)} \colon 1\leq i \leq n, j\geq 0 \rbrace$ (see Figure~\ref{F:two-pictures}).
-From the perspective of differential indeterminates, ``neighborhoods'' of intersections of $\partial$-dimension zero are described by finite dimensional schemes.
-Both perspectives are useful.
-
-\begin{figure}[h]
-	\begin{center}
-		\includegraphics[scale=0.3]{two-pictures.eps}
-	\end{center}
-	\caption{The above picture shows two ways to draw the intersection of the differential algebraic varieties $\Sigma \colon x'=0$ and $\Gamma \colon x+(y')^2=0$. 
-		From the point of view of differential transcendence degrees, $\Sigma \cap \Gamma$ has dimension zero. 
-		From the point of view of transcendence degrees or absolute dimensions, $\Sigma\cap \Gamma$ has dimension 2.
-	}\label{F:two-pictures}
-\end{figure}
+The theorem above is used in our proving that all solutions of 
+$$P(y,\dfrac{dy}{dt})=0, \qquad P \in \CC[x_1,x_2]$$ 
+where $P$ is an irreducible polynomial of sufficiently large degree must be algebraic functions. 
+This is is a theorem of Poincare.
 
 
+\begin{exercise}\label{EX:algebraic-towers}
+	The composition of $\Delta$-algebraic extensions is $\Delta$-algebraic. 
+	That is if $L\supset F \supset K$ is an extension of $\Delta$-fields with $L$ $\Delta$-algebraic over $F$ and $F$ $\Delta$-algebraic over $K$ then $L$ is $\Delta$-algebraic over $K$. The same this can be said about $\Delta$-transcendental extensions.	
+\end{exercise}
+
+We are going to give the exchange property for algebraic independence. 
+\begin{lemma}[Exchange Property]\label{L:exchange-property}
+	Suppose that $F \supset K$ is an extension of $\Delta$-fields. 
+	Suppose that $F$ is $\Delta$ algebraic over $K(\varphi_1,\ldots,\varphi_n)_{\Delta}$. 
+	If $\psi_1,\ldots,\psi_m \in F$ is a collection of $\Delta$-algebraically independent elements then $m\leq n$. 
+\end{lemma}
+\begin{proof}
+	The idea is to use the $\Delta$-algebraic relation over $K$ to replace one element with another.  
+	Since $\psi_1$ is $\Delta$-algebraic over $K(\varphi_1,\ldots, \varphi_n)_{\Delta}$ there exist some $f \in K[y_1,\ldots,y_{n+1}]_{\Delta}$ such that 
+	$$f(\psi_1,\varphi_1, \ldots, \varphi_n) =0.$$
+	We will suppose that $\varphi_1$ appears nontrivially in this $\Delta$-polynomial.
+	This means that $\varphi_1$ is $\Delta$-algebraic over $K(\psi_1,\varphi_2,\ldots,\varphi_n)_{\Delta}$. 
+	Furthermore $F$ is $\Delta$-algebraic over $K(\psi_1,\varphi_2,\ldots,\varphi_n)_{\Delta}$ by the Exercise on towers of $\Delta$-algebraic extensions (Exercise~\ref{EX:algebraic-towers}).
+	To see this note that $F$ is $\Delta$ algebraic over $K(\psi_1,\varphi_1,\varphi_2, \ldots,\varphi_n)_{\Delta}$ which is algebraic over $K(\psi_1,\varphi_2,\ldots,\varphi_n)_{\Delta}$. 
+	
+	We continue in this way exchanging $\psi_2$ with (without loss of generality) $\varphi_2$ [you need to show that there some $\varphi_j$ appears non-trivially in the algebraic relation and that follows from algebraic independence hypothesis] and so on. 
+	
+	Eventually one arrives at $K(\psi_1,\psi_2,\ldots,\psi_m, \varphi_{m+1},\ldots,\varphi_n)$ which proves the result. 
+	If $m>n$ then it would show that $\psi_{m+1}$ would be algebraic over $K(\psi_1,\ldots,\psi_n)$ which would give a contradiction.
+\end{proof}
+
+\begin{definition}
+	For $A$ and $(K,\Delta)$-algebra for $(K,\Delta)$ a $\Delta$-field a \emph{$\Delta$-transcendence basis} is a subset $S \subset A$ that is $\Delta$-algebraically independent over $K$ and is maximal with respect to this property. 
+\end{definition}
+
+The following theorem tells us that $\Delta$-transcendence degrees are well-defined. 
+\begin{theorem}[$\Delta$-Transcendence Degrees Are Well Defined]\label{T:transcendence-degrees}
+	Any two finite $\Delta$-transcendence bases have the same cardinality.
+\end{theorem}
+\begin{proof}
+	We will prove this using the exchange property. 
+	Let $F \supset K$ be a extension of $\Delta$-fields where $S \subset F$ is a finite transcendence basis. 
+	Let $T_1,T_2 \subset F$ be a transcendence basis. 
+	We know that $\vert T_1 \vert \leq \vert T_2 \vert$ by the exchange property. 
+	Similarly we know that $\vert T_2 \vert \leq \vert T_1 \vert$.
+	Hence the two sets have the same cardinality. 
+\end{proof}
+This process in the above proof can actually be carried out using ordinals.
+In a later version of these notes I want to add the transfinite version.
+
+\begin{definition}
+	If such a minimal subset $S$ is finite we define the \emph{$\Delta$-transcendence degree} of $A/K$ to be the number $\trdeg^{\Delta}_K(A)$ defined by 
+	$$ \trdeg_K^{\Delta}(A) = \vert S \vert.$$
+\end{definition}
+This is well defined in general and the proof in the $\Delta$-finitely generated case follows from Theorem~\ref{T:transcendence-degrees}.
+
+The following proposition is useful. 
+\begin{exercise}
+	Let $F/K$ be a finitely $\partial$-generated extension of fields. 
+	If $F$ is $\partial$-algebraic over $K$ then $F$ is finitely generated over $K$ (in the classical sense).
+\end{exercise}
+The idea of the above exercise is to use the algebraic relation 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Kolchin Polynomials}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+We are going to follow Johnson's presentation of the Kolchin polynomial from \cite{Johnson1969}.
+We first set up some notation to give the main statement. 
+\begin{definition}
+	We say a function $f: \ZZ_{\geq 0} \to \ZZ_{\geq 0}$ is \emph{eventually polynomial} if and only if there exists some $H(x) \in \QQ(x)$ and some $t_0\geq 0$ such that 
+	$$ t\geq t_0 \implies f(t) = H(t). $$
+\end{definition}
+We sometimes say ``$f$ is eventually polynomial with polynomial $H$'' to mean the above. 
+
+Let $F/K$ be a $\Delta$-finitely generated extension of $\Delta$-fields, so $ F = K(\varphi_1,\ldots,\varphi_n)_{\Delta}.$
+Define 
+$$ F_r = K( \partial^{\alpha}(\varphi_j) \colon \vert \alpha \vert \leq r, \quad 1\leq j \leq n).$$
+We now state the main theorem about the Kolchin Polynomial $\chi_{F/K}(t)$. 
+\begin{theorem}[Existence of Kolchin Polynomials]
+	The function $r\mapsto \trdeg_K(F_r)$ is eventually polynomial with polynomial 
+	$$\chi_{F/K}(t) = \sum_{j=0}^m a_j {t +j \choose j }. $$
+\end{theorem}
+In the typical situation $m = \vert \Delta \vert$ is the number of derivatives used and $a_m = \trdeg^{\Delta}_K(F)$ is the $\Delta$-transcendence degree.
+In less typical situations the polynomial can detect how many derivatives are actually used in this extension. 
+
+The main trick we are going to use is that 
+$$ \dim_{F_r}(\Omega_{F_r/K}) = \trdeg_K(F_r) $$
+and observe that $\Omega_{F/K}$ is a $D$-module equipped with an increasing filtration by order. 
+We then convert the filtered module into an associated graded module where the theory of Hilbert Polynomials applies.
+
+That being said, we need to begin with Hilbert Polynomials. 
+The first place to read about Hilbert Polynomials is in Harris' \emph{A First Course in Algebraic Geometry} book. 
+After one gets a hand of it I recommend looking up Hilbert polynomials in Eisenbud \cite{Eisenbud1995}.
+
+
+\subsection{Hilbert Polynomials}\label{S:hilbert-polynomials}
+We follow roughly Eisenbud \cite[\S 1.9, pg 41]{Eisenbud1995} with some changes to the proofs to make them more understandable (to me). 
+Let $R$ be commutative ring and let $S = R[x_1,\ldots,x_n]$ be viewed as a graded ring.
+Let $M$ be a finitely generated graded $S$-module.
+The purpose of this section is to show that there exists some polynomial $H_M(x) \in \QQ[x]$ which is numerical (meaning on all integers it takes integers) and some $r_0\geq 0$ such that 
+$$ r\geq r_0 \implies \len_{S_0}(M_r) = H_M(x).$$
+
+Before getting into this we need to recall some basics about graded rings and modules.
+Recall that morphisms of graded rings $\varphi:M\to N$ are given a degree $d$ where $\varphi: M_n \to N_{n+d}$ for every $n$. 
+For any graded $S$-module $P$ we define $P(d)$ to be the same module with a shifted grading so that $P(d)_n = P_{n+d}$. 
+This allows us to place all of our morphisms of graded $S$-modules in degree zero. 
+
+\begin{example}
+	Let $S = R[x_1,\ldots, x_n]$ and let $M$ be a graded $S$-module. 
+	The multiplication-by-$x_n$ map $M \to M$ given by $m \mapsto x_n m$ has degree one. 
+	The map $M(-1) \to M$ has degree zero. 
+\end{example}
+
+We need a lemma to show Hilbert Polynomials exist. 
+In that lemma we need the power sum formula. 
+\begin{lemma}[Power Sum Polynomials]
+	For all $d$ there exists a polynomial $P_d(x) \in \QQ(x)$ of degree $d+1$ such that 
+	$$ \sum_{n=1}^N n^d = P_d(N). $$
+\end{lemma}
+\begin{proof}
+	There are many proofs of this fact. 
+	One uses Euler Maclaurin Summation, and another uses Faulhaber's formula. 
+	Here is a \href{https://www.youtube.com/watch?v=Uy1B_eGXQ0g}{Lecture of John H. Conway} doing a proof on YouTube.
+	All of the proofs involve Bernoulli numbers in some way.
+\end{proof}
+For example $P_1(N) = N(N+1)/2$.
+The following Lemma is key to showing that Hilbert polynomials exist. 
+\begin{lemma}[Difference Lemma]\label{L:difference-lemma}
+	Let $f$ and $g$ be integer valued functions on the integers. 
+	Suppose  
+	$$f(r) = g(r) - g(r-1).$$
+	If $f(r)$ is eventually polynomial of degree $d$ then $g(r)$ is eventually polynomial of degree $d+1$. 
+\end{lemma}
+\begin{proof}
+	We will let $f(x)$ be the polynomial such that $g(s) -g(s-1) = f(s)$ and let $f(s) = \sum_{j=0}^d c_j s^j$ for $s\geq s_0$. 
+	Then we have 
+	\begin{align*}
+	g(s) =& f(s) + g(s-1) \\
+	=& f(s) + f(s-1) + g(s-2) \\
+	=& \ \cdots \\
+	=& g(s_0) +\sum_{s_0 <s-j \leq s } f(s-j).
+	\end{align*}
+	We have 
+	\begin{align*}
+	\sum_{j=0}^{s-s_0} f(s_0+j) =& \sum_{j=0}^{s-s_0} \sum_{i=0}^d c_i (s_0+j)^i \\
+	=& \sum_{j=0}^{s-s_0} \sum_{i=0}^d c_i \sum_{k=0}^i {i \choose k} s_0^{i-k} j^k \\
+	=& \sum_{i=0}^d \sum_{k=0}^i c_i {i \choose k} s_0^{i-k} P_k(s-s_0) \\
+	=& \sum_{a+b\leq d} c_{a+b} {a+b \choose a} s_0^{a} P_b(s-s_0). 
+	\end{align*}
+	This is a polynomial of degree $d+1$.
+\end{proof}
+
+We can now prove the existence of Hilbert polynomials.
+\begin{theorem}
+	Let $S=R[x_1,\ldots,x_m]$. 
+	Let $M$ be a finitely generated graded $S$-module. 
+	There exists some $H_M(x) \in \QQ[x]$ a numerical polynomial and some $r\ll 0$ 
+	$$ H_M(r) = \len_R(M_r). $$
+\end{theorem}
+\begin{proof}
+	The proof will be induction on $m$. 
+	In the case $m=0$ then $H_m(s)=0$ identically with is a polynomial of degree $-1$ (by convention).
+	
+	We now proceed with the inductive step. 
+	Let $K = \ker( M(-1) \xrightarrow{x_m} M)$. 
+	Note that $K$ since $x_m f =0$ for each $f \in K$ we have that multiplication by elements of $R[x_1,\ldots,x_m]$ factors through multiplication by $R[x_1,\ldots,x_{m-1}]$ and hence $K$ is a $R[x_1,\ldots,x_{m-1}]$-module.
+	
+	We have an exact sequence 
+	$$ 0 \to K \to M(-1) \xrightarrow{x_m} M \to M/x_m M \to 0.$$
+	Taking lengths of the degree $s$ piece we get 
+	$$ \len(K_s) - \len( M(-1)_s) + \len(M_s) - \len( (M/x_nM)_s) =0.$$
+	This implies 
+	$$ H_K(s) - H_M(s-1) + H_M(s) - H_{M/x_mM}(s) =0,$$
+	which implies 
+	$$ H_M(s) - H_M(s-1) = H_K(s) - H_{M/x_mM}(s). $$
+	Note that the modules used on the right hand side of the above equality are graded $R[x_1,\ldots,x_{m-1}]$-modules.  
+	By inductive hypothesis these are a polynomial of degree $m-1$. 
+	By the Difference Lemma we are done.
+\end{proof}
+
+\begin{definition}
+	The polynomial $H_M(t)$ is called the \emph{Hilbert Polynomial} of the graded module $M$.
+\end{definition}
+
+\begin{example}
+	The main application is when $X \subset \PP^N$ and we let $M=S_X$ and $S= \CC[x_0,\ldots,x_m]$ as in the statement of the Theorem. 
+	In this case we let $H_M(t) = H_X(t)$ and 
+	$$ H_X(t) = \sum_{j=0}^n a_j \frac{t^j}{j!}, \quad n = \dim(X), \quad a_n = \deg(X).$$
+\end{example}
+
+\subsection{Filtered Rings}
+The aim of this section is to set up our basic notation for what follows. 
+Let $\Delta = \lbrace \partial_1,\ldots, \partial_m\rbrace$.
+Define $\Theta(r)$ to be the collection of $\partial^{\alpha}=\partial_1^{\alpha_1} \cdots \partial_m^{\alpha_m}$ with $\vert \alpha \vert = \alpha_1 + \cdot + \alpha_m \leq r$.
+Let $R$ be a $\Delta$-ring. 
+
+We let $\Fil(\Ring)$ denote the the category of \emph{filtered rings} (here rings are not necessarily commutative).
+The official description of rings with an increasing filtration is given in Bourbaki \cite[page 17]{Bourbaki1961}, which is what Johnson follows. 
+\footnote{Lars Hesselholt has told me that you should always write increasing filtrations with a lower subscript $F_i$ and decreasing filtrations with an upper subscript $F^i$ so this is what we are going to do in this manuscript. }
+
+Objects are rings $A$ equipped with an increasing filtration $F_rA \subset A$ for $r \in \ZZ$ satisfying 
+$$ \cdots \subset F_{r-1} A \subset F_r A \subset F_{r+1} A \subset \cdots. $$
+The ring multiplication needs to satisfy $F_r(A) F_s(A) \subset F_{r+s}(A)$ for all $r,s \in \ZZ$.
+
+Morphisms in this category are ring homomorphisms $\sigma:A\to B$ satisfing $\sigma(F_rA) \subset F_rB$. 
+\begin{example}[Filtration on Weyl Algebras]
+	We define increasing filtration of the Weyl algebra $\mathcal{D}(R) = R[\Delta]$ which we think of as the ring of linear differential operators $\sum_{\theta \in \Theta} a_{\theta} \theta$ where $a_{\theta}=0$ for all but finitely many $\theta$. 
+	The filtation 
+	$$F_rR[\Delta] = R[\Delta]_{\leq r} = \lbrace \sum_{\theta \in \Theta(r)} a_{\theta} \theta \rbrace. $$
+\end{example}
+Intuitively $R[\Delta]_{\leq r}$ are the linear operators which have order less than or equal to $r$. 
+
+\begin{example}\label{EX:filtration}
+	Let $R = K[x]_{\partial_t,\partial_s}$ and consider the Weyl Algebra $R[\Delta]$ with $\Delta = \lbrace \partial_t,\partial_s\rbrace$.
+	Then 
+	$$ R[\Delta]_{\leq 0} = R, \quad R[\Delta]_{\leq 1 } = R + R\partial_t + R \partial_s,$$
+	$$R[\Delta]_{\leq 2} = R[\Delta]_{\leq 1} + R\partial_t^2 + R\partial_s \partial_t + R\partial_s^2.$$
+\end{example}
+
+To every filtered ring $A$ there is an \emph{associated graded} ring $\Gr(A)$ given by 
+$$\Gr(A) = \bigoplus_{r\in \ZZ} \Gr_r(A), \quad  \Gr_n(A) = F_n(A)/F_{n-1}(A), \qquad n \in \ZZ.$$
+
+\begin{exercise}
+	Check that the definition of an associated graded ring is well-defined.
+\end{exercise}
+
+A remarkable fact is that by taking the associated graded ring of a Weyl-algebra we recover a commutative graded ring where the theory of Hilbert Polynomials applies. 
+\begin{theorem}[How To Turn Noncommutative Things Into Commutative Things]\label{T:associated-graded}
+	Let $\Delta = \lbrace \partial_1,\ldots,\partial_m\rbrace$.
+	Let $R$ be a $\Delta$-ring. 
+	$$\Gr(R[\Delta]) = R[\xi_1,\xi_2,\ldots,\xi_n] $$
+	as graded rings where $\xi_i$ and its powers represent $\partial_i$ and its powers in the associated graded ring.
+\end{theorem}
+
+The main idea here can understood by building on \ref{EX:filtration}
+\begin{example}
+	Let $R = K[x]_{\Delta}$ with $\Delta = \lbrace \partial_t,\partial_s\rbrace$.
+	The associated graded pieces are 
+	$$ G_0 = F_0/F_{-1} = F_0 = R $$
+	$$ G_1 = F_1/F_0 = R\partial_s + R\partial_t $$
+	$$ G_2 = F_2/F_2 = R\partial_s^2 + R\partial_s \partial_t + R \partial_t^2 $$
+	where are the sums in the above expressions are direct and the expressions on the right hand side really denote equivalence classes. 
+	We illustrate the commutativity by an example. 
+	In this example we let $\xi_1^n$ and $\xi_2^n$ denote the equivalence classes of $\partial_t^n$ and $\partial_s^n$ respectively in each graded component.
+	Look at what happens when we multiply elements
+	$$ f\partial_t  g\partial_s = f(g\partial_t + \partial_t(g))\partial_ss = fg \partial_t\partial_s + f\partial_t(g) \partial_s \equiv fg \xi_1 \xi_2, \mod F_1.$$
+	Observe that the ``noncommutative piece'' gets cancelled.
+	In general for $\partial f = f \partial+ \partial(f)$ and the terms on the right hand side are of different orders and hence the lower order term will get killed in the filtration. 
+\end{example}
+
+\begin{exercise}
+	Prove Theorem~\ref{T:associated-graded} using the hints from the above example.
+\end{exercise}
+
+\iffalse
+\begin{example}[Trivial Filtration]
+	For any ring $R$ one case define a filtration 
+	$$F_rR = \begin{cases} 
+	R, & r = 0\\
+	0, & r<0
+	\end{cases}.$$
+	The associated graded is the same 
+	$$\Gr_r(R) = \begin{cases} 
+	R, & r = 0\\
+	0, & r<0
+	\end{cases}.$$
+\end{example}
+\fi
+
+\begin{exercise}
+	Let $R$ be a $\Delta$-ring with $m$ differential operators. 
+	The associated graded of $R[\Delta]$ is a polynomial ring in $m$ variables
+	$$\Gr(R[\Delta]) \cong R[\xi_1,\ldots,\xi_n].$$
+	(This should be compared to the associated gradeds in the first chapter of \cite{Saito2000}).
+\end{exercise}
+
+\subsection{Filtered Modules}
+In what follows we will let $A$ denote a ring with an increasing filtration. 
+\begin{definition}
+	A \emph{filtered $A$-module} is an $A$-module $M$ with an increasing filtration 
+	$$\cdots \subset F_{r-1}(M) \subset F_r(M) \subset F_{r+1}(M) \subset  \cdots $$ 
+	such that 
+	$$F_r(A) F_s(M) \subset F_{r+s}(M).$$ 
+	The collection of filtered $A$-modules form a category $\Fil(\Mod_A)$ where 
+	we define a morphism $\phi:N\to M$ to be a morphism of $A$ modules which respects the filtration in the sense that $\phi(F_r(N)) \subset F_r(M)$.
+	
+\end{definition}
+An exact sequence of filtered modules $M\to N \to P$ is one where for every $r$ the sequence $F_rM \to F_r N \to F_r P$ is exact. 
+
+\begin{definition}
+	Let $A$ be a filtered ring and $M$ bne a filtered $A$-module. 
+	We define the \emph{associated graded} module $\Gr(M) = \bigoplus_{r\in \ZZ} \Gr_r(M)$ where the $r$th graded piece is defined by 
+	$$\Gr_n(M) = F_n(M)/F_{n-1}(M), \qquad n \in \ZZ.$$
+\end{definition}
+
+We now give some basic adjectives. 
+We are going to assume that all of our $R[\Delta]$-modules are ``exhaustive'' and ''discrete'' and the theorems we prove are going to apply when they are ``excellent''. 
+These conditions will make so that the graded $S$-module $G = \Gr(M)$, where $S = \Gr(R[\Delta]) = R[\xi_1,\ldots,\xi_m]$, is within the hypotheses of the Hilbert Polynomial $H_G$ existing.
+\begin{definition}
+	Let $A$ be a filtered ring and let $M$ be a filtered $A$ module. 
+	We now give some adjectives. 
+	\begin{enumerate}
+		\item We say $M$ is \emph{exhaustive} if $\bigcup_{r\in \ZZ} F_rM = M$.
+		\item We say $M$ is \emph{discrete} if $F_rM=0$ for $r\ll 0$.
+		\item We say $M$ is \emph{finitely filtered} if and only if $F_rM$ is a finitely generated $A$-module for every $r\in \ZZ$.
+		\item We say $M$ is \emph{well-filtered} if and only if for every $r\in \ZZ$ and every $s>r$ we have $F_sM = A_{s-r} F_rM$. 
+		\item We say $M$ is \emph{excellent} if it is finitely filtered and well-filtered. 
+	\end{enumerate}	
+\end{definition}
+
+
+\subsection{Filtered $D$-modules}
+In this section $R$ is going to be a $\Delta$-ring. 
+In what follows we are going to assume that all filtered $R[\Delta]$-modules are exhaustive and discrete by definition.
+
+The forgetful functor 
+$$\Mod_{R[\Delta]} \to \Mod_R, $$ 
+which is restriction of scalars via the ring homomorphism $R\to R[\Delta]$ can be upgraded to one on filtered modules 
+$$\Fil(\Mod^{\Delta}_R) \to \Fil(\Mod_R).$$.
+We are going to describe the left adjoint of this functor. 
+
+Note that $R[\Delta]$ is a right $R$-module. 
+There is a functor from left $R$-modules to left $R[\Delta]$-modules given by tensoring
+$$ \Mod_R \to \Mod_{R[\Delta]}, \quad M \mapsto R[\Delta] \otimes_R M.$$
+This can be upgraded this to a filtered $R[\Delta]$-modules 
+$$\Fil(\Mod_R) \to \Fil(\Mod_R^{\Delta}), \quad N \mapsto R[\Delta]\otimes_R N$$
+where the filtration on the tensor product is defined by
+$$ F_r( R[\Delta]\otimes N) = \sum_{s+t=r} F_s(R[\Delta])(1 \otimes F_t N). $$
+
+\begin{exercise}
+	Show that the functor $R[\Delta]\otimes_R -$ is the left adjoint of the restriction of scalars functor $\Mod_{R[\Delta]} \to \Mod_R$.
+	If $N \in \Fil(\Mod_R)$ and $M \in \Fil(\Mod_R^{\Delta})$ then 
+	$$ \Fil(\Mod_R)(N,M) \cong \Fil(\Mod_R^{\Delta})(R[\Delta]\otimes N, M).$$
+\end{exercise}
+
+\subsection{Kolchin Polynomials}
+
+The proof of the existence of Kochin polynomials goes through a general theorem about filterted $D$-modules. 
+In what follows $\len_R(V)$ denotes the length of an $R$-module $V$. 
+\begin{theorem}[Kolchin Polynomials for Filtered $D$-Modules]
+	Let $R$ be an artinian $\Delta$-ring where $\Delta$ consists of $m$ commuting derivations. 
+	Let $M \in \Fil(\Mod_R^{\Delta})$ be excellent. 
+	There exists a numerical polynomial $\chi_M(x) \in \QQ[x]$ and some $r_0 \in \ZZ$ such that 
+	$$ r \geq r_0 \implies \len_R(F_rM) = \chi_M(r). $$
+	Furthermore $\deg(\chi_M) \leq m$. 
+\end{theorem}
+\begin{proof}
+	One has the exact sequence 
+	$$0 \to F_{i-1}M \to F_i M \to \Gr_i(M) \to 0. $$ 
+	Taking length gives 
+	$$ \len_R(\Gr_i(M)) = \len_R(F_i(M)) - \len_R(F_{i-1}(M)).$$
+	Since $\len_R(\Gr_i(M))$ is eventually a polynomial with Hilbert Polynomial $H_{\Gr(M)}(t)$, by the Difference Lemma (Lemma~\ref{L:difference-lemma}) we know that $\chi_M(t)$ exists and will have degree $\deg( H_{\Gr(M)}) +1$.
+\end{proof}
+
+\begin{definition}
+	The polynomial $\chi_M(x)$ as in the statement of the theorem is called the \emph{Kolchin polynomial} (or dimension polynomial) or $M$.
+\end{definition}
+
+\begin{example}
+	In the mose basic case we have 
+	$$\chi_{R[\Delta]}(r) = { m+r \choose m }$$
+	simply because $\vert \Theta(r) \vert = {m+r \choose r}$ and the elements of that set form a basis for $F_mR[\Delta]$.
+\end{example}
+
+Recall that for a commutative $B$-algebra $A$ the module of Kahler differentials is the $A$-modules $\Omega_{A/B}$ which is freely generated by the symbols $d(a)$ for $a\in A$ subject to the relations $d(ba_1+a_2) = bd(a_1)+d(a_2)$ for $a_1,a_2\in A$ and $b\in B$ as well as $d(a_1a_2)= a_2 d(a_1) + a_1 d(a_2)$ for $a_1,a_2 \in A$. 
+The fundamental properties such as the behavior $\Omega_{A/B}$ under localization and quotients can be found in Eisenbud. 
+
+In the case that $B$ and $A$ are $\Delta$-rings the module $\Omega_{A/B}$ has a $A[\Delta]$-module structure given by 
+$$\partial( f dg ) = \partial(f) dg + f d\partial(g), \qquad f,g\in A, \partial \in \Delta.$$
+
+\begin{example}
+	Where $B=K$ is a $\Delta$-field and $A = K[x]_{\partial} = K[x,x',x'',\ldots]$ then we have 
+	$$ \Omega_{K[x]_{\partial}/K} = A dx + A dx' + A dx'' + \cdots. $$
+	The $D$-module structure is then given by the rule $\partial(dx^{(j)}) = dx^{(j+1)}$.
+\end{example}
+
+When $A$ is $\Delta$-finitely generated as a $B$-algebra, then a choice of $\Delta$-generators $\varphi_1, \varphi_2, \ldots, \varphi_n$ gives a filtration on $\Omega_{A/B}$ defined by 
+$$ F_r(\Omega_{A/B}) = A[\Delta]_{\leq r} \cdot \left( \ZZ d\varphi_1 + \cdots + \ZZ d\varphi_n \right).$$
+The filtration here is completely determined by the filtration of the Weyl algebra together with the choice of generators.
+
+
+\begin{exercise}
+	The filtration on $\Omega_{B/A}$ is excellent.
+\end{exercise}
+
+We not define the Kolchin Polynomial of a finitely generated extension of $\Delta$-fields.
+\begin{definition}
+	We define the \emph{Kolchin Polynomial} of a $\Delta$-finitely generated extension of $\Delta$-rings by $\chi_{A/B}(t) = \chi_{\Omega_{B/A}}(t)$.
+\end{definition}
+
+In the case that $A=F$ and $B=K$ where $F = K(\varphi_1,\ldots,\varphi_n)_{\Delta}$ we have 
+$$ \Fil_r \Omega_{F/K} = F\otimes_{F_r} \Omega_{F_r/K}.$$
+The length of $\Fil_r \Omega_{F/K}$ over $F$ is just the $F$-dimension which from the above expression gives 
+$$ \dim(\Fil_r\Omega_{F/K}) = \trdeg_K(F_r). $$
+The associated polynomial $\chi_{\Omega_{F/K}}(t)$ we defined be $\chi_{F/K}(t)$. 
+\begin{definition}
+	The polynomial $\chi_{F/K}(t)$ is the \emph{Kolchin Polynomial} of the field extension.
+\end{definition}
+
+In the case when $\Delta = \lbrace \partial \rbrace$ and we just have an extension of $\partial$-fields $F/K$. 
+We have 
+$$ \chi_{F/K}(t) = a+b(t+1),$$
+and $b=\trdeg^{\partial}_K(F)$.
+
+
+\begin{theorem}
+	Let $P \subset K[x_1,\ldots,x_n]_{\Delta}$ with $\Delta = \lbrace \partial_1,\ldots,\partial_m\rbrace$.
+	There exists integers $a_i(P) \in \ZZ$ for $1 \leq i \leq m$ such that 
+	$$ \chi_P(x) = \sum_{i=0}^m a_i(P) {x+i \choose i }. $$
+	Moreover $\dim^{\Delta}(V_{\Delta}(P)) = a_m(P)$, and when $a_m(P)=0$ we have $a_{m-1}(P) = a(V_{\Delta}(P))$.
+\end{theorem}
+\begin{proof}
+	\cite[pages 129-130]{Kolchin1973}
+\end{proof}
+
+There are some \href{https://ksda.ccny.cuny.edu/PostedPapers/10-21-05KSDA.pdf}{Sit Kolchin Seminar Notes} by William Sit that covers this topic well.
+The also some \href{https://ksda.ccny.cuny.edu/PostedPapers/10-21-05KSDA.pdf}{ Kolchin Seminar Notes} by Levin. 
 
 
 
@@ -5151,6 +5561,50 @@ This section is motivated by the following problem.
 	 $$ u_1=u_2=\cdots=u_n=0. $$
 	How many constants of integration does a general solution of this equation need?
 \end{problem}
+
+Let $f_1,\ldots,f_n \in K\lbrace x_1,\ldots,x_n\rbrace$ and consider the differential system 
+$$ \Gamma \colon \quad f_1=\cdots = f_e =0.$$
+This is just a space of solutions of differential equations. 
+
+The algebraic object associated to this space is the ring 
+$$ A=K\lbrace x_1,\ldots, x_n\rbrace/[f_1,\ldots,f_e],$$
+and we try to read off properties of the space from the ring $A$.
+
+A big difference between algebraic geometry and differential algebraic geometry is how intersection theory works, as shown in Figure~\ref{F:two-pictures}.
+
+For random $f,g \in K\lbrace x,y \rbrace$ we expect $K\lbrace x,y\rbrace/[f,g]$ to be finite dimensional. 
+The idea is that (say) $f$ will kill off the higher derivatives of $x$ and $g$ will kill off the higher derivatives of $y$ and we will only be left with a ring which is the quotient of finitely many variables $x$ and $y$.
+Understanding this rigorously ends up being incredibly complicated and related to Jacobi Bound Conjecture.
+
+
+
+Let $F\supset K$ be a $\partial$-finitely generated extension of $\partial$-fields.
+One has the following important correspondence:
+$$ \trdeg_K^{\partial}(F)=0 \iff \trdeg_K(F)<\infty. $$
+Geometrically this corresponds to the fact that a differential algebraic variety $\Sigma$ over $K$ has differential dimension zero if and only if it has finite absolute dimension
+$$\dim^{\partial}(\Sigma)=0 \iff a(\Sigma)<\infty.$$ 
+The number $a(\Sigma)$ is the \emph{absolute dimension} of the differential algebraic variety $\Sigma$ \cite[\S 2, pg 485]{Buium1993}. 
+
+In the case that $\Sigma$ is irreducible $a(\Sigma)$ can be computed as the transcendence degree of the function field $K(\Sigma)$ over $K$.
+Equivalently it can be computed as the (Krull) dimension of the underlying jet scheme $\Sigma^{[\infty]}$ of $\Sigma$.
+By this we just mean the usual scheme-theoretic dimension of the scheme $\Sigma^{[\infty]}$. 
+One issue we have to contend with is the fact that rings and ideals defining $\Sigma^{[\infty]}$ are not finitely generated, so the proofs of many theorems we would like to use do not apply directly.
+
+The existence of the two notions of dimension means there are two ways to think about differential algebraic varieties: in terms of  $\partial$-indeterminates $\lbrace x_i \colon 1\leq i \leq n \rbrace$ and in terms of classical indeterminates $\lbrace x_i^{(j)} \colon 1\leq i \leq n, j\geq 0 \rbrace$ (see Figure~\ref{F:two-pictures}).
+From the perspective of differential indeterminates, ``neighborhoods'' of intersections of $\partial$-dimension zero are described by finite dimensional schemes.
+Both perspectives are useful.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[scale=0.3]{two-pictures.eps}
+	\end{center}
+	\caption{The above picture shows two ways to draw the intersection of the differential algebraic varieties $\Sigma \colon x'=0$ and $\Gamma \colon x+(y')^2=0$. 
+		From the point of view of differential transcendence degrees, $\Sigma \cap \Gamma$ has dimension zero. 
+		From the point of view of transcendence degrees or absolute dimensions, $\Sigma\cap \Gamma$ has dimension 2.
+	}\label{F:two-pictures}
+\end{figure}
+
+
 
 
 
