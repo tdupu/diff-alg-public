@@ -1,7 +1,0 @@
-{
-  "database": "dolt",
-  "backend": "dolt",
-  "dolt_mode": "embedded",
-  "dolt_database": "diff_alg_public",
-  "project_id": "49c9af90-0e90-443f-8744-588891cffa3a"
-}
